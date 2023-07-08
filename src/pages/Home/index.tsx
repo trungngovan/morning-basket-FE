@@ -1,4 +1,4 @@
-import { OurCoffees } from "../../components/OurProducts";
+import { OurProducts } from "../../components/OurProducts";
 import { Hero } from "./components/Hero";
 import { HomeContainer } from "./styles";
 
@@ -7,7 +7,7 @@ export function Home() {
     <HomeContainer>
       <Hero />
 
-      <OurCoffees />
+      <OurProducts />
     </HomeContainer>
   );
 }
