@@ -1,25 +1,29 @@
-import { HeaderButton, HeaderButtonsContainer, HeaderContainer } from './styles'
+import {
+  HeaderButton,
+  HeaderButtonsContainer,
+  HeaderContainer,
+} from "./styles";
 
-import { MapPin, ShoppingCart } from 'phosphor-react'
+import { MapPin, ShoppingCart } from "phosphor-react";
 
-import coffeLogoImage from '../../assets/coffe-delivery-logo.svg'
-import { NavLink } from 'react-router-dom'
-import { useCart } from '../../hooks/useCart'
+import LogoImage from "../../assets/logo.svg";
+import { NavLink } from "react-router-dom";
+import { useCart } from "../../hooks/useCart";
 
 export function Header() {
-  const { cartQuantity } = useCart()
+  const { cartQuantity } = useCart();
 
   return (
     <HeaderContainer>
       <div className="container">
         <NavLink to="/">
-          <img src={coffeLogoImage} alt="" />
+          <img src={LogoImage} alt="" />
         </NavLink>
 
         <HeaderButtonsContainer>
           <HeaderButton variant="purple">
             <MapPin size={20} weight="fill" />
-            Fortaleza, CE
+            Ho Chi Minh, VN
           </HeaderButton>
           <NavLink to="/completeOrder">
             <HeaderButton variant="yellow">
@@ -30,5 +34,5 @@ export function Header() {
         </HeaderButtonsContainer>
       </div>
     </HeaderContainer>
-  )
+  );
 }
