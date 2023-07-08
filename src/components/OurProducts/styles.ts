@@ -1,15 +1,15 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 
-export const OurCoffeesContainer = styled.section`
+export const OurProductsContainer = styled.section`
   width: 100%;
   margin-top: 2rem;
 
   @media (max-width: 700px) {
     margin-top: 23rem;
   }
-`
+`;
 
-export const CoffeeList = styled.div`
+export const ProductList = styled.div`
   width: 100%;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -26,4 +26,10 @@ export const CoffeeList = styled.div`
   @media (max-width: 560px) {
     grid-template-columns: 1fr;
   }
-`
+`;
+
+export const PaginationContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-top: 2.4rem;
+`;

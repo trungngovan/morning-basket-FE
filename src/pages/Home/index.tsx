@@ -1,6 +1,6 @@
-import { OurCoffees } from '../../components/OurCoffees'
-import { Hero } from './components/Hero'
-import { HomeContainer } from './styles'
+import { OurCoffees } from "../../components/OurProducts";
+import { Hero } from "./components/Hero";
+import { HomeContainer } from "./styles";
 
 export function Home() {
   return (
@@ -9,5 +9,5 @@ export function Home() {
 
       <OurCoffees />
     </HomeContainer>
-  )
+  );
 }
