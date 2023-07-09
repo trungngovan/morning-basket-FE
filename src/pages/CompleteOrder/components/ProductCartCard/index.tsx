@@ -47,14 +47,14 @@ export function ProductCartCard({ product }: ProductCardCardProps) {
               onDecrease={handleDecrease}
             />
             <RemoveButton onClick={handleRemove}>
-              <Trash size={16} />
+              <Trash size={18} />
               REMOVER
             </RemoveButton>
           </ActionsContainer>
         </div>
       </div>
 
-      <p>R$ {formattedPrice}</p>
+      <p>$ {formattedPrice}</p>
     </ProductCartCardContainer>
   );
 }

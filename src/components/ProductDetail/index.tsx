@@ -56,10 +56,10 @@ export function ProductDetail({ product, onClose }: ProductDetailProps) {
       />
 
       <ProductDetailContent>
-        <TitleText size="m" color="text" as="h2">
+        <TitleText size="l" color="text" as="h2">
           {product.name}
         </TitleText>
-        <RegularText size="s">{product.description}</RegularText>
+        <RegularText size="m">{product.description}</RegularText>
       </ProductDetailContent>
 
       <ProductDetailFooter>

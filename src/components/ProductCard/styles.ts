@@ -60,6 +60,7 @@ export const CardFooter = styled.div`
   width: 100%;
   display: flex;
   align-items: center;
+  // justify-content: center;
   justify-content: space-between;
 
   > div {
@@ -93,4 +94,23 @@ export const AddCartWrapper = styled.div`
       background: ${({ theme }) => theme.colors['brand-purple']};
     }
   }
-`
+`;
+
+export const ViewDetailButton = styled.button`
+  background: ${({ theme }) => theme.colors['brand-purple-light']};
+  color: ${({ theme }) => theme.colors['brand-purple-dark']};
+  border: none;
+  border-radius: 999px;
+  font-size: ${({ theme }) => theme.textSizes['components-tag']};
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 0.25rem 0.5rem;
+  margin-left: 0.3rem;
+  transition: 0.4s;
+
+  &:hover {
+    background: ${({ theme }) => theme.colors['brand-purple-dark']};
+  color: ${({ theme }) => theme.colors['brand-purple-light']};
+
+  }
+`;

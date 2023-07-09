@@ -5,7 +5,7 @@ export const ProductDetailContainer = styled.div`
   width: auto;
   background: ${({ theme }) => theme.colors["base-card"]};
   border-radius: 6px 36px 6px 36px;
-  padding: 1.25rem;
+  padding: 1.25rem; 
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -30,24 +30,6 @@ export const ProductDetailContainer = styled.div`
   }
 `;
 
-export const Overlay = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.6);
-  z-index: 1;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.2s ease-in-out;
-
-  &.open {
-    opacity: 1;
-    pointer-events: auto;
-  }
-`;
-
 export const ProductDetailImage = styled.img`
   width: 15rem;
   height: 15rem;
@@ -57,6 +39,8 @@ export const ProductDetailImage = styled.img`
 
 export const ProductDetailContent = styled.div`
   margin-top: 2rem;
+  margin-bottom: 1rem;
+  max-width: 25rem; 
 `;
 
 export const ProductDetailFooter = styled.div`

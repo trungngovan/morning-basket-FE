@@ -7,6 +7,7 @@ import {
   Description,
   CardFooter,
   AddCartWrapper,
+  ViewDetailButton,
 } from "./styles";
 import { ShoppingCart } from "phosphor-react";
 import { useCart } from "../../hooks/useCart";
@@ -59,7 +60,7 @@ export function ProductCard({ product, onClick }: ProductProps) {
   };
 
   return (
-    <ProductCardContainer onClick={handleClick}>
+    <ProductCardContainer>
       <img src={`/coffees/${product.photo}`} alt="" />
 
       <Tags>
@@ -73,13 +74,13 @@ export function ProductCard({ product, onClick }: ProductProps) {
 
       <CardFooter>
         <div>
-          <RegularText size="s">R$</RegularText>
           <TitleText size="m" color="text" as="strong">
             {formattedPrice}
           </TitleText>
+          <RegularText size="s">$</RegularText>
         </div>
-
-        <AddCartWrapper>
+        <ViewDetailButton onClick={handleClick}>View detail</ViewDetailButton>
+        {/* <AddCartWrapper>
           <QuantityInput
             onIncrease={handleIncrease}
             onDecrease={handleDecrease}
@@ -88,7 +89,7 @@ export function ProductCard({ product, onClick }: ProductProps) {
           <button onClick={handleAddToCart}>
             <ShoppingCart weight="fill" size={22} />
           </button>
-        </AddCartWrapper>
+        </AddCartWrapper> */}
       </CardFooter>
     </ProductCardContainer>
   );

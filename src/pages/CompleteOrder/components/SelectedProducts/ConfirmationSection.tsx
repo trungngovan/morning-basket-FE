@@ -18,18 +18,18 @@ export function ConfirmationSection() {
     <ConfirmationSectionContainer>
       <div>
         <RegularText size="s">Total items</RegularText>
-        <RegularText size="s">R$ {formattedItemsTotal}</RegularText>
+        <RegularText size="s">$ {formattedItemsTotal}</RegularText>
       </div>
       <div>
         <RegularText size="s">Delivery</RegularText>
-        <RegularText size="s">R$ {formattedDeliveryPrice}</RegularText>
+        <RegularText size="s">$ {formattedDeliveryPrice}</RegularText>
       </div>
       <div>
         <RegularText weight="700" color="subtitle" size="l">
           Total
         </RegularText>
         <RegularText weight="700" color="subtitle" size="l">
-          R$ {formattedCartTotal}
+          $ {formattedCartTotal}
         </RegularText>
       </div>
 
