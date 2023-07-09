@@ -5,7 +5,7 @@ import {
   HeaderButtonsContainer,
   HeaderButton,
 } from "./styles";
-import { MapPin, ShoppingCart } from "phosphor-react";
+import { ShoppingCart } from "phosphor-react";
 import LogoImage from "../../assets/logo.svg";
 
 export function Header() {

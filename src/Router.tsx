@@ -11,7 +11,6 @@ export function Router() {
         <Route path="/" element={<Home />} />
         <Route path="/completeOrder" element={<CompleteOrderPage />} />
         <Route path="/orderConfirmed" element={<OrderConfirmedPage />} />
-        <Route path="/CompleteOrder" element={<CompleteOrderPage />} />
       </Route>
     </Routes>
   );
