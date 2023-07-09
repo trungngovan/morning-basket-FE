@@ -1,32 +1,32 @@
-import { Bank, CreditCard, Money } from 'phosphor-react'
-import { PaymentMethodInput } from '../PaymentMethodInput'
-import { PaymentMethodOptionsContainer } from './styles'
+import { Bank, CreditCard, Money } from "phosphor-react";
+import { PaymentMethodInput } from "../PaymentMethodInput";
+import { PaymentMethodOptionsContainer } from "./styles";
 
-import { useFormContext } from 'react-hook-form'
-import { RegularText } from '../../../../components/Typography'
+import { useFormContext } from "react-hook-form";
+import { RegularText } from "../../../../components/Typography";
 
 export const paymentMethods = {
   credit: {
-    label: 'Cartão de Cŕedito',
+    label: "Credit Card",
     icon: <CreditCard size={16} />,
   },
   debit: {
-    label: 'Cartão de Débito',
+    label: "Bank",
     icon: <Bank size={16} />,
   },
   money: {
-    label: 'Dinheiro',
+    label: "Money",
     icon: <Money size={16} />,
   },
-}
+};
 
 export function PaymentMethodOptions() {
   const {
     register,
     formState: { errors },
-  } = useFormContext()
+  } = useFormContext();
 
-  const paymentMethodError = errors?.paymentMethod?.message as string
+  const paymentMethodError = errors?.paymentMethod?.message as string;
 
   return (
     <PaymentMethodOptionsContainer>
@@ -37,10 +37,10 @@ export function PaymentMethodOptions() {
           icon={icon}
           label={label}
           value={key}
-          {...register('paymentMethod')}
+          {...register("paymentMethod")}
         />
       ))}
       {paymentMethodError && <RegularText>{paymentMethodError}</RegularText>}
     </PaymentMethodOptionsContainer>
-  )
+  );
 }

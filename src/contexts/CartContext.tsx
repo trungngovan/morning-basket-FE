@@ -1,5 +1,5 @@
 import { createContext, ReactNode, useEffect, useState } from "react";
-import { Product } from "../components/CoffeeCard";
+import { Product } from "../components/ProductCard";
 import { produce } from "immer";
 
 export interface CartItem extends Product {
