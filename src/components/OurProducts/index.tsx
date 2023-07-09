@@ -10,16 +10,24 @@ import {
 } from "./styles";
 import { Pagination } from "../Pagination";
 import SearchBar from "../SearchBar";
-
+import { Product } from "../ProductType";
+import { ProductDetail } from "../ProductDetail";
 import { products } from "../../mock/coffee";
 
 export function OurProducts() {
   const [currentPage, setCurrentPage] = useState(1);
   const productsPerPage = 12;
 
-  const [searchResults, setSearchResults] = useState(products);
-  const [allProducts, setAllProducts] = useState(products);
+  const [searchResults, setSearchResults] = useState<Product[]>([]);
+  const [allProducts, setAllProducts] = useState<Product[]>([]);
   const [isSearched, setIsSearched] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+  const [isProductDetailOpen, setIsProductDetailOpen] = useState(false);
+
+  useEffect(() => {
+    setAllProducts(products);
+    setSearchResults(products);
+  }, []);
 
   // Create an array of unique tags
   const tags = [...new Set(allProducts.flatMap((product) => product.tags))];
@@ -57,16 +65,16 @@ export function OurProducts() {
     setCurrentPage(1);
 
     if (tag === "all") {
-      setSearchResults(products);
+      setSearchResults(allProducts);
     } else {
-      const filteredProducts = products.filter((product) =>
+      const filteredProducts = allProducts.filter((product) =>
         product.tags.includes(tag.toLowerCase())
       );
       setSearchResults(filteredProducts);
     }
   };
 
-  const handleSearch = (results: any) => {
+  const handleSearch = (results: Product[]) => {
     if (results.length === 0) {
       setSearchResults(allProducts);
     } else {
@@ -77,12 +85,23 @@ export function OurProducts() {
     setIsSearched(true);
   };
 
+  const handleProductClick = (product: Product) => {
+    setSelectedProduct(product);
+    setIsProductDetailOpen(true);
+  };
+
+  const handleCloseProductDetail = () => {
+    setSelectedProduct(null);
+  };
+
   return (
     <OurProductsContainer>
       <TitleText size="l" color="subtitle">
         Products
       </TitleText>
+
       {/* <SearchBar products={allProducts} onSearch={handleSearch} /> */}
+
       <TagList>
         <Tag
           key={"all"}
@@ -107,19 +126,34 @@ export function OurProducts() {
         ))}
       </TagList>
 
-      <ProductList>
-        {currentProducts.map((product) => (
-          <ProductCard key={product.id} product={product} />
-        ))}
-      </ProductList>
-
-      <PaginationContainer>
-        <Pagination
-          currentPage={currentPage}
-          totalPages={totalPages}
-          onPageChange={handlePageChange}
+      {selectedProduct && (
+        <ProductDetail
+          product={selectedProduct}
+          onClose={handleCloseProductDetail}
         />
-      </PaginationContainer>
+      )}
+
+      {!selectedProduct && (
+        <ProductList>
+          {currentProducts.map((product) => (
+            <ProductCard
+              key={product.id}
+              product={product}
+              onClick={() => handleProductClick(product)}
+            />
+          ))}
+        </ProductList>
+      )}
+
+      {!isSearched && !selectedProduct && (
+        <PaginationContainer>
+          <Pagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            onPageChange={handlePageChange}
+          />
+        </PaginationContainer>
+      )}
     </OurProductsContainer>
   );
 }

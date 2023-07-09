@@ -23,9 +23,10 @@ export interface Product {
 
 interface ProductProps {
   product: Product;
+  onClick: (product: Product) => void;
 }
 
-export function ProductCard({ product }: ProductProps) {
+export function ProductCard({ product, onClick }: ProductProps) {
   const { addProductToCart } = useCart();
 
   const [quantity, setQuantity] = useState(1);
@@ -53,8 +54,12 @@ export function ProductCard({ product }: ProductProps) {
     minimumFractionDigits: 2,
   });
 
+  const handleClick = () => {
+    onClick(product);
+  };
+
   return (
-    <ProductCardContainer>
+    <ProductCardContainer onClick={handleClick}>
       <img src={`/coffees/${product.photo}`} alt="" />
 
       <Tags>
@@ -64,7 +69,7 @@ export function ProductCard({ product }: ProductProps) {
       </Tags>
 
       <Name>{product.name}</Name>
-      <Description>{product.description}</Description>
+      {/* <Description>{product.description}</Description> */}
 
       <CardFooter>
         <div>
