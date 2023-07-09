@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { ProductCard } from "../ProductCard";
 import { TitleText } from "../Typography";
 import {
@@ -9,6 +9,7 @@ import {
   Tag,
 } from "./styles";
 import { Pagination } from "../Pagination";
+import SearchBar from "../SearchBar";
 
 import { products } from "../../mock/coffee";
 
@@ -16,23 +17,32 @@ export function OurProducts() {
   const [currentPage, setCurrentPage] = useState(1);
   const productsPerPage = 12;
 
+  const [searchResults, setSearchResults] = useState(products);
+  const [allProducts, setAllProducts] = useState(products);
+  const [isSearched, setIsSearched] = useState(false);
+
   // Create an array of unique tags
-  const tags = [...new Set(products.flatMap((product) => product.tags))];
+  const tags = [...new Set(allProducts.flatMap((product) => product.tags))];
 
   // Initialize the selected tag to "all"
   const [selectedTag, setSelectedTag] = useState("all");
   const [prevSelectedTag, setPrevSelectedTag] = useState("");
 
-  // Filter the products based on the selected tag
-  const filteredProducts =
-    selectedTag === "all"
-      ? products
-      : products.filter((product) => product.tags.includes(selectedTag));
+  useEffect(() => {
+    if (selectedTag === "all") {
+      setSearchResults(allProducts);
+    } else {
+      setSearchResults(
+        allProducts.filter((product) => product.tags.includes(selectedTag))
+      );
+    }
+    setCurrentPage(1);
+  }, [selectedTag, allProducts]);
 
-  const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
+  const totalPages = Math.ceil(searchResults.length / productsPerPage);
   const indexOfLastProduct = currentPage * productsPerPage;
   const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
-  const currentProducts = filteredProducts.slice(
+  const currentProducts = searchResults.slice(
     indexOfFirstProduct,
     indexOfLastProduct
   );
@@ -45,6 +55,26 @@ export function OurProducts() {
     setPrevSelectedTag(selectedTag);
     setSelectedTag(tag);
     setCurrentPage(1);
+
+    if (tag === "all") {
+      setSearchResults(products);
+    } else {
+      const filteredProducts = products.filter((product) =>
+        product.tags.includes(tag.toLowerCase())
+      );
+      setSearchResults(filteredProducts);
+    }
+  };
+
+  const handleSearch = (results: any) => {
+    if (results.length === 0) {
+      setSearchResults(allProducts);
+    } else {
+      setSearchResults(results);
+    }
+    setSelectedTag("all");
+    setAllProducts(results);
+    setIsSearched(true);
   };
 
   return (
@@ -52,6 +82,7 @@ export function OurProducts() {
       <TitleText size="l" color="subtitle">
         Products
       </TitleText>
+      {/* <SearchBar products={allProducts} onSearch={handleSearch} /> */}
       <TagList>
         <Tag
           key={"all"}
@@ -75,6 +106,7 @@ export function OurProducts() {
           </Tag>
         ))}
       </TagList>
+
       <ProductList>
         {currentProducts.map((product) => (
           <ProductCard key={product.id} product={product} />
