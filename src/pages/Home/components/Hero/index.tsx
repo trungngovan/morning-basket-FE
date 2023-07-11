@@ -21,7 +21,7 @@ export function Hero() {
           <section>
             <HeroTitle size="xl">Morning Basket</HeroTitle>
             <RegularText size="l" color="subtitle" as="h3">
-              Go go
+              Welcome to morning-basket.vn!
             </RegularText>
           </section>
 
@@ -29,7 +29,7 @@ export function Hero() {
             <InfoWithIcon
               iconColor={colors["brand-yellow-dark"]}
               icon={<ShoppingCart weight="fill" />}
-              text="...."
+              text="..."
             />
             <InfoWithIcon
               iconColor={colors["base-text"]}
