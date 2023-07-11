@@ -16,7 +16,7 @@ import { products } from "../../mock/coffee";
 
 export function OurProducts() {
   const [currentPage, setCurrentPage] = useState(1);
-  const productsPerPage = 12;
+  const productsPerPage = 15;
 
   const [searchResults, setSearchResults] = useState<Product[]>([]);
   const [allProducts, setAllProducts] = useState<Product[]>([]);
