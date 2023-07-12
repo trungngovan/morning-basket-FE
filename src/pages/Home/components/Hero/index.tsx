@@ -5,7 +5,8 @@ import {
   BenefitsContainer,
 } from "./styles";
 
-import heroImage from "../../../../assets/hero-image.png";
+// import heroImage from "../../../../assets/hero-image.png";
+import logoTruc from "../../../../assets/morning-basket-logo-Truc.png";
 import { RegularText } from "../../../../components/Typography";
 import { InfoWithIcon } from "../../../../components/InfoWithIcon";
 import { ShoppingCart, Package, Timer, Coffee } from "phosphor-react";
@@ -19,7 +20,9 @@ export function Hero() {
       <HeroContent className="container">
         <div>
           <section>
-            <HeroTitle size="xl">Morning Basket</HeroTitle>
+            <HeroTitle size="xl">
+              Morning Basket
+            </HeroTitle>
             <RegularText size="l" color="subtitle" as="h3">
               Welcome to morning-basket.vn!
             </RegularText>
@@ -49,8 +52,11 @@ export function Hero() {
           </BenefitsContainer>
         </div>
 
-        <div className="imageContainer">
+        {/* <div className="imageContainer">
           <img src={heroImage} alt="" />
+        </div> */}
+        <div className="imageContainer">
+          <img src={logoTruc} alt="" />
         </div>
       </HeroContent>
     </HeroContainer>

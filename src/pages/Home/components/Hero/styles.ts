@@ -5,7 +5,7 @@ import { TitleText } from '../../../../components/Typography'
 
 export const HeroContainer = styled.section`
   width: 100%;
-  height: 34rem;
+  height: 24rem;
   background: ${() => `url(${heroBackgroundImage})`} no-repeat center;
   background-size: cover;
   display: flex;
