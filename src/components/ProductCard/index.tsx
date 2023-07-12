@@ -85,7 +85,7 @@ export function ProductCard({ product, onClick }: ProductProps) {
           </TitleText>
           <RegularText size="s">$</RegularText>
         </div>
-        <ViewDetailButton onClick={handleClick}>View detail</ViewDetailButton>
+        <ViewDetailButton onClick={handleClick}>Detail</ViewDetailButton>
         {/* <AddCartWrapper>
           <QuantityInput
             onIncrease={handleIncrease}

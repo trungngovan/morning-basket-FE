@@ -7,15 +7,15 @@ export const PaginationContainer = styled.div`
 `;
 
 export const PaginationButton = styled.button<{ isActive: boolean }>`
-  font-size: 1.6rem;
+  font-size: 1.2rem;
   font-weight: bold;
-  padding: 0.8rem 1.6rem;
-  margin-right: 0.8rem;
+  padding: 0.6rem 1.4rem;
+  margin-right: 0.6rem;
   border-radius: 0.4rem;
   background-color: ${(props) =>
-        props.isActive ? props.theme.colors['base-text'] : props.theme.colors['base-white']};
+    props.isActive ? props.theme.colors['base-text'] : props.theme.colors['base-white']};
   color: ${(props) =>
-        props.isActive ? props.theme.colors['base-white'] : props.theme.colors['base-text']};
+    props.isActive ? props.theme.colors['base-white'] : props.theme.colors['base-text']};
   cursor: pointer;
   border: none;
 
