@@ -3,6 +3,7 @@ import { DefaultLayout } from "./layout/Default";
 import { Home } from "./pages/Home";
 import { CompleteOrderPage } from "./pages/CompleteOrder";
 import { OrderConfirmedPage } from "./pages/OrderConfirmed";
+import ProductDetail from "./pages/ProductDetail";
 
 export function Router() {
   return (
@@ -11,6 +12,7 @@ export function Router() {
         <Route path="/" element={<Home />} />
         <Route path="/completeOrder" element={<CompleteOrderPage />} />
         <Route path="/orderConfirmed" element={<OrderConfirmedPage />} />
+        <Route path="/product/:id" element={<ProductDetail />} />
       </Route>
     </Routes>
   );
