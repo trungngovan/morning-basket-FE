@@ -7,6 +7,7 @@ import {
   PaginationContainer,
   TagList,
   Tag,
+  HorizontalScrollWrapper,
 } from "./styles";
 import { Pagination } from "../Pagination";
 import SearchBar from "../SearchBar";
@@ -95,36 +96,37 @@ export function OurProducts() {
   };
 
   return (
-    <OurProductsContainer>
+    <OurProductsContainer className="container">
       <TitleText size="l" color="subtitle">
         Products
       </TitleText>
 
       {/* <SearchBar products={allProducts} onSearch={handleSearch} /> */}
-
-      <TagList>
-        <Tag
-          key={"all"}
-          isActive={selectedTag === "all"}
-          onClick={() => handleTagSelect("all")}
-          variant="yellow"
-        >
-          All
-        </Tag>
-        {tags.map((tag) => (
+      <HorizontalScrollWrapper>
+        <TagList>
           <Tag
-            key={tag}
-            isActive={selectedTag === tag}
-            onClick={() => {
-              setPrevSelectedTag(selectedTag);
-              setSelectedTag(tag);
-            }}
-            variant={selectedTag === tag ? "yellow" : "purple"}
+            key={"all"}
+            isActive={selectedTag === "all"}
+            onClick={() => handleTagSelect("all")}
+            variant="yellow"
           >
-            {tag}
+            All
           </Tag>
-        ))}
-      </TagList>
+          {tags.map((tag) => (
+            <Tag
+              key={tag}
+              isActive={selectedTag === tag}
+              onClick={() => {
+                setPrevSelectedTag(selectedTag);
+                setSelectedTag(tag);
+              }}
+              variant={selectedTag === tag ? "yellow" : "purple"}
+            >
+              {tag}
+            </Tag>
+          ))}
+        </TagList>
+      </HorizontalScrollWrapper>
 
       {selectedProduct && (
         <ProductDetail

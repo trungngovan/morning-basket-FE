@@ -32,29 +32,26 @@ export function Hero() {
             <InfoWithIcon
               iconColor={colors["brand-yellow-dark"]}
               icon={<ShoppingCart weight="fill" />}
-              text="..."
+              text="Lorem ipsum dolosit amet Lorem ipsum dolosit amet Lorem ipsum dolosit amet..."
             />
             <InfoWithIcon
               iconColor={colors["base-text"]}
               icon={<Package weight="fill" />}
-              text="..."
+              text="Lorem ipsum dolosit amet Lorem ipsum dolosit amet Lorem ipsum dolosit amet..."
             />
             <InfoWithIcon
               iconColor={colors["brand-yellow"]}
               icon={<Timer weight="fill" />}
-              text="..."
+              text="Lorem ipsum dolosit amet Lorem ipsum dolosit amet Lorem ipsum dolosit amet..."
             />
             <InfoWithIcon
               iconColor={colors["brand-purple"]}
               icon={<Coffee weight="fill" />}
-              text="..."
+              text="Lorem ipsum dolosit amet Lorem ipsum dolosit amet Lorem ipsum dolosit amet..."
             />
           </BenefitsContainer>
         </div>
 
-        {/* <div className="imageContainer">
-          <img src={heroImage} alt="" />
-        </div> */}
         <div className="imageContainer">
           <img src={logoTruc} alt="" />
         </div>

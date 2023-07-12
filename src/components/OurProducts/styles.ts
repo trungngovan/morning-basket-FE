@@ -34,12 +34,24 @@ export const PaginationContainer = styled.div`
   margin-top: 2.4rem;
 `;
 
+export const HorizontalScrollWrapper = styled.div`
+  height: 3rem;
+  overflow-x: hidden;
+  overflow-y: hidden;
+
+  :hover {
+    overflow-x: scroll;
+    ::-webkit-scrollbar {
+      height: 0.4rem;
+    }
+  }
+`
+
 export const TagList = styled.div`
   display: flex;
   align-items: center;
   gap: 0.2rem;
   flex-wrap: nowrap;
-  overflow-x: auto;
   white-space: nowrap;
   margin: 0 1rem; 
 `;
