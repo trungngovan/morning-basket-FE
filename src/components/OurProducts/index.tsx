@@ -1,18 +1,17 @@
-import React, { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
+import { Pagination } from "../Pagination";
 import { ProductCard } from "../ProductCard";
 import { TitleText } from "../Typography";
 import {
-  ProductList,
   OurProductsContainer,
   PaginationContainer,
-  TagList,
+  ProductList,
   Tag,
+  TagList,
 } from "./styles";
-import { Pagination } from "../Pagination";
-import SearchBar from "../SearchBar";
-import { Product } from "../ProductType";
-import { ProductDetail } from "../ProductDetail";
 import { products } from "../../mock/coffee";
+import { ProductDetail } from "../ProductDetail";
+import { Product } from "../ProductType";
 
 export function OurProducts() {
   const [currentPage, setCurrentPage] = useState(1);
