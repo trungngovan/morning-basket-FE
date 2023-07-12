@@ -2,7 +2,8 @@ import styled, { css } from 'styled-components'
 
 export const OurProductsContainer = styled.section`
   width: 100%;
-  margin-top: 2rem;
+  margin: 1rem auto;
+  max-width: 1000px;
 
   @media (max-width: 700px) {
     margin-top: 23rem;
@@ -12,7 +13,7 @@ export const OurProductsContainer = styled.section`
 export const ProductList = styled.div`
   width: 100%;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   column-gap: 2rem;
   row-gap: 3.5rem;
   margin-top: 3.5rem;

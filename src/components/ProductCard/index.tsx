@@ -12,6 +12,7 @@ import {
 import { ShoppingCart } from "phosphor-react";
 import { useCart } from "../../hooks/useCart";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export interface Product {
   id: number;
@@ -29,6 +30,7 @@ interface ProductProps {
 
 export function ProductCard({ product, onClick }: ProductProps) {
   const { addProductToCart } = useCart();
+  const navigate = useNavigate();
 
   const [quantity, setQuantity] = useState(1);
 
@@ -59,8 +61,12 @@ export function ProductCard({ product, onClick }: ProductProps) {
     onClick(product);
   };
 
+  const handleNavigate = () => {
+    navigate(`/product/${product.id}`);
+  };
+
   return (
-    <ProductCardContainer>
+    <ProductCardContainer onClick={handleNavigate} className="cursor-pointer">
       <img src={`/coffees/${product.photo}`} alt="" />
 
       <Tags>
@@ -79,7 +85,7 @@ export function ProductCard({ product, onClick }: ProductProps) {
           </TitleText>
           <RegularText size="s">$</RegularText>
         </div>
-        <ViewDetailButton onClick={handleClick}>View detail</ViewDetailButton>
+        <ViewDetailButton onClick={handleClick}>Detail</ViewDetailButton>
         {/* <AddCartWrapper>
           <QuantityInput
             onIncrease={handleIncrease}

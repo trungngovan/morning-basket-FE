@@ -31,7 +31,7 @@ export function Header() {
           <NavLink to="/our-stores">
             <HeaderButton variant="purple">OUR STORES</HeaderButton>
           </NavLink>
-          <NavLink to="/about-us">
+          <NavLink to="/aboutUs">
             <HeaderButton variant="yellow">ABOUT US</HeaderButton>
           </NavLink>
           {/* <HeaderButton variant="purple">
