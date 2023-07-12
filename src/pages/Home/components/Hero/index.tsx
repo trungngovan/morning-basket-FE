@@ -5,7 +5,8 @@ import {
   BenefitsContainer,
 } from "./styles";
 
-import heroImage from "../../../../assets/hero-image.png";
+// import heroImage from "../../../../assets/hero-image.png";
+import logoTruc from "../../../../assets/morning-basket-logo-Truc.png";
 import { RegularText } from "../../../../components/Typography";
 import { InfoWithIcon } from "../../../../components/InfoWithIcon";
 import { ShoppingCart, Package, Timer, Coffee } from "phosphor-react";
@@ -19,9 +20,11 @@ export function Hero() {
       <HeroContent className="container">
         <div>
           <section>
-            <HeroTitle size="xl">Morning Basket</HeroTitle>
+            <HeroTitle size="xl">
+              Morning Basket
+            </HeroTitle>
             <RegularText size="l" color="subtitle" as="h3">
-              Go go
+              Welcome to morning-basket.vn!
             </RegularText>
           </section>
 
@@ -29,28 +32,28 @@ export function Hero() {
             <InfoWithIcon
               iconColor={colors["brand-yellow-dark"]}
               icon={<ShoppingCart weight="fill" />}
-              text="...."
+              text="Lorem ipsum dolosit amet Lorem ipsum dolosit amet Lorem ipsum dolosit amet..."
             />
             <InfoWithIcon
               iconColor={colors["base-text"]}
               icon={<Package weight="fill" />}
-              text="..."
+              text="Lorem ipsum dolosit amet Lorem ipsum dolosit amet Lorem ipsum dolosit amet..."
             />
             <InfoWithIcon
               iconColor={colors["brand-yellow"]}
               icon={<Timer weight="fill" />}
-              text="..."
+              text="Lorem ipsum dolosit amet Lorem ipsum dolosit amet Lorem ipsum dolosit amet..."
             />
             <InfoWithIcon
               iconColor={colors["brand-purple"]}
               icon={<Coffee weight="fill" />}
-              text="..."
+              text="Lorem ipsum dolosit amet Lorem ipsum dolosit amet Lorem ipsum dolosit amet..."
             />
           </BenefitsContainer>
         </div>
 
         <div className="imageContainer">
-          <img src={heroImage} alt="" />
+          <img src={logoTruc} alt="" />
         </div>
       </HeroContent>
     </HeroContainer>

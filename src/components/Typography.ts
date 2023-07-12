@@ -27,7 +27,7 @@ export const TitleText = styled.h1<TitleTextProps>`
   font-family: ${({ theme }) => theme.fonts.title};
   line-height: 130%;
   font-weight: ${({ weight }) => weight ?? 800};
-  padding-left: 1rem; /* Thêm padding-left cho TitleText */
+  // padding-left: 1rem; /* Thêm padding-left cho TitleText */
 `;
 
 export const RegularText = styled.p<RegularTextProps>`

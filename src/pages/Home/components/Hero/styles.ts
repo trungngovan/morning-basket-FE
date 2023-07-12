@@ -5,7 +5,7 @@ import { TitleText } from '../../../../components/Typography'
 
 export const HeroContainer = styled.section`
   width: 100%;
-  height: 34rem;
+  height: 20rem;
   background: ${() => `url(${heroBackgroundImage})`} no-repeat center;
   background-size: cover;
   display: flex;
@@ -28,6 +28,9 @@ export const HeroContent = styled.div`
 
     img {
       width: 100%;
+      height: 100%;
+      padding: 3rem;
+      object-fit: contain;
     }
   }
 
@@ -37,7 +40,9 @@ export const HeroContent = styled.div`
     flex-direction: column-reverse;
     > img {
       width: 100%;
-    }
+      height: 100%;
+      padding: 3rem;
+      object-fit: contain;    }
   }
 `
 
@@ -50,7 +55,7 @@ export const BenefitsContainer = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   row-gap: 1.25rem;
-  margin-top: 4.125rem;
+  margin-top: 2.125rem;
 
   @media (max-width: 700px) {
     grid-template-columns: 1fr;
