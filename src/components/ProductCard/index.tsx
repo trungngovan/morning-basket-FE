@@ -16,11 +16,15 @@ import { useNavigate } from "react-router-dom";
 
 export interface Product {
   id: number;
-  tags: string[];
+  barcode: string;
   name: string;
   description: string;
-  photo: string;
   price: number;
+  quantity: number;
+  photo: string;
+  tags: string[];
+  createdAt: Date;
+  updatedAt: Date;
 }
 
 interface ProductProps {
@@ -53,7 +57,7 @@ export function ProductCard({ product, onClick }: ProductProps) {
     setQuantity(1);
   }
 
-  const formattedPrice = product.price.toLocaleString("pt-BR", {
+  const formattedPrice = !product.price ? 0 : product.price.toLocaleString("pt-BR", {
     minimumFractionDigits: 2,
   });
 
@@ -67,7 +71,7 @@ export function ProductCard({ product, onClick }: ProductProps) {
 
   return (
     <ProductCardContainer onClick={handleNavigate} className="cursor-pointer">
-      <img src={`/coffees/${product.photo}`} alt="" />
+      <img src={`/products/${product.barcode}@150x120.png`} alt={product.name} />
 
       <Tags>
         {product.tags.map((tag) => (

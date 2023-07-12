@@ -42,7 +42,7 @@ export function ProductDetail({ product, onClose }: ProductDetailProps) {
     setQuantity(1);
   }
 
-  const formattedPrice = product.price.toLocaleString("pt-BR", {
+  const formattedPrice = !product.price ? 0 : product.price.toLocaleString("pt-BR", {
     minimumFractionDigits: 2,
   });
 
@@ -51,7 +51,7 @@ export function ProductDetail({ product, onClose }: ProductDetailProps) {
       <CloseButton onClick={onClose}>X</CloseButton>
 
       <ProductDetailImage
-        src={`/coffees/${product.photo}`}
+        src={`/products/${product.photo}`}
         alt={product.name}
       />
 

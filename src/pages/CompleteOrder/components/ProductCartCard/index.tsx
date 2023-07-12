@@ -35,7 +35,7 @@ export function ProductCartCard({ product }: ProductCardCardProps) {
   return (
     <ProductCartCardContainer>
       <div>
-        <img src={`/coffees/${product.photo}`} alt="Café" />
+        <img src={`/products/${product.barcode}@150x120.png`} alt={product.name} />
 
         <div>
           <RegularText color="subtitle">{product.name}</RegularText>

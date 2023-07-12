@@ -21,8 +21,8 @@ const ProductBooking = ({ product }: Props) => {
     <div className="flex gap-10">
       <div className="aspect-square w-1/3">
         <img
-          alt="product image"
-          src={`/coffees/${photo}`}
+          alt={product.name}
+          src={`/products/${photo}`}
           className="w-full h-full"
         />
       </div>
@@ -47,19 +47,19 @@ const ProductBooking = ({ product }: Props) => {
           <div className="text-lg font-medium">Số lượng</div>
           <div className="flex items-center border w-fit ">
             <div
-              onClick={() => handleCount(1)}
+              onClick={() => handleCount(-1)}
               className="w-10 h-10 flex items-center justify-center cursor-pointer"
             >
-              <Plus />
+              <Minus />
             </div>
             <div className="border-x min-w-[40px] h-10 flex items-center justify-center">
               {amount}
             </div>
             <div
-              onClick={() => handleCount(-1)}
+              onClick={() => handleCount(1)}
               className="w-10 h-10 flex items-center justify-center cursor-pointer"
             >
-              <Minus />
+              <Plus />
             </div>
           </div>
         </div>

@@ -12,7 +12,8 @@ import {
 } from "./styles";
 import { products } from "../../mock/coffee";
 import { ProductDetail } from "../ProductDetail";
-import { Product } from "../ProductType";
+import { GetProductsReponse, Product } from "../ProductType";
+import { apiRequest, apiGet, apiPost, apiDelete, apiPut, apiPatch } from "../../apis/api";
 
 export function OurProducts() {
   const [currentPage, setCurrentPage] = useState(1);
@@ -25,8 +26,13 @@ export function OurProducts() {
   const [isProductDetailOpen, setIsProductDetailOpen] = useState(false);
 
   useEffect(() => {
-    setAllProducts(products);
-    setSearchResults(products);
+    // setAllProducts(products);
+    // setSearchResults(products);
+    apiGet<GetProductsReponse>("http://localhost:3000/products").then((reponse) => {
+      setAllProducts(reponse.data.products);
+      setSearchResults(reponse.data.products);
+    }
+    );
   }, []);
 
   // Create an array of unique tags
