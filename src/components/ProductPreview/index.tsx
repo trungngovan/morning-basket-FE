@@ -31,7 +31,7 @@ const CloseButton = ({ isShow, onClick }: CloseButtonProps) => {
             {isShow ? (
                 <button
                     type="button"
-                    className="opacity-50 bg-base-error rounded-full p-2 inline-flex items-center justify-center"
+                    className="opacity-50 bg-red-500 rounded-full p-2 inline-flex items-center justify-center"
                 >
                     <span className="sr-only">Close menu</span>
                     <svg
@@ -70,8 +70,8 @@ export function ProductPreview({ product, onClose }: ProductPreviewProps) {
             1 <= prev + count && prev + count <= product.quantity
                 ? setError(false)
                 : prev + count >= product.quantity
-                ? setError(true)
-                : null
+                    ? setError(true)
+                    : null
             return Math.max(1, prev + count)
         })
     }
@@ -100,8 +100,8 @@ export function ProductPreview({ product, onClose }: ProductPreviewProps) {
     const formattedPrice = !product.price
         ? 0
         : product.price.toLocaleString('pt-BR', {
-              minimumFractionDigits: 2,
-          })
+            minimumFractionDigits: 2,
+        })
 
     return (
         <ProductPreviewContainer
