@@ -32,12 +32,12 @@ This is a project made entirely in React for an e-commerce coffee sales site to 
 
 This project was developed with the following technologies:
 
-- [React](https://reactjs.org)
-- [TypeScript](https://www.typescriptlang.org/)
-- [StyledComponents](https://www.styled-components.com/)
-- [Zod](https://zod.dev/)
-- [ReactHookForm](https://react-hook-form.com/)
-- [ReactRouterDom](https://reactrouter.com/)
+-   [React](https://reactjs.org)
+-   [TypeScript](https://www.typescriptlang.org/)
+-   [StyledComponents](https://www.styled-components.com/)
+-   [Zod](https://zod.dev/)
+-   [ReactHookForm](https://react-hook-form.com/)
+-   [ReactRouterDom](https://reactrouter.com/)
 
 ## ℹ️ How To Use
 

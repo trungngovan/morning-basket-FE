@@ -1,1 +1,1 @@
-export { default as ProductBooking } from "./ProductBooking";
+export { default as ProductBooking } from './ProductBooking'
