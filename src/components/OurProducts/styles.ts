@@ -13,10 +13,10 @@ export const OurProductsContainer = styled.section`
 export const ProductList = styled.div`
     width: 100%;
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    column-gap: 2rem;
-    row-gap: 3.5rem;
-    margin-top: 3.5rem;
+    grid-template-columns: repeat(4, 1fr);
+    column-gap: 1rem;
+    row-gap: 1rem;
+    margin-top: 1rem;
 
     @media (max-width: 1000px) {
         grid-template-columns: repeat(3, 1fr);

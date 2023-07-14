@@ -1,5 +1,4 @@
-// import { products } from "../mock/coffee";
-import { GetProductsReponse, Product } from '../components/ProductType'
+import { GetProductByIdResponse } from '../@types/product'
 import { apiGet } from '../apis/api'
 
 type Props = {
@@ -9,12 +8,11 @@ type Props = {
 export const getProductDetail = async ({ id }: Props) => {
     return new Promise((resolve) => {
         setTimeout(() => {
-            apiGet<GetProductsReponse>('http://localhost:3000/products').then(
-                (reponse) => {
-                    const products = reponse.data.products
-                    resolve(products.find((product) => product.id === id))
-                }
-            )
+            apiGet<GetProductByIdResponse>(
+                `http://localhost:3000/products/${id}`
+            ).then((response) => {
+                resolve(response.data.product)
+            })
         }, 200)
     })
 }

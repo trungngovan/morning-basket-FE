@@ -18,6 +18,10 @@ export type Product = {
     updatedAt: Date
 }
 
-export type GetProductsReponse = {
+export type GetAllProductsResponse = {
     products: Product[]
+}
+
+export type GetProductByIdResponse = {
+    product: Product
 }

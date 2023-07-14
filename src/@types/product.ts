@@ -1,20 +1,4 @@
-// export type Product = {
-//   id: number;
-//   tags: string[];
-//   name: string;
-//   description: string;
-//   photo: string;
-//   price: number;
-// };
-
-export type Product = {
-    // id: number;
-    // name: string;
-    // description: string;
-    // price: number;
-    // photo: string;
-    // tags: string[];
-
+export type ProductType = {
     id: number
     barcode: string
     name: string
@@ -27,6 +11,10 @@ export type Product = {
     updatedAt: Date
 }
 
-export type GetProductsReponse = {
-    products: Product[]
+export type GetAllProductsResponse = {
+    products: ProductType[]
+}
+
+export type GetProductByIdResponse = {
+    product: ProductType
 }

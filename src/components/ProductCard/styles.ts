@@ -16,7 +16,8 @@ export const ProductCardContainer = styled.div`
     img {
         width: 7.5rem;
         height: 7.5rem;
-        margin-top: -5rem;
+        margin-top: -2rem;
+        border-radius: 999px;
     }
 `
 
@@ -27,7 +28,7 @@ export const Tags = styled.div`
     justify-content: center;
     gap: 4px;
     margin-top: 1rem;
-    margin-bottom: 1.25rem;
+    margin-bottom: 0.75rem;
     flex-wrap: wrap;
 
     span {
@@ -59,10 +60,13 @@ export const Description = styled(RegularText).attrs({
 export const CardFooter = styled.div`
     width: 100%;
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
-    // justify-content: center;
-    justify-content: space-between;
-
+    justify-content: center;
+    justify-content: space-around;
+    margin-top: auto;
+    padding-top: 1.5rem;
+    // border-top: 1px solid ${({ theme }) => theme.colors['brand-purple']};
     > div {
         display: flex;
         align-items: center;
@@ -96,16 +100,17 @@ export const AddCartWrapper = styled.div`
     }
 `
 
-export const ViewDetailButton = styled.button`
+export const PreviewButton = styled.button`
     background: ${({ theme }) => theme.colors['brand-purple-light']};
     color: ${({ theme }) => theme.colors['brand-purple-dark']};
     border: none;
     border-radius: 999px;
     font-size: ${({ theme }) => theme.textSizes['components-tag']};
-    font-weight: 800;
-    text-transform: uppercase;
+    // font-weight: 800;
+    // text-transform: uppercase;
     padding: 0.25rem 0.5rem;
-    margin-left: 0.3rem;
+    // margin-left: 0.3rem;
+    margin-bottom: 0.25rem;
     transition: 0.3s;
 
     &:hover {

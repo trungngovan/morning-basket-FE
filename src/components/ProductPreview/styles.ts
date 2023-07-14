@@ -1,8 +1,8 @@
 import styled from 'styled-components'
-import { TitleText, RegularText } from '../Typography'
 
-export const ProductDetailContainer = styled.div`
-    width: auto;
+export const ProductPreviewContainer = styled.div`
+    width: 20vw;
+    height: 20vw;
     background: ${({ theme }) => theme.colors['base-card']};
     border-radius: 6px 36px 6px 36px;
     padding: 1.25rem;
@@ -19,7 +19,7 @@ export const ProductDetailContainer = styled.div`
     transition: all 0.2s ease-in-out;
     box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
 
-    &.open {
+    .open {
         opacity: 1;
         transform: translate(-50%, -50%) scale(1.2);
         z-index: 3;
@@ -28,30 +28,38 @@ export const ProductDetailContainer = styled.div`
     .product-card {
         transform: scale(1.2);
     }
+
+    img {
+        width: 15rem;
+        height: 15rem;
+        margin-top: -7.5rem;
+        border-radius: 999px;
+    }
 `
 
-export const ProductDetailImage = styled.img`
-    width: 15rem;
-    height: 15rem;
-    margin-top: -7.5rem;
-    border-radius: 999px;
-`
+// export const ProductPreviewImage = styled.img`
+//     width: 15rem;
+//     height: 15rem;
+//     margin-top: -7.5rem;
+//     border-radius: 999px;
+// `
 
-export const ProductDetailContent = styled.div`
+export const ProductPreviewContent = styled.div`
     margin-top: 2rem;
     margin-bottom: 1rem;
     max-width: 25rem;
 `
 
-export const ProductDetailFooter = styled.div`
+export const ProductPreviewFooter = styled.div`
     width: 100%;
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
+    justify-content: space-around;
     margin-top: auto;
     padding-top: 1.5rem;
     border-top: 1px solid ${({ theme }) => theme.colors['brand-purple']};
-
     > div {
         display: flex;
         align-items: center;
@@ -67,21 +75,22 @@ export const CloseButton = styled.button`
     position: absolute;
     top: 0.5rem;
     right: 0.5rem;
-    border: none;
-    background: ${({ theme }) => theme.colors['brand-purple']};
+    // border: none;
+    background: ${({ theme }) => theme.colors['base-error']};
     font-size: ${({ theme }) => theme.textSizes['components-tag']};
     cursor: pointer;
-    color: ${({ theme }) => theme.colors['brand-yellow']};
+    color: ${({ theme }) => theme.colors['brand-yellow-light']};
     transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out;
     padding: 0.75rem;
-    border-radius: 50%;
     box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
     width: 2rem;
     height: 2rem;
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 8px;
+    // border-radius: 8px;
+    // border-radius: 50%;
+    border-radius: 20px;
 
     &:hover {
         color: ${({ theme }) => theme.colors['brand-purple']};
@@ -119,7 +128,7 @@ export const ProductCardImage = styled.img`
 `
 
 export const AddCartWrapper = styled.div`
-    width: 5rem;
+    width: 7.5rem;
 
     > button {
         width: 2.375rem;

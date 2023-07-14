@@ -22,7 +22,7 @@ export function Hero() {
                     <section>
                         <HeroTitle size="xl">Morning Basket</HeroTitle>
                         <RegularText size="l" color="subtitle" as="h3">
-                            Welcome to morning-basket.vn!
+                            Welcome to morningbasket.vn!
                         </RegularText>
                     </section>
 

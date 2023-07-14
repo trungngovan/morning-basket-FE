@@ -4,8 +4,7 @@ import { Home } from './pages/Home'
 // import { AboutUsPage } from "./pages/AboutUs";
 import { CompleteOrderPage } from './pages/CompleteOrder'
 import { OrderConfirmedPage } from './pages/OrderConfirmed'
-import ProductDetail from './pages/ProductDetail'
-import { SingleProductPage } from './pages/SingleProduct'
+import { ProductDetail } from './pages/ProductDetail'
 
 export function Router() {
     return (
@@ -19,7 +18,6 @@ export function Router() {
                     element={<OrderConfirmedPage />}
                 />
                 <Route path="/product/:id" element={<ProductDetail />} />
-                <Route path="/product" element={<SingleProductPage />} />{' '}
             </Route>
         </Routes>
     )

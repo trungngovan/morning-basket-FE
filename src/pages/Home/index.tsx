@@ -6,7 +6,6 @@ export function Home() {
     return (
         <HomeContainer>
             <Hero />
-
             <OurProducts />
         </HomeContainer>
     )

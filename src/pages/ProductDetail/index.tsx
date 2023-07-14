@@ -4,12 +4,12 @@ import { getProductDetail } from '../../apis/product'
 import { ProductBooking } from './components/ProductBooking'
 import { ProductInfomation } from './components/ProductInfomation'
 import { Review } from './components/Review'
-import { Product } from '../../@types/product'
+import { ProductType } from '../../@types/product'
 
-const ProductDetail = () => {
+export function ProductDetail() {
     const { id } = useParams()
     const [loading, setLoading] = useState(true)
-    const [product, setProduct] = useState<Product | null>(null)
+    const [product, setProduct] = useState<ProductType | null>(null)
 
     useEffect(() => {
         if (!id) {
@@ -18,19 +18,17 @@ const ProductDetail = () => {
         }
         getProductDetail({ id: +id })
             .then((res) => {
-                setProduct(res as Product)
+                setProduct(res as ProductType)
             })
             .catch(() => null)
             .finally(() => setLoading(false))
     }, [])
 
     return (
-        <div className="px-20 py-10">
-            <ProductBooking product={product as Product} />
-            {product && <ProductInfomation product={product as Product} />}
+        <div className="container">
+            <ProductBooking product={product as ProductType} />
+            {product && <ProductInfomation product={product as ProductType} />}
             <Review />
         </div>
     )
 }
-
-export default ProductDetail

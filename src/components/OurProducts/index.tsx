@@ -10,9 +10,9 @@ import {
     TagList,
     HorizontalScrollWrapper,
 } from './styles'
-import { products } from '../../mock/coffee'
-import { ProductDetail } from '../ProductDetail'
-import { GetProductsReponse, Product } from '../ProductType'
+// import { products } from '../../mock/coffee'
+import { ProductPreview } from '../ProductPreview'
+import { GetAllProductsResponse, ProductType } from '../../@types/product'
 import {
     apiRequest,
     apiGet,
@@ -21,24 +21,24 @@ import {
     apiPut,
     apiPatch,
 } from '../../apis/api'
+import { margin } from 'polished'
 
 export function OurProducts() {
     const [currentPage, setCurrentPage] = useState(1)
-    const productsPerPage = 15
+    const productsPerPage = 20
 
-    const [searchResults, setSearchResults] = useState<Product[]>([])
-    const [allProducts, setAllProducts] = useState<Product[]>([])
+    const [searchResults, setSearchResults] = useState<ProductType[]>([])
+    const [allProducts, setAllProducts] = useState<ProductType[]>([])
     const [isSearched, setIsSearched] = useState(false)
-    const [selectedProduct, setSelectedProduct] = useState<Product | null>(null)
-    const [isProductDetailOpen, setIsProductDetailOpen] = useState(false)
+    const [selectedProduct, setSelectedProduct] = useState<ProductType | null>(
+        null
+    )
 
     useEffect(() => {
-        // setAllProducts(products);
-        // setSearchResults(products);
-        apiGet<GetProductsReponse>('http://localhost:3000/products').then(
-            (reponse) => {
-                setAllProducts(reponse.data.products)
-                setSearchResults(reponse.data.products)
+        apiGet<GetAllProductsResponse>('http://localhost:3000/products').then(
+            (response) => {
+                setAllProducts(response.data.products)
+                setSearchResults(response.data.products)
             }
         )
     }, [])
@@ -90,7 +90,7 @@ export function OurProducts() {
         }
     }
 
-    const handleSearch = (results: Product[]) => {
+    const handleSearch = (results: ProductType[]) => {
         if (results.length === 0) {
             setSearchResults(allProducts)
         } else {
@@ -101,24 +101,23 @@ export function OurProducts() {
         setIsSearched(true)
     }
 
-    const handleProductClick = (product: Product) => {
+    const handleOpenProductPreview = (product: ProductType) => {
         setSelectedProduct(product)
-        setIsProductDetailOpen(true)
     }
 
-    const handleCloseProductDetail = () => {
+    const handleCloseProductPreview = () => {
         setSelectedProduct(null)
     }
 
     return (
         <OurProductsContainer className="container">
-            <TitleText size="l" color="subtitle">
+            <TitleText size="l" color="subtitle" className="mt-5">
                 Products
             </TitleText>
 
             {/* <SearchBar products={allProducts} onSearch={handleSearch} /> */}
             <HorizontalScrollWrapper>
-                <TagList>
+                <TagList className="mt-5">
                     <Tag
                         key={'all'}
                         isActive={selectedTag === 'all'}
@@ -143,23 +142,23 @@ export function OurProducts() {
                 </TagList>
             </HorizontalScrollWrapper>
 
-            {selectedProduct && (
-                <ProductDetail
-                    product={selectedProduct}
-                    onClose={handleCloseProductDetail}
-                />
-            )}
+            <ProductList>
+                {currentProducts.map((product) => (
+                    <ProductCard
+                        key={product.id}
+                        product={product}
+                        onPreviewButtonClick={() =>
+                            handleOpenProductPreview(product)
+                        }
+                    />
+                ))}
+            </ProductList>
 
-            {!selectedProduct && (
-                <ProductList>
-                    {currentProducts.map((product) => (
-                        <ProductCard
-                            key={product.id}
-                            product={product}
-                            onClick={() => handleProductClick(product)}
-                        />
-                    ))}
-                </ProductList>
+            {selectedProduct && (
+                <ProductPreview
+                    product={selectedProduct}
+                    onClose={handleCloseProductPreview}
+                />
             )}
 
             {!isSearched && !selectedProduct && (
