@@ -1,106 +1,142 @@
-import { QuantityInput } from "../QuantityInput";
-import { RegularText, TitleText } from "../Typography";
+import { QuantityInput } from '../QuantityInput'
+import { RegularText, TitleText } from '../Typography'
 import {
-  ProductCardContainer,
-  Tags,
-  Name,
-  Description,
-  CardFooter,
-  AddCartWrapper,
-  ViewDetailButton,
-} from "./styles";
-import { ShoppingCart } from "phosphor-react";
-import { useCart } from "../../hooks/useCart";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-
-export interface Product {
-  id: number;
-  barcode: string;
-  name: string;
-  description: string;
-  price: number;
-  quantity: number;
-  photo: string;
-  tags: string[];
-  createdAt: Date;
-  updatedAt: Date;
-}
+    ProductCardContainer,
+    Tags,
+    Name,
+    Description,
+    CardFooter,
+    AddCartWrapper,
+    PreviewButton,
+} from './styles'
+import { ShoppingCart } from 'phosphor-react'
+import { useCart } from '../../hooks/useCart'
+import { MouseEvent, ReactEventHandler, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { ProductType } from '../../@types/product'
 
 interface ProductProps {
-  product: Product;
-  onClick: (product: Product) => void;
+    product: ProductType
+    onPreviewButtonClick: (product: ProductType) => void
 }
 
-export function ProductCard({ product, onClick }: ProductProps) {
-  const { addProductToCart } = useCart();
-  const navigate = useNavigate();
+export function ProductCard({ product, onPreviewButtonClick }: ProductProps) {
+    const { addProductToCart } = useCart()
+    const navigate = useNavigate()
+    const tags = ['aaa', 'bbb']
+    const [showPreviewButton, setShowPreviewButton] = useState(false)
+    const [amount, setAmount] = useState<number | string>(1)
+    const [error, setError] = useState(false)
 
-  const [quantity, setQuantity] = useState(1);
+    const handleCount = (count: 1 | -1) => {
+        // setAmount((prev) => Math.max(0, prev + count))
+        setAmount((prev) => {
+            prev = prev as number
+            1 <= prev + count && prev + count <= product.quantity
+                ? setError(false)
+                : prev + count >= product.quantity
+                ? setError(true)
+                : null
+            return Math.max(1, prev + count)
+        })
+    }
 
-  function handleIncrease() {
-    setQuantity((state) => state + 1);
-  }
+    const handleIncrease = () => {
+        // setAmount((state) => state as number + 1)
+        handleCount(1)
+    }
 
-  function handleDecrease() {
-    setQuantity((state) => state - 1);
-  }
+    const handleDecrease = () => {
+        // setAmount((state) => state as number - 1)
+        handleCount(-1)
+    }
 
-  function handleAddToCart() {
-    const productToAdd = {
-      ...product,
-      quantity,
-    };
+    function handleAddToCart() {
+        const productToAdd = {
+            ...product,
+            amount,
+        } as ProductType
 
-    addProductToCart(productToAdd);
+        addProductToCart(productToAdd)
 
-    setQuantity(1);
-  }
+        setAmount(1)
+    }
 
-  const formattedPrice = !product.price ? 0 : product.price.toLocaleString("pt-BR", {
-    minimumFractionDigits: 2,
-  });
+    const formattedPrice = !product.price
+        ? 0
+        : product.price.toLocaleString('pt-BR', {
+              minimumFractionDigits: 2,
+          })
 
-  const handleClick = () => {
-    onClick(product);
-  };
+    const handlePreview = (
+        e: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>
+    ) => {
+        e.stopPropagation()
+        onPreviewButtonClick(product)
+    }
 
-  const handleNavigate = () => {
-    navigate(`/product/${product.id}`);
-  };
+    const handleNavigate = () => {
+        navigate(`/product/${product.id}`)
+    }
 
-  return (
-    <ProductCardContainer onClick={handleNavigate} className="cursor-pointer">
-      <img src={`/products/${product.barcode}@150x120.png`} alt={product.name} />
+    return (
+        <ProductCardContainer
+            onClick={handleNavigate}
+            className="cursor-pointer"
+            onMouseEnter={() => setShowPreviewButton(true)}
+            onMouseLeave={() => setShowPreviewButton(false)}
+        >
+            <img
+                src={`/products/${product.barcode}@150x120.png`}
+                alt={product.name}
+            />
 
-      <Tags>
-        {product.tags.map((tag) => (
-          <span key={tag}>{tag}</span>
-        ))}
-      </Tags>
+            <Tags>
+                {/* {product.tags.map((tag) => (
+                    <span key={tag}>{tag}</span>
+                ))} */}
+                {tags.map((tag) => (
+                    <span key={tag}>{tag}</span>
+                ))}
+            </Tags>
 
-      <Name>{product.name}</Name>
-      {/* <Description>{product.description}</Description> */}
-
-      <CardFooter>
-        <div>
-          <TitleText size="m" color="text" as="strong">
-            {formattedPrice}
-          </TitleText>
-          <RegularText size="s">$</RegularText>
-        </div>
-        <ViewDetailButton onClick={handleClick}>Detail</ViewDetailButton>
-        {/* <AddCartWrapper>
-          <QuantityInput
-            onIncrease={handleIncrease}
-            onDecrease={handleDecrease}
-            quantity={quantity}
-          />
-          <button onClick={handleAddToCart}>
-            <ShoppingCart weight="fill" size={22} />
-          </button>
-        </AddCartWrapper> */}
-      </CardFooter>
-    </ProductCardContainer>
-  );
+            <PreviewButton
+                className={showPreviewButton ? 'visible' : 'invisible'}
+                onClick={(e) => {
+                    handlePreview(e)
+                }}
+            >
+                Click here to preview
+            </PreviewButton>
+            <Name>{product.name}</Name>
+            <Description>{product.description}</Description>
+            <CardFooter
+                onClick={(e) => {
+                    e.stopPropagation()
+                }}
+            >
+                <div>
+                    <TitleText size="m" color="text" as="strong">
+                        {formattedPrice}
+                    </TitleText>
+                    <RegularText size="s">$</RegularText>
+                </div>
+                <AddCartWrapper>
+                    <QuantityInput
+                        onIncrease={handleIncrease}
+                        onDecrease={handleDecrease}
+                        quantity={amount as number}
+                    />
+                    <button onClick={handleAddToCart}>
+                        <ShoppingCart weight="fill" size={22} />
+                    </button>
+                </AddCartWrapper>
+            </CardFooter>
+            {error && (
+                <div className="text-xs text-red-500 font-medium pt-2">
+                    Số lượng đặt nhiều hơn mức tối đa!
+                </div>
+            )}
+        </ProductCardContainer>
+    )
 }

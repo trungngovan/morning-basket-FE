@@ -1,15 +1,15 @@
 import styled from 'styled-components'
 
 interface TitleTextProps {
-  size?: 'xl' | 'l' | 'm' | 's' | 'xs'
-  color?: 'title' | 'subtitle' | 'text'
-  weight?: string | number
+    size?: 'xl' | 'l' | 'm' | 's' | 'xs'
+    color?: 'title' | 'subtitle' | 'text'
+    weight?: string | number
 }
 
 interface RegularTextProps {
-  size?: 'l' | 'm' | 's'
-  color?: 'text' | 'subtitle' | 'label'
-  weight?: string | number
+    size?: 'l' | 'm' | 's'
+    color?: 'text' | 'subtitle' | 'label'
+    weight?: string | number
 }
 
 // export const TitleText = styled.h1<TitleTextProps>`
@@ -21,19 +21,19 @@ interface RegularTextProps {
 //   font-weight: ${({ weight }) => weight ?? 800};
 // `
 export const TitleText = styled.h1<TitleTextProps>`
-  color: ${({ theme, color }) => theme.colors[`base-${color ?? 'title'}`]};
-  font-size: ${({ theme, size }) =>
-    theme.textSizes[`title-title-${size ?? 'm'}`]};
-  font-family: ${({ theme }) => theme.fonts.title};
-  line-height: 130%;
-  font-weight: ${({ weight }) => weight ?? 800};
-  // padding-left: 1rem; /* Thêm padding-left cho TitleText */
-`;
+    color: ${({ theme, color }) => theme.colors[`base-${color ?? 'title'}`]};
+    font-size: ${({ theme, size }) =>
+        theme.textSizes[`title-title-${size ?? 'm'}`]};
+    font-family: ${({ theme }) => theme.fonts.title};
+    line-height: 130%;
+    font-weight: ${({ weight }) => weight ?? 800};
+    // padding-left: 1rem; /* Thêm padding-left cho TitleText */
+`
 
 export const RegularText = styled.p<RegularTextProps>`
-  color: ${({ theme, color }) => theme.colors[`base-${color ?? 'text'}`]};
-  font-size: ${({ theme, size }) =>
-    theme.textSizes[`text-regular-${size ?? 'm'}`]};
-  line-height: 130%;
-  font-weight: ${({ weight }) => weight ?? 400};
+    color: ${({ theme, color }) => theme.colors[`base-${color ?? 'text'}`]};
+    font-size: ${({ theme, size }) =>
+        theme.textSizes[`text-regular-${size ?? 'm'}`]};
+    line-height: 130%;
+    font-weight: ${({ weight }) => weight ?? 400};
 `
