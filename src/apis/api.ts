@@ -8,14 +8,17 @@ export const apiRequest = async <
 >(
     config: AxiosRequestConfig
 ): Promise<Response> => {
-    const token = ''
+    // Vu's token
+    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJIZW5yeSIsInN1YiI6IjY0YjIyNjZlMzJiMDQ3MTJhOTNhMGUwNiIsImlhdCI6MTY4OTM5NzI1NTI0MywiZXhwIjoxNjg5NjU2NDU1MjQzfQ.PT197K6sc5u9uSKpQ96ZHPhi-xsZbqoDwMBAvGdVNpc"
 
     return instance.request({
         ...config,
         headers: {
             Accept: 'application/json',
             'Content-Type': 'application/json; charset=utf-8',
-            Authorization: token ? `Bearer ${token}` : undefined,
+            // Authorization: token ? `Bearer ${token}` : undefined,
+            // Only token now, no "Bearer "
+            Authorization: token ? `${token}` : undefined,
             ...config.headers,
         },
     })
