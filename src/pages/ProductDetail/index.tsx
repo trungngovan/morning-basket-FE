@@ -5,6 +5,7 @@ import { ProductBooking } from './components/ProductBooking'
 import { ProductInfomation } from './components/ProductInfomation'
 import { Review } from './components/Review'
 import { ProductType } from '../../@types/product'
+import React from 'react'
 
 export function ProductDetail() {
     const { id } = useParams()
