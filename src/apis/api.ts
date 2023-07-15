@@ -1,9 +1,8 @@
 import axios, { type AxiosRequestConfig, type AxiosResponse } from 'axios'
-
-const BASE_URL = "http://localhost:3000"
+const BASE_URL = 'http://localhost:3000'
 const instance = axios.create({
     withCredentials: true,
-    baseURL: BASE_URL
+    baseURL: BASE_URL,
 })
 
 export const apiRequest = async <
@@ -11,50 +10,61 @@ export const apiRequest = async <
     Response = AxiosResponse<Data>
 >(
     config: AxiosRequestConfig
-): Promise<Response> => {
+): Promise<Response | undefined> => {
     // Vu's token
-    const authToken = localStorage.getItem('authToken') ?
-        localStorage.getItem('authToken') :
-        await instance.request({
-            method: 'post',
-            maxBodyLength: Infinity,
-            url: 'http://localhost:3000/customers/signin',
-            headers: {
-                'Content-Type': 'application/json',
-                'Cookie': 'connect.sid=s%3A7Jz-WMUHt8azEJeuX2jc_BvEHLgFrdvy.MmnxGKb%2F0%2BsX6MiSnpiwdPclQ%2BiVdOsUpvLKTd5MJIw'
-            },
-            data: JSON.stringify({
-                "phoneNumber": "0868821907",
-                "password": "vu7799"
-            })
-        }).then((response) => {
-            localStorage.setItem('authToken', response.data.token)
-            return JSON.stringify(response.data.token);
-        })
+    try {
+        // const authTokenValid = localStorage.getItem('authTokenValid') as string
+        const authToken = localStorage.getItem('authToken')
 
-    return await instance.request({
-        ...config,
-        headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json; charset=utf-8',
-            // Authorization: token ? `Bearer ${token}` : undefined,
-            // Only token now, no "Bearer "
-            Authorization: authToken,
-            ...config.headers,
-        },
-    })
+        return await instance.request({
+            ...config,
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json; charset=utf-8',
+                // Authorization: token ? `Bearer ${token}` : undefined,
+                // Only token now, no "Bearer "
+                Authorization: authToken,
+                ...config.headers,
+            },
+        })
+    } catch {
+        // localStorage.setItem('authTokenValid', "false")
+        alert('Please sign in and reload this page!')
+        const phoneNumber = prompt('Phone Number')
+        const password = prompt('Password')
+        console.log(phoneNumber, password)
+        await instance
+            .request({
+                method: 'post',
+                maxBodyLength: Infinity,
+                url: 'http://localhost:3000/customers/signin',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Cookie: 'connect.sid=s%3A7Jz-WMUHt8azEJeuX2jc_BvEHLgFrdvy.MmnxGKb%2F0%2BsX6MiSnpiwdPclQ%2BiVdOsUpvLKTd5MJIw',
+                },
+                data: JSON.stringify({
+                    phoneNumber: phoneNumber,
+                    password: password,
+                }),
+            })
+            .then((response) => {
+                // localStorage.setItem('authTokenValid', "true")
+                localStorage.setItem('authToken', response.data.token)
+                return response.data.token
+            })
+    }
 }
 
 export const apiGet = async <Data = unknown, Response = AxiosResponse<Data>>(
     url: string,
     params?: Record<string, unknown>,
     config?: AxiosRequestConfig
-): Promise<Response> => {
+): Promise<Response | undefined> => {
     const query = params
         ? `?${Object.keys(params)
-            .map((key) => (params[key] ? `${key}=${params[key]}` : ''))
-            .filter(Boolean)
-            .join('&')}`
+              .map((key) => (params[key] ? `${key}=${params[key]}` : ''))
+              .filter(Boolean)
+              .join('&')}`
         : ''
 
     return apiRequest<Data, Response>({
