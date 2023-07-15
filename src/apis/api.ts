@@ -1,6 +1,10 @@
 import axios, { type AxiosRequestConfig, type AxiosResponse } from 'axios'
 
-const instance = axios.create()
+const BASE_URL = "http://localhost:3000"
+const instance = axios.create({
+    withCredentials: true,
+    baseURL: BASE_URL
+})
 
 export const apiRequest = async <
     Data = unknown,
@@ -9,16 +13,33 @@ export const apiRequest = async <
     config: AxiosRequestConfig
 ): Promise<Response> => {
     // Vu's token
-    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJIZW5yeSIsInN1YiI6IjY0YjIyNjZlMzJiMDQ3MTJhOTNhMGUwNiIsImlhdCI6MTY4OTM5NzI1NTI0MywiZXhwIjoxNjg5NjU2NDU1MjQzfQ.PT197K6sc5u9uSKpQ96ZHPhi-xsZbqoDwMBAvGdVNpc"
+    const authToken = localStorage.getItem('authToken') ?
+        localStorage.getItem('authToken') :
+        await instance.request({
+            method: 'post',
+            maxBodyLength: Infinity,
+            url: 'http://localhost:3000/customers/signin',
+            headers: {
+                'Content-Type': 'application/json',
+                'Cookie': 'connect.sid=s%3A7Jz-WMUHt8azEJeuX2jc_BvEHLgFrdvy.MmnxGKb%2F0%2BsX6MiSnpiwdPclQ%2BiVdOsUpvLKTd5MJIw'
+            },
+            data: JSON.stringify({
+                "phoneNumber": "0868821907",
+                "password": "vu7799"
+            })
+        }).then((response) => {
+            localStorage.setItem('authToken', response.data.token)
+            return JSON.stringify(response.data.token);
+        })
 
-    return instance.request({
+    return await instance.request({
         ...config,
         headers: {
             Accept: 'application/json',
             'Content-Type': 'application/json; charset=utf-8',
             // Authorization: token ? `Bearer ${token}` : undefined,
             // Only token now, no "Bearer "
-            Authorization: token ? `${token}` : undefined,
+            Authorization: authToken,
             ...config.headers,
         },
     })
@@ -31,9 +52,9 @@ export const apiGet = async <Data = unknown, Response = AxiosResponse<Data>>(
 ): Promise<Response> => {
     const query = params
         ? `?${Object.keys(params)
-              .map((key) => (params[key] ? `${key}=${params[key]}` : ''))
-              .filter(Boolean)
-              .join('&')}`
+            .map((key) => (params[key] ? `${key}=${params[key]}` : ''))
+            .filter(Boolean)
+            .join('&')}`
         : ''
 
     return apiRequest<Data, Response>({
