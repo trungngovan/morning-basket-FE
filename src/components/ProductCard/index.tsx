@@ -24,7 +24,6 @@ interface ProductProps {
 export function ProductCard({ product, onPreviewButtonClick }: ProductProps) {
     const { addProductToCart } = useCart()
     const navigate = useNavigate()
-    const tags = ['aaa', 'bbb']
     const [showPreviewButton, setShowPreviewButton] = useState(false)
     const [amount, setAmount] = useState<number | string>(1)
     const [error, setError] = useState(false)
@@ -93,10 +92,7 @@ export function ProductCard({ product, onPreviewButtonClick }: ProductProps) {
             />
 
             <Tags>
-                {/* {product.tags.map((tag) => (
-                    <span key={tag}>{tag}</span>
-                ))} */}
-                {tags.map((tag) => (
+                {product.tags.map((tag) => (
                     <span key={tag}>{tag}</span>
                 ))}
             </Tags>
