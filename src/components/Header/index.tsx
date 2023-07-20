@@ -16,13 +16,13 @@ export function Header() {
                 </NavLink>
 
                 <HeaderButtonsContainer>
-                    <NavLink to="/our-stores">
+                    <NavLink to="/faq">
                         <HeaderButton variant="purple">FAQ</HeaderButton>
                     </NavLink>
                     <NavLink to="/aboutUs">
-                        <HeaderButton variant="yellow">ABOUT US</HeaderButton>
+                        <HeaderButton variant="yellow">About Us</HeaderButton>
                     </NavLink>
-                    <NavLink to="/our-stores">
+                    <NavLink to="/contact">
                         <HeaderButton variant="purple">Contact</HeaderButton>
                     </NavLink>
                     {/* <HeaderButton variant="purple">
