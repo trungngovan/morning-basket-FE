@@ -1,9 +1,10 @@
 import axios, { type AxiosRequestConfig, type AxiosResponse } from 'axios'
-const BASE_URL = 'http://localhost:3000'
+const BASE_URL = import.meta.env.VITE_BACKEND_URL
 const instance = axios.create({
     withCredentials: true,
     baseURL: BASE_URL,
 })
+console.log(import.meta.env)
 
 export const apiRequest = async <
     Data = unknown,
@@ -37,7 +38,7 @@ export const apiRequest = async <
             .request({
                 method: 'post',
                 maxBodyLength: Infinity,
-                url: 'http://localhost:3000/customers/signin',
+                url: '/customers/signin',
                 headers: {
                     'Content-Type': 'application/json',
                     Cookie: 'connect.sid=s%3A7Jz-WMUHt8azEJeuX2jc_BvEHLgFrdvy.MmnxGKb%2F0%2BsX6MiSnpiwdPclQ%2BiVdOsUpvLKTd5MJIw',
@@ -62,9 +63,9 @@ export const apiGet = async <Data = unknown, Response = AxiosResponse<Data>>(
 ): Promise<Response | undefined> => {
     const query = params
         ? `?${Object.keys(params)
-              .map((key) => (params[key] ? `${key}=${params[key]}` : ''))
-              .filter(Boolean)
-              .join('&')}`
+            .map((key) => (params[key] ? `${key}=${params[key]}` : ''))
+            .filter(Boolean)
+            .join('&')}`
         : ''
 
     return apiRequest<Data, Response>({

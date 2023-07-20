@@ -28,7 +28,7 @@ export function OurProducts() {
     )
 
     useEffect(() => {
-        apiGet<GetAllProductsResponse>('http://localhost:3000/products').then(
+        apiGet<GetAllProductsResponse>('/products').then(
             (response) => {
                 if (response) {
                     setAllProducts(response.data.products)
