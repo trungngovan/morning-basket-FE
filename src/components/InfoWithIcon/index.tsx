@@ -1,3 +1,4 @@
+import React from 'react'
 import { ReactNode } from 'react'
 import { IconContainer, InfoWithIconContainer } from './styles'
 

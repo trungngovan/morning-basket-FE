@@ -1,3 +1,4 @@
+import React from 'react'
 import { OurProducts } from '../../components/OurProducts'
 import { Hero } from './components/Hero'
 import { HomeContainer } from './styles'

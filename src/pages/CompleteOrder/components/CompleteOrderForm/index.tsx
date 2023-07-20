@@ -1,3 +1,4 @@
+import React from 'react'
 import { MapPinLine, CurrencyDollar } from 'phosphor-react'
 import { useTheme } from 'styled-components'
 import { TitleText } from '../../../../components/Typography'

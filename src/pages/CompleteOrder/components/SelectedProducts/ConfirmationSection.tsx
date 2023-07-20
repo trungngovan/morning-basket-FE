@@ -1,3 +1,4 @@
+import React from 'react'
 import { Button } from '../../../../components/Button'
 import { RegularText } from '../../../../components/Typography'
 import { useCart } from '../../../../hooks/useCart'

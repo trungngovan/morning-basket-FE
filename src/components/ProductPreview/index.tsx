@@ -1,3 +1,4 @@
+import React from 'react'
 import { QuantityInput } from '../QuantityInput'
 import { TitleText, RegularText } from '../Typography'
 import {

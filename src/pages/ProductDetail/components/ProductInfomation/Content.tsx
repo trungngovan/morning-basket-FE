@@ -1,4 +1,5 @@
 import { ReactNode } from 'react'
+import React from 'react'
 import { classNames } from '../../../../utils/classNames'
 
 type Props = {

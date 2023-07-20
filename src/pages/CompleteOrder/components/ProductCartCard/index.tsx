@@ -1,3 +1,4 @@
+import React from 'react'
 import { Trash } from 'phosphor-react'
 import { QuantityInput } from '../../../../components/QuantityInput'
 import { RegularText } from '../../../../components/Typography'

@@ -1,4 +1,5 @@
 /* eslint-disable no-unused-vars */
+import React from 'react'
 import { CompleteOrderForm } from './components/CompleteOrderForm'
 import { SelectedCoffees } from './components/SelectedProducts'
 import { CompleteOrderContainer } from './styles'
@@ -54,14 +55,16 @@ export function CompleteOrderPage() {
     }
 
     return (
-        <FormProvider {...confirmOrderForm}>
-            <CompleteOrderContainer
-                className="container"
-                onSubmit={handleSubmit(handleConfirmOrder)}
-            >
-                <CompleteOrderForm />
-                <SelectedCoffees />
-            </CompleteOrderContainer>
-        </FormProvider>
+        <>
+            <FormProvider {...confirmOrderForm}>
+                <CompleteOrderContainer
+                    className="container"
+                    onSubmit={handleSubmit(handleConfirmOrder)}
+                >
+                    <CompleteOrderForm />
+                    <SelectedCoffees />
+                </CompleteOrderContainer>
+            </FormProvider>
+        </>
     )
 }

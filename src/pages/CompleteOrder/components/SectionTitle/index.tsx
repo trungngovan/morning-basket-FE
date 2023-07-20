@@ -1,3 +1,4 @@
+import React from 'react'
 import { ReactNode } from 'react'
 import { RegularText } from '../../../../components/Typography'
 import { SectionTitleContainer } from './styles'
@@ -8,7 +9,7 @@ interface SectionTitleProps {
     icon: ReactNode
 }
 
-export function SectionTitle({ title, subtitle, icon }: SectionTitleProps) {
+export function SectionTitle({ title, icon }: SectionTitleProps) {
     return (
         <SectionTitleContainer>
             {icon}

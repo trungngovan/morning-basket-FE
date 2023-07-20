@@ -1,3 +1,4 @@
+import React from 'react'
 import { FooterContainer, FooterContent } from './styles'
 import { MapPin, Phone } from 'phosphor-react'
 import { FaInstagram, FaFacebook, FaTwitter, FaYoutube } from 'react-icons/fa'

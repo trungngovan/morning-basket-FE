@@ -1,3 +1,4 @@
+import React from 'react'
 import Filter from './Filter'
 import Ranking from './Ranking'
 import UserReview from './UserReview'

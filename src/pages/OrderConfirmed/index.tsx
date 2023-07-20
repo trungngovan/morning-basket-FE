@@ -1,3 +1,4 @@
+import React from 'react'
 import { RegularText, TitleText } from '../../components/Typography'
 import { OrderConfirmedContainer, OrderDetailsContainer } from './styles'
 

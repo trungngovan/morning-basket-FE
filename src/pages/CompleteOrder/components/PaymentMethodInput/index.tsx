@@ -1,3 +1,4 @@
+import React from 'react'
 import { PaymentMethodContainer, ContentContainer } from './styles'
 import { forwardRef, InputHTMLAttributes, ReactNode } from 'react'
 

@@ -1,5 +1,5 @@
 import React from 'react'
-import { RegularText, TitleText } from '../../../../components/Typography'
+import { TitleText } from '../../../../components/Typography'
 import useFormatCurrency from '../../../../hooks/useFormatCurrency'
 
 type Props = {

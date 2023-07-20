@@ -30,7 +30,12 @@ const Ranking = ({ rank, size = 32 }: Props) => {
                         color="#FFD43B"
                     />
                 ) : (
-                    <StarHalf size={size} weight="fill" color="#FFD43B" />
+                    <StarHalf
+                        key={index}
+                        size={size}
+                        weight="fill"
+                        color="#FFD43B"
+                    />
                 )
             )}
         </div>
