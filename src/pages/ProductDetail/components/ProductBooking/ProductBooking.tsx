@@ -1,9 +1,10 @@
-import { Minus, Plus, ShoppingCart } from 'phosphor-react'
+import React from 'react'
+import { ShoppingCart } from 'phosphor-react'
 import { ProductType } from '../../../../@types/product'
 import Price from './Price'
-import { ChangeEvent, useState } from 'react'
+import { useState } from 'react'
 import { AddCartWrapper } from './style'
-import { RegularText, TitleText } from '../../../../components/Typography'
+// import { RegularText, TitleText } from '../../../../components/Typography'
 import { QuantityInput } from '../../../../components/QuantityInput'
 import { useCart } from '../../../../hooks/useCart'
 
@@ -64,11 +65,11 @@ const ProductBooking = ({ product }: Props) => {
 
         setAmount(1)
     }
-    const formattedPrice = !product.price
-        ? 0
-        : product.price.toLocaleString('pt-BR', {
-              minimumFractionDigits: 2,
-          })
+    // const formattedPrice = !product.price
+    //     ? 0
+    //     : product.price.toLocaleString('pt-BR', {
+    //           minimumFractionDigits: 2,
+    //       })
     return (
         <div className="flex gap-10 p-10">
             <div className="aspect-square w-1/3">

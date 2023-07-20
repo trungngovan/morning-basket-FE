@@ -1,3 +1,4 @@
+import React from 'react'
 import { useEffect, useState } from 'react'
 import { Pagination } from '../Pagination'
 import { ProductCard } from '../ProductCard'
@@ -13,15 +14,7 @@ import {
 // import { products } from '../../mock/coffee'
 import { ProductPreview } from '../ProductPreview'
 import { GetAllProductsResponse, ProductType } from '../../@types/product'
-import {
-    apiRequest,
-    apiGet,
-    apiPost,
-    apiDelete,
-    apiPut,
-    apiPatch,
-} from '../../apis/api'
-import { margin } from 'polished'
+import { apiGet } from '../../apis/api'
 
 export function OurProducts() {
     const [currentPage, setCurrentPage] = useState(1)
@@ -37,8 +30,10 @@ export function OurProducts() {
     useEffect(() => {
         apiGet<GetAllProductsResponse>('http://localhost:3000/products').then(
             (response) => {
-                setAllProducts(response.data.products)
-                setSearchResults(response.data.products)
+                if (response) {
+                    setAllProducts(response.data.products)
+                    setSearchResults(response.data.products)
+                }
             }
         )
     }, [])

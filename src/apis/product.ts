@@ -11,7 +11,9 @@ export const getProductDetail = async ({ id }: Props) => {
             apiGet<GetProductByIdResponse>(
                 `http://localhost:3000/products/${id}`
             ).then((response) => {
-                resolve(response.data.product)
+                if (response) {
+                    resolve(response.data.product)
+                }
             })
         }, 200)
     })

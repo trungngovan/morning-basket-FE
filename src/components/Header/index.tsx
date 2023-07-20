@@ -1,3 +1,4 @@
+import React from 'react'
 import { NavLink } from 'react-router-dom'
 import { useCart } from '../../hooks/useCart'
 import { HeaderContainer, HeaderButtonsContainer, HeaderButton } from './styles'
@@ -15,22 +16,14 @@ export function Header() {
                 </NavLink>
 
                 <HeaderButtonsContainer>
-                    <NavLink to="/pre-order">
-                        <HeaderButton variant="yellow">PRE-ORDER</HeaderButton>
-                    </NavLink>
-                    <NavLink to="/lounge-menu">
-                        <HeaderButton variant="purple">
-                            LOUNGE MENU
-                        </HeaderButton>
-                    </NavLink>
-                    <NavLink to="/hamper">
-                        <HeaderButton variant="yellow">HAMPER</HeaderButton>
-                    </NavLink>
                     <NavLink to="/our-stores">
-                        <HeaderButton variant="purple">OUR STORES</HeaderButton>
+                        <HeaderButton variant="purple">FAQ</HeaderButton>
                     </NavLink>
                     <NavLink to="/aboutUs">
                         <HeaderButton variant="yellow">ABOUT US</HeaderButton>
+                    </NavLink>
+                    <NavLink to="/our-stores">
+                        <HeaderButton variant="purple">Contact</HeaderButton>
                     </NavLink>
                     {/* <HeaderButton variant="purple">
             <MapPin size={20} weight="fill" />

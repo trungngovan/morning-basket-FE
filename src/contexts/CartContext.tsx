@@ -1,8 +1,10 @@
+import React from 'react'
 import { createContext, ReactNode, useEffect, useState } from 'react'
-import { Product } from '../components/ProductCard'
+import { Product } from '../components/ProductType'
 import { produce } from 'immer'
 
 export interface CartItem extends Product {
+    id: number
     quantity: number
 }
 

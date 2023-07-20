@@ -1,3 +1,4 @@
+import React from 'react'
 import { TitleText } from '../../../../components/Typography'
 import { useCart } from '../../../../hooks/useCart'
 import { ProductCartCard } from '../ProductCartCard'

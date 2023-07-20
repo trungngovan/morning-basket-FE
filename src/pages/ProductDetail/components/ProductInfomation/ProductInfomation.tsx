@@ -1,8 +1,9 @@
-import { Product } from '../../../../@types/product'
+import React from 'react'
+import { ProductType } from '../../../../@types/product'
 import Content from './Content'
 
 type Props = {
-    product: Product
+    product: ProductType
 }
 
 const ProductInfomation = ({ product }: Props) => {
