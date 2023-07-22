@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components'
 
-export const InputWrapper = styled.div`
+export const SelectWrapper = styled.div`
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -12,11 +12,11 @@ export const InputWrapper = styled.div`
     }
 `
 
-interface InputContainerProps {
+interface SelectContainerProps {
     hasError: boolean
 }
 
-export const InputStyleContainer = styled.div<InputContainerProps>`
+export const SelectStyleContainer = styled.div<SelectContainerProps>`
     height: 2.625rem;
     border-radius: 4px;
     border: 1px solid ${({ theme }) => theme.colors['base-button']};
@@ -41,7 +41,7 @@ export const InputStyleContainer = styled.div<InputContainerProps>`
 `
 
 export const InputStyled = styled.input`
-    width: 70%;
+    // width: 1/3;
     background: none;
     border: none;
     padding: 0 0.75rem;
@@ -54,9 +54,14 @@ export const InputStyled = styled.input`
     }
 `
 
-export const RightText = styled.p`
+export const SelectStyled = styled.select`
+    width: 100%;
+    background: none;
+    border: none;
+    padding: 0 0.75rem;
+    height: 100%;
     font-size: 0.75rem;
-    margin-right: 0.75rem;
-    font-style: italic;
-    color: ${({ theme }) => theme.colors['base-label']};
+    color: ${({ theme }) => theme.colors['base-text']};
 `
+
+export const Option = styled.option``

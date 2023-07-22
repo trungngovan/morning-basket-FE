@@ -4,9 +4,10 @@ import { useCart } from '../../../../hooks/useCart'
 import { ProductCartCard } from '../ProductCartCard'
 import { ConfirmationSection } from './ConfirmationSection'
 import { DetailsContainer, SelectedProductsContainer } from './styles'
+import { Button } from '../../../../components/Button'
 
-export function SelectedCoffees() {
-    const { cartItems } = useCart()
+export function SelectedProducts() {
+    const { cartItems, cartQuantity } = useCart()
 
     return (
         <SelectedProductsContainer>
@@ -21,6 +22,11 @@ export function SelectedCoffees() {
 
                 <ConfirmationSection />
             </DetailsContainer>
+            <Button
+                text="Confirm order"
+                disabled={cartQuantity <= 0}
+                type="submit"
+            />
         </SelectedProductsContainer>
     )
 }

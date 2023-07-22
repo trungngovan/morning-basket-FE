@@ -5,7 +5,7 @@ export const SelectedProductsContainer = styled.div`
     display: flex;
     flex-direction: column;
     gap: 0.75rem;
-    width: 43rem;
+    width: 53rem;
 
     @media (max-width: 1000px) {
         width: 100%;

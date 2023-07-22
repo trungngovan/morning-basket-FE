@@ -13,7 +13,7 @@ import {
 } from './styles'
 // import { products } from '../../mock/coffee'
 import { ProductPreview } from '../ProductPreview'
-import { GetAllProductsResponse, ProductType } from '../../@types/product'
+import { GetAllProductsResponse, ProductType } from '../../@types/products'
 import { apiGet } from '../../apis/api'
 
 export function OurProducts() {
@@ -28,14 +28,12 @@ export function OurProducts() {
     )
 
     useEffect(() => {
-        apiGet<GetAllProductsResponse>('/products').then(
-            (response) => {
-                if (response) {
-                    setAllProducts(response.data.products)
-                    setSearchResults(response.data.products)
-                }
+        apiGet<GetAllProductsResponse>('/products').then((response) => {
+            if (response) {
+                setAllProducts(response.data.products)
+                setSearchResults(response.data.products)
             }
-        )
+        })
     }, [])
 
     // Create an array of unique tags
@@ -43,7 +41,7 @@ export function OurProducts() {
 
     // Initialize the selected tag to "all"
     const [selectedTag, setSelectedTag] = useState('all')
-    const [prevSelectedTag, setPrevSelectedTag] = useState('')
+    // const [prevSelectedTag, setPrevSelectedTag] = useState('')
 
     useEffect(() => {
         if (selectedTag === 'all') {
@@ -71,7 +69,7 @@ export function OurProducts() {
     }
 
     const handleTagSelect = (tag: string) => {
-        setPrevSelectedTag(selectedTag)
+        // setPrevSelectedTag(selectedTag)
         setSelectedTag(tag)
         setCurrentPage(1)
 
@@ -85,16 +83,16 @@ export function OurProducts() {
         }
     }
 
-    const handleSearch = (results: ProductType[]) => {
-        if (results.length === 0) {
-            setSearchResults(allProducts)
-        } else {
-            setSearchResults(results)
-        }
-        setSelectedTag('all')
-        setAllProducts(results)
-        setIsSearched(true)
-    }
+    // const handleSearch = (results: ProductType[]) => {
+    //     if (results.length === 0) {
+    //         setSearchResults(allProducts)
+    //     } else {
+    //         setSearchResults(results)
+    //     }
+    //     setSelectedTag('all')
+    //     setAllProducts(results)
+    //     setIsSearched(true)
+    // }
 
     const handleOpenProductPreview = (product: ProductType) => {
         setSelectedProduct(product)
@@ -126,7 +124,7 @@ export function OurProducts() {
                             key={tag}
                             isActive={selectedTag === tag}
                             onClick={() => {
-                                setPrevSelectedTag(selectedTag)
+                                // setPrevSelectedTag(selectedTag)
                                 setSelectedTag(tag)
                             }}
                             variant={selectedTag === tag ? 'yellow' : 'purple'}

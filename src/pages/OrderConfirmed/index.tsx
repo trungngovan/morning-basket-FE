@@ -48,11 +48,9 @@ export function OrderConfirmedPage() {
                         text={
                             <RegularText>
                                 Delivery to
-                                <strong>
-                                    {state.street}, {state.number}
-                                </strong>
+                                <strong> {state.number_street}</strong>
                                 <br />
-                                {state.district} - {state.city}, {state.uf}
+                                {state.ward}, {state.district}, {state.province}
                             </RegularText>
                         }
                     />

@@ -18,8 +18,8 @@ export function CompleteOrderForm() {
 
             <FormSectionContainer>
                 <SectionTitle
-                    title="Delivery address"
-                    subtitle="Enter the address where you want to receive your order"
+                    title="Địa chỉ nhận hàng"
+                    subtitle="Vui lòng nhập địa chỉ chi tiết"
                     icon={
                         <MapPinLine
                             color={colors['brand-yellow-dark']}
@@ -33,8 +33,8 @@ export function CompleteOrderForm() {
 
             <FormSectionContainer>
                 <SectionTitle
-                    title="Payment"
-                    subtitle="Payment is made on delivery. Choose the way you want to pay"
+                    title="Phương thức thanh toán"
+                    subtitle="Vui lòng chọn phương thức thanh toán"
                     icon={
                         <CurrencyDollar
                             color={colors['brand-purple']}

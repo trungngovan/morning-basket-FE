@@ -6,8 +6,7 @@ import {
     BenefitsContainer,
 } from './styles'
 
-// import heroImage from "../../../../assets/hero-image.png";
-import logoTruc from '../../../../assets/morning-basket-logo-Truc.png'
+import logo from '../../../../assets/logo.png'
 import { RegularText } from '../../../../components/Typography'
 import { InfoWithIcon } from '../../../../components/InfoWithIcon'
 import { ShoppingCart, Package, Timer, Coffee } from 'phosphor-react'
@@ -52,7 +51,7 @@ export function Hero() {
                 </div>
 
                 <div className="imageContainer">
-                    <img src={logoTruc} alt="" />
+                    <img src={logo} alt="" />
                 </div>
             </HeroContent>
         </HeroContainer>

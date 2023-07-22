@@ -13,7 +13,7 @@ import { ShoppingCart } from 'phosphor-react'
 import { useCart } from '../../hooks/useCart'
 import { MouseEvent, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { ProductType } from '../../@types/product'
+import { ProductType } from '../../@types/products'
 import React from 'react'
 
 interface ProductProps {

@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React from 'react'
 import { CompleteOrderForm } from './components/CompleteOrderForm'
-import { SelectedCoffees } from './components/SelectedProducts'
+import { SelectedProducts } from './components/SelectedProducts'
 import { CompleteOrderContainer } from './styles'
 import { useForm, FormProvider } from 'react-hook-form'
 import * as zod from 'zod'
@@ -16,16 +16,15 @@ enum PaymentMethods {
 }
 
 const confirmOrderFormValidationSchema = zod.object({
-    cep: zod.string().min(1, 'Please provide a valid CEP'),
-    street: zod.string().min(1, 'Please provide a valid street name'),
-    number: zod.string().min(1, 'Please provide a valid house number'),
-    complement: zod.string(),
-    district: zod.string().min(1, 'Please provide a valid district name'),
-    city: zod.string().min(1, 'Please provide a valid city name'),
-    uf: zod.string().min(1, 'Please provide a valid state/region name'),
+    number_street: zod.string().min(1, 'Vui lòng nhập số nhà và tên đường'),
+    ward: zod.string().min(1, 'Vui lòng chọn Phường/Xã/Thị trấn'),
+    district: zod.string().min(1, 'Vui lòng chọn Quận/Huyện'),
+    province: zod.string().min(1, 'Vui lòng chọn Tỉnh/Thành phố'),
+    note: zod.string(),
+    // zipcode: zod.string().min(1, 'Vui lòng nhập mã ZIP'),
     paymentMethod: zod.nativeEnum(PaymentMethods, {
         errorMap: () => {
-            return { message: 'Please select a payment method' }
+            return { message: 'Vui lòng chọn phương thức thanh toán' }
         },
     }),
 })
@@ -62,7 +61,7 @@ export function CompleteOrderPage() {
                     onSubmit={handleSubmit(handleConfirmOrder)}
                 >
                     <CompleteOrderForm />
-                    <SelectedCoffees />
+                    <SelectedProducts />
                 </CompleteOrderContainer>
             </FormProvider>
         </>

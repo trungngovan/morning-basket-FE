@@ -6,10 +6,10 @@ export const InfoWithIconContainer = styled.div`
     gap: 0.75rem;
 
     > p {
-        width: 180px;
-        white-space: nowrap;
+        // width: 180px;
+        // white-space: nowrap;
         overflow: hidden !important;
-        text-overflow: ellipsis;
+        // text-overflow: ellipsis;
     }
 `
 

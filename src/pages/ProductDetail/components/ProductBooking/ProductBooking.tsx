@@ -1,6 +1,6 @@
 import React from 'react'
 import { ShoppingCart } from 'phosphor-react'
-import { ProductType } from '../../../../@types/product'
+import { ProductType } from '../../../../@types/products'
 import Price from './Price'
 import { useState } from 'react'
 import { AddCartWrapper } from './style'

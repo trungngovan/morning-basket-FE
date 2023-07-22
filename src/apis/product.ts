@@ -1,4 +1,4 @@
-import { GetProductByIdResponse } from '../@types/product'
+import { GetProductByIdResponse } from '../@types/products'
 import { apiGet } from '../apis/api'
 
 type Props = {
@@ -8,13 +8,13 @@ type Props = {
 export const getProductDetail = async ({ id }: Props) => {
     return new Promise((resolve) => {
         setTimeout(() => {
-            apiGet<GetProductByIdResponse>(
-                `/products/${id}`
-            ).then((response) => {
-                if (response) {
-                    resolve(response.data.product)
+            apiGet<GetProductByIdResponse>(`/products/${id}`).then(
+                (response) => {
+                    if (response) {
+                        resolve(response.data.product)
+                    }
                 }
-            })
+            )
         }, 200)
     })
 }

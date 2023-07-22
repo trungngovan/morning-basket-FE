@@ -11,7 +11,7 @@ import { ShoppingCart } from 'phosphor-react'
 import { useCart } from '../../hooks/useCart'
 import { useState } from 'react'
 import { Description, Name } from '../ProductCard/styles'
-import { ProductType } from '../../@types/product'
+import { ProductType } from '../../@types/products'
 
 interface ProductPreviewProps {
     product: ProductType
@@ -44,9 +44,9 @@ const CloseButton = ({ isShow, onClick }: CloseButtonProps) => {
                         aria-hidden="true"
                     >
                         <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
                             d="M6 18L18 6M6 6l12 12"
                         />
                     </svg>

@@ -4,7 +4,9 @@ const instance = axios.create({
     withCredentials: true,
     baseURL: BASE_URL,
 })
-console.log(import.meta.env)
+const vnProvincesInstance = axios.create({
+    baseURL: 'https://provinces.open-api.vn/api',
+})
 
 export const apiRequest = async <
     Data = unknown,
@@ -33,7 +35,6 @@ export const apiRequest = async <
         alert('Please sign in and reload this page!')
         const phoneNumber = prompt('Phone Number')
         const password = prompt('Password')
-        console.log(phoneNumber, password)
         await instance
             .request({
                 method: 'post',
@@ -63,9 +64,9 @@ export const apiGet = async <Data = unknown, Response = AxiosResponse<Data>>(
 ): Promise<Response | undefined> => {
     const query = params
         ? `?${Object.keys(params)
-            .map((key) => (params[key] ? `${key}=${params[key]}` : ''))
-            .filter(Boolean)
-            .join('&')}`
+              .map((key) => (params[key] ? `${key}=${params[key]}` : ''))
+              .filter(Boolean)
+              .join('&')}`
         : ''
 
     return apiRequest<Data, Response>({
@@ -121,6 +122,47 @@ export const apiDelete = async <Data = unknown, Response = AxiosResponse<Data>>(
     return apiRequest<Data, Response>({
         url,
         method: 'DELETE',
+        ...config,
+    })
+}
+
+export const vnProvincesApiRequest = async <
+    Data = unknown,
+    Response = AxiosResponse<Data>
+>(
+    config: AxiosRequestConfig
+): Promise<Response | undefined> => {
+    return await vnProvincesInstance.request({
+        ...config,
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json; charset=utf-8',
+            // Authorization: token ? `Bearer ${token}` : undefined,
+            // Only token now, no "Bearer "
+            // Authorization: authToken,
+            ...config.headers,
+        },
+    })
+}
+
+export const vnProvincesApiGet = async <
+    Data = unknown,
+    Response = AxiosResponse<Data>
+>(
+    url: string,
+    params?: Record<string, unknown>,
+    config?: AxiosRequestConfig
+): Promise<Response | undefined> => {
+    const query = params
+        ? `?${Object.keys(params)
+              .map((key) => (params[key] ? `${key}=${params[key]}` : ''))
+              .filter(Boolean)
+              .join('&')}`
+        : ''
+
+    return vnProvincesApiRequest<Data, Response>({
+        url: `${url}${query}`,
+        method: 'GET',
         ...config,
     })
 }

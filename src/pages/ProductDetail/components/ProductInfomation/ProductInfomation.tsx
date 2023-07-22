@@ -1,5 +1,5 @@
 import React from 'react'
-import { ProductType } from '../../../../@types/product'
+import { ProductType } from '../../../../@types/products'
 import Content from './Content'
 
 type Props = {

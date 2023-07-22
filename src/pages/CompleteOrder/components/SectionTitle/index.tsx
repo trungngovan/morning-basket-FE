@@ -9,13 +9,15 @@ interface SectionTitleProps {
     icon: ReactNode
 }
 
-export function SectionTitle({ title, icon }: SectionTitleProps) {
+export function SectionTitle({ title, subtitle, icon }: SectionTitleProps) {
     return (
         <SectionTitleContainer>
             {icon}
             <div>
-                <RegularText color="subtitle">{title}</RegularText>
-                <RegularText size="s">{title}</RegularText>
+                <RegularText color="text">{title}</RegularText>
+                <RegularText size="s" color="subtitle">
+                    {subtitle}
+                </RegularText>
             </div>
         </SectionTitleContainer>
     )

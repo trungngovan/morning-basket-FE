@@ -1,11 +1,10 @@
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { getProductDetail } from '../../apis/product'
 import { ProductBooking } from './components/ProductBooking'
 import { ProductInfomation } from './components/ProductInfomation'
 import { Review } from './components/Review'
-import { ProductType } from '../../@types/product'
-import React from 'react'
+import { ProductType } from '../../@types/products'
 
 export function ProductDetail() {
     const { id } = useParams()

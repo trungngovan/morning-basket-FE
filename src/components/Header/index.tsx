@@ -3,7 +3,6 @@ import { NavLink } from 'react-router-dom'
 import { useCart } from '../../hooks/useCart'
 import { HeaderContainer, HeaderButtonsContainer, HeaderButton } from './styles'
 import { ShoppingCart } from 'phosphor-react'
-// import LogoImage from "../../assets/logo.svg";
 import LogoImage from '../../assets/morning-basket-logo-Truc-100-63.png'
 export function Header() {
     const { cartQuantity } = useCart()

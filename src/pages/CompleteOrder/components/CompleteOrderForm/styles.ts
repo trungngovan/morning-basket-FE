@@ -52,13 +52,16 @@ export const AddressFormContainer = styled.div`
     }
 `
 
+export const PaymentMethodOptionsWrapper = styled.div`
+    > p {
+        padding-top: 0.3rem;
+        color: ${({ theme }) => theme.colors['base-error']};
+    }
+`
+
 export const PaymentMethodOptionsContainer = styled.div`
     display: flex;
     gap: 0.75rem;
-
-    > p {
-        color: ${({ theme }) => theme.colors['base-error']};
-    }
 
     @media (max-width: 620px) {
         flex-direction: column;

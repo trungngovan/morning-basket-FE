@@ -1,15 +1,11 @@
 import React, { useState } from 'react'
 import { SearchContainer, Input, Button, Select } from './styles'
-import { TitleText } from '../Typography'
-
-interface Product {
-    name: string
-    tags: string[]
-}
+// import { TitleText } from '../Typography'
+import { ProductType } from '../../@types/products'
 
 interface Props {
-    products: Product[]
-    onSearch: (results: Product[]) => void
+    products: ProductType[]
+    onSearch: (results: ProductType[]) => void
 }
 
 const SearchBar = ({ products, onSearch }: Props) => {
@@ -17,7 +13,7 @@ const SearchBar = ({ products, onSearch }: Props) => {
     const [searchTag, setSearchTag] = useState('')
     const [searchType, setSearchType] = useState('name')
     const [disableSearch, setDisableSearch] = useState(true)
-    const [noResults, setNoResults] = useState(false)
+    // const [noResults, setNoResults] = useState(false)
 
     const handleSearchTextChange = (
         event: React.ChangeEvent<HTMLInputElement>
