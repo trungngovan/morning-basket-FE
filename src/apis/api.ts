@@ -14,47 +14,18 @@ export const apiRequest = async <
 >(
     config: AxiosRequestConfig
 ): Promise<Response | undefined> => {
-    // Vu's token
-    try {
-        // const authTokenValid = localStorage.getItem('authTokenValid') as string
-        const authToken = localStorage.getItem('authToken')
-
-        return await instance.request({
-            ...config,
-            headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json; charset=utf-8',
-                // Authorization: token ? `Bearer ${token}` : undefined,
-                // Only token now, no "Bearer "
-                Authorization: authToken,
-                ...config.headers,
-            },
-        })
-    } catch {
-        // localStorage.setItem('authTokenValid', "false")
-        alert('Please sign in and reload this page!')
-        const phoneNumber = prompt('Phone Number')
-        const password = prompt('Password')
-        await instance
-            .request({
-                method: 'post',
-                maxBodyLength: Infinity,
-                url: '/customers/signin',
-                headers: {
-                    'Content-Type': 'application/json',
-                    Cookie: 'connect.sid=s%3A7Jz-WMUHt8azEJeuX2jc_BvEHLgFrdvy.MmnxGKb%2F0%2BsX6MiSnpiwdPclQ%2BiVdOsUpvLKTd5MJIw',
-                },
-                data: JSON.stringify({
-                    phoneNumber: phoneNumber,
-                    password: password,
-                }),
-            })
-            .then((response) => {
-                // localStorage.setItem('authTokenValid', "true")
-                localStorage.setItem('authToken', response.data.token)
-                return response.data.token
-            })
-    }
+    const authToken = localStorage.getItem('authToken') as string
+    return await instance.request({
+        ...config,
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json; charset=utf-8',
+            // Authorization: token ? `Bearer ${token}` : undefined,
+            // Only token now, no "Bearer "
+            Authorization: authToken,
+            ...config.headers,
+        },
+    })
 }
 
 export const apiGet = async <Data = unknown, Response = AxiosResponse<Data>>(

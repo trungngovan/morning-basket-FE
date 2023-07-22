@@ -6,7 +6,7 @@ export const FooterContainer = styled.footer`
     background: ${({ theme }) => theme.colors['base-background']};
     display: flex;
     flex-direction: column;
-    position: sticky;
+    position: fixed;
     bottom: 0;
     left: 0;
     z-index: 5;
