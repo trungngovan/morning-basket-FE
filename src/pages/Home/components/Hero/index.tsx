@@ -9,7 +9,12 @@ import {
 import logo from '../../../../assets/logo.png'
 import { RegularText } from '../../../../components/Typography'
 import { InfoWithIcon } from '../../../../components/InfoWithIcon'
-import { ShoppingCart, Package, Timer, Coffee } from 'phosphor-react'
+import {
+    PiShoppingCartFill,
+    PiPackageFill,
+    PiHeartbeatFill,
+    PiPlantFill,
+} from 'react-icons/pi'
 import { useTheme } from 'styled-components'
 
 export function Hero() {
@@ -20,32 +25,35 @@ export function Hero() {
             <HeroContent className="container">
                 <div>
                     <section>
-                        <HeroTitle size="xl">Morning Basket</HeroTitle>
+                        <HeroTitle size="m">Bạn đang tìm kiếm món ăn nhẹ ngon, dinh dưỡng và lành mạnh để thưởng thức?</HeroTitle>
                         <RegularText size="l" color="subtitle" as="h3">
-                            Welcome to morningbasket.vn!
+                            Chào mừng đến với{' '}
+                            <a href='https://morningbasket.vn' className="text-indigo-600 hover:text-indigo-500">
+                                morningbasket.vn
+                            </a>!
                         </RegularText>
                     </section>
 
                     <BenefitsContainer>
                         <InfoWithIcon
+                            iconColor={colors['brand-green']}
+                            icon={<PiPlantFill />}
+                            text="Tự nhiên và bổ dưỡng"
+                        />
+                        <InfoWithIcon
                             iconColor={colors['brand-yellow-dark']}
-                            icon={<ShoppingCart weight="fill" />}
-                            text="Lorem ipsum dolosit amet Lorem ipsum dolosit amet Lorem ipsum dolosit amet..."
+                            icon={<PiPackageFill />}
+                            text="An toàn và vệ sinh"
                         />
                         <InfoWithIcon
-                            iconColor={colors['base-text']}
-                            icon={<Package weight="fill" />}
-                            text="Lorem ipsum dolosit amet Lorem ipsum dolosit amet Lorem ipsum dolosit amet..."
+                            iconColor={colors['brand-purple-dark']}
+                            icon={<PiShoppingCartFill />}
+                            text="Đa dạng, đầy đủ, chiều chuộng mọi khẩu vị"
                         />
                         <InfoWithIcon
-                            iconColor={colors['brand-yellow']}
-                            icon={<Timer weight="fill" />}
-                            text="Lorem ipsum dolosit amet Lorem ipsum dolosit amet Lorem ipsum dolosit amet..."
-                        />
-                        <InfoWithIcon
-                            iconColor={colors['brand-purple']}
-                            icon={<Coffee weight="fill" />}
-                            text="Lorem ipsum dolosit amet Lorem ipsum dolosit amet Lorem ipsum dolosit amet..."
+                            iconColor={colors['brand-red']}
+                            icon={<PiHeartbeatFill />}
+                            text="Hơn cả ngon, hãy tận hưởng!"
                         />
                     </BenefitsContainer>
                 </div>

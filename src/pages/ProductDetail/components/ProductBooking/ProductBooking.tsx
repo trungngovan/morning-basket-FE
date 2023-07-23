@@ -1,5 +1,5 @@
 import React from 'react'
-import { ShoppingCart } from 'phosphor-react'
+import { PiShoppingCartFill } from 'react-icons/pi'
 import { ProductType } from '../../../../@types/products'
 import Price from './Price'
 import { useState } from 'react'
@@ -119,7 +119,7 @@ const ProductBooking = ({ product }: Props) => {
                     <AddCartWrapper>
                         {/* <button onClick={handleAddToCart}> */}
                         <button>
-                            <ShoppingCart weight="fill" size={22} />
+                            <PiShoppingCartFill size={22} />
                             <p className="ml-2">Thêm vào giỏ hàng</p>
                         </button>
                     </AddCartWrapper>

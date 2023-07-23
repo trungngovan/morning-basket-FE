@@ -1,5 +1,5 @@
 import React from 'react'
-import { Bank, CreditCard, Money } from 'phosphor-react'
+import { PiBank, PiCreditCard, PiMoney } from 'react-icons/pi'
 import { PaymentMethodInput } from '../PaymentMethodInput'
 import {
     PaymentMethodOptionsContainer,
@@ -12,15 +12,15 @@ import { RegularText } from '../../../../components/Typography'
 export const paymentMethods = {
     credit: {
         label: 'Credit Card',
-        icon: <CreditCard size={16} />,
+        icon: <PiCreditCard size={16} />,
     },
     debit: {
         label: 'Bank',
-        icon: <Bank size={16} />,
+        icon: <PiBank size={16} />,
     },
     money: {
         label: 'Money',
-        icon: <Money size={16} />,
+        icon: <PiMoney size={16} />,
     },
 }
 

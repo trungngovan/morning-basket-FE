@@ -7,7 +7,7 @@ import {
     ProductPreviewFooter,
     AddCartWrapper,
 } from './styles'
-import { ShoppingCart } from 'phosphor-react'
+import { PiShoppingCartFill } from 'react-icons/pi'
 import { useCart } from '../../hooks/useCart'
 import { useState } from 'react'
 import { Description, Name } from '../ProductCard/styles'
@@ -136,7 +136,7 @@ export function ProductPreview({ product, onClose }: ProductPreviewProps) {
                         quantity={amount as number}
                     />
                     <button onClick={handleAddToCart}>
-                        <ShoppingCart weight="fill" size={22} />
+                        <PiShoppingCartFill size={22} />
                     </button>
                 </AddCartWrapper>
             </ProductPreviewFooter>

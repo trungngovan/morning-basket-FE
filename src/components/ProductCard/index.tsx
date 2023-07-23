@@ -9,7 +9,7 @@ import {
     AddCartWrapper,
     PreviewButton,
 } from './styles'
-import { ShoppingCart } from 'phosphor-react'
+import { PiShoppingCartFill } from 'react-icons/pi'
 import { useCart } from '../../hooks/useCart'
 import { MouseEvent, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
@@ -35,8 +35,8 @@ export function ProductCard({ product, onPreviewButtonClick }: ProductProps) {
             1 <= prev + count && prev + count <= product.quantity
                 ? setError(false)
                 : prev + count >= product.quantity
-                ? setError(true)
-                : null
+                    ? setError(true)
+                    : null
             return Math.max(1, prev + count)
         })
     }
@@ -65,8 +65,8 @@ export function ProductCard({ product, onPreviewButtonClick }: ProductProps) {
     const formattedPrice = !product.price
         ? 0
         : product.price.toLocaleString('pt-BR', {
-              minimumFractionDigits: 2,
-          })
+            minimumFractionDigits: 2,
+        })
 
     const handlePreview = (
         e: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>
@@ -103,7 +103,7 @@ export function ProductCard({ product, onPreviewButtonClick }: ProductProps) {
                     handlePreview(e)
                 }}
             >
-                Click here to preview
+                Xem trước
             </PreviewButton>
             <Name>{product.name}</Name>
             <Description>{product.description}</Description>
@@ -125,7 +125,7 @@ export function ProductCard({ product, onPreviewButtonClick }: ProductProps) {
                         quantity={amount as number}
                     />
                     <button onClick={handleAddToCart}>
-                        <ShoppingCart weight="fill" size={22} />
+                        <PiShoppingCartFill size={22} />
                     </button>
                 </AddCartWrapper>
             </CardFooter>

@@ -1,5 +1,5 @@
 import React from 'react'
-import { MapPinLine, CurrencyDollar } from 'phosphor-react'
+import { PiMapPinLine, PiCurrencyDollar } from 'react-icons/pi'
 import { useTheme } from 'styled-components'
 import { TitleText } from '../../../../components/Typography'
 import { SectionTitle } from '../SectionTitle'
@@ -21,7 +21,7 @@ export function CompleteOrderForm() {
                     title="Địa chỉ nhận hàng"
                     subtitle="Vui lòng nhập địa chỉ chi tiết"
                     icon={
-                        <MapPinLine
+                        <PiMapPinLine
                             color={colors['brand-yellow-dark']}
                             size={22}
                         />
@@ -36,7 +36,7 @@ export function CompleteOrderForm() {
                     title="Phương thức thanh toán"
                     subtitle="Vui lòng chọn phương thức thanh toán"
                     icon={
-                        <CurrencyDollar
+                        <PiCurrencyDollar
                             color={colors['brand-purple']}
                             size={22}
                         />

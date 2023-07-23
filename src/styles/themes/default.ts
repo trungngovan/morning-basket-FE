@@ -20,6 +20,10 @@ export const defaultTheme = {
         'brand-red-dark': '#991b1b',
         'brand-red': '#ef4444',
         'brand-red-light': '#fecaca',
+        'brand-green-dark': '#034648',
+        'brand-green': '#07a858',
+        'brand-green-light': '#88dbb2',
+
     },
     textSizes: {
         'title-title-xl': '3rem',

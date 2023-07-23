@@ -1,5 +1,5 @@
 import React from 'react'
-import { Trash } from 'phosphor-react'
+import { PiTrash } from 'react-icons/pi'
 import { QuantityInput } from '../../../../components/QuantityInput'
 import { RegularText } from '../../../../components/Typography'
 import { CartItem } from '../../../../contexts/CartContext'
@@ -51,7 +51,7 @@ export function ProductCartCard({ product }: ProductCardCardProps) {
                             onDecrease={handleDecrease}
                         />
                         <RemoveButton onClick={handleRemove}>
-                            <Trash size={18} />
+                            <PiTrash size={18} />
                             REMOVER
                         </RemoveButton>
                     </ActionsContainer>

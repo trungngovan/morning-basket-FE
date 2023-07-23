@@ -5,7 +5,7 @@ import { OrderConfirmedContainer, OrderDetailsContainer } from './styles'
 import confirmedOrderIllustration from '../../assets/confirmed-order.svg'
 import { InfoWithIcon } from '../../components/InfoWithIcon'
 
-import { MapPin, Clock, CurrencyDollar } from 'phosphor-react'
+import { PiMapPinLine, PiClockFill, PiCurrencyDollar } from 'react-icons/pi'
 import { useTheme } from 'styled-components'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { OrderData } from '../CompleteOrder'
@@ -43,7 +43,7 @@ export function OrderConfirmedPage() {
             <section>
                 <OrderDetailsContainer>
                     <InfoWithIcon
-                        icon={<MapPin weight="fill" />}
+                        icon={<PiMapPinLine />}
                         iconColor={colors['brand-purple']}
                         text={
                             <RegularText>
@@ -56,7 +56,7 @@ export function OrderConfirmedPage() {
                     />
 
                     <InfoWithIcon
-                        icon={<Clock weight="fill" />}
+                        icon={<PiClockFill />}
                         iconColor={colors['brand-yellow']}
                         text={
                             <RegularText>
@@ -68,7 +68,7 @@ export function OrderConfirmedPage() {
                     />
 
                     <InfoWithIcon
-                        icon={<CurrencyDollar weight="fill" />}
+                        icon={<PiCurrencyDollar />}
                         iconColor={colors['brand-yellow-dark']}
                         text={
                             <RegularText>

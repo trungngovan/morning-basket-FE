@@ -1,5 +1,5 @@
-import { Star, StarHalf } from 'phosphor-react'
 import React, { useMemo } from 'react'
+import { PiStarFill, PiStarHalfFill } from 'react-icons/pi'
 
 type Props = {
     rank: number
@@ -23,19 +23,9 @@ const Ranking = ({ rank, size = 32 }: Props) => {
         <div className="flex items-center gap-1">
             {stars.map((star, index) =>
                 star === 1 || star === 0 ? (
-                    <Star
-                        key={index}
-                        size={size}
-                        weight={star ? 'fill' : 'bold'}
-                        color="#FFD43B"
-                    />
+                    <PiStarFill key={index} size={size} color="#FFD43B" />
                 ) : (
-                    <StarHalf
-                        key={index}
-                        size={size}
-                        weight="fill"
-                        color="#FFD43B"
-                    />
+                    <PiStarHalfFill key={index} size={size} color="#FFD43B" />
                 )
             )}
         </div>

@@ -1,7 +1,6 @@
 import React from 'react'
 import { IconWrapper, QuantityInputContainer } from './styles'
-
-import { Minus, Plus } from 'phosphor-react'
+import { PiMinus, PiPlus } from 'react-icons/pi'
 
 interface QuantityInputProps {
     size?: 'medium' | 'small'
@@ -19,11 +18,11 @@ export function QuantityInput({
     return (
         <QuantityInputContainer size={size}>
             <IconWrapper disabled={quantity <= 1} onClick={onDecrease}>
-                <Minus size={14} weight="fill" />
+                <PiMinus size={14} />
             </IconWrapper>
             <input type="number" readOnly value={quantity} />
             <IconWrapper onClick={onIncrease}>
-                <Plus size={14} weight="fill" />
+                <PiPlus size={14} />
             </IconWrapper>
         </QuantityInputContainer>
     )

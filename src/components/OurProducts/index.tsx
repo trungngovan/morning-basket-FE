@@ -105,7 +105,7 @@ export function OurProducts() {
     return (
         <OurProductsContainer className="container">
             <TitleText size="l" color="subtitle" className="mt-5">
-                Products
+                Sản phẩm
             </TitleText>
 
             {/* <SearchBar products={allProducts} onSearch={handleSearch} /> */}
@@ -117,7 +117,7 @@ export function OurProducts() {
                         onClick={() => handleTagSelect('all')}
                         variant="yellow"
                     >
-                        All
+                        Tất cả
                     </Tag>
                     {tags.map((tag) => (
                         <Tag

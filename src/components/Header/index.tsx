@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { NavLink } from 'react-router-dom'
 import { useCart } from '../../hooks/useCart'
 import { HeaderContainer, HeaderButtonsContainer, HeaderButton } from './styles'
-import { ShoppingCart } from 'phosphor-react'
-import LogoImage from '../../assets/morning-basket-logo-Truc-100-63.png'
+import { PiShoppingCartFill } from 'react-icons/pi'
+import LogoImage from '../../assets/logo@100-63.png'
 import { useAuth } from '../../hooks/useAuth'
 const CUSTOMER_NAME_STORAGE_KEY = 'MorningBasket:customerName'
 export function Header() {
@@ -20,22 +20,24 @@ export function Header() {
                 <div className="h-10">
                     <HeaderButtonsContainer>
                         <NavLink to="/faq">
-                            <HeaderButton variant="purple">FAQ</HeaderButton>
+                            <HeaderButton variant="purple">
+                                FAQ
+                            </HeaderButton>
                         </NavLink>
                         <NavLink to="/aboutUs">
                             <HeaderButton variant="yellow">
-                                About Us
+                                Về Chúng Tôi
                             </HeaderButton>
                         </NavLink>
                         <NavLink to="/contact">
                             <HeaderButton variant="purple">
-                                Contact
+                                Liên hệ
                             </HeaderButton>
                         </NavLink>
                         {!isAuthenticated && (
                             <NavLink to="/signin">
                                 <HeaderButton variant="yellow">
-                                    Sign In
+                                    Đăng nhập
                                 </HeaderButton>
                             </NavLink>
                         )}
@@ -48,7 +50,7 @@ export function Header() {
                                 {cartQuantity >= 1 && (
                                     <span>{cartQuantity}</span>
                                 )}
-                                <ShoppingCart size={30} weight="fill" />
+                                <PiShoppingCartFill size={30} />
                             </HeaderButton>
                         </NavLink>
                     </HeaderButtonsContainer>
