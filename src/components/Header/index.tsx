@@ -1,14 +1,15 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { NavLink } from 'react-router-dom'
 import { useCart } from '../../hooks/useCart'
 import { HeaderContainer, HeaderButtonsContainer, HeaderButton } from './styles'
 import { ShoppingCart } from 'phosphor-react'
 import LogoImage from '../../assets/morning-basket-logo-Truc-100-63.png'
 import { useAuth } from '../../hooks/useAuth'
+const CUSTOMER_NAME_STORAGE_KEY = 'MorningBasket:customerName'
 export function Header() {
     const { cartQuantity } = useCart()
-    const { isAuthenticated, customerName, signout } = useAuth()
-
+    const { isAuthenticated, signout } = useAuth()
+    const nameCustomer = localStorage.getItem(CUSTOMER_NAME_STORAGE_KEY)
     return (
         <HeaderContainer>
             <div className="container">
@@ -53,7 +54,7 @@ export function Header() {
                     </HeaderButtonsContainer>
                     {isAuthenticated && (
                         <p className="mt-2 text-sm leading-6 text-gray-500 text-right">
-                            Hi, {customerName}!{' '}
+                            Hi, {nameCustomer}!{' '}
                             <a
                                 href=""
                                 className="font-semibold text-red-500 hover:text-red-300"
