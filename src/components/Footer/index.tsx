@@ -1,8 +1,7 @@
 import React from 'react'
 import { FooterContainer, FooterContent } from './styles'
-import { Phone } from 'phosphor-react'
 import { FaInstagram, FaFacebook } from 'react-icons/fa'
-import { FiMail } from 'react-icons/fi'
+import { FiMail, FiPhone } from 'react-icons/fi'
 
 export function Footer() {
     return (
@@ -19,7 +18,7 @@ export function Footer() {
                 <div className="column" style={{ flex: 1 }}>
                     <h3>Contact</h3>
                     <a href="tel: (+84) 93 864 28 87">
-                        <Phone />
+                        <FiPhone />
                     </a>
                     <a href="tel: (+84) 93 864 28 87">(+84) 93 864 28 87</a>
                     <br />
