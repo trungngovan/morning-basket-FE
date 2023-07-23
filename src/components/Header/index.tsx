@@ -1,50 +1,50 @@
-import React from 'react'
-import { NavLink } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+import { NavLink, useNavigate } from 'react-router-dom'
 import { useCart } from '../../hooks/useCart'
 import { HeaderContainer, HeaderButtonsContainer, HeaderButton } from './styles'
 import { PiShoppingCartFill } from 'react-icons/pi'
 import LogoImage from '../../assets/logo@100-63.png'
 import { useAuth } from '../../hooks/useAuth'
-const CUSTOMER_NAME_STORAGE_KEY = 'MorningBasket:customerName'
 export function Header() {
     const { cartQuantity } = useCart()
-    const { isAuthenticated, signout } = useAuth()
-    const nameCustomer = localStorage.getItem(CUSTOMER_NAME_STORAGE_KEY)
+    const { customerInfo, isAuthenticated, signout } = useAuth()
+    const navigate = useNavigate()
+    useEffect(() => {
+        if (!isAuthenticated && window.location.pathname != "/") {
+            navigate('/', { replace: true })
+        }
+    }, [isAuthenticated])
+
     return (
         <HeaderContainer>
             <div className="container">
                 <NavLink to="/">
                     <img src={LogoImage} alt="" />
                 </NavLink>
-
-                <div className="h-10">
+                <div className="h-10 flex">
+                    {isAuthenticated && (
+                        <p className="mt-2 mr-1 text-sm leading-6 text-gray-500 text-right">
+                            Xin chào, <span className='font-bold'>{customerInfo.name}</span>!{' '}
+                        </p>
+                    )}
                     <HeaderButtonsContainer>
-                        {/* <NavLink to="/faq">
-                            <HeaderButton variant="purple">FAQ</HeaderButton>
-                        </NavLink>
-                        <NavLink to="/aboutUs">
-                            <HeaderButton variant="yellow">
-                                Về Chúng Tôi
-                            </HeaderButton>
-                        </NavLink>
-                        <NavLink to="/contact">
-                            <HeaderButton variant="purple">
-                                Liên hệ
-                            </HeaderButton>
-                        </NavLink> */}
-                        {!isAuthenticated && (
+                        {!isAuthenticated ?
                             <NavLink to="/signin">
                                 <HeaderButton variant="yellow">
                                     Đăng nhập
                                 </HeaderButton>
                             </NavLink>
-                        )}
-                        {/* <HeaderButton variant="purple">
-            <MapPin size={20} weight="fill" />
-            Ho Chi Minh, VN
-          </HeaderButton> */}
+                            :
+                            <NavLink to="/" onClick={() => {
+                                signout()
+                            }}>
+                                <HeaderButton variant="red">
+                                    Đăng xuất
+                                </HeaderButton>
+                            </NavLink>
+                        }
                         <NavLink to="/completeOrder">
-                            <HeaderButton variant="yellow">
+                            <HeaderButton variant="purple">
                                 {cartQuantity >= 1 && (
                                     <span>{cartQuantity}</span>
                                 )}
@@ -52,21 +52,7 @@ export function Header() {
                             </HeaderButton>
                         </NavLink>
                     </HeaderButtonsContainer>
-                    {isAuthenticated && (
-                        <p className="mt-2 text-sm leading-6 text-gray-500 text-right">
-                            Hi, {nameCustomer}!{' '}
-                            <a
-                                href=""
-                                className="font-semibold text-red-500 hover:text-red-300"
-                                onClick={() => {
-                                    signout()
-                                    window.location.reload()
-                                }}
-                            >
-                                Sign out
-                            </a>
-                        </p>
-                    )}
+
                 </div>
             </div>
         </HeaderContainer>

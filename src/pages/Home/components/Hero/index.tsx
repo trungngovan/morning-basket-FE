@@ -25,7 +25,7 @@ export function Hero() {
             <HeroContent className="container">
                 <div>
                     <section>
-                        <HeroTitle size="m">Bạn đang tìm kiếm món ăn nhẹ ngon, dinh dưỡng và lành mạnh để thưởng thức?</HeroTitle>
+                        <HeroTitle size="m">Bạn đang tìm kiếm món ăn nhẹ ngon, lành mạnh và giàu dinh dưỡng?</HeroTitle>
                         <RegularText size="l" color="subtitle" as="h3">
                             Chào mừng đến với{' '}
                             <a href='https://morningbasket.vn' className="text-indigo-600 hover:text-indigo-500">

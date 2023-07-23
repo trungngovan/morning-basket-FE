@@ -11,7 +11,6 @@ import {
 
 const ContactPage: React.FC = () => {
     return (
-
         <ContactContainer>
             <Title>Liên hệ với chúng tôi</Title>
             <FormWrapper>

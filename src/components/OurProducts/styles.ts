@@ -13,9 +13,9 @@ export const OurProductsContainer = styled.section`
 export const ProductList = styled.div`
     width: 100%;
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    column-gap: 1rem;
-    row-gap: 1rem;
+    grid-template-columns: repeat(6, 1fr);
+    column-gap: 0.5rem;
+    // row-gap: 0.5rem;
     margin-top: 1rem;
 
     @media (max-width: 1000px) {
@@ -78,7 +78,7 @@ export const Tag = styled.button<TagButtonProps>`
 
     &:hover {
         background-color: ${(props) =>
-            props.isActive ? props.theme.colors['base-button'] : '#e0e0e0'};
+        props.isActive ? props.theme.colors['base-button'] : '#e0e0e0'};
     }
 
     &:last-child {

@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { CompleteOrderForm } from './components/CompleteOrderForm'
 import { SelectedProducts } from './components/SelectedProducts'
 import { CompleteOrderContainer } from './styles'
@@ -8,12 +8,16 @@ import * as zod from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useNavigate } from 'react-router-dom'
 import { useCart } from '../../hooks/useCart'
+import { useAuth } from '../../hooks/useAuth'
+import { OrderNotSignedIn } from '../../components/OrderNotSignedIn'
 
 enum PaymentMethods {
     credit = 'credit',
     debit = 'debit',
-    money = 'money',
+    cash = 'cash',
 }
+const ORDER_COMPLETE_INFO_STORAGE_KEY = 'MorningBasket:orderCompleteInfo'
+const storedOrderCompleteInfo = JSON.parse(localStorage.getItem(ORDER_COMPLETE_INFO_STORAGE_KEY) as string)
 
 const confirmOrderFormValidationSchema = zod.object({
     number_street: zod.string().min(1, 'Vui lòng nhập số nhà và tên đường'),
@@ -26,9 +30,10 @@ const confirmOrderFormValidationSchema = zod.object({
         errorMap: () => {
             return { message: 'Vui lòng chọn phương thức thanh toán' }
         },
-    }),
+    })
 })
 
+export type PaymentMethodType = PaymentMethods
 export type OrderData = zod.infer<typeof confirmOrderFormValidationSchema>
 
 type ConfirmOrderFormData = OrderData
@@ -41,16 +46,41 @@ export function CompleteOrderPage() {
         },
     })
 
-    const { handleSubmit } = confirmOrderForm
+    const [isSubmitting, setIsSubmitting] = useState(false)
+    const [showModal, setShowModal] = useState(false)
 
     const navigate = useNavigate()
-    const { cleanCart } = useCart()
+    const { isOrderReceived, orderData, sendOrder, cleanCart } = useCart()
+    const { isAuthenticated } = useAuth()
 
-    function handleConfirmOrder(data: ConfirmOrderFormData) {
-        navigate('/orderConfirmed', {
-            state: data,
-        })
-        cleanCart()
+
+    useEffect(() => {
+        document.title = 'Complete Order - Morning Basket'
+        if (isOrderReceived) {
+            navigate('/orderConfirmed',
+                { state: orderData, replace: true }
+            )
+        }
+    }, [isOrderReceived, orderData])
+
+    const handleConfirmOrder = async (data: ConfirmOrderFormData) => {
+        if (isAuthenticated) {
+            setIsSubmitting(true)
+            await sendOrder(data)
+            setIsSubmitting(false)
+            cleanCart()
+        } else {
+            setShowModal(true)
+        }
+    }
+
+    const handleModalProceed = () => {
+        localStorage.setItem(ORDER_COMPLETE_INFO_STORAGE_KEY, JSON.stringify(confirmOrderForm.getValues()))
+        navigate("/signin")
+    }
+
+    const handleModalClose = () => {
+        setShowModal(false)
     }
 
     return (
@@ -58,12 +88,13 @@ export function CompleteOrderPage() {
             <FormProvider {...confirmOrderForm}>
                 <CompleteOrderContainer
                     className="container"
-                    onSubmit={handleSubmit(handleConfirmOrder)}
+                    onSubmit={confirmOrderForm.handleSubmit(handleConfirmOrder)}
                 >
-                    <CompleteOrderForm />
                     <SelectedProducts />
+                    <CompleteOrderForm defaultValues={storedOrderCompleteInfo} />
                 </CompleteOrderContainer>
             </FormProvider>
+            {showModal && <OrderNotSignedIn onProceed={handleModalProceed} onClose={handleModalClose}></OrderNotSignedIn>}
         </>
     )
 }

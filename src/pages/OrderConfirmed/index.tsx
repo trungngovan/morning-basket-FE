@@ -5,15 +5,16 @@ import { OrderConfirmedContainer, OrderDetailsContainer } from './styles'
 import confirmedOrderIllustration from '../../assets/confirmed-order.svg'
 import { InfoWithIcon } from '../../components/InfoWithIcon'
 
-import { PiMapPinLine, PiClockFill, PiCurrencyDollar } from 'react-icons/pi'
+import { PiMapPinLine, PiClockFill, PiCurrencyDollar, PiHandbag } from 'react-icons/pi'
 import { useTheme } from 'styled-components'
 import { useLocation, useNavigate } from 'react-router-dom'
-import { OrderData } from '../CompleteOrder'
+import { PaymentMethodType, OrderData } from '../CompleteOrder'
 import { paymentMethods } from '../CompleteOrder/components/CompleteOrderForm/PaymentMethodOptions'
 import { useEffect } from 'react'
+import { stat } from 'fs'
 
 interface LocationType {
-    state: OrderData
+    state: any
 }
 
 export function OrderConfirmedPage() {
@@ -32,25 +33,36 @@ export function OrderConfirmedPage() {
     if (!state) return <></>
 
     return (
-        <OrderConfirmedContainer className="container">
+        <OrderConfirmedContainer className="container py-8 my-8">
             <div>
-                <TitleText size="l">Yay! Order confirmed</TitleText>
+                <TitleText size="l">Đơn hàng đã được lưu lại</TitleText>
                 <RegularText size="l" color="subtitle">
-                    Now just wait for your coffee to arrive soon
+                    Vui lòng chờ đợi trong khi chúng tôi xác nhận đơn hàng
                 </RegularText>
             </div>
 
             <section>
                 <OrderDetailsContainer>
                     <InfoWithIcon
+                        icon={<PiHandbag />}
+                        iconColor={colors['brand-yellow']}
+                        text={
+                            <RegularText>
+                                Mã đơn hàng
+                                <br />
+                                <strong> {state.id ? state.id : "Không có"}</strong>
+                            </RegularText>
+                        }
+                    />
+
+                    <InfoWithIcon
                         icon={<PiMapPinLine />}
                         iconColor={colors['brand-purple']}
                         text={
                             <RegularText>
-                                Delivery to
-                                <strong> {state.number_street}</strong>
+                                Địa chỉ giao hàng
                                 <br />
-                                {state.ward}, {state.district}, {state.province}
+                                <strong> {state.shippingAddress}</strong>
                             </RegularText>
                         }
                     />
@@ -60,9 +72,9 @@ export function OrderConfirmedPage() {
                         iconColor={colors['brand-yellow']}
                         text={
                             <RegularText>
-                                Delivery estimate
+                                Thời gian xác nhận
                                 <br />
-                                <strong>20 min - 30 min</strong>
+                                <strong>Trong vòng 24 giờ</strong>
                             </RegularText>
                         }
                     />
@@ -72,10 +84,10 @@ export function OrderConfirmedPage() {
                         iconColor={colors['brand-yellow-dark']}
                         text={
                             <RegularText>
-                                Payment on delivery
+                                Phương thức thanh toán
                                 <br />
                                 <strong>
-                                    {paymentMethods[state.paymentMethod].label}
+                                    {paymentMethods[(state.paymentMethod as PaymentMethodType)].label}
                                 </strong>
                             </RegularText>
                         }

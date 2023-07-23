@@ -6,14 +6,22 @@ import { SectionTitle } from '../SectionTitle'
 import { AddressForm } from './AddressForm'
 import { PaymentMethodOptions } from './PaymentMethodOptions'
 import { CompleteOrderFormContainer, FormSectionContainer } from './styles'
+import { Button } from '../../../../components/Button'
+import { useCart } from '../../../../hooks/useCart'
+import { OrderData } from "../../../../pages/CompleteOrder"
 
-export function CompleteOrderForm() {
+interface Props {
+    defaultValues: OrderData
+}
+
+export function CompleteOrderForm({ defaultValues }: Props) {
     const { colors } = useTheme()
+    const { cartItems, cartQuantity } = useCart()
 
     return (
         <CompleteOrderFormContainer>
             <TitleText size="xs" color="subtitle">
-                Complete your order
+                Hoàn tất đơn hàng
             </TitleText>
 
             <FormSectionContainer>
@@ -28,7 +36,7 @@ export function CompleteOrderForm() {
                     }
                 />
 
-                <AddressForm />
+                <AddressForm defaultValues={defaultValues} />
             </FormSectionContainer>
 
             <FormSectionContainer>
@@ -43,8 +51,13 @@ export function CompleteOrderForm() {
                     }
                 />
 
-                <PaymentMethodOptions />
+                <PaymentMethodOptions defaultValues={defaultValues} />
             </FormSectionContainer>
+            <Button
+                text="Đặt hàng"
+                disabled={cartQuantity <= 0}
+                type="submit"
+            />
         </CompleteOrderFormContainer>
     )
 }

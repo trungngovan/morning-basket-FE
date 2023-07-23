@@ -1,3 +1,4 @@
+import React from 'react'
 import { QuantityInput } from '../QuantityInput'
 import { RegularText, TitleText } from '../Typography'
 import {
@@ -14,7 +15,6 @@ import { useCart } from '../../hooks/useCart'
 import { MouseEvent, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { ProductType } from '../../@types/products'
-import React from 'react'
 
 interface ProductProps {
     product: ProductType
@@ -25,12 +25,11 @@ export function ProductCard({ product, onPreviewButtonClick }: ProductProps) {
     const { addProductToCart } = useCart()
     const navigate = useNavigate()
     const [showPreviewButton, setShowPreviewButton] = useState(false)
-    const [amount, setAmount] = useState<number | string>(1)
+    const [quantity, setQuantity] = useState<number | string>(1)
     const [error, setError] = useState(false)
 
     const handleCount = (count: 1 | -1) => {
-        // setAmount((prev) => Math.max(0, prev + count))
-        setAmount((prev) => {
+        setQuantity((prev) => {
             prev = prev as number
             1 <= prev + count && prev + count <= product.quantity
                 ? setError(false)
@@ -42,24 +41,22 @@ export function ProductCard({ product, onPreviewButtonClick }: ProductProps) {
     }
 
     const handleIncrease = () => {
-        // setAmount((state) => state as number + 1)
         handleCount(1)
     }
 
     const handleDecrease = () => {
-        // setAmount((state) => state as number - 1)
         handleCount(-1)
     }
 
     function handleAddToCart() {
         const productToAdd = {
             ...product,
-            amount,
+            quantity
         } as ProductType
 
         addProductToCart(productToAdd)
 
-        setAmount(1)
+        setQuantity(1)
     }
 
     const formattedPrice = !product.price
@@ -106,7 +103,7 @@ export function ProductCard({ product, onPreviewButtonClick }: ProductProps) {
                 Xem trước
             </PreviewButton>
             <Name>{product.name}</Name>
-            <Description>{product.description}</Description>
+            {/* <Description>{product.description}</Description> */}
             <CardFooter
                 onClick={(e) => {
                     e.stopPropagation()
@@ -122,7 +119,7 @@ export function ProductCard({ product, onPreviewButtonClick }: ProductProps) {
                     <QuantityInput
                         onIncrease={handleIncrease}
                         onDecrease={handleDecrease}
-                        quantity={amount as number}
+                        quantity={quantity as number}
                     />
                     <button onClick={handleAddToCart}>
                         <PiShoppingCartFill size={22} />

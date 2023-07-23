@@ -12,21 +12,17 @@ export function SelectedProducts() {
     return (
         <SelectedProductsContainer>
             <TitleText size="xs" color="subtitle">
-                Selected products
+                Sản phẩm trong giỏ hàng
             </TitleText>
 
             <DetailsContainer>
-                {cartItems.map((item) => (
-                    <ProductCartCard key={item.id} product={item} />
-                ))}
-
+                <div className='flex flex-col overflow-y-hidden hover:overflow-y-scroll mb-4' style={{ scrollbarGutter: "stable" }}>
+                    {cartItems.map((item) => (
+                        <ProductCartCard key={item.id} product={item} />
+                    ))}
+                </div>
                 <ConfirmationSection />
             </DetailsContainer>
-            <Button
-                text="Confirm order"
-                disabled={cartQuantity <= 0}
-                type="submit"
-            />
         </SelectedProductsContainer>
     )
 }

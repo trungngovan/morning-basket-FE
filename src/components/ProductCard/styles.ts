@@ -42,12 +42,12 @@ export const Tags = styled.div`
     }
 `
 
-export const Name = styled(TitleText).attrs({
+export const Name = styled(RegularText).attrs({
     size: 's',
-    color: 'subtitle',
-    weight: '700',
+    color: 'text',
+    weight: '600',
 })`
-    margin-bottom: 0.5rem;
+    // margin-bottom: 0.5rem;
 `
 
 export const Description = styled(RegularText).attrs({
@@ -65,7 +65,7 @@ export const CardFooter = styled.div`
     justify-content: center;
     justify-content: space-around;
     margin-top: auto;
-    padding-top: 1.5rem;
+    padding-top: 0.5rem;
     // border-top: 1px solid ${({ theme }) => theme.colors['brand-purple']};
     > div {
         display: flex;

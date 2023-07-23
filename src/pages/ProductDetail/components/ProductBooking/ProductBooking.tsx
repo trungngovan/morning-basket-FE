@@ -15,35 +15,21 @@ type Props = {
 const ProductBooking = ({ product }: Props) => {
     if (!product) return <></>
     const { addProductToCart } = useCart()
-    const { name, photo, price, tags, quantity } = product
-
-    const [amount, setAmount] = useState<number | string>(1)
+    const [quantity, setQuantity] = useState<number | string>(1)
     const [error, setError] = useState(false)
 
     const handleCount = (count: 1 | -1) => {
         // setAmount((prev) => Math.max(0, prev + count))
-        setAmount((prev) => {
+        setQuantity((prev) => {
             prev = prev as number
-            1 <= prev + count && prev + count <= quantity
+            1 <= prev + count && prev + count <= product.quantity
                 ? setError(false)
-                : prev + count >= quantity
-                ? setError(true)
-                : null
+                : prev + count >= product.quantity
+                    ? setError(true)
+                    : null
             return Math.max(1, prev + count)
         })
     }
-
-    // const handleInput = (event: ChangeEvent<HTMLInputElement>) => {
-    //     event.preventDefault()
-    //     const value = event.target.value
-    //     setAmount(() => {
-    //         typeof value === 'string' ||
-    //             (typeof value === 'number' && value <= quantity)
-    //             ? setError(false)
-    //             : setError(true)
-    //         return !value ? value : Math.max(1, parseInt(value))
-    //     })
-    // }
 
     const handleIncrease = () => {
         // setAmount((state) => state as number + 1)
@@ -63,7 +49,7 @@ const ProductBooking = ({ product }: Props) => {
 
         addProductToCart(productToAdd)
 
-        setAmount(1)
+        setQuantity(1)
     }
     // const formattedPrice = !product.price
     //     ? 0
@@ -75,15 +61,15 @@ const ProductBooking = ({ product }: Props) => {
             <div className="aspect-square w-1/3">
                 <img
                     alt={product.name}
-                    src={`/products/${photo}`}
+                    src={`/products/${product.photo}`}
                     className="w-full h-full"
                 />
             </div>
             <div className="flex-1">
                 <div className="flex flex-wrap items-center mb-3 gap-3">
-                    <div className="text-3xl font-bold">{name}</div>
+                    <div className="text-3xl font-bold">{product.name}</div>
                     <div className="flex gap-2">
-                        {tags.map((tag: string) => (
+                        {product.tags.map((tag: string) => (
                             <span
                                 key={tag}
                                 className="px-2 py-1 text-xs rounded-full text-yellow-500 font-bold bg-yellow-200"
@@ -93,18 +79,18 @@ const ProductBooking = ({ product }: Props) => {
                         ))}
                     </div>
                 </div>
-                <Price price={price} oldPrice={price} />
+                <Price price={product.price} oldPrice={product.price} />
                 <div className="flex items-center gap-10 mt-10">
                     <div className="text-lg font-medium">Số lượng</div>
                     <div className="w-24 flex items-center">
                         <QuantityInput
                             onIncrease={handleIncrease}
                             onDecrease={handleDecrease}
-                            quantity={amount as number}
+                            quantity={quantity as number}
                         />
                     </div>
                     <div className="text-sm font-medium">
-                        (kho có sẵn {quantity})
+                        (kho có sẵn {product.quantity})
                     </div>
                 </div>
                 {error && (
@@ -117,7 +103,6 @@ const ProductBooking = ({ product }: Props) => {
                     onClick={handleAddToCart}
                 >
                     <AddCartWrapper>
-                        {/* <button onClick={handleAddToCart}> */}
                         <button>
                             <PiShoppingCartFill size={22} />
                             <p className="ml-2">Thêm vào giỏ hàng</p>

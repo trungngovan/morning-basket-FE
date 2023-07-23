@@ -1,7 +1,9 @@
 import styled from 'styled-components'
 
 export const CompleteOrderContainer = styled.form`
-    margin-top: 2.5rem;
+    // margin-top: 2.5rem;
+    // margin-bottom: 2rem;
+    margin: 2rem auto;
     display: flex;
     justify-content: space-between;
     gap: 2rem;
@@ -10,7 +12,6 @@ export const CompleteOrderContainer = styled.form`
         flex-direction: column;
     }
     padding: 0 2rem;
-    margin-bottom: 2rem;
 `
 
 export const SectionBaseStyle = styled.div`

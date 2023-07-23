@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { forwardRef, SelectHTMLAttributes } from 'react'
 import { RegularText } from '../Typography'
 import { SelectWrapper, SelectStyleContainer, SelectStyled } from './styles'
@@ -17,16 +17,16 @@ export const SelectMunicipality = forwardRef<
         <SelectWrapper className={className}>
             <SelectStyleContainer hasError={!!error}>
                 <SelectStyled ref={ref} {...props}>
-                    <option value="" disabled selected>
+                    <option value="" disabled>
                         {className == 'province'
                             ? 'Tỉnh/Thành phố'
                             : className == 'district'
-                            ? options
-                                ? 'Quận/Huyện'
-                                : 'Chọn tỉnh trước'
-                            : options
-                            ? 'Xã/Phường/Thị trấn'
-                            : 'Chọn huyện trước'}
+                                ? options
+                                    ? 'Quận/Huyện'
+                                    : 'Chọn tỉnh trước'
+                                : options
+                                    ? 'Xã/Phường/Thị trấn'
+                                    : 'Chọn huyện trước'}
                     </option>
                     {(options ? options : []).map((option) => (
                         <option key={option} value={option}>

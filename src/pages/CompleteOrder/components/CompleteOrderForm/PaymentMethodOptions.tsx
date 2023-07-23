@@ -8,23 +8,29 @@ import {
 
 import { useFormContext } from 'react-hook-form'
 import { RegularText } from '../../../../components/Typography'
+import { OrderData } from '../..'
+
+interface Props {
+    defaultValues: OrderData
+}
 
 export const paymentMethods = {
     credit: {
-        label: 'Credit Card',
+        label: 'Thẻ tín dụng',
         icon: <PiCreditCard size={16} />,
     },
     debit: {
-        label: 'Bank',
+        label: 'Ngân hàng',
         icon: <PiBank size={16} />,
     },
-    money: {
-        label: 'Money',
+    cash: {
+        label: 'Tiền mặt',
         icon: <PiMoney size={16} />,
     },
 }
 
-export function PaymentMethodOptions() {
+
+export function PaymentMethodOptions({ defaultValues }: Props) {
     const {
         register,
         formState: { errors },
@@ -43,6 +49,7 @@ export function PaymentMethodOptions() {
                             icon={icon}
                             label={label}
                             value={key}
+                            defaultChecked={defaultValues ? defaultValues.paymentMethod === key : false}
                             {...register('paymentMethod')}
                         />
                     )

@@ -61,48 +61,45 @@ export function ProductPreview({ product, onClose }: ProductPreviewProps) {
 
     const [showCloseButton, setShowCloseButton] = useState(false)
 
-    const [amount, setAmount] = useState<number | string>(1)
+    const [quantity, setQuantity] = useState<number | string>(1)
     const [error, setError] = useState(false)
 
     const handleCount = (count: 1 | -1) => {
-        // setAmount((prev) => Math.max(0, prev + count))
-        setAmount((prev) => {
+        setQuantity((prev) => {
             prev = prev as number
             1 <= prev + count && prev + count <= product.quantity
                 ? setError(false)
                 : prev + count >= product.quantity
-                ? setError(true)
-                : null
+                    ? setError(true)
+                    : null
             return Math.max(1, prev + count)
         })
     }
 
     const handleIncrease = () => {
-        // setAmount((state) => state as number + 1)
         handleCount(1)
     }
 
     const handleDecrease = () => {
-        // setAmount((state) => state as number - 1)
         handleCount(-1)
     }
 
     function handleAddToCart() {
         const productToAdd = {
             ...product,
-            amount,
+            quantity,
         } as ProductType
 
         addProductToCart(productToAdd)
 
-        setAmount(1)
+        setQuantity(1)
     }
 
     const formattedPrice = !product.price
         ? 0
         : product.price.toLocaleString('pt-BR', {
-              minimumFractionDigits: 2,
-          })
+            minimumFractionDigits: 2,
+        })
 
     return (
         <ProductPreviewContainer
@@ -133,7 +130,7 @@ export function ProductPreview({ product, onClose }: ProductPreviewProps) {
                     <QuantityInput
                         onIncrease={handleIncrease}
                         onDecrease={handleDecrease}
-                        quantity={amount as number}
+                        quantity={quantity as number}
                     />
                     <button onClick={handleAddToCart}>
                         <PiShoppingCartFill size={22} />

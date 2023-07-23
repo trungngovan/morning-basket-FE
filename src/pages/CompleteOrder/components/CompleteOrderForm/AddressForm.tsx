@@ -10,30 +10,53 @@ import { getDistricts, getWards } from '../../../../apis/provinces'
 import { Input } from '../../../../components/Input'
 import { SelectMunicipality } from '../../../../components/SelectMunicipality'
 import { getProvinces } from '../../../../apis/provinces'
+import { OrderData } from '../..'
 
-export function AddressForm() {
+interface Props {
+    defaultValues: OrderData
+}
+
+export function AddressForm({ defaultValues }: Props) {
     const {
         register,
         formState: { errors },
+        watch,
+        setValue
     } = useFormContext()
-    const [curProv, setCurProv] = useState<ProvinceType>()
     const [provinces, setProvinces] = useState<ProvinceType[]>()
     const [districts, setDistricts] = useState<DistrictType[]>()
     const [wards, setWards] = useState<WardType[] | null>()
 
+    const provinceWatch = watch('province')
+    const districtWatch = watch('district')
+    const wardWatch = watch('ward')
+
     useEffect(() => {
-        getProvinces()
-            .then((response) => {
-                setProvinces(response)
-            })
-            .catch(() => null)
-    }, [])
+        if (!provinces) {
+            getProvinces()
+                .then((response) => {
+                    setProvinces(response)
+                })
+                .catch(() => null)
+            setValue('province', defaultValues ? defaultValues.province : undefined)
+        }
+
+        if (provinces && !districts) {
+            handleProvChange(provinceWatch)
+            setValue('district', defaultValues ? defaultValues.district : undefined)
+        }
+
+        if (districts && !wards
+            && (districts as DistrictType[]).find((district) => district.name === districtWatch)
+        ) {
+            handleDistChange(districtWatch)
+        }
+    }, [provinceWatch, districtWatch, wardWatch, districts, wards])
 
     const handleProvChange = async (value: string) => {
         const newProv = (provinces as ProvinceType[]).find(
             (province) => province.name === value
         )
-        setCurProv(newProv)
         await getDistricts({ provinceCode: (newProv as ProvinceType).code })
             .then(async (response) => {
                 setDistricts(response)
@@ -43,22 +66,24 @@ export function AddressForm() {
     }
 
     const handleDistChange = async (value: string) => {
+        const prov = (provinces as ProvinceType[]).find(
+            (province) => province.name === provinceWatch
+        )
         const newDist = (districts as DistrictType[]).find(
             (district) => district.name === value
         )
         await getWards({
-            provinceCode: (curProv as ProvinceType).code,
+            provinceCode: (prov as ProvinceType).code,
             districtCode: (newDist as DistrictType).code,
         })
             .then((response) => {
                 setWards(response)
+                setValue('ward', defaultValues ? defaultValues.ward : undefined)
             })
             .catch(() => null)
     }
 
-    const provinceField = register('province')
-    const districtField = register('district')
-    const wardField = register('ward')
+
 
     return (
         <AddressFormContainer>
@@ -66,6 +91,7 @@ export function AddressForm() {
                 <Input
                     placeholder="Số nhà, Tên Đường"
                     className="number_street"
+                    defaultValue={defaultValues ? defaultValues.number_street : undefined}
                     {...register('number_street')}
                     error={errors?.number_street?.message as string}
                 />
@@ -73,39 +99,43 @@ export function AddressForm() {
             <div className="row">
                 <SelectMunicipality
                     className="province"
-                    {...provinceField}
+                    value={provinceWatch}
                     error={errors?.province?.message as string}
                     options={
                         provinces?.map((province) => province.name) as string[]
                     }
                     onChange={(e) => {
-                        provinceField.onChange(e)
+                        setValue('province', e.target.value)
                         handleProvChange(e.target.value)
                     }}
                 />
                 <SelectMunicipality
                     className="district"
-                    {...districtField}
+                    value={districtWatch}
                     error={errors?.district?.message as string}
                     options={
                         districts?.map((district) => district.name) as string[]
                     }
                     onChange={(e) => {
-                        districtField.onChange(e)
+                        setValue('district', e.target.value)
                         handleDistChange(e.target.value)
                     }}
                 />
                 <SelectMunicipality
                     className="ward"
-                    {...wardField}
+                    value={wardWatch}
                     error={errors?.ward?.message as string}
                     options={wards?.map((ward) => ward.name) as string[]}
+                    onChange={(e) => {
+                        setValue('ward', e.target.value)
+                    }}
                 />
             </div>
             <div className="row">
                 <Input
                     placeholder="Lưu ý"
                     className="note"
+                    // defaultValue={defaultValues ? defaultValues.note : undefined}
                     {...register('note')}
                     error={errors?.note?.message as string}
                     rightText="Không bắt buộc"

@@ -11,11 +11,13 @@ export const ProductCartCardContainer = styled.div`
     margin-bottom: 1.5rem;
 
     > div {
+        flex: 1;
         display: flex;
         align-items: center;
         gap: 1.25rem;
 
         img {
+            flex: 1
             width: 4rem;
             height: 4rem;
         }

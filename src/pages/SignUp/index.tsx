@@ -1,9 +1,10 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import * as zod from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../../hooks/useAuth'
+import storefront from "../../assets/store-front.jpg"
 
 const signUpFormValidationSchema = zod.object({
     name: zod.string().min(2, 'Vui lòng nhập tên có ít nhất 2 ký tự'),
@@ -30,6 +31,8 @@ export function SignUpPage() {
     })
     const navigate = useNavigate()
     const { signup } = useAuth()
+    const [storefrontImgLoaded, setStorefrontImgLoaded] = useState<boolean>(false)
+    const [storefrontImgWidth, setStorefrontImgWidth] = useState<number>()
 
     useEffect(() => {
         document.title = 'Sign Up - Morning Basket'
@@ -41,16 +44,20 @@ export function SignUpPage() {
     }
 
     return (
-        <div className="container">
-            <div className="flex min-h-full flex-1 my-12">
-                <div className="relative hidden w-1 flex-1 lg:block">
-                    <img
-                        className="absolute inset-0 h-full w-full object-cover object-left"
-                        src="https://scontent.fsgn5-3.fna.fbcdn.net/v/t39.30808-6/354901547_160684827004356_3927233456344602243_n.jpg?stp=cp6_dst-jpg&_nc_cat=104&ccb=1-7&_nc_sid=8bfeb9&_nc_ohc=zjQ2HY94a0UAX9TjmBW&_nc_ht=scontent.fsgn5-3.fna&oh=00_AfCp8a4W9NSsnqgNrtLZmEINCCOdI9AAV0yGLSn6eC1jZw&oe=64BFD7E4"
-                        alt=""
-                    />
-                </div>
-                <div className="w-2/5 flex flex-1 flex-col justify-center px-4 py-12 sm:px-6 lg:flex-none lg:px-16 xl:px-18">
+        <div className="container my-4 py-8 flex min-h-full flex-1 px-4" style={{ height: (storefrontImgWidth as number) / 3 }}>
+            <div className="relative hidden w-1 flex-1 lg:block">
+                <img
+                    className="absolute inset-0 h-full w-full object-cover object-left"
+                    src={storefront}
+                    alt=""
+                    onLoad={(e) => {
+                        setStorefrontImgWidth(e.currentTarget.naturalWidth)
+                        setStorefrontImgLoaded(true)
+                    }}
+                />
+            </div>
+            {storefrontImgLoaded ?
+                <div className="flex-1 w-2/5 flex flex-col justify-center px-4 py-12 sm:px-6 lg:flex-none lg:px-16 xl:px-18" >
                     <div className="mx-auto w-full max-w-sm lg:w-64">
                         <div>
                             <h2 className="text-2xl font-bold leading-9 tracking-tight text-gray-900">
@@ -67,10 +74,10 @@ export function SignUpPage() {
                             </p>
                         </div>
 
-                        <div className="mt-10">
+                        <div className="mt-4">
                             <div>
                                 <form
-                                    className="space-y-6"
+                                    className="space-y-2"
                                     onSubmit={handleSubmit(handleSignInSubmit)}
                                 >
                                     <div>
@@ -199,7 +206,7 @@ export function SignUpPage() {
                                     </div>
                                     {watch('passwordConfirmation') !==
                                         watch('password') &&
-                                    getValues('passwordConfirmation') ? (
+                                        getValues('passwordConfirmation') ? (
                                         <p className="text-sm text-red-500">
                                             Passwords does not match
                                         </p>
@@ -207,7 +214,7 @@ export function SignUpPage() {
                                     <div>
                                         <button
                                             type="submit"
-                                            className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                                            className="mt-8 flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                                         >
                                             Sign up
                                         </button>
@@ -254,7 +261,8 @@ export function SignUpPage() {
                         </div>
                     </div>
                 </div>
-            </div>
+                : null
+            }
         </div>
     )
 }

@@ -52,7 +52,7 @@ export function ProductCartCard({ product }: ProductCardCardProps) {
                         />
                         <RemoveButton onClick={handleRemove}>
                             <PiTrash size={18} />
-                            REMOVER
+                            XÓA
                         </RemoveButton>
                     </ActionsContainer>
                 </div>

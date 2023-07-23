@@ -2,13 +2,13 @@ import styled from 'styled-components'
 
 export const FooterContainer = styled.footer`
     width: 100%;
-    height: 3rem;
+    height: fit-content;
     background: ${({ theme }) => theme.colors['base-background']};
     display: flex;
     flex-direction: column;
     gap: 1rem;
     position: absolute;
-    left: 0;
+    // left: 0;
     z-index: 5;
 `
 
@@ -32,22 +32,24 @@ export const FooterContent = styled.div`
             position: top;
             color: ${({ theme }) => theme.colors['base-text']};
             font-size: ${({ theme }) => theme.textSizes['title-title-s']};
+            font-weight: bold;
             margin-bottom: 0.5rem;
         }
 
         p {
             color: ${({ theme }) => theme.colors['base-text']};
-            font-size: ${({ theme }) => theme.textSizes['text-bold-m']};
+            font-size: ${({ theme }) => theme.textSizes['text-regular-m']};
             margin-bottom: 0.5rem;
         }
         a {
             display: inline-block;
+            font-size: ${({ theme }) => theme.textSizes['text-regular-m']};
             margin-right: 0.5rem;
         }
     }
 
     svg {
         color: ${({ theme }) => theme.colors['base-text']};
-        font-size: ${({ theme }) => theme.textSizes['text-bold-m']};
+        font-size: ${({ theme }) => theme.textSizes['title-title-s']};
     }
 `;

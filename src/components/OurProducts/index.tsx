@@ -104,7 +104,7 @@ export function OurProducts() {
 
     return (
         <OurProductsContainer className="container">
-            <TitleText size="l" color="subtitle" className="mt-5">
+            <TitleText size="l" color="subtitle" className="mt-5 mb-3">
                 Sản phẩm
             </TitleText>
 
