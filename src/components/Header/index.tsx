@@ -19,10 +19,8 @@ export function Header() {
 
                 <div className="h-10">
                     <HeaderButtonsContainer>
-                        <NavLink to="/faq">
-                            <HeaderButton variant="purple">
-                                FAQ
-                            </HeaderButton>
+                        {/* <NavLink to="/faq">
+                            <HeaderButton variant="purple">FAQ</HeaderButton>
                         </NavLink>
                         <NavLink to="/aboutUs">
                             <HeaderButton variant="yellow">
@@ -33,7 +31,7 @@ export function Header() {
                             <HeaderButton variant="purple">
                                 Liên hệ
                             </HeaderButton>
-                        </NavLink>
+                        </NavLink> */}
                         {!isAuthenticated && (
                             <NavLink to="/signin">
                                 <HeaderButton variant="yellow">
