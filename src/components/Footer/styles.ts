@@ -6,7 +6,8 @@ export const FooterContainer = styled.footer`
     background: ${({ theme }) => theme.colors['base-background']};
     display: flex;
     flex-direction: column;
-    position: fixed;
+    gap: 1rem;
+    position: bottom;
     bottom: 0;
     left: 0;
     z-index: 5;
@@ -14,18 +15,40 @@ export const FooterContainer = styled.footer`
 
 export const FooterContent = styled.div`
     display: flex;
-    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: stretch;
     gap: 1rem;
-    margin-top: 1rem;
-    // center
-    justify-content: center;
-    span {
-        color: ${({ theme }) => theme.colors['base-text']};
-        font-size: ${({ theme }) => theme.textSizes['text-bold-s']};
+    // margin-top: 1rem;
+    margin-left: 20%;
+    margin-right: 20%;
+
+    .column {
+        flex: 1;
+        min-width: 0;
+        margin-right: 1rem;
+        justify-content: space-between;
+        
+        h3 {
+            position: top;
+            color: ${({ theme }) => theme.colors['base-text']};
+            font-size: ${({ theme }) => theme.textSizes['title-title-s']};
+            margin-bottom: 0.5rem;
+        }
+
+        p {
+            color: ${({ theme }) => theme.colors['base-text']};
+            font-size: ${({ theme }) => theme.textSizes['text-bold-m']};
+            margin-bottom: 0.5rem;
+        }
+        a {
+            display: inline-block;
+            margin-right: 0.5rem;
+        }
     }
 
     svg {
         color: ${({ theme }) => theme.colors['base-text']};
-        font-size: ${({ theme }) => theme.textSizes['text-bold-s']};
+        font-size: ${({ theme }) => theme.textSizes['text-bold-m']};
     }
-`
+`;
