@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react'
-import { NavLink, useNavigate } from 'react-router-dom'
+import React from 'react'
+import { NavLink } from 'react-router-dom'
 import { useCart } from '../../hooks/useCart'
 import { HeaderContainer, HeaderButtonsContainer, HeaderButton } from './styles'
 import { PiShoppingCartFill } from 'react-icons/pi'
@@ -8,12 +8,6 @@ import { useAuth } from '../../hooks/useAuth'
 export function Header() {
     const { cartQuantity } = useCart()
     const { customerInfo, isAuthenticated, signout } = useAuth()
-    const navigate = useNavigate()
-    useEffect(() => {
-        if (!isAuthenticated && window.location.pathname != "/") {
-            navigate('/', { replace: true })
-        }
-    }, [isAuthenticated])
 
     return (
         <HeaderContainer>
@@ -35,9 +29,7 @@ export function Header() {
                                 </HeaderButton>
                             </NavLink>
                             :
-                            <NavLink to="/" onClick={() => {
-                                signout()
-                            }}>
+                            <NavLink to="/" state={{ reload: true }} onClick={signout}>
                                 <HeaderButton variant="red">
                                     Đăng xuất
                                 </HeaderButton>
@@ -55,6 +47,6 @@ export function Header() {
 
                 </div>
             </div>
-        </HeaderContainer>
+        </HeaderContainer >
     )
 }

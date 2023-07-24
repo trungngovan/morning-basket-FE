@@ -12,7 +12,9 @@ interface AuthContextType {
         phoneNumber: string,
         email: string,
         password: string
-    ) => Promise<void>
+    ) => Promise<boolean>
+    signinNotif: string
+    signupNotif: string
 }
 
 interface AuthContextProviderProps {
@@ -40,6 +42,8 @@ export function AuthContextProvider({ children }: AuthContextProviderProps) {
     const [isAuthenticated, setIsAuthenticated] = useState<boolean>(() =>
         authToken ? true : false
     )
+    const [signinNotif, setSigninNotif] = useState<string>("")
+    const [signupNotif, setSignupNotif] = useState<string>("")
 
     const signin = async (
         username: string,
@@ -58,7 +62,6 @@ export function AuthContextProvider({ children }: AuthContextProviderProps) {
                     const newAuthToken = response.data.token
                     localStorage.setItem(AUTH_TOKEN_STORAGE_KEY, newAuthToken)
                     setAuthToken(newAuthToken)
-                    setIsAuthenticated(true)
 
                     const response1 = await apiGet<unknown, AxiosResponse>(`/customers/info`)
                     if (response1 && response1.status === 200) {
@@ -66,12 +69,14 @@ export function AuthContextProvider({ children }: AuthContextProviderProps) {
                         setCustomerInfo(newCustomerInfo)
                         localStorage.setItem(CUSTOMER_INFO_STORAGE_KEY, JSON.stringify(newCustomerInfo))
                     }
-
+                    setIsAuthenticated(true)
+                    setSigninNotif("Đăng nhập thành công!")
                     return true
                 }
             })
         } catch (error) {
             console.error(error)
+            setSigninNotif("Signed in successfully!")
         }
         return false
     }
@@ -88,7 +93,7 @@ export function AuthContextProvider({ children }: AuthContextProviderProps) {
         phoneNumber: string,
         email: string,
         password: string
-    ): Promise<void> => {
+    ): Promise<boolean> => {
         try {
             const response = await apiPost<unknown, AxiosResponse>(
                 `/customers/signup`,
@@ -101,10 +106,12 @@ export function AuthContextProvider({ children }: AuthContextProviderProps) {
             )
             if (response && response.status === 200) {
                 console.log('Sign up successfully')
+                return true
             }
         } catch (error) {
             console.error(error)
         }
+        return false
     }
 
     useEffect(() => {
@@ -122,6 +129,8 @@ export function AuthContextProvider({ children }: AuthContextProviderProps) {
                 signin,
                 signout,
                 signup,
+                signinNotif,
+                signupNotif
             }}
         >
             {children}

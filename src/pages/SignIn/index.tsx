@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import * as zod from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { useAuth } from '../../hooks/useAuth'
 import storefront from "../../assets/store-front.jpg"
 
@@ -17,17 +17,22 @@ export function SignInPage() {
         resolver: zodResolver(signInFormValidationSchema),
     })
     const navigate = useNavigate()
-    const { isAuthenticated, signin } = useAuth()
+    const { isAuthenticated, signin, signinNotif } = useAuth()
     const [isSubmitting, setIsSubmitting] = useState(false)
     const [storefrontImgLoaded, setStorefrontImgLoaded] = useState<boolean>(false)
     const [storefrontImgWidth, setStorefrontImgWidth] = useState<number>()
+    const location = useLocation()
 
     useEffect(() => {
         document.title = 'Sign In - Morning Basket'
-        if (isAuthenticated) {
-            navigate('/', { replace: true })
+        if (location.state) {
+            window.location.reload()
+            window.history.replaceState({}, document.title)
         }
-    }, [isAuthenticated])
+        if (isAuthenticated) {
+            navigate('/', { replace: true, state: { reload: true } })
+        }
+    }, [location, isAuthenticated])
 
     const handleSignInSubmit = async (data: SignInFormData) => {
         setIsSubmitting(true)
@@ -151,6 +156,7 @@ export function SignInPage() {
                                         </div>
                                     </form>
                                 </div>
+
                                 {/* {isSubmitting && (
                                     <div className="text-center mt-4 text-gray-500">
                                         Signing in...

@@ -26,7 +26,7 @@ export function OrderConfirmedPage() {
 
     useEffect(() => {
         if (!state) {
-            navigate('/')
+            navigate('/', { state: { reload: true } })
         }
     }, [])
 

@@ -8,13 +8,15 @@ import storefront from "../../assets/store-front.jpg"
 
 const signUpFormValidationSchema = zod.object({
     name: zod.string().min(2, 'Vui lòng nhập tên có ít nhất 2 ký tự'),
-    email: zod.string().min(1, 'Vui lòng nhập email'),
+    email: zod.string()
+        .email("Vui lòng nhập địa chỉ email có dấu '@'")
+        .min(1, 'Vui lòng nhập địa chỉ email'),
     phoneNumber: zod
         .string()
-        .regex(new RegExp(/^[0-9]{10}$/), 'Chỉ chấp nhận ký số')
+        .regex(new RegExp(/^[0-9]{10}$/), 'Phải bao gồm 10 ký tự là chữ số')
         .min(1, 'Vui lòng nhập số điện thoại'),
     password: zod.string().min(6, 'Vui lòng nhập mật khẩu'),
-    passwordConfirmation: zod.string().min(6, 'Vui lòng nhập mật khẩu'),
+    passwordConfirmation: zod.string().min(6, 'Vui lòng nhập lại mật khẩu'),
 })
 export type SignUpData = zod.infer<typeof signUpFormValidationSchema>
 type SignUpFormData = SignUpData
@@ -33,18 +35,22 @@ export function SignUpPage() {
     const { signup } = useAuth()
     const [storefrontImgLoaded, setStorefrontImgLoaded] = useState<boolean>(false)
     const [storefrontImgWidth, setStorefrontImgWidth] = useState<number>()
+    const [isSubmitting, setIsSubmitting] = useState(false)
 
     useEffect(() => {
         document.title = 'Sign Up - Morning Basket'
     }, [])
 
     const handleSignInSubmit = async (data: SignUpFormData) => {
-        signup(data.name, data.phoneNumber, data.email, data.password)
-        navigate('/signin')
+        setIsSubmitting(true)
+        const result = await signup(data.name, data.phoneNumber, data.email, data.password)
+        console.log(result)
+        setIsSubmitting(false)
+        result ? navigate('/signin', { state: { reload: true } }) : null
     }
 
     return (
-        <div className="container my-4 py-8 flex min-h-full flex-1 px-4" style={{ height: (storefrontImgWidth as number) / 3 }}>
+        <div className="container my-4 py-8 flex min-h-full flex-1 px-4" style={{ height: storefrontImgLoaded ? (storefrontImgWidth as number) / 3 : "full" }}>
             <div className="relative hidden w-1 flex-1 lg:block">
                 <img
                     className="absolute inset-0 h-full w-full object-cover object-left"
@@ -61,15 +67,15 @@ export function SignUpPage() {
                     <div className="mx-auto w-full max-w-sm lg:w-64">
                         <div>
                             <h2 className="text-2xl font-bold leading-9 tracking-tight text-gray-900">
-                                Let&apos;s sign you up
+                                Đăng ký tài khoản
                             </h2>
                             <p className="mt-2 text-sm leading-6 text-gray-500">
-                                Already a member?{' '}
+                                Đã là thành viên?{' '}
                                 <a
                                     href="/signin"
                                     className="font-semibold text-indigo-600 hover:text-indigo-500"
                                 >
-                                    Sign in
+                                    Đăng nhập
                                 </a>
                             </p>
                         </div>
@@ -79,13 +85,14 @@ export function SignUpPage() {
                                 <form
                                     className="space-y-2"
                                     onSubmit={handleSubmit(handleSignInSubmit)}
+                                    noValidate
                                 >
                                     <div>
                                         <label
                                             htmlFor="name"
                                             className="block text-sm font-medium leading-6 text-gray-900"
                                         >
-                                            Your name
+                                            Họ và Tên
                                         </label>
                                         <div className="mt-2">
                                             <input
@@ -97,6 +104,14 @@ export function SignUpPage() {
                                                 // pattern="^([a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3})|(\d{3}-\d{3}-\d{4})$"
                                                 className="block w-full rounded-md border-0 px-3 py-1.5 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-400 sm:text-sm sm:leading-6"
                                             />
+                                            {errors ? (
+                                                <p className="text-sm text-red-500">
+                                                    {
+                                                        errors?.name
+                                                            ?.message as string
+                                                    }
+                                                </p>
+                                            ) : null}
                                         </div>
                                     </div>
 
@@ -105,7 +120,7 @@ export function SignUpPage() {
                                             htmlFor="phoneNumber"
                                             className="block text-sm font-medium leading-6 text-gray-900"
                                         >
-                                            Phone number
+                                            Số điện thoại
                                         </label>
                                         <div className="mt-2">
                                             <input
@@ -133,7 +148,7 @@ export function SignUpPage() {
                                             htmlFor="email"
                                             className="block text-sm font-medium leading-6 text-gray-900"
                                         >
-                                            Email address
+                                            Địa chỉ email
                                         </label>
                                         <div className="mt-2">
                                             <input
@@ -145,6 +160,14 @@ export function SignUpPage() {
                                                 // pattern="^([a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3})|(\d{3}-\d{3}-\d{4})$"
                                                 className="block w-full rounded-md border-0 px-3 py-1.5 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-400 sm:text-sm sm:leading-6"
                                             />
+                                            {errors ? (
+                                                <p className="text-sm text-red-500">
+                                                    {
+                                                        errors?.email
+                                                            ?.message as string
+                                                    }
+                                                </p>
+                                            ) : null}
                                         </div>
                                     </div>
 
@@ -153,7 +176,7 @@ export function SignUpPage() {
                                             htmlFor="password"
                                             className="block text-sm font-medium leading-6 text-gray-900"
                                         >
-                                            Password
+                                            Mật khẩu
                                         </label>
                                         <div className="mt-2">
                                             <input
@@ -180,7 +203,7 @@ export function SignUpPage() {
                                             htmlFor="passwordConfirmation"
                                             className="block text-sm font-medium leading-6 text-gray-900"
                                         >
-                                            Password confirmation
+                                            Nhập lại mật khẩu
                                         </label>
                                         <div className="mt-2">
                                             <input
@@ -189,7 +212,6 @@ export function SignUpPage() {
                                                     'passwordConfirmation'
                                                 )}
                                                 type="password"
-                                                // autoComplete="current-password"
                                                 required
                                                 className="block w-full rounded-md border-0 px-3 py-1.5 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-400 sm:text-sm sm:leading-6"
                                             />
@@ -208,15 +230,18 @@ export function SignUpPage() {
                                         watch('password') &&
                                         getValues('passwordConfirmation') ? (
                                         <p className="text-sm text-red-500">
-                                            Passwords does not match
+                                            Mật khẩu không khớp
                                         </p>
                                     ) : null}
                                     <div>
                                         <button
                                             type="submit"
+                                            disabled={isSubmitting}
                                             className="mt-8 flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                                         >
-                                            Sign up
+                                            {isSubmitting
+                                                ? 'Đang đăng ký...'
+                                                : 'Đăng ký'}
                                         </button>
                                     </div>
                                 </form>
