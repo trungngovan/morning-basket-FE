@@ -21,7 +21,7 @@ export function AddressForm({ defaultValues }: Props) {
         register,
         formState: { errors },
         watch,
-        setValue
+        setValue,
     } = useFormContext()
     const [provinces, setProvinces] = useState<ProvinceType[]>()
     const [districts, setDistricts] = useState<DistrictType[]>()
@@ -38,16 +38,26 @@ export function AddressForm({ defaultValues }: Props) {
                     setProvinces(response)
                 })
                 .catch(() => null)
-            setValue('province', defaultValues ? defaultValues.province : undefined)
+            setValue(
+                'province',
+                defaultValues ? defaultValues.province : undefined
+            )
         }
 
         if (provinces && !districts) {
             handleProvChange(provinceWatch)
-            setValue('district', defaultValues ? defaultValues.district : undefined)
+            setValue(
+                'district',
+                defaultValues ? defaultValues.district : undefined
+            )
         }
 
-        if (districts && !wards
-            && (districts as DistrictType[]).find((district) => district.name === districtWatch)
+        if (
+            districts &&
+            !wards &&
+            (districts as DistrictType[]).find(
+                (district) => district.name === districtWatch
+            )
         ) {
             handleDistChange(districtWatch)
         }
@@ -83,15 +93,15 @@ export function AddressForm({ defaultValues }: Props) {
             .catch(() => null)
     }
 
-
-
     return (
         <AddressFormContainer>
             <div className="row">
                 <Input
                     placeholder="Số nhà, Tên Đường"
                     className="number_street"
-                    defaultValue={defaultValues ? defaultValues.number_street : undefined}
+                    defaultValue={
+                        defaultValues ? defaultValues.number_street : undefined
+                    }
                     {...register('number_street')}
                     error={errors?.number_street?.message as string}
                 />

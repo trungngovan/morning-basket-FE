@@ -4,11 +4,12 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../../hooks/useAuth'
-import storefront from "../../assets/store-front.jpg"
+import storefront from '../../assets/store-front.jpg'
 
 const signUpFormValidationSchema = zod.object({
     name: zod.string().min(2, 'Vui lòng nhập tên có ít nhất 2 ký tự'),
-    email: zod.string()
+    email: zod
+        .string()
         .email("Vui lòng nhập địa chỉ email có dấu '@'")
         .min(1, 'Vui lòng nhập địa chỉ email'),
     phoneNumber: zod
@@ -33,7 +34,8 @@ export function SignUpPage() {
     })
     const navigate = useNavigate()
     const { signup } = useAuth()
-    const [storefrontImgLoaded, setStorefrontImgLoaded] = useState<boolean>(false)
+    const [storefrontImgLoaded, setStorefrontImgLoaded] =
+        useState<boolean>(false)
     const [storefrontImgWidth, setStorefrontImgWidth] = useState<number>()
     const [isSubmitting, setIsSubmitting] = useState(false)
 
@@ -43,14 +45,26 @@ export function SignUpPage() {
 
     const handleSignInSubmit = async (data: SignUpFormData) => {
         setIsSubmitting(true)
-        const result = await signup(data.name, data.phoneNumber, data.email, data.password)
+        const result = await signup(
+            data.name,
+            data.phoneNumber,
+            data.email,
+            data.password
+        )
         console.log(result)
         setIsSubmitting(false)
         result ? navigate('/signin', { state: { reload: true } }) : null
     }
 
     return (
-        <div className="container my-4 py-8 flex min-h-full flex-1 px-4" style={{ height: storefrontImgLoaded ? (storefrontImgWidth as number) / 3 : "full" }}>
+        <div
+            className="container my-4 py-8 flex min-h-full flex-1 px-4"
+            style={{
+                height: storefrontImgLoaded
+                    ? (storefrontImgWidth as number) / 3
+                    : 'full',
+            }}
+        >
             <div className="relative hidden w-1 flex-1 lg:block">
                 <img
                     className="absolute inset-0 h-full w-full object-cover object-left"
@@ -62,8 +76,8 @@ export function SignUpPage() {
                     }}
                 />
             </div>
-            {storefrontImgLoaded ?
-                <div className="flex-1 w-2/5 flex flex-col justify-center px-4 py-12 sm:px-6 lg:flex-none lg:px-16 xl:px-18" >
+            {storefrontImgLoaded ? (
+                <div className="flex-1 w-2/5 flex flex-col justify-center px-4 py-12 sm:px-6 lg:flex-none lg:px-16 xl:px-18">
                     <div className="mx-auto w-full max-w-sm lg:w-64">
                         <div>
                             <h2 className="text-2xl font-bold leading-9 tracking-tight text-gray-900">
@@ -228,7 +242,7 @@ export function SignUpPage() {
                                     </div>
                                     {watch('passwordConfirmation') !==
                                         watch('password') &&
-                                        getValues('passwordConfirmation') ? (
+                                    getValues('passwordConfirmation') ? (
                                         <p className="text-sm text-red-500">
                                             Mật khẩu không khớp
                                         </p>
@@ -286,8 +300,7 @@ export function SignUpPage() {
                         </div>
                     </div>
                 </div>
-                : null
-            }
+            ) : null}
         </div>
     )
 }

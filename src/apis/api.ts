@@ -35,9 +35,9 @@ export const apiGet = async <Data = unknown, Response = AxiosResponse<Data>>(
 ): Promise<Response | undefined> => {
     const query = params
         ? `?${Object.keys(params)
-            .map((key) => (params[key] ? `${key}=${params[key]}` : ''))
-            .filter(Boolean)
-            .join('&')}`
+              .map((key) => (params[key] ? `${key}=${params[key]}` : ''))
+              .filter(Boolean)
+              .join('&')}`
         : ''
 
     return apiRequest<Data, Response>({
@@ -126,9 +126,9 @@ export const vnProvincesApiGet = async <
 ): Promise<Response | undefined> => {
     const query = params
         ? `?${Object.keys(params)
-            .map((key) => (params[key] ? `${key}=${params[key]}` : ''))
-            .filter(Boolean)
-            .join('&')}`
+              .map((key) => (params[key] ? `${key}=${params[key]}` : ''))
+              .filter(Boolean)
+              .join('&')}`
         : ''
 
     return vnProvincesApiRequest<Data, Response>({

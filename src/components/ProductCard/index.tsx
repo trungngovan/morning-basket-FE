@@ -34,8 +34,8 @@ export function ProductCard({ product, onPreviewButtonClick }: ProductProps) {
             1 <= prev + count && prev + count <= product.quantity
                 ? setError(false)
                 : prev + count >= product.quantity
-                    ? setError(true)
-                    : null
+                ? setError(true)
+                : null
             return Math.max(1, prev + count)
         })
     }
@@ -51,7 +51,7 @@ export function ProductCard({ product, onPreviewButtonClick }: ProductProps) {
     function handleAddToCart() {
         const productToAdd = {
             ...product,
-            quantity
+            quantity,
         } as ProductType
 
         addProductToCart(productToAdd)
@@ -62,8 +62,8 @@ export function ProductCard({ product, onPreviewButtonClick }: ProductProps) {
     const formattedPrice = !product.price
         ? 0
         : product.price.toLocaleString('pt-BR', {
-            minimumFractionDigits: 2,
-        })
+              minimumFractionDigits: 2,
+          })
 
     const handlePreview = (
         e: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>

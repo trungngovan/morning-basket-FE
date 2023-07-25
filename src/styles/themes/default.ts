@@ -23,7 +23,6 @@ export const defaultTheme = {
         'brand-green-dark': '#034648',
         'brand-green': '#07a858',
         'brand-green-light': '#88dbb2',
-
     },
     textSizes: {
         'title-title-xl': '3rem',

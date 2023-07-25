@@ -105,20 +105,30 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
         setCartItems([])
     }
 
-    const sendOrder = async (
-        data: any
-    ): Promise<boolean> => {
+    const sendOrder = async (data: any): Promise<boolean> => {
         try {
             setTimeout(async () => {
-                const customerId = JSON.parse(localStorage.getItem("MorningBasket:customerInfo") as string).id
+                const customerId = JSON.parse(
+                    localStorage.getItem('MorningBasket:customerInfo') as string
+                ).id
                 const items = cartItems.map((item) => {
-                    let retItem = (({ id, name, quantity, price }) => ({ id, name, quantity, price }))(item)
+                    let retItem = (({ id, name, quantity, price }) => ({
+                        id,
+                        name,
+                        quantity,
+                        price,
+                    }))(item)
                     retItem = Object.assign(retItem, { itemId: retItem.id })
                     retItem.price = retItem.price ? retItem.price : 0
                     delete retItem.id
                     return retItem
                 })
-                const shippingAddress = [data.number_street, data.ward, data.district, data.province].join(", ")
+                const shippingAddress = [
+                    data.number_street,
+                    data.ward,
+                    data.district,
+                    data.province,
+                ].join(', ')
                 const response = await apiPost<unknown, AxiosResponse>(
                     `/orders`,
                     {
@@ -128,7 +138,7 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
                         shippingAddress: shippingAddress,
                         billingAddress: null,
                         addressNote: data.note ? data.note : null,
-                        paymentMethod: data.paymentMethod
+                        paymentMethod: data.paymentMethod,
                     }
                 )
                 if (response && response.status === 200) {
@@ -142,7 +152,6 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
         }
         return false
     }
-
 
     useEffect(() => {
         localStorage.setItem(
@@ -163,7 +172,7 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
                 cleanCart,
                 sendOrder,
                 isOrderReceived,
-                orderData
+                orderData,
             }}
         >
             {children}

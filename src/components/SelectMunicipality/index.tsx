@@ -21,12 +21,12 @@ export const SelectMunicipality = forwardRef<
                         {className == 'province'
                             ? 'Tỉnh/Thành phố'
                             : className == 'district'
-                                ? options
-                                    ? 'Quận/Huyện'
-                                    : 'Chọn tỉnh trước'
-                                : options
-                                    ? 'Xã/Phường/Thị trấn'
-                                    : 'Chọn huyện trước'}
+                            ? options
+                                ? 'Quận/Huyện'
+                                : 'Chọn tỉnh trước'
+                            : options
+                            ? 'Xã/Phường/Thị trấn'
+                            : 'Chọn huyện trước'}
                     </option>
                     {(options ? options : []).map((option) => (
                         <option key={option} value={option}>

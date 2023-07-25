@@ -44,10 +44,10 @@ export const AnswerTitle = styled.p`
     font-size: 1.2rem;
     font-weight: bold;
     margin: 0.5rem 0;
-    color: ${({ theme }) => theme.colors["brand-purple"]};
+    color: ${({ theme }) => theme.colors['brand-purple']};
 `
 
 export const AnswerDetails = styled.span`
     font-weight: bold;
-    color: ${({ theme }) => theme.colors["brand-purple-dark"]};
+    color: ${({ theme }) => theme.colors['brand-purple-dark']};
 `

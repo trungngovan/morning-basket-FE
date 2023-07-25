@@ -18,23 +18,31 @@ export function Header() {
                 <div className="h-10 flex">
                     {isAuthenticated && (
                         <p className="mt-2 mr-1 text-sm leading-6 text-gray-500 text-right">
-                            Xin chào, <span className='font-bold'>{customerInfo.name}</span>!{' '}
+                            Xin chào,{' '}
+                            <span className="font-bold">
+                                {customerInfo.name}
+                            </span>
+                            !{' '}
                         </p>
                     )}
                     <HeaderButtonsContainer>
-                        {!isAuthenticated ?
+                        {!isAuthenticated ? (
                             <NavLink to="/signin">
                                 <HeaderButton variant="yellow">
                                     Đăng nhập
                                 </HeaderButton>
                             </NavLink>
-                            :
-                            <NavLink to="/" state={{ reload: true }} onClick={signout}>
+                        ) : (
+                            <NavLink
+                                to="/"
+                                state={{ reload: true }}
+                                onClick={signout}
+                            >
                                 <HeaderButton variant="red">
                                     Đăng xuất
                                 </HeaderButton>
                             </NavLink>
-                        }
+                        )}
                         <NavLink to="/completeOrder">
                             <HeaderButton variant="purple">
                                 {cartQuantity >= 1 && (
@@ -44,9 +52,8 @@ export function Header() {
                             </HeaderButton>
                         </NavLink>
                     </HeaderButtonsContainer>
-
                 </div>
             </div>
-        </HeaderContainer >
+        </HeaderContainer>
     )
 }

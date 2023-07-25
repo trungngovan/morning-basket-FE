@@ -29,7 +29,6 @@ export const paymentMethods = {
     },
 }
 
-
 export function PaymentMethodOptions({ defaultValues }: Props) {
     const {
         register,
@@ -49,7 +48,11 @@ export function PaymentMethodOptions({ defaultValues }: Props) {
                             icon={icon}
                             label={label}
                             value={key}
-                            defaultChecked={defaultValues ? defaultValues.paymentMethod === key : false}
+                            defaultChecked={
+                                defaultValues
+                                    ? defaultValues.paymentMethod === key
+                                    : false
+                            }
                             {...register('paymentMethod')}
                         />
                     )

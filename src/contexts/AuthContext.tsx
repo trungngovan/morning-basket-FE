@@ -1,6 +1,7 @@
 import React, { ReactNode, createContext, useEffect, useState } from 'react'
 import { apiGet, apiPost } from '../apis/api'
-import { AxiosResponse } from 'axios'
+import { AxiosError, AxiosResponse } from 'axios'
+import { apiMessages } from '../utils/apiMessages'
 
 interface AuthContextType {
     isAuthenticated: boolean
@@ -31,7 +32,9 @@ export function AuthContextProvider({ children }: AuthContextProviderProps) {
         localStorage.getItem(AUTH_TOKEN_STORAGE_KEY)
     )
     const [customerInfo, setCustomerInfo] = useState<any>(() => {
-        const storedCustomerInfo = localStorage.getItem(CUSTOMER_INFO_STORAGE_KEY)
+        const storedCustomerInfo = localStorage.getItem(
+            CUSTOMER_INFO_STORAGE_KEY
+        )
 
         if (storedCustomerInfo) {
             return JSON.parse(storedCustomerInfo)
@@ -42,43 +45,53 @@ export function AuthContextProvider({ children }: AuthContextProviderProps) {
     const [isAuthenticated, setIsAuthenticated] = useState<boolean>(() =>
         authToken ? true : false
     )
-    const [signinNotif, setSigninNotif] = useState<string>("")
-    const [signupNotif, setSignupNotif] = useState<string>("")
+    const [signinNotif, setSigninNotif] = useState<string>('')
+    const [signupNotif, setSignupNotif] = useState<string>('')
 
-    const signin = async (
-        username: string,
-        password: string
-    ): Promise<boolean> => {
-        try {
+    const signin = async (username: string, password: string) => {
+        return new Promise<boolean>((resolve) => {
             setTimeout(async () => {
-                const response = await apiPost<unknown, AxiosResponse>(
-                    `/customers/signin`,
-                    {
-                        username: username,
-                        password: password,
-                    }
-                )
-                if (response && response.status === 200) {
-                    const newAuthToken = response.data.token
-                    localStorage.setItem(AUTH_TOKEN_STORAGE_KEY, newAuthToken)
-                    setAuthToken(newAuthToken)
-
-                    const response1 = await apiGet<unknown, AxiosResponse>(`/customers/info`)
-                    if (response1 && response1.status === 200) {
-                        const newCustomerInfo = response1.data.customer
-                        setCustomerInfo(newCustomerInfo)
-                        localStorage.setItem(CUSTOMER_INFO_STORAGE_KEY, JSON.stringify(newCustomerInfo))
-                    }
-                    setIsAuthenticated(true)
-                    setSigninNotif("Đăng nhập thành công!")
-                    return true
-                }
-            })
-        } catch (error) {
-            console.error(error)
-            setSigninNotif("Signed in successfully!")
-        }
-        return false
+                await apiPost<unknown, AxiosResponse>(`/customers/signin`, {
+                    username: username,
+                    password: password,
+                })
+                    .then(async (response) => {
+                        if (response) {
+                            const newAuthToken = response.data.token
+                            localStorage.setItem(
+                                AUTH_TOKEN_STORAGE_KEY,
+                                newAuthToken
+                            )
+                            setAuthToken(newAuthToken)
+                            await apiGet<unknown, AxiosResponse>(
+                                `/customers/info`
+                            ).then((response1) => {
+                                if (response1) {
+                                    const newCustomerInfo =
+                                        response1.data.customer
+                                    setCustomerInfo(newCustomerInfo)
+                                    localStorage.setItem(
+                                        CUSTOMER_INFO_STORAGE_KEY,
+                                        JSON.stringify(newCustomerInfo)
+                                    )
+                                }
+                            })
+                            setIsAuthenticated(true)
+                            setSigninNotif(apiMessages(response.data.message))
+                            resolve(true)
+                        }
+                    })
+                    .catch((e: AxiosError) => {
+                        console.log(e.response?.data?.error?.message)
+                        setSigninNotif(
+                            apiMessages(
+                                e.response?.data?.error?.message
+                            ).replace('<DETAIL>', username)
+                        )
+                        resolve(false)
+                    })
+            }, 200)
+        })
     }
 
     const signout = () => {
@@ -130,7 +143,7 @@ export function AuthContextProvider({ children }: AuthContextProviderProps) {
                 signout,
                 signup,
                 signinNotif,
-                signupNotif
+                signupNotif,
             }}
         >
             {children}

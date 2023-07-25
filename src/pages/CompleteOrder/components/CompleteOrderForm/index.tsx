@@ -8,7 +8,7 @@ import { PaymentMethodOptions } from './PaymentMethodOptions'
 import { CompleteOrderFormContainer, FormSectionContainer } from './styles'
 import { Button } from '../../../../components/Button'
 import { useCart } from '../../../../hooks/useCart'
-import { OrderData } from "../../../../pages/CompleteOrder"
+import { OrderData } from '../../../../pages/CompleteOrder'
 
 interface Props {
     defaultValues: OrderData

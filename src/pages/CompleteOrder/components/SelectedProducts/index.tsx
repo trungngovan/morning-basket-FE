@@ -16,7 +16,10 @@ export function SelectedProducts() {
             </TitleText>
 
             <DetailsContainer>
-                <div className='flex flex-col overflow-y-hidden hover:overflow-y-scroll mb-4' style={{ scrollbarGutter: "stable" }}>
+                <div
+                    className="flex flex-col overflow-y-hidden hover:overflow-y-scroll mb-4"
+                    style={{ scrollbarGutter: 'stable' }}
+                >
                     {cartItems.map((item) => (
                         <ProductCartCard key={item.id} product={item} />
                     ))}

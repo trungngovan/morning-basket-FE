@@ -46,7 +46,7 @@ export const Label = styled.label`
     font-weight: bold;
     width: 20%;
     margin: auto 0;
-    color: ${({ theme }) => theme.colors["brand-purple"]};
+    color: ${({ theme }) => theme.colors['brand-purple']};
     @media (max-width: 700px) {
         font-size: 70%;
     }

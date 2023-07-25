@@ -27,7 +27,7 @@ export const FooterContent = styled.div`
         min-width: 0;
         margin-right: 1rem;
         justify-content: space-between;
-        
+
         h3 {
             position: top;
             color: ${({ theme }) => theme.colors['base-text']};
@@ -52,4 +52,4 @@ export const FooterContent = styled.div`
         color: ${({ theme }) => theme.colors['base-text']};
         font-size: ${({ theme }) => theme.textSizes['title-title-s']};
     }
-`;
+`

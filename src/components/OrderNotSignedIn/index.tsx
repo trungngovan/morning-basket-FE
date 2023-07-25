@@ -77,19 +77,12 @@ export function OrderNotSignedIn({ onClose, onProceed }: Props) {
                 isShow={showCloseButton}
             ></CloseButton>
 
-            <button
-                className='m-auto'
-                onClick={onProceed}
-            >
+            <button className="m-auto" onClick={onProceed}>
                 Go to Sign In
             </button>
-            <button
-                className='m-auto'
-                onClick={onClose}
-            >
+            <button className="m-auto" onClick={onClose}>
                 Not going to Sign In
             </button>
-
         </OrderNotSignedInContainer>
     )
 }

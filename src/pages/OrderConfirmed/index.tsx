@@ -5,7 +5,12 @@ import { OrderConfirmedContainer, OrderDetailsContainer } from './styles'
 import confirmedOrderIllustration from '../../assets/confirmed-order.svg'
 import { InfoWithIcon } from '../../components/InfoWithIcon'
 
-import { PiMapPinLine, PiClockFill, PiCurrencyDollar, PiHandbag } from 'react-icons/pi'
+import {
+    PiMapPinLine,
+    PiClockFill,
+    PiCurrencyDollar,
+    PiHandbag,
+} from 'react-icons/pi'
 import { useTheme } from 'styled-components'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { PaymentMethodType, OrderData } from '../CompleteOrder'
@@ -50,7 +55,10 @@ export function OrderConfirmedPage() {
                             <RegularText>
                                 Mã đơn hàng
                                 <br />
-                                <strong> {state.id ? state.id : "Không có"}</strong>
+                                <strong>
+                                    {' '}
+                                    {state.id ? state.id : 'Không có'}
+                                </strong>
                             </RegularText>
                         }
                     />
@@ -87,7 +95,11 @@ export function OrderConfirmedPage() {
                                 Phương thức thanh toán
                                 <br />
                                 <strong>
-                                    {paymentMethods[(state.paymentMethod as PaymentMethodType)].label}
+                                    {
+                                        paymentMethods[
+                                            state.paymentMethod as PaymentMethodType
+                                        ].label
+                                    }
                                 </strong>
                             </RegularText>
                         }

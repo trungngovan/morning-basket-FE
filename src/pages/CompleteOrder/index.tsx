@@ -17,7 +17,9 @@ enum PaymentMethods {
     cash = 'cash',
 }
 const ORDER_COMPLETE_INFO_STORAGE_KEY = 'MorningBasket:orderCompleteInfo'
-const storedOrderCompleteInfo = JSON.parse(localStorage.getItem(ORDER_COMPLETE_INFO_STORAGE_KEY) as string)
+const storedOrderCompleteInfo = JSON.parse(
+    localStorage.getItem(ORDER_COMPLETE_INFO_STORAGE_KEY) as string
+)
 
 const confirmOrderFormValidationSchema = zod.object({
     number_street: zod.string().min(1, 'Vui lòng nhập số nhà và tên đường'),
@@ -30,7 +32,7 @@ const confirmOrderFormValidationSchema = zod.object({
         errorMap: () => {
             return { message: 'Vui lòng chọn phương thức thanh toán' }
         },
-    })
+    }),
 })
 
 export type PaymentMethodType = PaymentMethods
@@ -53,13 +55,10 @@ export function CompleteOrderPage() {
     const { isOrderReceived, orderData, sendOrder, cleanCart } = useCart()
     const { isAuthenticated } = useAuth()
 
-
     useEffect(() => {
         document.title = 'Complete Order - Morning Basket'
         if (isOrderReceived) {
-            navigate('/orderConfirmed',
-                { state: orderData, replace: true }
-            )
+            navigate('/orderConfirmed', { state: orderData, replace: true })
         }
     }, [isOrderReceived, orderData])
 
@@ -75,8 +74,11 @@ export function CompleteOrderPage() {
     }
 
     const handleModalProceed = () => {
-        localStorage.setItem(ORDER_COMPLETE_INFO_STORAGE_KEY, JSON.stringify(confirmOrderForm.getValues()))
-        navigate("/signin")
+        localStorage.setItem(
+            ORDER_COMPLETE_INFO_STORAGE_KEY,
+            JSON.stringify(confirmOrderForm.getValues())
+        )
+        navigate('/signin')
     }
 
     const handleModalClose = () => {
@@ -91,10 +93,17 @@ export function CompleteOrderPage() {
                     onSubmit={confirmOrderForm.handleSubmit(handleConfirmOrder)}
                 >
                     <SelectedProducts />
-                    <CompleteOrderForm defaultValues={storedOrderCompleteInfo} />
+                    <CompleteOrderForm
+                        defaultValues={storedOrderCompleteInfo}
+                    />
                 </CompleteOrderContainer>
             </FormProvider>
-            {showModal && <OrderNotSignedIn onProceed={handleModalProceed} onClose={handleModalClose}></OrderNotSignedIn>}
+            {showModal && (
+                <OrderNotSignedIn
+                    onProceed={handleModalProceed}
+                    onClose={handleModalClose}
+                ></OrderNotSignedIn>
+            )}
         </>
     )
 }

@@ -32,7 +32,12 @@ const ContactPage: React.FC = () => {
 
                     <InputContainer>
                         <Label htmlFor="message">Lời nhắn</Label>
-                        <TextArea id="message" name="message" rows={5} required />
+                        <TextArea
+                            id="message"
+                            name="message"
+                            rows={5}
+                            required
+                        />
                     </InputContainer>
                     <InputContainer>
                         <button
