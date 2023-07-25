@@ -1,19 +1,19 @@
 import React from 'react'
-import { QuantityInput } from '../QuantityInput'
+// import { QuantityInput } from '../QuantityInput'
 import { TitleText, RegularText } from '../Typography'
 import {
     OrderNotSignedInContainer,
-    ProductPreviewContent,
-    ProductPreviewFooter,
-    AddCartWrapper,
+    // ProductPreviewContent,
+    // ProductPreviewFooter,
+    // AddCartWrapper,
 } from './styles'
-import { PiShoppingCartFill } from 'react-icons/pi'
-import { useCart } from '../../hooks/useCart'
+// import { PiShoppingCartFill } from 'react-icons/pi'
+// import { useCart } from '../../hooks/useCart'
 import { useState } from 'react'
-import { Description, Name } from '../ProductCard/styles'
-import { ProductType } from '../../@types/products'
-import { Button } from '../Button'
-import { useNavigate } from 'react-router-dom'
+// import { Description, Name } from '../ProductCard/styles'
+// import { ProductType } from '../../@types/products'
+// import { Button } from '../Button'
+// import { useNavigate } from 'react-router-dom'
 
 interface Props {
     onClose: () => void
@@ -58,14 +58,14 @@ const CloseButton = ({ isShow, onClick }: CloseButtonProps) => {
 }
 
 export function OrderNotSignedIn({ onClose, onProceed }: Props) {
-    const { addProductToCart } = useCart()
+    // const { addProductToCart } = useCart()
 
     const [showCloseButton, setShowCloseButton] = useState(false)
 
-    const [quantity, setQuantity] = useState<number | string>(1)
-    const [error, setError] = useState(false)
+    // const [quantity, setQuantity] = useState<number | string>(1)
+    // const [error, setError] = useState(false)
 
-    const navigate = useNavigate()
+    // const navigate = useNavigate()
     return (
         <OrderNotSignedInContainer
             className="modal bg-opacity-50"
@@ -76,13 +76,24 @@ export function OrderNotSignedIn({ onClose, onProceed }: Props) {
                 onClick={onClose}
                 isShow={showCloseButton}
             ></CloseButton>
-
-            <button className="m-auto" onClick={onProceed}>
-                Go to Sign In
-            </button>
-            <button className="m-auto" onClick={onClose}>
-                Not going to Sign In
-            </button>
+            <div className="flex flex-col">
+                <div className="flex flex-col">
+                    <TitleText className="text-center justify-center">
+                        Bạn chưa đăng nhập
+                    </TitleText>
+                    <RegularText className="text-center justify-center">
+                        Đăng nhập để tiếp tục
+                    </RegularText>
+                </div>
+            </div>
+            <div className="click-container">
+                <button className="m-auto click" onClick={onProceed}>
+                    Đăng nhập
+                </button>
+                <button className="m-auto click" onClick={onClose}>
+                    Chưa phải lúc này
+                </button>
+            </div>
         </OrderNotSignedInContainer>
     )
 }

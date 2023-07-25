@@ -18,7 +18,7 @@ import { apiGet } from '../../apis/api'
 
 export function OurProducts() {
     const [currentPage, setCurrentPage] = useState(1)
-    const productsPerPage = 20
+    const productsPerPage = 18
 
     const [searchResults, setSearchResults] = useState<ProductType[]>([])
     const [allProducts, setAllProducts] = useState<ProductType[]>([])

@@ -1,5 +1,85 @@
 import styled from 'styled-components'
 
+// export const OrderNotSignedInContainer = styled.div`
+//     width: 20vw;
+//     height: 20vw;
+//     background: ${({ theme }) => theme.colors['base-card']};
+//     border-radius: 6px 36px 6px 36px;
+//     padding: 1.25rem;
+//     display: flex;
+//     flex-direction: column;
+//     align-items: center;
+//     padding-top: 0;
+//     text-align: center;
+//     position: absolute;
+//     top: 40%;
+//     left: 50%;
+//     transform: translate(-50%, -50%) scale(1);
+//     z-index: 2;
+//     transition: all 0.2s ease-in-out;
+//     box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+
+//     .open {
+//         opacity: 1;
+//         transform: translate(-50%, -50%) scale(1.2);
+//         z-index: 3;
+//     }
+
+//     .product-card {
+//         transform: scale(1.2);
+//     }
+
+//     button {
+//         background-color: ${({ theme }) => theme.colors['brand-purple']};
+//         color: ${({ theme }) => theme.colors['base-card']};
+//         border: none;
+//         border-radius: 6px;
+//         padding: 1rem 2rem;
+//         margin: 1rem;
+//         cursor: pointer;
+//         transition: all 0.2s ease-in-out;
+
+//         &:hover {
+//             background-color: ${({ theme }) => theme.colors['brand-purple-light']};
+//         }
+//     }
+
+//     .click-container {
+//         display: flex;
+//         justify-content: space-between;
+//         width: 100%;
+//         position: absolute;
+//         bottom: 0;
+//         text-align: center;
+//     }
+
+//     .click {
+//         background-color: ${({ theme }) => theme.colors['brand-purple']};
+//         color: ${({ theme }) => theme.colors['base-card']};
+//         border: none;
+//         border-radius: 6px;
+//         padding: 1rem 2rem;
+//         margin: 1rem;
+//         cursor: pointer;
+//         transition: all 0.2s ease-in-out;
+//         flex-grow: 1;
+//         flex-shrink: 1;
+
+//         &:hover {
+//             background-color: ${({ theme }) => theme.colors['brand-purple-light']};
+//         }
+//     }
+
+//     img {
+//         width: 15rem;
+//         height: 15rem;
+//         margin-top: -7.5rem;
+//         border-radius: 999px;
+//         border: 2px solid ${({ theme }) => theme.colors['brand-purple-light']};
+//     }
+// `
+
+
 export const OrderNotSignedInContainer = styled.div`
     width: 20vw;
     height: 20vw;
@@ -11,8 +91,8 @@ export const OrderNotSignedInContainer = styled.div`
     align-items: center;
     padding-top: 0;
     text-align: center;
-    position: fixed;
-    top: 50%;
+    position: absolute;
+    top: 40%;
     left: 50%;
     transform: translate(-50%, -50%) scale(1);
     z-index: 2;
@@ -29,20 +109,62 @@ export const OrderNotSignedInContainer = styled.div`
         transform: scale(1.2);
     }
 
+    button {
+        background-color: ${({ theme }) => theme.colors['brand-purple']};
+        color: ${({ theme }) => theme.colors['base-card']};
+        border: none;
+        border-radius: 6px;
+        padding: 1rem 1rem;
+        margin: 1rem;
+        cursor: pointer;
+        // transition: all 0.2s ease-in-out;
+
+        &:hover {
+            background-color: ${({ theme }) => theme.colors['brand-yellow']};
+        }
+    }
+
+    .click-container {
+        position: absolute;
+        bottom: 0;
+        width: 85%;
+        height: 30%;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .click {
+        background-color: ${({ theme }) => theme.colors['brand-yellow-light']};
+        color: ${({ theme }) => theme.colors['brand-yellow-dark']};
+        // display: flex;
+        border: none;
+        border-radius: 1em;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        cursor: pointer;
+        width: 8vw;
+        height: 2.2vw;
+        font-size: 0.7vw;
+        padding: 1%;
+        margin: 1%;
+        text-align: center;
+        font-weight: bold;
+
+        &:hover {
+            color: ${({ theme }) => theme.colors['base-card']};
+            background-color: ${({ theme }) => theme.colors['brand-purple-dark']};
+        }
+    }
+
     img {
         width: 15rem;
         height: 15rem;
         margin-top: -7.5rem;
         border-radius: 999px;
+        border: 2px solid ${({ theme }) => theme.colors['brand-purple-light']};
     }
-`
-
-// export const ProductPreviewImage = styled.img`
-//     width: 15rem;
-//     height: 15rem;
-//     margin-top: -7.5rem;
-//     border-radius: 999px;
-// `
+`;
 
 export const ProductPreviewContent = styled.div`
     margin-top: 2rem;
