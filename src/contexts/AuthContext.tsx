@@ -81,12 +81,17 @@ export function AuthContextProvider({ children }: AuthContextProviderProps) {
                             resolve(true)
                         }
                     })
-                    .catch((e: AxiosError) => {
-                        console.log(e.response?.data?.error?.message)
+                    .catch((e: AxiosError<{ error: { message: string } }>) => {
+                        const customErrMsg = e.response?.data?.error
+                            ?.message as string
+                        console.log(customErrMsg)
                         setSigninNotif(
-                            apiMessages(
-                                e.response?.data?.error?.message
-                            ).replace('<DETAIL>', username)
+                            customErrMsg.includes('<DETAIL>')
+                                ? apiMessages(customErrMsg).replace(
+                                      '<DETAIL>',
+                                      username
+                                  )
+                                : apiMessages(customErrMsg)
                         )
                         resolve(false)
                     })

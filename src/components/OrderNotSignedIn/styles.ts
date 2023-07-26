@@ -79,7 +79,6 @@ import styled from 'styled-components'
 //     }
 // `
 
-
 export const OrderNotSignedInContainer = styled.div`
     width: 15vw;
     height: 15vw;
@@ -130,7 +129,6 @@ export const OrderNotSignedInContainer = styled.div`
         font-size: 0.7vw;
     }
 
-
     .click-container {
         position: absolute;
         bottom: 0;
@@ -160,7 +158,8 @@ export const OrderNotSignedInContainer = styled.div`
 
         &:hover {
             color: ${({ theme }) => theme.colors['base-card']};
-            background-color: ${({ theme }) => theme.colors['brand-purple-dark']};
+            background-color: ${({ theme }) =>
+                theme.colors['brand-purple-dark']};
         }
     }
 
@@ -171,7 +170,7 @@ export const OrderNotSignedInContainer = styled.div`
         border-radius: 999px;
         border: 2px solid ${({ theme }) => theme.colors['brand-purple-light']};
     }
-`;
+`
 
 export const ProductPreviewContent = styled.div`
     margin-top: 2rem;

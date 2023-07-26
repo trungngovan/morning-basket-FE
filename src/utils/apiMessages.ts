@@ -43,7 +43,7 @@ export const apiMessages = (code: string) => {
         'CUSTOMER_SIGNIN:USERNAME_INVALID': '',
         'CUSTOMER_SIGNIN:EMAIL_NOT_FOUND':
             'Không tìm thấy tài khoản cho email: <DETAIL>',
-        'CUSTOMER_SIGNIN:PASSWORD_INCORRECT': '',
+        'CUSTOMER_SIGNIN:PASSWORD_INCORRECT': 'Mật khẩu chưa đúng',
         'CUSTOMER_SIGNIN:PHONE_NOT_FOUND':
             'Không tìm thấy tài khoản cho số điện thoại: <DETAIL>',
         // "CUSTOMER_SIGNIN:PASSWORD_INCORRECT": ""
