@@ -1,4 +1,5 @@
 import React from 'react'
+import { useLocation } from 'react-router-dom'
 import {
     ContactContainer,
     Title,
@@ -10,6 +11,7 @@ import {
 } from './styles'
 
 const ContactPage: React.FC = () => {
+    const location = useLocation()
     return (
         <ContactContainer>
             <Title>Liên hệ với chúng tôi</Title>
@@ -37,6 +39,7 @@ const ContactPage: React.FC = () => {
                             name="message"
                             rows={5}
                             required
+                            value={location.state ? `Quên mật khẩu. Tài khoản: \"${location.state.username}\"` : undefined}
                         />
                     </InputContainer>
                     <InputContainer>
