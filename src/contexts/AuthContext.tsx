@@ -82,16 +82,13 @@ export function AuthContextProvider({ children }: AuthContextProviderProps) {
                         }
                     })
                     .catch((e: AxiosError<{ error: { message: string } }>) => {
-                        const customErrMsg = e.response?.data?.error
+                        const customErrCode = e.response?.data?.error
                             ?.message as string
-                        console.log(customErrMsg)
+                        const customerErrMsg = apiMessages(customErrCode)
                         setSigninNotif(
-                            customErrMsg.includes('<DETAIL>')
-                                ? apiMessages(customErrMsg).replace(
-                                      '<DETAIL>',
-                                      username
-                                  )
-                                : apiMessages(customErrMsg)
+                            customerErrMsg.includes('<DETAIL>')
+                                ? customerErrMsg.replace('<DETAIL>', username)
+                                : customerErrMsg
                         )
                         resolve(false)
                     })
