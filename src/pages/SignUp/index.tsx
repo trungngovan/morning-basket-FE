@@ -43,7 +43,7 @@ export function SignUpPage() {
         document.title = 'Sign Up - Morning Basket'
     }, [])
 
-    const handleSignInSubmit = async (data: SignUpFormData) => {
+    const handleSignUpSubmit = async (data: SignUpFormData) => {
         setIsSubmitting(true)
         const result = await signup(
             data.name,
@@ -98,7 +98,7 @@ export function SignUpPage() {
                             <div>
                                 <form
                                     className="space-y-2"
-                                    onSubmit={handleSubmit(handleSignInSubmit)}
+                                    onSubmit={handleSubmit(handleSignUpSubmit)}
                                     noValidate
                                 >
                                     <div>

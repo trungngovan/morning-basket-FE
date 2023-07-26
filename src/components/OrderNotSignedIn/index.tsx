@@ -76,22 +76,22 @@ export function OrderNotSignedIn({ onClose, onProceed }: Props) {
                 onClick={onClose}
                 isShow={showCloseButton}
             ></CloseButton>
-            <div className="flex flex-col">
+            <div className="flex flex-col m-auto">
                 <div className="flex flex-col">
-                    <TitleText className="text-center justify-center">
+                    <TitleText className="text-center justify-center title">
                         Bạn chưa đăng nhập
                     </TitleText>
-                    <RegularText className="text-center justify-center">
-                        Đăng nhập để tiếp tục
+                    <RegularText className="text-center justify-center regular">
+                        Hãy đăng nhập để đặt hàng
                     </RegularText>
                 </div>
             </div>
             <div className="click-container">
-                <button className="m-auto click" onClick={onProceed}>
-                    Đăng nhập
-                </button>
                 <button className="m-auto click" onClick={onClose}>
                     Chưa phải lúc này
+                </button>
+                <button className="m-auto click" onClick={onProceed}>
+                    Đăng nhập
                 </button>
             </div>
         </OrderNotSignedInContainer>

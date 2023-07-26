@@ -81,15 +81,14 @@ import styled from 'styled-components'
 
 
 export const OrderNotSignedInContainer = styled.div`
-    width: 20vw;
-    height: 20vw;
+    width: 15vw;
+    height: 15vw;
     background: ${({ theme }) => theme.colors['base-card']};
     border-radius: 6px 36px 6px 36px;
     padding: 1.25rem;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-top: 0;
     text-align: center;
     position: absolute;
     top: 40%;
@@ -109,20 +108,28 @@ export const OrderNotSignedInContainer = styled.div`
         transform: scale(1.2);
     }
 
-    button {
-        background-color: ${({ theme }) => theme.colors['brand-purple']};
-        color: ${({ theme }) => theme.colors['base-card']};
-        border: none;
-        border-radius: 6px;
-        padding: 1rem 1rem;
-        margin: 1rem;
-        cursor: pointer;
-        // transition: all 0.2s ease-in-out;
+    // button {
+    //     background-color: ${({ theme }) => theme.colors['brand-purple']};
+    //     color: ${({ theme }) => theme.colors['base-card']};
+    //     border: none;
+    //     border-radius: 6px;
+    //     padding: 1rem 1rem;
+    //     margin: 1rem;
+    //     cursor: pointer;
+    //     transition: all 0.2s ease-in-out;
 
-        &:hover {
-            background-color: ${({ theme }) => theme.colors['brand-yellow']};
-        }
+    //     &:hover {
+    //         background-color: ${({ theme }) => theme.colors['brand-yellow']};
+    //     }
+    // }
+    .title {
+        font-size: 0.9vw;
     }
+
+    .regular {
+        font-size: 0.7vw;
+    }
+
 
     .click-container {
         position: absolute;
