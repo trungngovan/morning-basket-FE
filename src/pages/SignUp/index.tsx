@@ -51,7 +51,6 @@ export function SignUpPage() {
             data.email,
             data.password
         )
-        console.log(result)
         setIsSubmitting(false)
         result ? navigate('/signin', { state: { reload: true } }) : null
     }
@@ -242,7 +241,7 @@ export function SignUpPage() {
                                     </div>
                                     {watch('passwordConfirmation') !==
                                         watch('password') &&
-                                    getValues('passwordConfirmation') ? (
+                                        getValues('passwordConfirmation') ? (
                                         <p className="text-sm text-red-500">
                                             Mật khẩu không khớp
                                         </p>

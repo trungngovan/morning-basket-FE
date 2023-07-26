@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import * as zod from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useAuth } from '../../hooks/useAuth'
 import storefront from '../../assets/store-front.jpg'
 
@@ -13,7 +13,7 @@ const signInFormValidationSchema = zod.object({
 export type SignInData = zod.infer<typeof signInFormValidationSchema>
 type SignInFormData = SignInData
 export function SignInPage() {
-    const { register, handleSubmit } = useForm<SignInFormData>({
+    const { register, handleSubmit, watch } = useForm<SignInFormData>({
         resolver: zodResolver(signInFormValidationSchema),
     })
     const navigate = useNavigate()
@@ -63,18 +63,18 @@ export function SignInPage() {
             </div>
             {storefrontImgLoaded ? (
                 <div className="flex-1 w-2/5 flex flex-col justify-center px-4 py-12 sm:px-6 lg:flex-none lg:px-16 xl:px-18">
-                    <div className="mx-auto w-full max-w-sm lg:w-64">
+                    <div className="mx-auto w-full max-w-sm lg:w-64 ">
                         <div>
                             <h2 className="text-2xl font-bold leading-9 tracking-tight text-gray-900">
-                                Sign in to your account
+                                Đăng nhập vào tài khoản của bạn
                             </h2>
                             <p className="mt-2 text-sm leading-6 text-gray-500">
-                                Not a member?{' '}
+                                Chưa có tài khoản?{' '}
                                 <a
                                     href="/signup"
                                     className="font-semibold text-indigo-600 hover:text-indigo-500"
                                 >
-                                    Sign up
+                                    Đăng ký
                                 </a>
                             </p>
                         </div>
@@ -90,7 +90,7 @@ export function SignInPage() {
                                             htmlFor="username"
                                             className="block text-sm font-medium leading-6 text-gray-900"
                                         >
-                                            Email address or phone number
+                                            Địa chỉ email hoặc số điện thoại
                                         </label>
                                         <div className="mt-2">
                                             <input
@@ -110,7 +110,7 @@ export function SignInPage() {
                                             htmlFor="password"
                                             className="block text-sm font-medium leading-6 text-gray-900"
                                         >
-                                            Password
+                                            Mật khẩu
                                         </label>
                                         <div className="mt-2">
                                             <input
@@ -134,19 +134,20 @@ export function SignInPage() {
                                             />
                                             <label
                                                 htmlFor="remember-me"
-                                                className="ml-3 block text-sm leading-6 text-gray-700"
+                                                className="ml-1 block text-sm leading-6 text-gray-700"
                                             >
-                                                Remember me
+                                                Ghi nhớ đăng nhập
                                             </label>
                                         </div>
 
                                         <div className="text-sm leading-6">
-                                            <a
-                                                href="/contact"
+                                            <Link
+                                                to="/contact"
+                                                state={{ username: watch("username") }}
                                                 className="font-semibold text-indigo-600 hover:text-indigo-500"
                                             >
-                                                Forgot password?
-                                            </a>
+                                                Quên mật khẩu?
+                                            </Link>
                                         </div>
                                     </div>
 
@@ -157,22 +158,22 @@ export function SignInPage() {
                                             className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                                         >
                                             {isSubmitting
-                                                ? 'Signing in...'
-                                                : 'Sign in'}
+                                                ? 'Đang đăng nhập...'
+                                                : 'Đăng nhập'}
                                         </button>
                                     </div>
                                 </form>
                             </div>
-
-                            {signinNotif && (
-                                <div className="text-center mt-4 text-red-500">
-                                    {signinNotif}
-                                </div>
-                            )}
+                        </div>
+                        <div
+                            className="text-center text-sm truncate text-wrap text-red-500 mt-4 min-h-[4rem]"
+                        >
+                            {signinNotif}
                         </div>
                     </div>
-                </div>
-            ) : null}
-        </div>
+                </div >
+            ) : null
+            }
+        </div >
     )
 }
