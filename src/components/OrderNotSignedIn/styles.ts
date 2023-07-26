@@ -81,8 +81,8 @@ import styled from 'styled-components'
 
 export const OrderNotSignedInContainer = styled.div`
     width: 15vw;
-    height: 15vw;
-    background: ${({ theme }) => theme.colors['base-card']};
+    height: 10vw;
+    background: ${({ theme }) => theme.colors['base-input']};
     border-radius: 6px 36px 6px 36px;
     padding: 1.25rem;
     display: flex;
@@ -139,29 +139,40 @@ export const OrderNotSignedInContainer = styled.div`
     }
 
     .click {
-        background-color: ${({ theme }) => theme.colors['brand-yellow-light']};
-        color: ${({ theme }) => theme.colors['brand-yellow-dark']};
         // display: flex;
-        border: none;
-        border-radius: 1em;
+        border-radius: 0.5rem;
         text-align: center;
         text-decoration: none;
         display: inline-block;
         cursor: pointer;
-        width: 8vw;
+        width: 6vw;
         height: 2.2vw;
         font-size: 0.7vw;
         padding: 1%;
         margin: 1%;
         text-align: center;
         font-weight: bold;
+    }
 
+    .deny {
+        color: ${({ theme }) => theme.colors['base-card']};
+        background-color: ${({ theme }) => theme.colors['brand-purple']};
         &:hover {
-            color: ${({ theme }) => theme.colors['base-card']};
-            background-color: ${({ theme }) =>
-                theme.colors['brand-purple-dark']};
+            color: ${({ theme }) => theme.colors['brand-purple-dark']};
+            background-color: ${({ theme }) => theme.colors['brand-purple-light']};
+            border: solid 1px;
         }
     }
+
+    .accept {
+        color: ${({ theme }) => theme.colors['base-card']};
+        background-color: ${({ theme }) => theme.colors['brand-yellow']};
+        &:hover {
+            color: ${({ theme }) => theme.colors['brand-yellow-dark']};
+            background-color: ${({ theme }) => theme.colors['brand-yellow-light']};
+            border: solid 1px;
+        }
+    } 
 
     img {
         width: 15rem;
