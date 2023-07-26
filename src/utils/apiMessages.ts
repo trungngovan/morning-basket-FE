@@ -42,10 +42,10 @@ export const apiMessages = (code: string) => {
         'PRODUCTRATING_DELETE:NOT_FOUND_${productRating.id}': '',
         'CUSTOMER_SIGNIN:USERNAME_INVALID': '',
         'CUSTOMER_SIGNIN:EMAIL_NOT_FOUND':
-            'Không tìm thấy tài khoản cho email: <DETAIL>',
+            'Không tìm thấy tài khoản: <DETAIL>',
         'CUSTOMER_SIGNIN:PASSWORD_INCORRECT': 'Mật khẩu chưa đúng',
         'CUSTOMER_SIGNIN:PHONE_NOT_FOUND':
-            'Không tìm thấy tài khoản cho số điện thoại: <DETAIL>',
+            'Không tìm thấy tài khoản: <DETAIL>',
         // "CUSTOMER_SIGNIN:PASSWORD_INCORRECT": ""
     })
 
