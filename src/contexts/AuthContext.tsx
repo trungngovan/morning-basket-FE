@@ -2,6 +2,7 @@ import React, { ReactNode, createContext, useEffect, useState } from 'react'
 import { apiGet, apiPost } from '../apis/api'
 import { AxiosError, AxiosResponse } from 'axios'
 import { apiMessages } from '../utils/apiMessages'
+import { rejects } from 'assert'
 
 interface AuthContextType {
     isAuthenticated: boolean
@@ -108,25 +109,39 @@ export function AuthContextProvider({ children }: AuthContextProviderProps) {
         phoneNumber: string,
         email: string,
         password: string
-    ): Promise<boolean> => {
-        try {
-            const response = await apiPost<unknown, AxiosResponse>(
-                `/customers/signup`,
-                {
+    ) => {
+        return new Promise<boolean>((resolve, rejects) => {
+            setTimeout(async () => {
+                await apiPost<unknown, AxiosResponse>(`/customers/signup`, {
                     name: name,
                     phoneNumber: phoneNumber,
                     email: email,
                     password: password,
-                }
-            )
-            if (response && response.status === 200) {
-                console.log('Sign up successfully')
-                return true
-            }
-        } catch (error) {
-            console.error(error)
-        }
-        return false
+                })
+                    .then((response) => {
+                        if (response) {
+                            setSignupNotif(apiMessages(response.data.message))
+                            resolve(true)
+                        }
+                    })
+                    .catch((e: AxiosError<{ error: { message: string } }>) => {
+                        const customErrCode = e.response?.data?.error
+                            ?.message as string
+                        const customerErrMsg = apiMessages(customErrCode)
+                        setSignupNotif(
+                            customerErrMsg.includes('<DETAIL>')
+                                ? customerErrMsg.replace(
+                                      '<DETAIL>',
+                                      customErrCode.includes('PHONE')
+                                          ? phoneNumber
+                                          : email
+                                  )
+                                : customerErrMsg
+                        )
+                        rejects()
+                    })
+            }, 200)
+        })
     }
 
     useEffect(() => {

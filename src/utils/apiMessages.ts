@@ -20,8 +20,9 @@ export const apiMessages = (code: string) => {
         'CUSTOMER_UPDATE:SUCCESS': '',
         'CUSTOMER_SIGNIN:SUCCESS': 'Đăng nhập thành công!',
         'CUSTOMER_SIGNUP:SUCCESS': 'Đăng ký thành công!',
-        'CUSTOMER_SIGNUP:EMAIL_EXIST': '',
-        'CUSTOMER_SIGNUP:PHONE_EXIST': '',
+        'CUSTOMER_SIGNUP:EMAIL_EXIST': 'Đã có tài khoản cho email: <DETAIL>',
+        'CUSTOMER_SIGNUP:PHONE_EXIST':
+            'Đã có tài khoản cho số điện thoại: <DETAIL>',
         'ORDER_CREATE:SUCCESS': '',
         'ORDER_DELETE:NOT_FOUND': '',
         'ORDER_DELETE:SUCCESS': '',
@@ -41,11 +42,9 @@ export const apiMessages = (code: string) => {
         'PRODUCTRATING_DELETE:NOT_FOUND_${productRatingID}': '',
         'PRODUCTRATING_DELETE:NOT_FOUND_${productRating.id}': '',
         'CUSTOMER_SIGNIN:USERNAME_INVALID': '',
-        'CUSTOMER_SIGNIN:EMAIL_NOT_FOUND':
-            'Không tìm thấy tài khoản: <DETAIL>',
+        'CUSTOMER_SIGNIN:EMAIL_NOT_FOUND': 'Không tìm thấy tài khoản: <DETAIL>',
         'CUSTOMER_SIGNIN:PASSWORD_INCORRECT': 'Mật khẩu chưa đúng',
-        'CUSTOMER_SIGNIN:PHONE_NOT_FOUND':
-            'Không tìm thấy tài khoản: <DETAIL>',
+        'CUSTOMER_SIGNIN:PHONE_NOT_FOUND': 'Không tìm thấy tài khoản: <DETAIL>',
         // "CUSTOMER_SIGNIN:PASSWORD_INCORRECT": ""
     })
 

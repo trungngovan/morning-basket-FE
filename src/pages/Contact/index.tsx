@@ -39,7 +39,11 @@ const ContactPage: React.FC = () => {
                             name="message"
                             rows={5}
                             required
-                            value={location.state ? `Quên mật khẩu. Tài khoản: \"${location.state.username}\"` : undefined}
+                            value={
+                                location.state
+                                    ? `Quên mật khẩu. Tài khoản: \"${location.state.username}\"`
+                                    : undefined
+                            }
                         />
                     </InputContainer>
                     <InputContainer>

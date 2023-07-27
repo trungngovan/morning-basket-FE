@@ -159,7 +159,8 @@ export const OrderNotSignedInContainer = styled.div`
         background-color: ${({ theme }) => theme.colors['brand-purple']};
         &:hover {
             color: ${({ theme }) => theme.colors['brand-purple-dark']};
-            background-color: ${({ theme }) => theme.colors['brand-purple-light']};
+            background-color: ${({ theme }) =>
+                theme.colors['brand-purple-light']};
             border: solid 1px;
         }
     }
@@ -169,10 +170,11 @@ export const OrderNotSignedInContainer = styled.div`
         background-color: ${({ theme }) => theme.colors['brand-yellow']};
         &:hover {
             color: ${({ theme }) => theme.colors['brand-yellow-dark']};
-            background-color: ${({ theme }) => theme.colors['brand-yellow-light']};
+            background-color: ${({ theme }) =>
+                theme.colors['brand-yellow-light']};
             border: solid 1px;
         }
-    } 
+    }
 
     img {
         width: 15rem;

@@ -16,7 +16,7 @@ const Filter = ({ onChange }: Props) => {
                     key={item}
                     onClick={() => setSelected(item)}
                     className={classNames(
-                        'border-2 rounded-lg p-3 min-w-[80px] bg-white hover:border-yellow-400',
+                        'border-2 rounded-lg p-3 min-w-[80px] bg-white hover:border-yellow-400 cursor-pointer',
                         {
                             'border-yellow-400 font-bold text-yellow-500':
                                 item === selected,

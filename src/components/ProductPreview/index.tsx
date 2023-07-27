@@ -12,6 +12,7 @@ import { useCart } from '../../hooks/useCart'
 import { useState } from 'react'
 import { Description, Name } from '../ProductCard/styles'
 import { ProductType } from '../../@types/products'
+import useFormatCurrency from '../../hooks/useFormatCurrency'
 
 interface ProductPreviewProps {
     product: ProductType
@@ -58,6 +59,7 @@ const CloseButton = ({ isShow, onClick }: CloseButtonProps) => {
 
 export function ProductPreview({ product, onClose }: ProductPreviewProps) {
     const { addProductToCart } = useCart()
+    const format = useFormatCurrency()
 
     const [showCloseButton, setShowCloseButton] = useState(false)
 
@@ -95,11 +97,11 @@ export function ProductPreview({ product, onClose }: ProductPreviewProps) {
         setQuantity(1)
     }
 
-    const formattedPrice = !product.price
-        ? 0
-        : product.price.toLocaleString('pt-BR', {
-              minimumFractionDigits: 2,
-          })
+    // const formattedPrice = !product.price
+    //     ? 0
+    //     : product.price.toLocaleString('pt-BR', {
+    //           minimumFractionDigits: 2,
+    //       })
 
     return (
         <ProductPreviewContainer
@@ -121,9 +123,9 @@ export function ProductPreview({ product, onClose }: ProductPreviewProps) {
 
             <ProductPreviewFooter>
                 <div>
-                    <RegularText size="s">${product.price}</RegularText>
+                    {/* <RegularText size="s">{format(product.price)}</RegularText> */}
                     <TitleText size="m" color="text" as="strong">
-                        {formattedPrice}
+                        {format(product.price)}
                     </TitleText>
                 </div>
                 <AddCartWrapper>

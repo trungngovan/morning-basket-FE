@@ -4,7 +4,7 @@ import { QuantityInput } from '../../../../components/QuantityInput'
 import { RegularText } from '../../../../components/Typography'
 import { CartItem } from '../../../../contexts/CartContext'
 import { useCart } from '../../../../hooks/useCart'
-import { formatMoney } from '../../../../utils/formatMoney'
+import useFormatCurrency from '../../../../hooks/useFormatCurrency'
 import {
     ActionsContainer,
     ProductCartCardContainer,
@@ -17,21 +17,22 @@ interface ProductCardCardProps {
 
 export function ProductCartCard({ product }: ProductCardCardProps) {
     const { changeCartItemQuantity, removeCartItem } = useCart()
+    const format = useFormatCurrency()
 
     function handleIncrease() {
-        changeCartItemQuantity(product.id, 'increase')
+        changeCartItemQuantity(product.id as number, 'increase')
     }
 
     function handleDecrease() {
-        changeCartItemQuantity(product.id, 'decrease')
+        changeCartItemQuantity(product.id as number, 'decrease')
     }
 
     function handleRemove() {
-        removeCartItem(product.id)
+        removeCartItem(product.id as number)
     }
 
-    const coffeeTotal = product.price * product.quantity
-    const formattedPrice = formatMoney(coffeeTotal)
+    const productTotal = product.price * product.quantity
+    const formattedPrice = format(productTotal)
 
     return (
         <ProductCartCardContainer>
@@ -58,7 +59,7 @@ export function ProductCartCard({ product }: ProductCardCardProps) {
                 </div>
             </div>
 
-            <p>$ {formattedPrice}</p>
+            <p>{formattedPrice}</p>
         </ProductCartCardContainer>
     )
 }

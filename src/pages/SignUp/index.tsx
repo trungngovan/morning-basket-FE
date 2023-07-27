@@ -33,7 +33,7 @@ export function SignUpPage() {
         resolver: zodResolver(signUpFormValidationSchema),
     })
     const navigate = useNavigate()
-    const { signup } = useAuth()
+    const { signup, signupNotif } = useAuth()
     const [storefrontImgLoaded, setStorefrontImgLoaded] =
         useState<boolean>(false)
     const [storefrontImgWidth, setStorefrontImgWidth] = useState<number>()
@@ -45,14 +45,18 @@ export function SignUpPage() {
 
     const handleSignUpSubmit = async (data: SignUpFormData) => {
         setIsSubmitting(true)
-        const result = await signup(
+        await signup(
             data.name,
             data.phoneNumber,
             data.email,
             data.password
+        ).then(
+            () => {
+                setIsSubmitting(false)
+                navigate('/signin', { state: { reload: true } })
+            },
+            () => setIsSubmitting(false)
         )
-        setIsSubmitting(false)
-        result ? navigate('/signin', { state: { reload: true } }) : null
     }
 
     return (
@@ -241,7 +245,7 @@ export function SignUpPage() {
                                     </div>
                                     {watch('passwordConfirmation') !==
                                         watch('password') &&
-                                        getValues('passwordConfirmation') ? (
+                                    getValues('passwordConfirmation') ? (
                                         <p className="text-sm text-red-500">
                                             Mật khẩu không khớp
                                         </p>
@@ -296,6 +300,9 @@ export function SignUpPage() {
                                     </a>
                                 </div>
                             </div> */}
+                        </div>
+                        <div className="text-center text-sm truncate text-wrap text-red-500 mt-4 min-h-[4rem]">
+                            {signupNotif}
                         </div>
                     </div>
                 </div>

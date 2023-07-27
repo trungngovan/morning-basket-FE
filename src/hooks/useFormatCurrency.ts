@@ -3,9 +3,8 @@ const useFormatCurrency = () => {
         if (!number) {
             number = 0
         }
-        return number.toLocaleString('pt-BR', {
-            minimumFractionDigits: 2,
-        })
+        // return number.toLocaleString('en-US', { style: 'currency', currency: 'VND', currencyDisplay: 'code' })
+        return `${number} VNĐ`
     }
     return format
 }

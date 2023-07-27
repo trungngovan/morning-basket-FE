@@ -15,6 +15,7 @@ import { useCart } from '../../hooks/useCart'
 import { MouseEvent, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { ProductType } from '../../@types/products'
+import useFormatCurrency from '../../hooks/useFormatCurrency'
 
 interface ProductProps {
     product: ProductType
@@ -24,6 +25,7 @@ interface ProductProps {
 export function ProductCard({ product, onPreviewButtonClick }: ProductProps) {
     const { addProductToCart } = useCart()
     const navigate = useNavigate()
+    const format = useFormatCurrency()
     const [showPreviewButton, setShowPreviewButton] = useState(false)
     const [quantity, setQuantity] = useState<number | string>(1)
     const [error, setError] = useState(false)
@@ -59,11 +61,11 @@ export function ProductCard({ product, onPreviewButtonClick }: ProductProps) {
         setQuantity(1)
     }
 
-    const formattedPrice = !product.price
-        ? 0
-        : product.price.toLocaleString('pt-BR', {
-              minimumFractionDigits: 2,
-          })
+    // const formattedPrice = !product.price
+    //     ? 0
+    //     : product.price.toLocaleString('pt-BR', {
+    //           minimumFractionDigits: 2,
+    //       })
 
     const handlePreview = (
         e: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>
@@ -111,9 +113,9 @@ export function ProductCard({ product, onPreviewButtonClick }: ProductProps) {
             >
                 <div>
                     <TitleText size="m" color="text" as="strong">
-                        {formattedPrice}
+                        {format(product.price)}
                     </TitleText>
-                    <RegularText size="s">$</RegularText>
+                    {/* <RegularText size="s">$</RegularText> */}
                 </div>
                 <AddCartWrapper>
                     <QuantityInput

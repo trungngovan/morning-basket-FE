@@ -27,11 +27,22 @@ export function SignInPage() {
     useEffect(() => {
         document.title = 'Sign In - Morning Basket'
         if (location.state) {
-            window.location.reload()
-            window.history.replaceState({}, document.title)
+            if (location.state.hasOwnProperty('reload')) {
+                window.location.reload()
+                window.history.replaceState({}, document.title)
+            }
         }
         if (isAuthenticated) {
-            navigate('/', { replace: true, state: { reload: true } })
+            if (location.state) {
+                if (location.state.hasOwnProperty('completingOrder')) {
+                    console.log(
+                        location.state.hasOwnProperty('completingOrder')
+                    )
+                    navigate('/completeOrder', { state: { reload: true } })
+                }
+            } else {
+                navigate('/', { replace: true, state: { reload: true } })
+            }
         }
     }, [location, isAuthenticated])
 
@@ -70,12 +81,13 @@ export function SignInPage() {
                             </h2>
                             <p className="mt-2 text-sm leading-6 text-gray-500">
                                 Chưa có tài khoản?{' '}
-                                <a
-                                    href="/signup"
+                                <Link
+                                    to="/signup"
+                                    // state={location.state.completingOrder ? { completingOrder: true } : undefined}
                                     className="font-semibold text-indigo-600 hover:text-indigo-500"
                                 >
                                     Đăng ký
-                                </a>
+                                </Link>
                             </p>
                         </div>
 
@@ -143,7 +155,9 @@ export function SignInPage() {
                                         <div className="text-sm leading-6">
                                             <Link
                                                 to="/contact"
-                                                state={{ username: watch("username") }}
+                                                state={{
+                                                    username: watch('username'),
+                                                }}
                                                 className="font-semibold text-indigo-600 hover:text-indigo-500"
                                             >
                                                 Quên mật khẩu?
@@ -165,15 +179,12 @@ export function SignInPage() {
                                 </form>
                             </div>
                         </div>
-                        <div
-                            className="text-center text-sm truncate text-wrap text-red-500 mt-4 min-h-[4rem]"
-                        >
+                        <div className="text-center text-sm truncate text-wrap text-red-500 mt-4 min-h-[4rem]">
                             {signinNotif}
                         </div>
                     </div>
-                </div >
-            ) : null
-            }
-        </div >
+                </div>
+            ) : null}
+        </div>
     )
 }

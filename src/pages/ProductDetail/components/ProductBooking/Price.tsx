@@ -20,13 +20,13 @@ const Price = ({ oldPrice, price }: Props) => {
                         as="strong"
                         className="line-through"
                     >
-                        {`${format(oldPrice)}$`}
+                        {`${format(oldPrice)}`}
                     </TitleText>
                 </div>
             )}
             <div className="items-center">
-                <TitleText size="xl" color="title" as="strong">
-                    {`${format(price)}$`}
+                <TitleText size="l" color="title" as="strong">
+                    {`${format(price)}`}
                 </TitleText>
             </div>
             {oldPrice && (

@@ -68,7 +68,7 @@ const ProductBooking = ({ product }: Props) => {
             <div className="flex-1">
                 <div className="flex flex-wrap items-center mb-3 gap-3">
                     <div className="text-3xl font-bold">{product.name}</div>
-                    <div className="flex gap-2">
+                    {/* <div className="flex gap-2">
                         {product.tags.map((tag: string) => (
                             <span
                                 key={tag}
@@ -77,9 +77,10 @@ const ProductBooking = ({ product }: Props) => {
                                 {tag}
                             </span>
                         ))}
-                    </div>
+                    </div> */}
                 </div>
-                <Price price={product.price} oldPrice={product.price} />
+                <Price price={product.price} />{' '}
+                {/* Currently don't use oldPrice */}
                 <div className="flex items-center gap-10 mt-10">
                     <div className="text-lg font-medium">Số lượng</div>
                     <div className="w-24 flex items-center">

@@ -6,7 +6,7 @@ import { CompleteOrderContainer } from './styles'
 import { useForm, FormProvider } from 'react-hook-form'
 import * as zod from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { useCart } from '../../hooks/useCart'
 import { useAuth } from '../../hooks/useAuth'
 import { OrderNotSignedIn } from '../../components/OrderNotSignedIn'
@@ -52,15 +52,22 @@ export function CompleteOrderPage() {
     const [showModal, setShowModal] = useState(false)
 
     const navigate = useNavigate()
-    const { isOrderReceived, orderData, sendOrder, cleanCart } = useCart()
+    const { isOrderReceived, orderData, cartQuantity, sendOrder, cleanCart } =
+        useCart()
     const { isAuthenticated } = useAuth()
+    const location = useLocation()
 
     useEffect(() => {
         document.title = 'Complete Order - Morning Basket'
-        if (isOrderReceived) {
-            navigate('/orderConfirmed', { state: orderData, replace: true })
+        if (location.state) {
+            window.location.reload()
+            window.history.replaceState({}, document.title)
         }
-    }, [isOrderReceived, orderData])
+        if (isOrderReceived && cartQuantity === 0) {
+            navigate('/orderConfirmed', { state: orderData, replace: true })
+            window.history.replaceState({}, document.title)
+        }
+    }, [isOrderReceived, orderData, location])
 
     const handleConfirmOrder = async (data: ConfirmOrderFormData) => {
         if (isAuthenticated) {
@@ -78,7 +85,7 @@ export function CompleteOrderPage() {
             ORDER_COMPLETE_INFO_STORAGE_KEY,
             JSON.stringify(confirmOrderForm.getValues())
         )
-        navigate('/signin')
+        navigate('/signin', { state: { completingOrder: true } })
     }
 
     const handleModalClose = () => {
