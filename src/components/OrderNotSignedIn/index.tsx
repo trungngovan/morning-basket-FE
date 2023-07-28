@@ -1,19 +1,8 @@
-import React from 'react'
-// import { QuantityInput } from '../QuantityInput'
+import React, { useState } from 'react'
 import { TitleText, RegularText } from '../Typography'
 import {
     OrderNotSignedInContainer,
-    // ProductPreviewContent,
-    // ProductPreviewFooter,
-    // AddCartWrapper,
 } from './styles'
-// import { PiShoppingCartFill } from 'react-icons/pi'
-// import { useCart } from '../../hooks/useCart'
-import { useState } from 'react'
-// import { Description, Name } from '../ProductCard/styles'
-// import { ProductType } from '../../@types/products'
-// import { Button } from '../Button'
-// import { useNavigate } from 'react-router-dom'
 
 interface Props {
     onClose: () => void

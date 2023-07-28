@@ -2,7 +2,6 @@ import React, { ReactNode, createContext, useEffect, useState } from 'react'
 import { apiGet, apiPost } from '../apis/api'
 import { AxiosError, AxiosResponse } from 'axios'
 import { apiMessages } from '../utils/apiMessages'
-import { rejects } from 'assert'
 
 interface AuthContextType {
     isAuthenticated: boolean

@@ -122,16 +122,17 @@ export const OrderNotSignedInContainer = styled.div`
     //     }
     // }
     .title {
-        font-size: 0.9vw;
+        font-size: 1.2vw;
     }
 
     .regular {
-        font-size: 0.7vw;
+        font-size: 0.8vw;
     }
 
     .click-container {
         position: absolute;
         bottom: 0;
+        margin-bottom: 0.5rem;
         width: 85%;
         height: 30%;
         display: flex;
@@ -160,7 +161,7 @@ export const OrderNotSignedInContainer = styled.div`
         &:hover {
             color: ${({ theme }) => theme.colors['brand-purple-dark']};
             background-color: ${({ theme }) =>
-                theme.colors['brand-purple-light']};
+        theme.colors['brand-purple-light']};
             border: solid 1px;
         }
     }
@@ -171,7 +172,7 @@ export const OrderNotSignedInContainer = styled.div`
         &:hover {
             color: ${({ theme }) => theme.colors['brand-yellow-dark']};
             background-color: ${({ theme }) =>
-                theme.colors['brand-yellow-light']};
+        theme.colors['brand-yellow-light']};
             border: solid 1px;
         }
     }

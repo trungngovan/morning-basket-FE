@@ -4,6 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useAuth } from '../../hooks/useAuth'
+import { RedirectCountdown } from '../../components/RedirectCountdown'
 import storefront from '../../assets/store-front.jpg'
 
 const signInFormValidationSchema = zod.object({
@@ -23,6 +24,20 @@ export function SignInPage() {
         useState<boolean>(false)
     const [storefrontImgWidth, setStorefrontImgWidth] = useState<number>()
     const location = useLocation()
+    const [timer, setTimer] = useState<NodeJS.Timeout>()
+
+    const handleNavigate = (() => {
+        if (location.state) {
+            if (location.state.hasOwnProperty('completingOrder')) {
+                console.log(
+                    location.state.hasOwnProperty('completingOrder')
+                )
+                navigate('/completeOrder', { state: { reload: true } })
+            }
+        } else {
+            navigate('/', { replace: true, state: { reload: true } })
+        }
+    })
 
     useEffect(() => {
         document.title = 'Sign In - Morning Basket'
@@ -33,16 +48,7 @@ export function SignInPage() {
             }
         }
         if (isAuthenticated) {
-            if (location.state) {
-                if (location.state.hasOwnProperty('completingOrder')) {
-                    console.log(
-                        location.state.hasOwnProperty('completingOrder')
-                    )
-                    navigate('/completeOrder', { state: { reload: true } })
-                }
-            } else {
-                navigate('/', { replace: true, state: { reload: true } })
-            }
+            setTimer(setTimeout(handleNavigate, 3000))
         }
     }, [location, isAuthenticated])
 
@@ -185,6 +191,17 @@ export function SignInPage() {
                     </div>
                 </div>
             ) : null}
+            {isAuthenticated && (
+                <RedirectCountdown
+                    seconds={3}
+                    onProceed={
+                        () => {
+                            clearTimeout(timer)
+                            handleNavigate()
+                        }
+                    }
+                ></RedirectCountdown>
+            )}
         </div>
     )
 }

@@ -245,7 +245,7 @@ export function SignUpPage() {
                                     </div>
                                     {watch('passwordConfirmation') !==
                                         watch('password') &&
-                                    getValues('passwordConfirmation') ? (
+                                        getValues('passwordConfirmation') ? (
                                         <p className="text-sm text-red-500">
                                             Mật khẩu không khớp
                                         </p>
