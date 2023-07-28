@@ -15,12 +15,12 @@ const FAQPage: React.FC = () => {
             <Title>Các câu hỏi thường gặp</Title>
 
             <Question>Làm sao để thanh toán?</Question>
-            <AnswerWrapper id="faq_payment">
+            <AnswerWrapper id="payment">
                 <AnswerDetails>
                     Quý khách có thể thanh toán bằng cách chuyển khoản cho chúng
                     tôi với{' '}
                     <a
-                        href="#faq_bank"
+                        href="#bank"
                         className="text-indigo-600 hover:text-indigo-500 hover:underline"
                     >
                         thông tin ngân hàng
@@ -32,7 +32,7 @@ const FAQPage: React.FC = () => {
                     Nếu quý khách muốn thanh toán bằng phương thức khác, vui
                     lòng liên hệ với chúng tôi qua{' '}
                     <a
-                        href="#faq_bank"
+                        href="#store"
                         className="text-indigo-600 hover:text-indigo-500 hover:underline"
                     >
                         email hoặc điện thoại
@@ -41,7 +41,27 @@ const FAQPage: React.FC = () => {
                 </AnswerDetails>
             </AnswerWrapper>
 
-            <Question id="faq_bank">Thông tin chuyển khoản ngân hàng?</Question>
+            <Question>Làm sao tôi biết đơn hàng đã được xác nhận chưa?</Question>
+            <AnswerWrapper id="orderConfirm">
+                <AnswerDetails>
+                    Chúng tôi sẽ liên hệ với quý khách trong vòng 24 tiếng sau khi ghi nhận thông tin đơn hàng để xác nhận đơn hàng.<br />
+                    Chúng tôi sẽ ưu tiên việc gọi đến số điện thoại quý khách đã cung cấp. Nếu không được, chúng tôi sẽ gửi tin nhắn SMS hoặc gửi thư điện tử đến địa chỉ email quý khách đã cung cấp.
+                </AnswerDetails>
+                <br />
+                <br />
+                <AnswerDetails>
+                    Quý khách có thể liên hệ với chúng tôi trước qua{' '}
+                    <a
+                        href="#store"
+                        className="text-indigo-600 hover:text-indigo-500 hover:underline"
+                    >
+                        email hoặc điện thoại
+                    </a>{' '}
+                    để biết thêm thông tin.
+                </AnswerDetails>
+            </AnswerWrapper>
+
+            <Question id="bank">Thông tin chuyển khoản ngân hàng?</Question>
             <AnswerWrapper>
                 <div className="flex flex-row">
                     <div className="flex-1 m-auto">
@@ -69,7 +89,7 @@ const FAQPage: React.FC = () => {
                 </div>
             </AnswerWrapper>
 
-            <Question id="faq_store">Thông tin cửa hàng?</Question>
+            <Question id="store">Thông tin cửa hàng?</Question>
             <AnswerWrapper>
                 <AnswerTitle>
                     Địa chỉ:{' '}

@@ -4,6 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../../hooks/useAuth'
+import { RedirectCountdown } from '../../components/RedirectCountdown'
 import storefront from '../../assets/store-front.jpg'
 
 const signUpFormValidationSchema = zod.object({
@@ -34,14 +35,20 @@ export function SignUpPage() {
     })
     const navigate = useNavigate()
     const { signup, signupNotif } = useAuth()
-    const [storefrontImgLoaded, setStorefrontImgLoaded] =
-        useState<boolean>(false)
+    const [storefrontImgLoaded, setStorefrontImgLoaded] = useState<boolean>(false)
     const [storefrontImgWidth, setStorefrontImgWidth] = useState<number>()
     const [isSubmitting, setIsSubmitting] = useState(false)
+    const [showModal, setShowModal] = useState(false)
+    const [timer, setTimer] = useState<NodeJS.Timeout>()
 
     useEffect(() => {
         document.title = 'Sign Up - Morning Basket'
     }, [])
+
+    const handleNavigate = ((formData: SignUpFormData) => {
+        navigate('/signin', { state: { formData: formData } })
+    })
+
 
     const handleSignUpSubmit = async (data: SignUpFormData) => {
         setIsSubmitting(true)
@@ -53,7 +60,8 @@ export function SignUpPage() {
         ).then(
             () => {
                 setIsSubmitting(false)
-                navigate('/signin', { state: { reload: true } })
+                setTimer(setTimeout(() => { handleNavigate(data) }, 3000))
+                setShowModal(true)
             },
             () => setIsSubmitting(false)
         )
@@ -307,6 +315,17 @@ export function SignUpPage() {
                     </div>
                 </div>
             ) : null}
+            {showModal && (
+                <RedirectCountdown
+                    seconds={3}
+                    onProceed={
+                        () => {
+                            clearTimeout(timer)
+                            handleNavigate(getValues())
+                        }
+                    }
+                ></RedirectCountdown>
+            )}
         </div>
     )
 }

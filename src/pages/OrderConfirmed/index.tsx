@@ -16,7 +16,6 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import { PaymentMethodType, OrderData } from '../CompleteOrder'
 import { paymentMethods } from '../CompleteOrder/components/CompleteOrderForm/PaymentMethodOptions'
 import { useEffect } from 'react'
-import { stat } from 'fs'
 
 interface LocationType {
     state: any
@@ -40,9 +39,24 @@ export function OrderConfirmedPage() {
     return (
         <OrderConfirmedContainer className="container py-8 my-8">
             <div>
-                <TitleText size="l">Đơn hàng đã được lưu lại</TitleText>
+                <TitleText size="l">Đơn hàng đã được ghi nhận</TitleText>
                 <RegularText size="l" color="subtitle">
-                    Vui lòng chờ đợi trong khi chúng tôi xác nhận đơn hàng
+                    Chúng tôi sẽ liên hệ với quý khách trong vòng 24 tiếng để xác nhận đơn hàng!
+                </RegularText>
+                <RegularText className='my-2' size="s" color="subtitle">
+                    <a
+                        href='/faq#payment'
+                        className="text-indigo-600 hover:text-indigo-500 hover:underline"
+                    >
+                        Làm sao để thanh toán?
+                    </a>
+                    <br />
+                    <a
+                        href='/faq#orderConfirm'
+                        className="text-indigo-600 hover:text-indigo-500 hover:underline"
+                    >
+                        Làm sao tôi biết đơn hàng đã được xác nhận chưa?
+                    </a>
                 </RegularText>
             </div>
 
@@ -108,6 +122,6 @@ export function OrderConfirmedPage() {
 
                 <img src={confirmedOrderIllustration} alt="" />
             </section>
-        </OrderConfirmedContainer>
+        </OrderConfirmedContainer >
     )
 }

@@ -4,6 +4,8 @@ import { Product } from '../components/ProductType'
 import { produce } from 'immer'
 import { apiPost } from '../apis/api'
 import { AxiosResponse } from 'axios'
+import { rejects } from 'assert'
+import { OrderData } from '../pages/CompleteOrder'
 
 export interface CartItem extends Product {
     id?: number
@@ -21,9 +23,8 @@ interface CartContextType {
     ) => void
     removeCartItem: (cartItemId: number) => void
     cleanCart: () => void
+    orderCompleteInfo: OrderData
     sendOrder: (data: any) => any
-    isOrderReceived: boolean
-    orderData: any
 }
 
 interface CartContextProviderProps {
@@ -31,6 +32,7 @@ interface CartContextProviderProps {
 }
 
 const PRODUCT_ITEMS_STORAGE_KEY = 'MorningBasket:cartItems'
+const ORDER_COMPLETE_INFO_STORAGE_KEY = 'MorningBasket:orderCompleteInfo'
 
 export const CartContext = createContext({} as CartContextType)
 
@@ -44,8 +46,16 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
 
         return []
     })
-    const [isOrderReceived, setIsOrderReceived] = useState(false)
-    const [orderData, setOrderData] = useState(false)
+
+    const [orderCompleteInfo, setOrderCompleteInfo] = useState<OrderData>(() => {
+        const storedOrderCompleteInfo = localStorage.getItem(ORDER_COMPLETE_INFO_STORAGE_KEY)
+
+        if (storedOrderCompleteInfo) {
+            return JSON.parse(storedOrderCompleteInfo)
+        }
+
+        return {}
+    })
 
     const cartQuantity = cartItems.length
     const cartItemsTotal = cartItems.reduce((total, cartItem) => {
@@ -105,8 +115,8 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
         setCartItems([])
     }
 
-    const sendOrder = async (data: any): Promise<boolean> => {
-        try {
+    const sendOrder = async (data: any) => {
+        return new Promise<any>((resolve, rejects) => {
             setTimeout(async () => {
                 const customerId = JSON.parse(
                     localStorage.getItem('MorningBasket:customerInfo') as string
@@ -129,28 +139,30 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
                     data.district,
                     data.province,
                 ].join(', ')
-                const response = await apiPost<unknown, AxiosResponse>(
-                    `/orders`,
-                    {
-                        customerId: customerId,
-                        items: items,
-                        totalPrice: cartItemsTotal,
-                        shippingAddress: shippingAddress,
-                        billingAddress: null,
-                        addressNote: data.note ? data.note : null,
-                        paymentMethod: data.paymentMethod,
-                    }
-                )
-                if (response && response.status === 200) {
-                    setOrderData(response.data.order)
-                    setIsOrderReceived(true)
-                    return true
-                }
-            })
-        } catch (error) {
-            console.error(error)
-        }
-        return false
+                await apiPost<unknown, AxiosResponse>(`/orders`, {
+                    customerId: customerId,
+                    items: items,
+                    totalPrice: cartItemsTotal,
+                    shippingAddress: shippingAddress,
+                    billingAddress: null,
+                    addressNote: data.note ? data.note : null,
+                    paymentMethod: data.paymentMethod,
+                })
+                    .then((response) => {
+                        if (response) {
+                            if (data.remember) {
+                                setOrderCompleteInfo(data)
+                            } else {
+                                localStorage.removeItem(ORDER_COMPLETE_INFO_STORAGE_KEY)
+                            }
+                            resolve(response.data.order)
+                        }
+                    })
+                    .catch((e) => {
+                        rejects(e)
+                    })
+            }, 200)
+        })
     }
 
     useEffect(() => {
@@ -171,8 +183,7 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
                 removeCartItem,
                 cleanCart,
                 sendOrder,
-                isOrderReceived,
-                orderData,
+                orderCompleteInfo
             }}
         >
             {children}
