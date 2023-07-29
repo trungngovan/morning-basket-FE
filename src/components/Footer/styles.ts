@@ -13,10 +13,10 @@ export const FooterContainer = styled.footer`
 `
 
 export const FooterContent = styled.div`
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: stretch;
+    // display: flex;
+    // flex-wrap: wrap;
+    // justify-content: space-between;
+    // align-items: stretch;
     gap: 1rem;
     // margin-top: 1rem;
     margin-left: 20%;

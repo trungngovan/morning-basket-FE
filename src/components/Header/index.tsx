@@ -1,23 +1,28 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 import { useCart } from '../../hooks/useCart'
-import { HeaderContainer, HeaderButtonsContainer, HeaderButton } from './styles'
+import { HeaderButton } from './styles'
 import { PiShoppingCartFill } from 'react-icons/pi'
 import LogoImage from '../../assets/logo@100-63.png'
 import { useAuth } from '../../hooks/useAuth'
+import { defaultTheme } from '../../styles/themes/default'
+
 export function Header() {
     const { cartQuantity } = useCart()
     const { customerInfo, isAuthenticated, signout } = useAuth()
 
     return (
-        <HeaderContainer>
-            <div className="container">
+        <header
+            className='w-full h-[6.5rem] m-auto flex items-center justify-center sticky top-0 left-0 z-[5]'
+            style={{ background: defaultTheme.colors['base-background'] }}
+        >
+            <div className="container w-full px-4 flex items-center justify-between">
                 <NavLink to="/">
                     <img src={LogoImage} alt="" />
                 </NavLink>
-                <div className="h-10 flex">
+                <div className='flex flex-col items-end gap-2'>
                     {isAuthenticated && (
-                        <p className="mt-2 mr-1 text-sm leading-6 text-gray-500 text-right">
+                        <p className="text-sm text-gray-500">
                             Xin chào,{' '}
                             <span className="font-bold">
                                 {customerInfo.name}
@@ -25,7 +30,7 @@ export function Header() {
                             !{' '}
                         </p>
                     )}
-                    <HeaderButtonsContainer>
+                    <div className='flex items-center gap-3'>
                         {!isAuthenticated ? (
                             <NavLink to="/signin">
                                 <HeaderButton variant="yellow">
@@ -45,15 +50,17 @@ export function Header() {
                         )}
                         <NavLink to="/completeOrder">
                             <HeaderButton variant="purple">
-                                {cartQuantity >= 1 && (
-                                    <span>{cartQuantity}</span>
-                                )}
                                 <PiShoppingCartFill size={30} />
+                                {cartQuantity >= 1 ?
+                                    <span>{cartQuantity}</span>
+                                    :
+                                    <span style={{ background: 'transparent' }}></span>
+                                }
                             </HeaderButton>
                         </NavLink>
-                    </HeaderButtonsContainer>
+                    </div>
                 </div>
-            </div>
-        </HeaderContainer>
+            </div >
+        </header >
     )
 }
