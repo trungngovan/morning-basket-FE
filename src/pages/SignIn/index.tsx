@@ -4,6 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useAuth } from '../../hooks/useAuth'
+import { RedirectCountdown } from '../../components/RedirectCountdown'
 import storefront from '../../assets/store-front.jpg'
 
 const signInFormValidationSchema = zod.object({
@@ -23,26 +24,31 @@ export function SignInPage() {
         useState<boolean>(false)
     const [storefrontImgWidth, setStorefrontImgWidth] = useState<number>()
     const location = useLocation()
+    const [timer, setTimer] = useState<NodeJS.Timeout>()
+    const [defaultValues, setDefaultValues] = useState<any>()
+
+    const handleNavigate = (() => {
+        if (location.state) {
+            if (location.state.hasOwnProperty('completingOrder')) {
+                navigate('/completeOrder', { state: { reload: true } })
+            }
+        } else {
+            navigate('/', { replace: true, state: { reload: true } })
+        }
+    })
 
     useEffect(() => {
         document.title = 'Sign In - Morning Basket'
         if (location.state) {
             if (location.state.hasOwnProperty('reload')) {
                 window.location.reload()
-                window.history.replaceState({}, document.title)
+            }
+            if (location.state.hasOwnProperty('formData')) {
+                setDefaultValues(location.state.formData)
             }
         }
         if (isAuthenticated) {
-            if (location.state) {
-                if (location.state.hasOwnProperty('completingOrder')) {
-                    console.log(
-                        location.state.hasOwnProperty('completingOrder')
-                    )
-                    navigate('/completeOrder', { state: { reload: true } })
-                }
-            } else {
-                navigate('/', { replace: true, state: { reload: true } })
-            }
+            setTimer(setTimeout(handleNavigate, 3000))
         }
     }, [location, isAuthenticated])
 
@@ -109,7 +115,12 @@ export function SignInPage() {
                                                 id="username"
                                                 {...register('username')}
                                                 type="text"
-                                                autoComplete="username"
+                                                value={
+                                                    defaultValues ? defaultValues.email : undefined
+                                                }
+                                                autoComplete={
+                                                    defaultValues ? undefined : "email"
+                                                }
                                                 required
                                                 // pattern="^([a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3})|(\d{3}-\d{3}-\d{4})$"
                                                 className="block w-full rounded-md border-0 px-3 py-1.5 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-400 sm:text-sm sm:leading-6"
@@ -129,7 +140,12 @@ export function SignInPage() {
                                                 id="password"
                                                 {...register('password')}
                                                 type="password"
-                                                autoComplete="current-password"
+                                                value={
+                                                    defaultValues ? defaultValues.password : undefined
+                                                }
+                                                autoComplete={
+                                                    defaultValues ? undefined : "current-password"
+                                                }
                                                 required
                                                 className="block w-full rounded-md border-0 px-3 py-1.5 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-400 sm:text-sm sm:leading-6"
                                             />
@@ -185,6 +201,17 @@ export function SignInPage() {
                     </div>
                 </div>
             ) : null}
+            {isAuthenticated && (
+                <RedirectCountdown
+                    seconds={3}
+                    onProceed={
+                        () => {
+                            clearTimeout(timer)
+                            handleNavigate()
+                        }
+                    }
+                ></RedirectCountdown>
+            )}
         </div>
     )
 }

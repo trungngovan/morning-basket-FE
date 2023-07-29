@@ -16,10 +16,6 @@ enum PaymentMethods {
     debit = 'debit',
     cash = 'cash',
 }
-const ORDER_COMPLETE_INFO_STORAGE_KEY = 'MorningBasket:orderCompleteInfo'
-const storedOrderCompleteInfo = JSON.parse(
-    localStorage.getItem(ORDER_COMPLETE_INFO_STORAGE_KEY) as string
-)
 
 const confirmOrderFormValidationSchema = zod.object({
     number_street: zod.string().min(1, 'Vui lòng nhập số nhà và tên đường'),
@@ -33,6 +29,7 @@ const confirmOrderFormValidationSchema = zod.object({
             return { message: 'Vui lòng chọn phương thức thanh toán' }
         },
     }),
+    remember: zod.boolean()
 })
 
 export type PaymentMethodType = PaymentMethods
@@ -48,12 +45,10 @@ export function CompleteOrderPage() {
         },
     })
 
-    const [isSubmitting, setIsSubmitting] = useState(false)
     const [showModal, setShowModal] = useState(false)
-
     const navigate = useNavigate()
-    const { isOrderReceived, orderData, cartQuantity, sendOrder, cleanCart } =
-        useCart()
+    const { sendOrder, cleanCart, orderCompleteInfo } = useCart()
+
     const { isAuthenticated } = useAuth()
     const location = useLocation()
 
@@ -63,28 +58,26 @@ export function CompleteOrderPage() {
             window.location.reload()
             window.history.replaceState({}, document.title)
         }
-        if (isOrderReceived && cartQuantity === 0) {
-            navigate('/orderConfirmed', { state: orderData, replace: true })
-            window.history.replaceState({}, document.title)
-        }
-    }, [isOrderReceived, orderData, location])
+    }, [location])
 
     const handleConfirmOrder = async (data: ConfirmOrderFormData) => {
         if (isAuthenticated) {
-            setIsSubmitting(true)
             await sendOrder(data)
-            setIsSubmitting(false)
-            cleanCart()
+                .then(
+                    (responseData: any) => {
+                        cleanCart()
+                        navigate('/orderConfirmed', { state: responseData })
+                    },
+                    (e: any) => {
+                        console.log(e)
+                    }
+                )
         } else {
             setShowModal(true)
         }
     }
 
     const handleModalProceed = () => {
-        localStorage.setItem(
-            ORDER_COMPLETE_INFO_STORAGE_KEY,
-            JSON.stringify(confirmOrderForm.getValues())
-        )
         navigate('/signin', { state: { completingOrder: true } })
     }
 
@@ -101,7 +94,7 @@ export function CompleteOrderPage() {
                 >
                     <SelectedProducts />
                     <CompleteOrderForm
-                        defaultValues={storedOrderCompleteInfo}
+                        defaultValues={orderCompleteInfo}
                     />
                 </CompleteOrderContainer>
             </FormProvider>

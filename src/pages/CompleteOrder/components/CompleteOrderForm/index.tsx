@@ -9,6 +9,7 @@ import { CompleteOrderFormContainer, FormSectionContainer } from './styles'
 import { Button } from '../../../../components/Button'
 import { useCart } from '../../../../hooks/useCart'
 import { OrderData } from '../../../../pages/CompleteOrder'
+import { useFormContext } from 'react-hook-form'
 
 interface Props {
     defaultValues: OrderData
@@ -17,6 +18,7 @@ interface Props {
 export function CompleteOrderForm({ defaultValues }: Props) {
     const { colors } = useTheme()
     const { cartItems, cartQuantity } = useCart()
+    const { register } = useFormContext()
 
     return (
         <CompleteOrderFormContainer>
@@ -53,11 +55,27 @@ export function CompleteOrderForm({ defaultValues }: Props) {
 
                 <PaymentMethodOptions defaultValues={defaultValues} />
             </FormSectionContainer>
+            <div className="flex items-center px-[2.5rem]">
+                <input
+                    id="remember-checkout"
+                    // name="remember-checkout"
+                    type="checkbox"
+                    {...register("remember")}
+                    className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
+                />
+                <label
+                    htmlFor="remember-checkout"
+                    className="ml-1 block text-sm leading-6 text-gray-700"
+                >
+                    Ghi nhớ thông tin đặt hàng của tôi
+                </label>
+            </div>
+
             <Button
                 text="Đặt hàng"
                 disabled={cartQuantity <= 0}
                 type="submit"
             />
-        </CompleteOrderFormContainer>
+        </CompleteOrderFormContainer >
     )
 }

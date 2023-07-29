@@ -2,7 +2,6 @@ import React, { ReactNode, createContext, useEffect, useState } from 'react'
 import { apiGet, apiPost } from '../apis/api'
 import { AxiosError, AxiosResponse } from 'axios'
 import { apiMessages } from '../utils/apiMessages'
-import { rejects } from 'assert'
 
 interface AuthContextType {
     isAuthenticated: boolean
@@ -100,6 +99,7 @@ export function AuthContextProvider({ children }: AuthContextProviderProps) {
     const signout = () => {
         localStorage.removeItem(AUTH_TOKEN_STORAGE_KEY)
         localStorage.removeItem(CUSTOMER_INFO_STORAGE_KEY)
+        localStorage.removeItem('MorningBasket:orderCompleteInfo')
         setAuthToken(null)
         setIsAuthenticated(false)
     }
@@ -131,11 +131,11 @@ export function AuthContextProvider({ children }: AuthContextProviderProps) {
                         setSignupNotif(
                             customerErrMsg.includes('<DETAIL>')
                                 ? customerErrMsg.replace(
-                                      '<DETAIL>',
-                                      customErrCode.includes('PHONE')
-                                          ? phoneNumber
-                                          : email
-                                  )
+                                    '<DETAIL>',
+                                    customErrCode.includes('PHONE')
+                                        ? phoneNumber
+                                        : email
+                                )
                                 : customerErrMsg
                         )
                         rejects()
