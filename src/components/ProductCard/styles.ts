@@ -13,12 +13,12 @@ export const ProductCardContainer = styled.div`
     text-align: center;
     margin-top: 3rem;
 
-    img {
-        width: 7.5rem;
-        height: 7.5rem;
-        margin-top: -2rem;
-        border-radius: 999px;
-    }
+    // img {
+    //     width: 7.5rem;
+    //     height: 7.5rem;
+    //     margin-top: -2rem;
+    //     border-radius: 999px;
+    // }
 `
 
 export const Tags = styled.div`

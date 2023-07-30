@@ -11,7 +11,6 @@ import {
     TagList,
     HorizontalScrollWrapper,
 } from './styles'
-// import { products } from '../../mock/coffee'
 import { ProductPreview } from '../ProductPreview'
 import { GetAllProductsResponse, ProductType } from '../../@types/products'
 import { apiGet } from '../../apis/api'
@@ -103,8 +102,8 @@ export function OurProducts() {
     }
 
     return (
-        <OurProductsContainer className="container">
-            <TitleText size="l" color="subtitle" className="mt-5 mb-3">
+        <section className="container w-full mx-auto px-4">
+            <TitleText size="l" color="subtitle" className="my-2">
                 Sản phẩm
             </TitleText>
 
@@ -135,7 +134,7 @@ export function OurProducts() {
                 </TagList>
             </HorizontalScrollWrapper>
 
-            <ProductList>
+            <div className='w-full mt-4 gap-x-2 grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6'>
                 {currentProducts.map((product) => (
                     <ProductCard
                         key={product.id}
@@ -145,7 +144,7 @@ export function OurProducts() {
                         }
                     />
                 ))}
-            </ProductList>
+            </div>
 
             {selectedProduct && (
                 <ProductPreview
@@ -163,6 +162,6 @@ export function OurProducts() {
                     />
                 </PaginationContainer>
             )}
-        </OurProductsContainer>
+        </section>
     )
 }

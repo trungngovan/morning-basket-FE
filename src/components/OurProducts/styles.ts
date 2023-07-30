@@ -5,9 +5,9 @@ export const OurProductsContainer = styled.section`
     margin: 1rem auto;
     max-width: 1000px;
 
-    @media (max-width: 700px) {
-        margin-top: 23rem;
-    }
+    // @media (max-width: 700px) {
+    //     margin-top: 23rem;
+    // }
 `
 
 export const ProductList = styled.div`
@@ -78,7 +78,7 @@ export const Tag = styled.button<TagButtonProps>`
 
     &:hover {
         background-color: ${(props) =>
-            props.isActive ? props.theme.colors['base-button'] : '#e0e0e0'};
+        props.isActive ? props.theme.colors['base-button'] : '#e0e0e0'};
     }
 
     &:last-child {

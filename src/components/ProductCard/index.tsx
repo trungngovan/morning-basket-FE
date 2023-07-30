@@ -36,8 +36,8 @@ export function ProductCard({ product, onPreviewButtonClick }: ProductProps) {
             1 <= prev + count && prev + count <= product.quantity
                 ? setError(false)
                 : prev + count >= product.quantity
-                ? setError(true)
-                : null
+                    ? setError(true)
+                    : null
             return Math.max(1, prev + count)
         })
     }
@@ -88,6 +88,7 @@ export function ProductCard({ product, onPreviewButtonClick }: ProductProps) {
             <img
                 src={`/products/${product.barcode}@150x120.png`}
                 alt={product.name}
+                className='w-[7.5rem] h-[7.5rem] mt-[-2rem] rounded-full'
             />
 
             <Tags>
