@@ -13,7 +13,7 @@ export function Header() {
 
     return (
         <header
-            className='w-full h-[6.5rem] m-auto flex items-center justify-center sticky top-0 left-0 z-[5]'
+            className='w-full h-[5rem] m-auto flex items-center justify-center sticky top-0 left-0 z-[5]'
             style={{ background: defaultTheme.colors['base-background'] }}
         >
             <div className="container w-full px-4 flex items-center justify-between">
