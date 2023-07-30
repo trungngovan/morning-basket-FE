@@ -16,20 +16,23 @@ import {
     PiPlantFill,
 } from 'react-icons/pi'
 import { useTheme } from 'styled-components'
+import heroBackgroundImage from '../../../../assets/hero-background.png'
 
 export function Hero() {
     const { colors } = useTheme()
-
     return (
-        <HeroContainer>
-            <HeroContent className="container">
-                <div>
+        <section
+            className='w-full flex items-center justify-center bg-no-repeat bg-center bg-auto'
+            style={{ background: `url(${heroBackgroundImage})` }}
+        >
+            <div className="container p-4 flex items-center justify-between gap-4 flex-col-reverse md:gap-[3.5rem] md:flex-row">
+                <div className='flex-1'>
                     <section>
                         <HeroTitle size="m">
                             Bạn đang tìm kiếm món ăn nhẹ ngon, lành mạnh và giàu
                             dinh dưỡng?
                         </HeroTitle>
-                        <RegularText size="l" color="subtitle" as="h3">
+                        <RegularText size="l" color="subtitle" as="h3" className='mb-4'>
                             Chào mừng đến với{' '}
                             <a
                                 href="https://morningbasket.vn"
@@ -41,7 +44,7 @@ export function Hero() {
                         </RegularText>
                     </section>
 
-                    <BenefitsContainer>
+                    <div className='w-100 grid gap-5 grid-cols-[1fr] md:grid-cols-[1fr_1fr]'>
                         <InfoWithIcon
                             iconColor={colors['brand-green']}
                             icon={<PiPlantFill />}
@@ -62,13 +65,13 @@ export function Hero() {
                             icon={<PiHeartbeatFill />}
                             text="Hơn cả ngon, hãy tận hưởng!"
                         />
-                    </BenefitsContainer>
+                    </div>
                 </div>
 
-                <div className="imageContainer">
-                    <img src={logo} alt="" />
+                <div className="flex-1 flex items-center justify-center">
+                    <img src={logo} alt="" className='w-full lg:w-1/2' />
                 </div>
-            </HeroContent>
-        </HeroContainer>
+            </div>
+        </section >
     )
 }
