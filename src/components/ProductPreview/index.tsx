@@ -1,16 +1,17 @@
 import React from 'react'
 import { QuantityInput } from '../QuantityInput'
-import { TitleText, RegularText } from '../Typography'
+import { TitleText } from '../Typography'
 import {
     ProductPreviewContainer,
     ProductPreviewContent,
     ProductPreviewFooter,
     AddCartWrapper,
+    Description,
+    Name
 } from './styles'
 import { PiShoppingCartFill } from 'react-icons/pi'
 import { useCart } from '../../hooks/useCart'
 import { useState } from 'react'
-import { Description, Name } from '../ProductCard/styles'
 import { ProductType } from '../../@types/products'
 import useFormatCurrency from '../../hooks/useFormatCurrency'
 
@@ -72,8 +73,8 @@ export function ProductPreview({ product, onClose }: ProductPreviewProps) {
             1 <= prev + count && prev + count <= product.quantity
                 ? setError(false)
                 : prev + count >= product.quantity
-                ? setError(true)
-                : null
+                    ? setError(true)
+                    : null
             return Math.max(1, prev + count)
         })
     }

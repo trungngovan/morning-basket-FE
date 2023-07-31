@@ -134,7 +134,7 @@ export function OurProducts() {
                 </TagList>
             </HorizontalScrollWrapper>
 
-            <div className='w-full mt-4 gap-x-2 grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6'>
+            <div className='w-full mt-4 gap-x-2 grid grid-cols-2 max-[320px]:grid-cols-1 md:grid-cols-4 lg:grid-cols-6'>
                 {currentProducts.map((product) => (
                     <ProductCard
                         key={product.id}

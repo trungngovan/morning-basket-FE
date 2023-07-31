@@ -1,8 +1,10 @@
 import styled from 'styled-components'
+import { RegularText } from '../Typography'
 
 export const ProductPreviewContainer = styled.div`
-    width: 20vw;
-    height: 20vw;
+    position: fixed;
+    width: fit-content;
+    height: fit-content;
     background: ${({ theme }) => theme.colors['base-card']};
     border-radius: 6px 36px 6px 36px;
     padding: 1.25rem;
@@ -11,11 +13,10 @@ export const ProductPreviewContainer = styled.div`
     align-items: center;
     padding-top: 0;
     text-align: center;
-    position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%) scale(1);
-    z-index: 2;
+    z-index: 6;
     transition: all 0.2s ease-in-out;
     box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
 
@@ -30,27 +31,35 @@ export const ProductPreviewContainer = styled.div`
     }
 
     img {
-        width: 15rem;
-        height: 15rem;
-        margin-top: -7.5rem;
+        width: 7.5rem;
+        height: 7.5rem;
+        margin-top: -4.5rem;
         border-radius: 999px;
     }
 `
 
-// export const ProductPreviewImage = styled.img`
-//     width: 15rem;
-//     height: 15rem;
-//     margin-top: -7.5rem;
-//     border-radius: 999px;
-// `
+export const Description = styled(RegularText).attrs({
+    size: 's',
+    color: 'label',
+})`
+`
+
+export const Name = styled(RegularText).attrs({
+    size: 's',
+    color: 'text',
+    weight: '600',
+})`
+`
 
 export const ProductPreviewContent = styled.div`
-    margin-top: 2rem;
-    margin-bottom: 1rem;
+    margin-top: 1rem;
+    // margin-bottom: 1rem;
     max-width: 25rem;
 `
 
 export const ProductPreviewFooter = styled.div`
+    // position: absolute;
+    bottom: 1rem;
     width: 100%;
     display: flex;
     flex-wrap: wrap;
@@ -58,8 +67,8 @@ export const ProductPreviewFooter = styled.div`
     justify-content: center;
     justify-content: space-around;
     margin-top: auto;
-    padding-top: 1.5rem;
-    border-top: 1px solid ${({ theme }) => theme.colors['brand-purple']};
+    padding: 1rem 1rem 0 1rem;
+    // border-top: 1px solid ${({ theme }) => theme.colors['brand-purple']};
     > div {
         display: flex;
         align-items: center;
