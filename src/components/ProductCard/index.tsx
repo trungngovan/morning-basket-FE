@@ -26,7 +26,6 @@ export function ProductCard({ product, onPreviewButtonClick }: ProductProps) {
     const { addProductToCart } = useCart()
     const navigate = useNavigate()
     const format = useFormatCurrency()
-    const [showPreviewButton, setShowPreviewButton] = useState(false)
     const [quantity, setQuantity] = useState<number | string>(1)
     const [error, setError] = useState(false)
 
@@ -61,34 +60,31 @@ export function ProductCard({ product, onPreviewButtonClick }: ProductProps) {
         setQuantity(1)
     }
 
-    // const formattedPrice = !product.price
-    //     ? 0
-    //     : product.price.toLocaleString('pt-BR', {
-    //           minimumFractionDigits: 2,
-    //       })
-
     const handlePreview = (
-        e: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>
+        e: MouseEvent<HTMLImageElement, globalThis.MouseEvent>
     ) => {
         e.stopPropagation()
         onPreviewButtonClick(product)
     }
 
-    const handleNavigate = () => {
+    const handleNavigate = (
+        e: MouseEvent<HTMLParagraphElement, globalThis.MouseEvent>
+    ) => {
+        e.stopPropagation()
         navigate(`/product/${product.id}`)
     }
 
     return (
         <ProductCardContainer
-            onClick={handleNavigate}
             className="cursor-pointer"
-            onMouseEnter={() => setShowPreviewButton(true)}
-            onMouseLeave={() => setShowPreviewButton(false)}
         >
             <img
                 src={`/products/${product.barcode}@150x120.png`}
                 alt={product.name}
-                className='w-[7.5rem] h-[7.5rem] mt-[-2rem] rounded-full'
+                className='w-[7.5rem] h-[7.5rem] mt-[-2rem] rounded-full hover:border-2 hover:border-purple-600'
+                onClick={(e) => {
+                    handlePreview(e)
+                }}
             />
 
             <Tags>
@@ -96,16 +92,12 @@ export function ProductCard({ product, onPreviewButtonClick }: ProductProps) {
                     <span key={tag}>{tag}</span>
                 ))}
             </Tags>
-
-            <PreviewButton
-                className={showPreviewButton ? 'visible' : 'invisible'}
-                onClick={(e) => {
-                    handlePreview(e)
-                }}
+            <Name
+                onClick={handleNavigate}
+                className='hover:underline'
             >
-                Xem trước
-            </PreviewButton>
-            <Name>{product.name}</Name>
+                {product.name}
+            </Name>
             {/* <Description>{product.description}</Description> */}
             <CardFooter
                 onClick={(e) => {
