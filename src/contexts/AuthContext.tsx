@@ -131,11 +131,11 @@ export function AuthContextProvider({ children }: AuthContextProviderProps) {
                         setSignupNotif(
                             customerErrMsg.includes('<DETAIL>')
                                 ? customerErrMsg.replace(
-                                    '<DETAIL>',
-                                    customErrCode.includes('PHONE')
-                                        ? phoneNumber
-                                        : email
-                                )
+                                      '<DETAIL>',
+                                      customErrCode.includes('PHONE')
+                                          ? phoneNumber
+                                          : email
+                                  )
                                 : customerErrMsg
                         )
                         rejects()

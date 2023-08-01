@@ -13,14 +13,14 @@ export function Header() {
 
     return (
         <header
-            className='w-full h-[5rem] m-auto flex items-center justify-center sticky top-0 left-0 z-[5]'
+            className="w-full h-[5rem] m-auto flex items-center justify-center sticky top-0 left-0 z-[5]"
             style={{ background: defaultTheme.colors['base-background'] }}
         >
             <div className="container w-full px-4 flex items-center justify-between">
                 <NavLink to="/">
                     <img src={LogoImage} alt="" />
                 </NavLink>
-                <div className='flex flex-col items-end gap-2'>
+                <div className="flex flex-col items-end gap-2">
                     {isAuthenticated && (
                         <p className="text-sm text-gray-500">
                             Xin chào,{' '}
@@ -30,7 +30,7 @@ export function Header() {
                             !{' '}
                         </p>
                     )}
-                    <div className='flex items-center gap-3'>
+                    <div className="flex items-center gap-3">
                         {!isAuthenticated ? (
                             <NavLink to="/signin">
                                 <HeaderButton variant="yellow">
@@ -51,16 +51,18 @@ export function Header() {
                         <NavLink to="/completeOrder">
                             <HeaderButton variant="purple">
                                 <PiShoppingCartFill size={30} />
-                                {cartQuantity >= 1 ?
+                                {cartQuantity >= 1 ? (
                                     <span>{cartQuantity}</span>
-                                    :
-                                    <span style={{ background: 'transparent' }}></span>
-                                }
+                                ) : (
+                                    <span
+                                        style={{ background: 'transparent' }}
+                                    ></span>
+                                )}
                             </HeaderButton>
                         </NavLink>
                     </div>
                 </div>
-            </div >
-        </header >
+            </div>
+        </header>
     )
 }

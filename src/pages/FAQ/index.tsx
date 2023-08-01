@@ -41,11 +41,17 @@ const FAQPage: React.FC = () => {
                 </AnswerDetails>
             </AnswerWrapper>
 
-            <Question>Làm sao tôi biết đơn hàng đã được xác nhận chưa?</Question>
+            <Question>
+                Làm sao tôi biết đơn hàng đã được xác nhận chưa?
+            </Question>
             <AnswerWrapper id="orderConfirm">
                 <AnswerDetails>
-                    Chúng tôi sẽ liên hệ với quý khách trong vòng 24 tiếng sau khi ghi nhận thông tin đơn hàng để xác nhận đơn hàng.<br />
-                    Chúng tôi sẽ ưu tiên việc gọi đến số điện thoại quý khách đã cung cấp. Nếu không được, chúng tôi sẽ gửi tin nhắn SMS hoặc gửi thư điện tử đến địa chỉ email quý khách đã cung cấp.
+                    Chúng tôi sẽ liên hệ với quý khách trong vòng 24 tiếng sau
+                    khi ghi nhận thông tin đơn hàng để xác nhận đơn hàng.
+                    <br />
+                    Chúng tôi sẽ ưu tiên việc gọi đến số điện thoại quý khách đã
+                    cung cấp. Nếu không được, chúng tôi sẽ gửi tin nhắn SMS hoặc
+                    gửi thư điện tử đến địa chỉ email quý khách đã cung cấp.
                 </AnswerDetails>
                 <br />
                 <br />

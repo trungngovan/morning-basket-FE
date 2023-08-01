@@ -41,18 +41,19 @@ export function OrderConfirmedPage() {
             <div>
                 <TitleText size="l">Đơn hàng đã được ghi nhận</TitleText>
                 <RegularText size="l" color="subtitle">
-                    Chúng tôi sẽ liên hệ với quý khách trong vòng 24 tiếng để xác nhận đơn hàng!
+                    Chúng tôi sẽ liên hệ với quý khách trong vòng 24 tiếng để
+                    xác nhận đơn hàng!
                 </RegularText>
-                <RegularText className='my-2' size="s" color="subtitle">
+                <RegularText className="my-2" size="s" color="subtitle">
                     <a
-                        href='/faq#payment'
+                        href="/faq#payment"
                         className="text-indigo-600 hover:text-indigo-500 hover:underline"
                     >
                         Làm sao để thanh toán?
                     </a>
                     <br />
                     <a
-                        href='/faq#orderConfirm'
+                        href="/faq#orderConfirm"
                         className="text-indigo-600 hover:text-indigo-500 hover:underline"
                     >
                         Làm sao tôi biết đơn hàng đã được xác nhận chưa?
@@ -122,6 +123,6 @@ export function OrderConfirmedPage() {
 
                 <img src={confirmedOrderIllustration} alt="" />
             </section>
-        </OrderConfirmedContainer >
+        </OrderConfirmedContainer>
     )
 }

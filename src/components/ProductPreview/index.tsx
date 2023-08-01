@@ -7,63 +7,24 @@ import {
     ProductPreviewFooter,
     AddCartWrapper,
     Description,
-    Name
+    Name,
 } from './styles'
 import { PiShoppingCartFill } from 'react-icons/pi'
 import { useCart } from '../../hooks/useCart'
 import { useState } from 'react'
 import { ProductType } from '../../@types/products'
 import useFormatCurrency from '../../hooks/useFormatCurrency'
+import { defaultTheme } from '../../styles/themes/default'
+import './styles.css'
 
 interface ProductPreviewProps {
     product: ProductType
     onClose: () => void
 }
 
-interface CloseButtonProps {
-    isShow: boolean
-    onClick: () => void
-}
-
-const CloseButton = ({ isShow, onClick }: CloseButtonProps) => {
-    return (
-        <div
-            className="absolute top-0 right-0 p-2 cursor-pointer ease-in-out duration-300"
-            onClick={() => onClick()}
-        >
-            {isShow ? (
-                <button
-                    type="button"
-                    className="opacity-50 bg-red-500 rounded-full p-2 inline-flex items-center justify-center"
-                >
-                    <span className="sr-only">Close menu</span>
-                    <svg
-                        className="h-4 w-4"
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="white"
-                        aria-hidden="true"
-                    >
-                        <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth="2"
-                            d="M6 18L18 6M6 6l12 12"
-                        />
-                    </svg>
-                </button>
-            ) : null}
-        </div>
-    )
-}
-
 export function ProductPreview({ product, onClose }: ProductPreviewProps) {
     const { addProductToCart } = useCart()
     const format = useFormatCurrency()
-
-    const [showCloseButton, setShowCloseButton] = useState(false)
-
     const [quantity, setQuantity] = useState<number | string>(1)
     const [error, setError] = useState(false)
 
@@ -73,8 +34,8 @@ export function ProductPreview({ product, onClose }: ProductPreviewProps) {
             1 <= prev + count && prev + count <= product.quantity
                 ? setError(false)
                 : prev + count >= product.quantity
-                    ? setError(true)
-                    : null
+                ? setError(true)
+                : null
             return Math.max(1, prev + count)
         })
     }
@@ -98,53 +59,56 @@ export function ProductPreview({ product, onClose }: ProductPreviewProps) {
         setQuantity(1)
     }
 
-    // const formattedPrice = !product.price
-    //     ? 0
-    //     : product.price.toLocaleString('pt-BR', {
-    //           minimumFractionDigits: 2,
-    //       })
-
     return (
-        <ProductPreviewContainer
-            className="modal bg-opacity-50"
-            onMouseEnter={() => setShowCloseButton(true)}
-            onMouseLeave={() => setShowCloseButton(false)}
+        <div
+            className="main-modal fixed w-full h-100 inset-0 z-50 overflow-hidden flex justify-center items-center animated fadeIn faster"
+            style={{ background: 'rgba(0, 0, 0, .7)' }}
+            onClick={onClose}
         >
-            <CloseButton
-                onClick={onClose}
-                isShow={showCloseButton}
-            ></CloseButton>
-
-            <img src={`/products/${product.photo}`} alt={product.name} />
-
-            <ProductPreviewContent>
-                <Name>{product.name}</Name>
-                <Description>{product.description}</Description>
-            </ProductPreviewContent>
-
-            <ProductPreviewFooter>
-                <div>
-                    {/* <RegularText size="s">{format(product.price)}</RegularText> */}
-                    <TitleText size="m" color="text" as="strong">
-                        {format(product.price)}
-                    </TitleText>
+            <div
+                className="rounded-[6px_36px_6px_36px] p-4 pt-0 flex flex-col items-center text-center top-1/2 left-1/2 z-50 w-4/5 h-1/3 md:w-[20rem] 2xl:h-1/5"
+                style={{
+                    background: defaultTheme.colors['base-card'],
+                    transform: 'translate(-50 %, -50 %) scale(1)',
+                    transition: 'all 0.2s ease-in -out',
+                    boxShadow: '0 0 8px rgba(0, 0, 0, 0.2)',
+                }}
+                onClick={(e) => {
+                    e.stopPropagation()
+                }}
+            >
+                <img
+                    src={`/products/${product.photo}`}
+                    alt={product.name}
+                    className="w-[7.5rem] h-[7.5rem] mt-[-2rem] rounded-full"
+                />
+                <div className="modal-content py-4 text-left px-6">
+                    <Name>{product.name}</Name>
+                    <Description>{product.description}</Description>
                 </div>
-                <AddCartWrapper>
-                    <QuantityInput
-                        onIncrease={handleIncrease}
-                        onDecrease={handleDecrease}
-                        quantity={quantity as number}
-                    />
-                    <button onClick={handleAddToCart}>
-                        <PiShoppingCartFill size={22} />
-                    </button>
-                </AddCartWrapper>
-            </ProductPreviewFooter>
-            {error && (
-                <div className="text-sm text-red-500 font-medium pt-3">
-                    Số lượng đặt nhiều hơn mức tối đa!
-                </div>
-            )}
-        </ProductPreviewContainer>
+                <ProductPreviewFooter>
+                    <div>
+                        <TitleText size="s" color="text" as="strong">
+                            {format(product.price)}
+                        </TitleText>
+                    </div>
+                    <AddCartWrapper>
+                        <QuantityInput
+                            onIncrease={handleIncrease}
+                            onDecrease={handleDecrease}
+                            quantity={quantity as number}
+                        />
+                        <button onClick={handleAddToCart}>
+                            <PiShoppingCartFill size={22} />
+                        </button>
+                    </AddCartWrapper>
+                </ProductPreviewFooter>
+                {error && (
+                    <div className="text-sm text-red-500 font-medium pt-3">
+                        Số lượng đặt nhiều hơn mức tối đa!
+                    </div>
+                )}
+            </div>
+        </div>
     )
 }

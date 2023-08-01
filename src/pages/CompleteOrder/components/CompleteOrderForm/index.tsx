@@ -60,7 +60,7 @@ export function CompleteOrderForm({ defaultValues }: Props) {
                     id="remember-checkout"
                     // name="remember-checkout"
                     type="checkbox"
-                    {...register("remember")}
+                    {...register('remember')}
                     className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
                 />
                 <label
@@ -76,6 +76,6 @@ export function CompleteOrderForm({ defaultValues }: Props) {
                 disabled={cartQuantity <= 0}
                 type="submit"
             />
-        </CompleteOrderFormContainer >
+        </CompleteOrderFormContainer>
     )
 }

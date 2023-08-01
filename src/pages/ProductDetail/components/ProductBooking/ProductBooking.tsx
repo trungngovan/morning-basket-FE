@@ -25,8 +25,8 @@ const ProductBooking = ({ product }: Props) => {
             1 <= prev + count && prev + count <= product.quantity
                 ? setError(false)
                 : prev + count >= product.quantity
-                    ? setError(true)
-                    : null
+                ? setError(true)
+                : null
             return Math.max(1, prev + count)
         })
     }
@@ -67,7 +67,9 @@ const ProductBooking = ({ product }: Props) => {
             </div>
             <div className="flex-1">
                 <div className="flex flex-wrap mb-3 gap-3 justify-center md:justify-start">
-                    <div className="text-xl md:text-3xl font-bold">{product.name}</div>
+                    <div className="text-xl md:text-3xl font-bold">
+                        {product.name}
+                    </div>
                     {/* <div className="flex gap-2">
                         {product.tags.map((tag: string) => (
                             <span

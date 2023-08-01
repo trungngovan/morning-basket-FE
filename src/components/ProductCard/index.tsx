@@ -35,8 +35,8 @@ export function ProductCard({ product, onPreviewButtonClick }: ProductProps) {
             1 <= prev + count && prev + count <= product.quantity
                 ? setError(false)
                 : prev + count >= product.quantity
-                    ? setError(true)
-                    : null
+                ? setError(true)
+                : null
             return Math.max(1, prev + count)
         })
     }
@@ -75,13 +75,11 @@ export function ProductCard({ product, onPreviewButtonClick }: ProductProps) {
     }
 
     return (
-        <ProductCardContainer
-            className="cursor-pointer"
-        >
+        <ProductCardContainer className="cursor-pointer">
             <img
                 src={`/products/${product.barcode}@150x120.png`}
                 alt={product.name}
-                className='w-[7.5rem] h-[7.5rem] mt-[-2rem] rounded-full hover:border-2 hover:border-purple-600'
+                className="w-[7.5rem] h-[7.5rem] mt-[-2rem] rounded-full hover:border-2 hover:border-purple-600"
                 onClick={(e) => {
                     handlePreview(e)
                 }}
@@ -92,10 +90,7 @@ export function ProductCard({ product, onPreviewButtonClick }: ProductProps) {
                     <span key={tag}>{tag}</span>
                 ))}
             </Tags>
-            <Name
-                onClick={handleNavigate}
-                className='hover:underline'
-            >
+            <Name onClick={handleNavigate} className="hover:underline">
                 {product.name}
             </Name>
             {/* <Description>{product.description}</Description> */}

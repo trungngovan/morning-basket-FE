@@ -15,6 +15,6 @@ export function DefaultLayout() {
                 <Outlet />
             </div>
             <Footer />
-        </div >
+        </div>
     )
 }

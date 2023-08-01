@@ -47,15 +47,19 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
         return []
     })
 
-    const [orderCompleteInfo, setOrderCompleteInfo] = useState<OrderData>(() => {
-        const storedOrderCompleteInfo = localStorage.getItem(ORDER_COMPLETE_INFO_STORAGE_KEY)
+    const [orderCompleteInfo, setOrderCompleteInfo] = useState<OrderData>(
+        () => {
+            const storedOrderCompleteInfo = localStorage.getItem(
+                ORDER_COMPLETE_INFO_STORAGE_KEY
+            )
 
-        if (storedOrderCompleteInfo) {
-            return JSON.parse(storedOrderCompleteInfo)
+            if (storedOrderCompleteInfo) {
+                return JSON.parse(storedOrderCompleteInfo)
+            }
+
+            return {}
         }
-
-        return {}
-    })
+    )
 
     const cartQuantity = cartItems.length
     const cartItemsTotal = cartItems.reduce((total, cartItem) => {
@@ -153,7 +157,9 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
                             if (data.remember) {
                                 setOrderCompleteInfo(data)
                             } else {
-                                localStorage.removeItem(ORDER_COMPLETE_INFO_STORAGE_KEY)
+                                localStorage.removeItem(
+                                    ORDER_COMPLETE_INFO_STORAGE_KEY
+                                )
                             }
                             resolve(response.data.order)
                         }
@@ -183,7 +189,7 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
                 removeCartItem,
                 cleanCart,
                 sendOrder,
-                orderCompleteInfo
+                orderCompleteInfo,
             }}
         >
             {children}

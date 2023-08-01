@@ -60,7 +60,7 @@ export const RedirectCountdownContainer = styled.div`
         &:hover {
             color: ${({ theme }) => theme.colors['brand-yellow-dark']};
             background-color: ${({ theme }) =>
-        theme.colors['brand-yellow-light']};
+                theme.colors['brand-yellow-light']};
             border: solid 1px;
         }
     }

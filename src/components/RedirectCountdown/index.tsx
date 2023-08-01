@@ -12,18 +12,21 @@ export function RedirectCountdown({ seconds, onProceed }: Props) {
     const [countdowner, setCountdowner] = useState(seconds)
     useEffect(() => {
         if (countdowner > 0) {
-            setInterval(
-                (() => { setCountdowner(countdowner - 1) }),
-                1000
-            )
+            setInterval(() => {
+                setCountdowner(countdowner - 1)
+            }, 1000)
         }
     }, [countdowner])
     return (
-        <RedirectCountdownContainer className="modal bg-opacity-50" >
+        <RedirectCountdownContainer className="modal bg-opacity-50">
             <div className="flex flex-col mt-[10%]">
                 <div className="flex flex-col">
                     <Title className="text-center justify-center title">
-                        Bạn sẽ được chuyển hướng trong <span className='text-bold text-red-600'>{countdowner} </span>giây nữa. Hoặc
+                        Bạn sẽ được chuyển hướng trong{' '}
+                        <span className="text-bold text-red-600">
+                            {countdowner}{' '}
+                        </span>
+                        giây nữa. Hoặc
                     </Title>
                 </div>
             </div>

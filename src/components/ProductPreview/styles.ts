@@ -20,6 +20,13 @@ export const ProductPreviewContainer = styled.div`
     transition: all 0.2s ease-in-out;
     box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
 
+    @media only screen and (min-width: 768px) {
+        min-width: 10%;
+        min-height: 20%;
+        max-width: 15%;
+        max-height: 30%;
+    }
+
     .open {
         opacity: 1;
         transform: translate(-50%, -50%) scale(1.2);
@@ -33,7 +40,7 @@ export const ProductPreviewContainer = styled.div`
     img {
         width: 7.5rem;
         height: 7.5rem;
-        margin-top: -4.5rem;
+        margin-top: -2rem;
         border-radius: 999px;
     }
 `
@@ -41,15 +48,13 @@ export const ProductPreviewContainer = styled.div`
 export const Description = styled(RegularText).attrs({
     size: 's',
     color: 'label',
-})`
-`
+})``
 
 export const Name = styled(RegularText).attrs({
-    size: 's',
+    size: 'l',
     color: 'text',
     weight: '600',
-})`
-`
+})``
 
 export const ProductPreviewContent = styled.div`
     margin-top: 1rem;

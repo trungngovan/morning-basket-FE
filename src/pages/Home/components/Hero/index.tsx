@@ -22,17 +22,22 @@ export function Hero() {
     const { colors } = useTheme()
     return (
         <section
-            className='w-full flex items-center justify-center bg-no-repeat bg-center bg-auto'
+            className="w-full flex items-center justify-center bg-no-repeat bg-center bg-auto"
             style={{ background: `url(${heroBackgroundImage})` }}
         >
             <div className="container p-4 flex items-center justify-between gap-4 flex-col-reverse md:gap-[3.5rem] md:flex-row">
-                <div className='flex-1'>
+                <div className="flex-1">
                     <section>
                         <HeroTitle size="m">
                             Bạn đang tìm kiếm món ăn nhẹ ngon, lành mạnh và giàu
                             dinh dưỡng?
                         </HeroTitle>
-                        <RegularText size="l" color="subtitle" as="h3" className='mb-4'>
+                        <RegularText
+                            size="l"
+                            color="subtitle"
+                            as="h3"
+                            className="mb-4"
+                        >
                             Chào mừng đến với{' '}
                             <a
                                 href="https://morningbasket.vn"
@@ -44,7 +49,7 @@ export function Hero() {
                         </RegularText>
                     </section>
 
-                    <div className='w-100 grid gap-5 grid-cols-[1fr] md:grid-cols-[1fr_1fr]'>
+                    <div className="w-100 grid gap-5 grid-cols-[1fr] md:grid-cols-[1fr_1fr]">
                         <InfoWithIcon
                             iconColor={colors['brand-green']}
                             icon={<PiPlantFill />}
@@ -69,9 +74,9 @@ export function Hero() {
                 </div>
 
                 <div className="flex-1 flex items-center justify-center">
-                    <img src={logo} alt="" className='w-full lg:w-1/2' />
+                    <img src={logo} alt="" className="w-full lg:w-1/2" />
                 </div>
             </div>
-        </section >
+        </section>
     )
 }

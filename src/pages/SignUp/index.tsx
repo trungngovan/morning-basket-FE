@@ -35,7 +35,8 @@ export function SignUpPage() {
     })
     const navigate = useNavigate()
     const { signup, signupNotif } = useAuth()
-    const [storefrontImgLoaded, setStorefrontImgLoaded] = useState<boolean>(false)
+    const [storefrontImgLoaded, setStorefrontImgLoaded] =
+        useState<boolean>(false)
     const [storefrontImgWidth, setStorefrontImgWidth] = useState<number>()
     const [isSubmitting, setIsSubmitting] = useState(false)
     const [showModal, setShowModal] = useState(false)
@@ -45,10 +46,9 @@ export function SignUpPage() {
         document.title = 'Sign Up - Morning Basket'
     }, [])
 
-    const handleNavigate = ((formData: SignUpFormData) => {
+    const handleNavigate = (formData: SignUpFormData) => {
         navigate('/signin', { state: { formData: formData } })
-    })
-
+    }
 
     const handleSignUpSubmit = async (data: SignUpFormData) => {
         setIsSubmitting(true)
@@ -60,7 +60,11 @@ export function SignUpPage() {
         ).then(
             () => {
                 setIsSubmitting(false)
-                setTimer(setTimeout(() => { handleNavigate(data) }, 3000))
+                setTimer(
+                    setTimeout(() => {
+                        handleNavigate(data)
+                    }, 3000)
+                )
                 setShowModal(true)
             },
             () => setIsSubmitting(false)
@@ -253,7 +257,7 @@ export function SignUpPage() {
                                     </div>
                                     {watch('passwordConfirmation') !==
                                         watch('password') &&
-                                        getValues('passwordConfirmation') ? (
+                                    getValues('passwordConfirmation') ? (
                                         <p className="text-sm text-red-500">
                                             Mật khẩu không khớp
                                         </p>
@@ -318,12 +322,10 @@ export function SignUpPage() {
             {showModal && (
                 <RedirectCountdown
                     seconds={3}
-                    onProceed={
-                        () => {
-                            clearTimeout(timer)
-                            handleNavigate(getValues())
-                        }
-                    }
+                    onProceed={() => {
+                        clearTimeout(timer)
+                        handleNavigate(getValues())
+                    }}
                 ></RedirectCountdown>
             )}
         </div>

@@ -29,7 +29,7 @@ const confirmOrderFormValidationSchema = zod.object({
             return { message: 'Vui lòng chọn phương thức thanh toán' }
         },
     }),
-    remember: zod.boolean()
+    remember: zod.boolean(),
 })
 
 export type PaymentMethodType = PaymentMethods
@@ -62,16 +62,15 @@ export function CompleteOrderPage() {
 
     const handleConfirmOrder = async (data: ConfirmOrderFormData) => {
         if (isAuthenticated) {
-            await sendOrder(data)
-                .then(
-                    (responseData: any) => {
-                        cleanCart()
-                        navigate('/orderConfirmed', { state: responseData })
-                    },
-                    (e: any) => {
-                        console.log(e)
-                    }
-                )
+            await sendOrder(data).then(
+                (responseData: any) => {
+                    cleanCart()
+                    navigate('/orderConfirmed', { state: responseData })
+                },
+                (e: any) => {
+                    console.log(e)
+                }
+            )
         } else {
             setShowModal(true)
         }
@@ -93,9 +92,7 @@ export function CompleteOrderPage() {
                     onSubmit={confirmOrderForm.handleSubmit(handleConfirmOrder)}
                 >
                     <SelectedProducts />
-                    <CompleteOrderForm
-                        defaultValues={orderCompleteInfo}
-                    />
+                    <CompleteOrderForm defaultValues={orderCompleteInfo} />
                 </CompleteOrderContainer>
             </FormProvider>
             {showModal && (

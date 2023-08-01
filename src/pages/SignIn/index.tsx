@@ -27,7 +27,7 @@ export function SignInPage() {
     const [timer, setTimer] = useState<NodeJS.Timeout>()
     const [defaultValues, setDefaultValues] = useState<any>()
 
-    const handleNavigate = (() => {
+    const handleNavigate = () => {
         if (location.state) {
             if (location.state.hasOwnProperty('completingOrder')) {
                 navigate('/completeOrder', { state: { reload: true } })
@@ -35,7 +35,7 @@ export function SignInPage() {
         } else {
             navigate('/', { replace: true, state: { reload: true } })
         }
-    })
+    }
 
     useEffect(() => {
         document.title = 'Sign In - Morning Basket'
@@ -116,10 +116,14 @@ export function SignInPage() {
                                                 {...register('username')}
                                                 type="text"
                                                 value={
-                                                    defaultValues ? defaultValues.email : undefined
+                                                    defaultValues
+                                                        ? defaultValues.email
+                                                        : undefined
                                                 }
                                                 autoComplete={
-                                                    defaultValues ? undefined : "email"
+                                                    defaultValues
+                                                        ? undefined
+                                                        : 'email'
                                                 }
                                                 required
                                                 // pattern="^([a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3})|(\d{3}-\d{3}-\d{4})$"
@@ -141,10 +145,14 @@ export function SignInPage() {
                                                 {...register('password')}
                                                 type="password"
                                                 value={
-                                                    defaultValues ? defaultValues.password : undefined
+                                                    defaultValues
+                                                        ? defaultValues.password
+                                                        : undefined
                                                 }
                                                 autoComplete={
-                                                    defaultValues ? undefined : "current-password"
+                                                    defaultValues
+                                                        ? undefined
+                                                        : 'current-password'
                                                 }
                                                 required
                                                 className="block w-full rounded-md border-0 px-3 py-1.5 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-400 sm:text-sm sm:leading-6"
@@ -204,12 +212,10 @@ export function SignInPage() {
             {isAuthenticated && (
                 <RedirectCountdown
                     seconds={3}
-                    onProceed={
-                        () => {
-                            clearTimeout(timer)
-                            handleNavigate()
-                        }
-                    }
+                    onProceed={() => {
+                        clearTimeout(timer)
+                        handleNavigate()
+                    }}
                 ></RedirectCountdown>
             )}
         </div>

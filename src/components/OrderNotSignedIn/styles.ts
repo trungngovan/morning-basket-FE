@@ -1,6 +1,5 @@
 import styled from 'styled-components'
 
-
 export const OrderNotSignedInContainer = styled.div`
     position: fixed;
     width: fit-content;
@@ -60,7 +59,7 @@ export const OrderNotSignedInContainer = styled.div`
         &:hover {
             color: ${({ theme }) => theme.colors['brand-purple-dark']};
             background-color: ${({ theme }) =>
-        theme.colors['brand-purple-light']};
+                theme.colors['brand-purple-light']};
             border: solid 1px;
         }
     }
@@ -73,12 +72,11 @@ export const OrderNotSignedInContainer = styled.div`
         &:hover {
             color: ${({ theme }) => theme.colors['brand-yellow-dark']};
             background-color: ${({ theme }) =>
-        theme.colors['brand-yellow-light']};
+                theme.colors['brand-yellow-light']};
             border: solid 1px;
         }
     }
 `
-
 
 export const CloseButton = styled.button`
     position: absolute;
@@ -110,4 +108,3 @@ export const CloseButton = styled.button`
         outline: none;
     }
 `
-

@@ -1,8 +1,6 @@
 import React, { useState } from 'react'
 import { TitleText, RegularText } from '../Typography'
-import {
-    OrderNotSignedInContainer,
-} from './styles'
+import { OrderNotSignedInContainer } from './styles'
 
 interface Props {
     onClose: () => void

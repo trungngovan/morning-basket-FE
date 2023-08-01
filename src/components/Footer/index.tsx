@@ -12,21 +12,19 @@ import { defaultTheme } from '../../styles/themes/default'
 export function Footer() {
     return (
         <footer
-            className='w-full h-fit m-auto flex items-center justify-center absolute bot-0 z-[5]'
+            className="w-full h-fit m-auto flex items-center justify-center absolute bot-0 z-[5]"
             style={{ background: defaultTheme.colors['base-background'] }}
         >
             <div className="container w-full mb-4 px-4 flex flex-col gap-1 items-start justify-between md:flex-row">
-                <div
-                    className="md:max-w-[20%] justify-between"
-                >
+                <div className="md:max-w-[20%] justify-between">
                     <h3
-                        className='top-0 text-[1.2rem] font-bold'
+                        className="top-0 text-[1.2rem] font-bold"
                         style={{ color: defaultTheme.colors['base-text'] }}
                     >
                         Morning Basket
                     </h3>
                     <p
-                        className='text-[1rem] mb-1'
+                        className="text-[1rem] mb-1"
                         style={{ color: defaultTheme.colors['base-text'] }}
                     >
                         <a href="/aboutUs" className="hover:underline">
@@ -34,7 +32,7 @@ export function Footer() {
                         </a>
                     </p>
                     <p
-                        className='text-[1rem] mb-1'
+                        className="text-[1rem] mb-1"
                         style={{ color: defaultTheme.colors['base-text'] }}
                     >
                         <a href="/contact" className="hover:underline">
@@ -42,7 +40,7 @@ export function Footer() {
                         </a>
                     </p>
                     <p
-                        className='text-[1rem] mb-1'
+                        className="text-[1rem] mb-1"
                         style={{ color: defaultTheme.colors['base-text'] }}
                     >
                         <a href="/faq" className="hover:underline">
@@ -55,13 +53,13 @@ export function Footer() {
                     style={{ flex: 1 }}
                 >
                     <h3
-                        className='top-0 text-[1.2rem] font-bold'
+                        className="top-0 text-[1.2rem] font-bold"
                         style={{ color: defaultTheme.colors['base-text'] }}
                     >
                         Địa chỉ
                     </h3>
                     <p
-                        className='text-[1rem] mb-1'
+                        className="text-[1rem] mb-1"
                         style={{ color: defaultTheme.colors['base-text'] }}
                     >
                         <a
@@ -72,50 +70,46 @@ export function Footer() {
                             Mall, Quận 7, Thành phố Hồ Chí Minh
                         </a>
                     </p>
-
                 </div>
-                <div
-                    className="md:max-w-[20%] justify-between"
-                >
+                <div className="md:max-w-[20%] justify-between">
                     <h3
-                        className='top-0 text-[1.2rem] font-bold'
+                        className="top-0 text-[1.2rem] font-bold"
                         style={{ color: defaultTheme.colors['base-text'] }}
                     >
                         Liên hệ
                     </h3>
                     <p
-                        className='text-[1rem] mb-1'
+                        className="text-[1rem] mb-1"
                         style={{ color: defaultTheme.colors['base-text'] }}
                     >
                         <a
                             href="tel: (+84) 93 864 28 87"
-                            className='hover:underline'
+                            className="hover:underline"
                         >
                             <PiPhone className="inline" /> (+84) 93 864 28 87
                         </a>
                     </p>
                     <p
-                        className='text-[1rem] mb-1'
+                        className="text-[1rem] mb-1"
                         style={{ color: defaultTheme.colors['base-text'] }}
                     >
                         <a
                             href="mailto:hanorder@parkltd.net"
-                            className='hover:underline'
+                            className="hover:underline"
                         >
-                            <PiEnvelope className="inline" /> hanorder@parkltd.net
+                            <PiEnvelope className="inline" />{' '}
+                            hanorder@parkltd.net
                         </a>
                     </p>
                 </div>
-                <div
-                    className="md:max-w-[20%] justify-between"
-                >
+                <div className="md:max-w-[20%] justify-between">
                     <h3
-                        className='top-0 text-[1.2rem] font-bold'
+                        className="top-0 text-[1.2rem] font-bold"
                         style={{ color: defaultTheme.colors['base-text'] }}
                     >
                         Theo dõi chúng tôi
                     </h3>
-                    <div className='flex flex-row gap-1'>
+                    <div className="flex flex-row gap-1">
                         <a href="https://www.instagram.com/morningbasket_official/">
                             <PiInstagramLogo />
                         </a>
