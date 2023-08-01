@@ -11,7 +11,7 @@ const Price = ({ oldPrice, price }: Props) => {
     const format = useFormatCurrency()
 
     return (
-        <div className="p-6 rounded-2xl flex gap-4 bg-gray-100 items-center">
+        <div className="p-6 rounded-2xl flex gap-4 bg-gray-100 items-center justify-center md:justify-start">
             {oldPrice !== undefined && (
                 <div className="text-gray-600 text-xl items-center">
                     <TitleText

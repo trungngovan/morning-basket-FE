@@ -25,6 +25,7 @@ export function OurProducts() {
     const [selectedProduct, setSelectedProduct] = useState<ProductType | null>(
         null
     )
+    const [showTips, setShowTips] = useState(true)
 
     useEffect(() => {
         apiGet<GetAllProductsResponse>('/products').then((response) => {
@@ -133,6 +134,14 @@ export function OurProducts() {
                     ))}
                 </TagList>
             </HorizontalScrollWrapper>
+            {showTips &&
+                <div
+                    className='flex flex-col justify-center items-start text-xs my-2 md:items-end'
+                    onClick={() => { setShowTips(false) }}
+                >
+                    <p className='hover:underline cursor-pointer text-purple-600'>Bấm vào hình ảnh để xem trước sản phẩm</p>
+                    <p className='hover:underline cursor-pointer text-purple-600'>Bấm vào tên để chuyển qua trang riêng của sản phẩm</p>
+                </div>}
 
             <div className='w-full mt-4 gap-x-2 grid grid-cols-2 max-[320px]:grid-cols-1 md:grid-cols-4 lg:grid-cols-6'>
                 {currentProducts.map((product) => (
@@ -146,22 +155,26 @@ export function OurProducts() {
                 ))}
             </div>
 
-            {selectedProduct && (
-                <ProductPreview
-                    product={selectedProduct}
-                    onClose={handleCloseProductPreview}
-                />
-            )}
-
-            {!isSearched && !selectedProduct && (
-                <PaginationContainer>
-                    <Pagination
-                        currentPage={currentPage}
-                        totalPages={totalPages}
-                        onPageChange={handlePageChange}
+            {
+                selectedProduct && (
+                    <ProductPreview
+                        product={selectedProduct}
+                        onClose={handleCloseProductPreview}
                     />
-                </PaginationContainer>
-            )}
-        </section>
+                )
+            }
+
+            {
+                !isSearched && !selectedProduct && (
+                    <PaginationContainer>
+                        <Pagination
+                            currentPage={currentPage}
+                            totalPages={totalPages}
+                            onPageChange={handlePageChange}
+                        />
+                    </PaginationContainer>
+                )
+            }
+        </section >
     )
 }

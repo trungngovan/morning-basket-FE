@@ -5,6 +5,8 @@ export const FAQContainer = styled.section`
     max-width: 1000px;
     margin: 2rem auto;
     // padding: 2rem 1rem;
+    padding-right: 1rem;
+    padding-left: 1rem;
 `
 
 export const Title = styled.h1`

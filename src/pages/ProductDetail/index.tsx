@@ -25,7 +25,7 @@ export function ProductDetail() {
     }, [])
 
     return (
-        <div className="container my-t-4 my-b-8">
+        <div className="container w-full mx-auto px-4">
             <ProductBooking product={product as ProductType} />
             {product && <ProductInfomation product={product as ProductType} />}
             {/* <Review /> */}

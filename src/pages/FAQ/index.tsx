@@ -63,7 +63,7 @@ const FAQPage: React.FC = () => {
 
             <Question id="bank">Thông tin chuyển khoản ngân hàng?</Question>
             <AnswerWrapper>
-                <div className="flex flex-row">
+                <div className="flex flex-col md:flex-row">
                     <div className="flex-1 m-auto">
                         <AnswerTitle>
                             Ngân Hàng Shinhan Việt Nam
@@ -83,7 +83,7 @@ const FAQPage: React.FC = () => {
                         <img
                             src={bankqr}
                             alt=""
-                            className="m-auto w-2/3 p-2/3 rounded-3xl"
+                            className="m-auto rounded-3xl md:w-2/3"
                         />
                     </div>
                 </div>

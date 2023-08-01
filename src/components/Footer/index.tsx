@@ -81,7 +81,7 @@ export function Footer() {
                         className='top-0 text-[1.2rem] font-bold'
                         style={{ color: defaultTheme.colors['base-text'] }}
                     >
-                        Thông tin liên hệ
+                        Liên hệ
                     </h3>
                     <p
                         className='text-[1rem] mb-1'

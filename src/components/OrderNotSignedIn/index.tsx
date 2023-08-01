@@ -47,15 +47,9 @@ const CloseButton = ({ isShow, onClick }: CloseButtonProps) => {
 }
 
 export function OrderNotSignedIn({ onClose, onProceed }: Props) {
-    // const { addProductToCart } = useCart()
-
     const [showCloseButton, setShowCloseButton] = useState(false)
-
-    // const [quantity, setQuantity] = useState<number | string>(1)
-    // const [error, setError] = useState(false)
-
-    // const navigate = useNavigate()
     return (
+        // TODO
         <OrderNotSignedInContainer
             className="modal bg-opacity-50"
             onMouseEnter={() => setShowCloseButton(true)}
@@ -65,17 +59,17 @@ export function OrderNotSignedIn({ onClose, onProceed }: Props) {
                 onClick={onClose}
                 isShow={showCloseButton}
             ></CloseButton>
-            <div className="flex flex-col mt-[10%]">
+            <div className="flex flex-col my-[10%]">
                 <div className="flex flex-col">
-                    <TitleText className="text-center justify-center title">
+                    <TitleText className="text-center justify-center">
                         Bạn chưa đăng nhập
                     </TitleText>
-                    <RegularText className="text-center justify-center regular">
+                    <RegularText className="text-center justify-center">
                         Hãy đăng nhập để đặt hàng
                     </RegularText>
                 </div>
             </div>
-            <div className="click-container">
+            <div className="b-0 mb-2 w-[75%] h-[30%] flex flex-col justify-between md:flex-row md:gap-2">
                 <button className="m-auto click deny" onClick={onClose}>
                     Chưa phải lúc này
                 </button>

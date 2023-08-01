@@ -9,7 +9,7 @@ type Props = {
 
 const ProductInfomation = ({ product }: Props) => {
     return (
-        <div className="mt-5 mb-10 bg-white shadow rounded-2xl p-10">
+        <div className="mb-5 bg-white shadow rounded-2xl p-4">
             <div className="bg-purple-100 text-purple-500 text-xl font-bold capitalize p-4 rounded-2xl">
                 Chi tiết sản phẩm
             </div>

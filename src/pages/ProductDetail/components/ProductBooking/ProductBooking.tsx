@@ -25,8 +25,8 @@ const ProductBooking = ({ product }: Props) => {
             1 <= prev + count && prev + count <= product.quantity
                 ? setError(false)
                 : prev + count >= product.quantity
-                ? setError(true)
-                : null
+                    ? setError(true)
+                    : null
             return Math.max(1, prev + count)
         })
     }
@@ -57,17 +57,17 @@ const ProductBooking = ({ product }: Props) => {
     //           minimumFractionDigits: 2,
     //       })
     return (
-        <div className="flex gap-10 p-10">
-            <div className="aspect-square w-1/3">
+        <div className="flex flex-col items-stretch justify-center gap-5 mt-5 md:flex-row md:justify-start md:items-start">
+            <div className="flex items-start justify-center md:w-1/3 md:h-1/3 md:aspect-square">
                 <img
                     alt={product.name}
                     src={`/products/${product.photo}`}
-                    className="w-full h-full"
+                    className="w-1/2 h-1/2 md:w-4/5 md:h-4/5"
                 />
             </div>
             <div className="flex-1">
-                <div className="flex flex-wrap items-center mb-3 gap-3">
-                    <div className="text-3xl font-bold">{product.name}</div>
+                <div className="flex flex-wrap mb-3 gap-3 justify-center md:justify-start">
+                    <div className="text-xl md:text-3xl font-bold">{product.name}</div>
                     {/* <div className="flex gap-2">
                         {product.tags.map((tag: string) => (
                             <span
@@ -81,8 +81,8 @@ const ProductBooking = ({ product }: Props) => {
                 </div>
                 <Price price={product.price} />{' '}
                 {/* Currently don't use oldPrice */}
-                <div className="flex items-center gap-10 mt-10">
-                    <div className="text-lg font-medium">Số lượng</div>
+                <div className="flex justify-center items-center my-3 gap-2 md:justify-start">
+                    <div className="md:text-lg font-medium">Số lượng</div>
                     <div className="w-24 flex items-center">
                         <QuantityInput
                             onIncrease={handleIncrease}
@@ -100,7 +100,7 @@ const ProductBooking = ({ product }: Props) => {
                     </div>
                 )}
                 <div
-                    className="w-1/5 min-w-[200px] mt-5 text-lg font-bold"
+                    className="my-5 text-lg font-bold flex justify-end md:justify-start"
                     onClick={handleAddToCart}
                 >
                     <AddCartWrapper>
