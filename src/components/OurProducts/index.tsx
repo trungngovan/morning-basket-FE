@@ -169,7 +169,7 @@ export function OurProducts() {
                 />
             )}
 
-            {!isSearched && !selectedProduct && (
+            {!isSearched && (
                 <PaginationContainer>
                     <Pagination
                         currentPage={currentPage}
