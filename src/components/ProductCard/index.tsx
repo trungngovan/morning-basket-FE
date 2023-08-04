@@ -28,16 +28,16 @@ export function ProductCard({ product, onPreviewButtonClick }: ProductProps) {
     const format = useFormatCurrency()
     const [quantity, setQuantity] = useState<number | string>(1)
     const [error, setError] = useState(false)
-
+    const product_tags = product.tags.length > 0 ? product.tags : ["product", "test", "demo", "example", "awesome"]
     const handleCount = (count: 1 | -1) => {
         setQuantity((prev) => {
             prev = prev as number
             1 <= prev + count && prev + count <= product.quantity
                 ? setError(false)
                 : prev + count >= product.quantity
-                ? setError(true)
-                : null
-            return Math.max(1, prev + count)
+                    ? setError(true)
+                    : null
+            return Math.min(product.quantity, prev + count)
         })
     }
 
@@ -75,52 +75,54 @@ export function ProductCard({ product, onPreviewButtonClick }: ProductProps) {
     }
 
     return (
-        <ProductCardContainer className="cursor-pointer">
+        <ProductCardContainer className='px-2 pb-2 gap-2'>
             <img
                 src={`/products/${product.barcode}@150x120.png`}
                 alt={product.name}
-                className="w-[7.5rem] h-[7.5rem] mt-[-2rem] rounded-full hover:border-2 hover:border-purple-600"
+                className="flex-1 max-w-[7.5rem] max-h-[7.5rem] mt-[-2rem] aspect-square rounded-full hover:border-2 hover:border-purple-600 cursor-pointer"
                 onClick={(e) => {
                     handlePreview(e)
                 }}
             />
-
             <Tags>
-                {product.tags.map((tag) => (
+                {product_tags.slice(0, 3).map((tag) => (
                     <span key={tag}>{tag}</span>
                 ))}
             </Tags>
-            <Name onClick={handleNavigate} className="hover:underline">
-                {product.name}
-            </Name>
-            {/* <Description>{product.description}</Description> */}
+            <div className="flex-1 w-full flex flex-col items-center justify-start text-center">
+                <Name onClick={handleNavigate} className="cursor-pointer hover:underline">
+                    {product.name}
+                </Name>
+                {/* <Description>{product.description ? product.description : product.name}</Description> */}
+            </div>
+
             <CardFooter
                 onClick={(e) => {
                     e.stopPropagation()
                 }}
             >
                 <div>
-                    <TitleText size="m" color="text" as="strong">
-                        {format(product.price)}
+                    <TitleText size="s" color="text" as="strong">
+                        {format(product.price ? product.price : 50000)}
                     </TitleText>
-                    {/* <RegularText size="s">$</RegularText> */}
                 </div>
                 <AddCartWrapper>
                     <QuantityInput
                         onIncrease={handleIncrease}
                         onDecrease={handleDecrease}
                         quantity={quantity as number}
+                        maxQuantity={product.quantity as number}
                     />
                     <button onClick={handleAddToCart}>
                         <PiShoppingCartFill size={22} />
                     </button>
                 </AddCartWrapper>
             </CardFooter>
-            {error && (
+            {/* {error && (
                 <div className="text-xs text-red-500 font-medium pt-2">
                     Số lượng đặt nhiều hơn mức tối đa!
                 </div>
-            )}
-        </ProductCardContainer>
+            )} */}
+        </ProductCardContainer >
     )
 }

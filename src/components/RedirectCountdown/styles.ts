@@ -48,11 +48,11 @@ export const RedirectCountdownContainer = styled.div`
         text-decoration: none;
         display: inline-block;
         cursor: pointer;
-        width: 6vw;
-        height: 2.2vw;
-        font-size: 0.7vw;
-        padding: 1%;
-        margin: 1%;
+        // width: 6vw;
+        // height: 2.2vw;
+        // font-size: 0.7vw;
+        // padding: 1%;
+        // margin: 1%;
         text-align: center;
         font-weight: bold;
         color: ${({ theme }) => theme.colors['base-card']};
@@ -60,7 +60,7 @@ export const RedirectCountdownContainer = styled.div`
         &:hover {
             color: ${({ theme }) => theme.colors['brand-yellow-dark']};
             background-color: ${({ theme }) =>
-                theme.colors['brand-yellow-light']};
+        theme.colors['brand-yellow-light']};
             border: solid 1px;
         }
     }

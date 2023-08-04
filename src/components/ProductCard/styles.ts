@@ -5,37 +5,39 @@ export const ProductCardContainer = styled.div`
     width: 100%;
     background: ${({ theme }) => theme.colors['base-card']};
     border-radius: 6px 36px 6px 36px;
-    padding: 1.25rem;
+    box-shadow: 0 0 2px #C47F17B3; // brand-yellow-dark, B3 means opacity 70%
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-top: 0;
     text-align: center;
     margin-top: 3rem;
-
-    // img {
-    //     width: 7.5rem;
-    //     height: 7.5rem;
-    //     margin-top: -2rem;
-    //     border-radius: 999px;
-    // }
 `
 
 export const Tags = styled.div`
     width: 100%;
+    max-width: 100%;
     display: flex;
+    flex-direction: row;
     align-items: center;
     justify-content: center;
     gap: 4px;
-    margin-top: 1rem;
-    margin-bottom: 0.75rem;
-    flex-wrap: wrap;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    overflow: hidden;
+
+    :hover {
+        overflow: scroll;
+        ::-webkit-scrollbar {
+            height: 0;
+            width: 0;
+        }
+    }
 
     span {
         background: ${({ theme }) => theme.colors['brand-yellow-light']};
         color: ${({ theme }) => theme.colors['brand-yellow-dark']};
         font-size: ${({ theme }) => theme.textSizes['components-tag']};
-        text-transform: uppercase;
+        // text-transform: uppercase;
         padding: 0.25rem 0.5rem;
         border-radius: 999px;
         font-weight: 700;
@@ -43,7 +45,7 @@ export const Tags = styled.div`
 `
 
 export const Name = styled(RegularText).attrs({
-    size: 's',
+    size: 'm',
     color: 'text',
     weight: '600',
 })`
@@ -54,10 +56,11 @@ export const Description = styled(RegularText).attrs({
     size: 's',
     color: 'label',
 })`
-    margin-bottom: 2rem;
+    // margin-bottom: 2rem;
 `
 
 export const CardFooter = styled.div`
+    flex: 1 1 0%;
     width: 100%;
     display: flex;
     flex-wrap: wrap;
@@ -65,7 +68,7 @@ export const CardFooter = styled.div`
     justify-content: center;
     justify-content: space-around;
     margin-top: auto;
-    padding-top: 0.5rem;
+    // padding-top: 0.5rem;
     // border-top: 1px solid ${({ theme }) => theme.colors['brand-purple']};
     > div {
         display: flex;

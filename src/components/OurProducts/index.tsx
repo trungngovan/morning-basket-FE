@@ -17,7 +17,7 @@ import { apiGet } from '../../apis/api'
 
 export function OurProducts() {
     const [currentPage, setCurrentPage] = useState(1)
-    const productsPerPage = 18
+    const productsPerPage = 20
 
     const [searchResults, setSearchResults] = useState<ProductType[]>([])
     const [allProducts, setAllProducts] = useState<ProductType[]>([])
@@ -103,7 +103,7 @@ export function OurProducts() {
     }
 
     return (
-        <section className="container w-full mx-auto px-4">
+        <section className="container w-full mx-auto px-4 flex flex-col">
             <TitleText size="l" color="subtitle" className="my-2">
                 Sản phẩm
             </TitleText>
@@ -150,7 +150,7 @@ export function OurProducts() {
                 </div>
             )}
 
-            <div className="w-full mt-4 gap-x-2 grid grid-cols-2 max-[320px]:grid-cols-1 md:grid-cols-4 lg:grid-cols-6">
+            <div className="w-full gap-x-4 grid grid-cols-2 max-[375px]:grid-cols-1 md:grid-cols-3 lg:grid-cols-5">
                 {currentProducts.map((product) => (
                     <ProductCard
                         key={product.id}

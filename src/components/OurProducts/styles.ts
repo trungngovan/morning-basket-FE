@@ -78,7 +78,7 @@ export const Tag = styled.button<TagButtonProps>`
 
     &:hover {
         background-color: ${(props) =>
-            props.isActive ? props.theme.colors['base-button'] : '#e0e0e0'};
+        props.isActive ? props.theme.colors['base-button'] : '#e0e0e0'};
     }
 
     &:last-child {

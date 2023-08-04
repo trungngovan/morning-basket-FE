@@ -7,6 +7,7 @@ interface QuantityInputProps {
     onIncrease: () => void
     onDecrease: () => void
     quantity: number
+    maxQuantity: number
 }
 
 export function QuantityInput({
@@ -14,6 +15,7 @@ export function QuantityInput({
     onIncrease,
     onDecrease,
     quantity,
+    maxQuantity
 }: QuantityInputProps) {
     return (
         <QuantityInputContainer size={size}>
@@ -21,7 +23,7 @@ export function QuantityInput({
                 <PiMinus size={14} />
             </IconWrapper>
             <input type="number" readOnly value={quantity} />
-            <IconWrapper onClick={onIncrease}>
+            <IconWrapper disabled={quantity >= maxQuantity} onClick={onIncrease}>
                 <PiPlus size={14} />
             </IconWrapper>
         </QuantityInputContainer>

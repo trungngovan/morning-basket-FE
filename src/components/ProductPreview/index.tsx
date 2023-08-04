@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { MouseEvent } from 'react'
 import { QuantityInput } from '../QuantityInput'
 import { TitleText } from '../Typography'
 import {
@@ -13,7 +13,9 @@ import { useState } from 'react'
 import { ProductType } from '../../@types/products'
 import useFormatCurrency from '../../hooks/useFormatCurrency'
 import { defaultTheme } from '../../styles/themes/default'
-import './styles.css'
+import "../../styles/modal.css"
+import { useNavigate } from 'react-router-dom'
+import { Tags } from '../ProductCard/styles'
 
 interface ProductPreviewProps {
     product: ProductType
@@ -26,6 +28,9 @@ export function ProductPreview({ product, onClose }: ProductPreviewProps) {
     const [quantity, setQuantity] = useState<number | string>(1)
     const [error, setError] = useState(false)
     const [onHover, setOnHover] = useState(false)
+    const product_tags = product.tags.length > 0 ? product.tags : ["product", "test", "demo", "example", "awesome"]
+
+    const navigate = useNavigate()
 
     const handleCount = (count: 1 | -1) => {
         setQuantity((prev) => {
@@ -35,7 +40,7 @@ export function ProductPreview({ product, onClose }: ProductPreviewProps) {
                 : prev + count >= product.quantity
                     ? setError(true)
                     : null
-            return Math.max(1, prev + count)
+            return Math.min(product.quantity, prev + count)
         })
     }
 
@@ -58,6 +63,13 @@ export function ProductPreview({ product, onClose }: ProductPreviewProps) {
         setQuantity(1)
     }
 
+    const handleNavigate = (
+        e: MouseEvent<HTMLParagraphElement, globalThis.MouseEvent>
+    ) => {
+        e.stopPropagation()
+        navigate(`/product/${product.id}`)
+    }
+
     return (
         <div
             className="fixed w-full h-100 inset-0 z-50 overflow-hidden flex justify-center items-center animated fadeIn faster"
@@ -65,7 +77,7 @@ export function ProductPreview({ product, onClose }: ProductPreviewProps) {
             onClick={onClose}
         >
             <div
-                className="rounded-[6px_36px_6px_36px] flex flex-col items-center justify-center text-center z-50 w-4/5 h-1/3 md:w-[20rem] 2xl:h-1/4"
+                className="rounded-[6px_36px_6px_36px] flex flex-col items-center justify-center text-center z-50 w-4/5 h-1/3 md:w-[20rem] 2xl:h-1/3"
                 style={{
                     background: defaultTheme.colors['base-card'],
                     transform: 'translate(-50 %, -50 %) scale(1)',
@@ -79,16 +91,21 @@ export function ProductPreview({ product, onClose }: ProductPreviewProps) {
                 <img
                     src={`/products/${product.photo}`}
                     alt={product.name}
-                    className="flex-1 w-[7.5rem] h-[7.5rem] mt-[-2rem] rounded-full"
+                    className="flex-1 max-w-[10rem] max-h-[10rem] mt-[-4rem] aspect-square rounded-full"
                 />
-                <div className="flex-1 w-full px-2 flex flex-col items-center justify-around text-center">
-                    <Name>{product.name}</Name>
-                    <Description>{product.description ? product.description : "Lorem ipsum dolor sit amet"}</Description>
+                <Tags>
+                    {product_tags.slice(0, 3).map((tag) => (
+                        <span key={tag}>{tag}</span>
+                    ))}
+                </Tags>
+                <div className="flex-1 w-full px-2 flex flex-col items-center justify-start text-center">
+                    <Name onClick={handleNavigate} className="cursor-pointer hover:underline">{product.name}</Name>
+                    <Description>{product.description ? product.description : product.name}</Description>
                 </div>
                 <div className='flex-1 w-full px-2 flex flex-row items-center justify-around'>
                     <div className='flex items-center gap-[3px]'>
                         <TitleText size="s" color="text" as="strong">
-                            {format(product.price)}
+                            {format(product.price ? product.price : 50000)}
                         </TitleText>
                     </div>
                     <div className='flex items-center gap-[3px] w-[7.5rem]'>
@@ -96,6 +113,7 @@ export function ProductPreview({ product, onClose }: ProductPreviewProps) {
                             onIncrease={handleIncrease}
                             onDecrease={handleDecrease}
                             quantity={quantity as number}
+                            maxQuantity={product.quantity as number}
                         />
                         <button
                             className='w-[2.375rem] h-[2.375rem] flex items-center justify-center rounded-md ml-[0.3rem] duration-300'
@@ -111,11 +129,11 @@ export function ProductPreview({ product, onClose }: ProductPreviewProps) {
                         </button>
                     </div>
                 </div>
-                {error && (
-                    <div className="text-sm text-red-500 font-medium pt-3">
+                {/* {error && (
+                    <div className="flex-1 text-sm text-red-500 font-medium pt-3">
                         Số lượng đặt nhiều hơn mức tối đa!
                     </div>
-                )}
+                )} */}
             </div>
         </div >
     )

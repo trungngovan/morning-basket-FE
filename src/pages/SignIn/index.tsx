@@ -24,7 +24,6 @@ export function SignInPage() {
         useState<boolean>(false)
     const [storefrontImgWidth, setStorefrontImgWidth] = useState<number>()
     const location = useLocation()
-    const [timer, setTimer] = useState<NodeJS.Timeout>()
     const [defaultValues, setDefaultValues] = useState<any>()
 
     const handleNavigate = () => {
@@ -33,6 +32,7 @@ export function SignInPage() {
                 navigate('/completeOrder', { state: { reload: true } })
             }
         } else {
+            console.log("Navigating after signing in")
             navigate('/', { replace: true, state: { reload: true } })
         }
     }
@@ -47,10 +47,7 @@ export function SignInPage() {
                 setDefaultValues(location.state.formData)
             }
         }
-        if (isAuthenticated) {
-            setTimer(setTimeout(handleNavigate, 3000))
-        }
-    }, [location, isAuthenticated])
+    }, [location])
 
     const handleSignInSubmit = async (data: SignInFormData) => {
         setIsSubmitting(true)
@@ -211,13 +208,18 @@ export function SignInPage() {
             ) : null}
             {isAuthenticated && (
                 <RedirectCountdown
-                    seconds={3}
+                    countdowner={3}
                     onProceed={() => {
-                        clearTimeout(timer)
                         handleNavigate()
                     }}
-                ></RedirectCountdown>
+                />
             )}
-        </div>
+            {/* <RedirectCountdown
+                countdowner={1000}
+                onProceed={() => {
+                    handleNavigate()
+                }}
+            /> */}
+        </div >
     )
 }

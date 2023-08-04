@@ -4,7 +4,7 @@ const useFormatCurrency = () => {
             number = 0
         }
         // return number.toLocaleString('en-US', { style: 'currency', currency: 'VND', currencyDisplay: 'code' })
-        return `${number} VNĐ`
+        return `${number.toLocaleString('en-US')} VNĐ`
     }
     return format
 }
