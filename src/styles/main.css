@@ -1,3 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.mozilla_input {
+    -moz-appearance: textfield;
+}
