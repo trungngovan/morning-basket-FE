@@ -30,7 +30,7 @@ export const GlobalStyle = createGlobalStyle`
     margin: 0;
   }
 
-  input[type="numer"] {
+  input[type="number"] {
     -moz-appearance: textfield;
   }
 
