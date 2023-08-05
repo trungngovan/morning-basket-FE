@@ -47,8 +47,15 @@ export const ProductPreviewContainer = styled.div`
 
 export const Description = styled(RegularText).attrs({
     size: 's',
-    color: 'label',
-})``
+    color: 'label'
+})`
+    max-height: 30vh;
+    overflow: hidden;
+
+    :hover {
+        overflow-y: auto;
+    }
+`
 
 export const Name = styled(RegularText).attrs({
     size: 'l',

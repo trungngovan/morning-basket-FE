@@ -1,14 +1,12 @@
 import React from 'react'
 import { QuantityInput } from '../QuantityInput'
-import { RegularText, TitleText } from '../Typography'
+import { TitleText } from '../Typography'
 import {
     ProductCardContainer,
     Tags,
     Name,
-    Description,
     CardFooter,
     AddCartWrapper,
-    PreviewButton,
 } from './styles'
 import { PiShoppingCartFill } from 'react-icons/pi'
 import { useCart } from '../../hooks/useCart'
@@ -16,13 +14,16 @@ import { MouseEvent, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { ProductType } from '../../@types/products'
 import useFormatCurrency from '../../hooks/useFormatCurrency'
+import { defaultTheme } from '../../styles/themes/default'
+import { Tag } from '../OurProducts/styles'
 
 interface ProductProps {
     product: ProductType
-    onPreviewButtonClick: (product: ProductType) => void
+    onImageClick: (product: ProductType) => void
+    onTagClick: (tag: any) => void
 }
 
-export function ProductCard({ product, onPreviewButtonClick }: ProductProps) {
+export function ProductCard({ product, onImageClick, onTagClick }: ProductProps) {
     const { addProductToCart } = useCart()
     const navigate = useNavigate()
     const format = useFormatCurrency()
@@ -64,7 +65,7 @@ export function ProductCard({ product, onPreviewButtonClick }: ProductProps) {
         e: MouseEvent<HTMLImageElement, globalThis.MouseEvent>
     ) => {
         e.stopPropagation()
-        onPreviewButtonClick(product)
+        onImageClick(product)
     }
 
     const handleNavigate = (
@@ -86,7 +87,13 @@ export function ProductCard({ product, onPreviewButtonClick }: ProductProps) {
             />
             <Tags>
                 {product_tags.slice(0, 3).map((tag) => (
-                    <span key={tag}>{tag}</span>
+                    <span
+                        key={tag}
+                        onClick={() => { onTagClick(tag) }}
+                        className='cursor-pointer'
+                    >
+                        {tag}
+                    </span>
                 ))}
             </Tags>
             <div className="flex-1 w-full flex flex-col items-center justify-start text-center">
@@ -101,10 +108,22 @@ export function ProductCard({ product, onPreviewButtonClick }: ProductProps) {
                     e.stopPropagation()
                 }}
             >
-                <div>
-                    <TitleText size="s" color="text" as="strong">
-                        {format(product.price ? product.price : 50000)}
-                    </TitleText>
+                <div className='my-1'>
+                    {product.price ?
+                        <p
+                            className='text-xl font-["Baloo_2"] text-bold'
+                            style={{ color: defaultTheme.colors['base-text'] }}
+                        >
+                            {format(product.price)}
+                        </p>
+                        :
+                        <p
+                            className='text-sm font-["Baloo_2"] text-bold'
+                            style={{ color: defaultTheme.colors['base-label'] }}
+                        >
+                            (Giá: liên hệ)
+                        </p>
+                    }
                 </div>
                 <AddCartWrapper>
                     <QuantityInput
@@ -118,11 +137,6 @@ export function ProductCard({ product, onPreviewButtonClick }: ProductProps) {
                     </button>
                 </AddCartWrapper>
             </CardFooter>
-            {/* {error && (
-                <div className="text-xs text-red-500 font-medium pt-2">
-                    Số lượng đặt nhiều hơn mức tối đa!
-                </div>
-            )} */}
         </ProductCardContainer >
     )
 }

@@ -41,6 +41,10 @@ export const Tags = styled.div`
         padding: 0.25rem 0.5rem;
         border-radius: 999px;
         font-weight: 700;
+        :hover {
+            background: ${({ theme }) => theme.colors['brand-yellow']};
+            color: ${({ theme }) => theme.colors['base-card']};
+        }
     }
 `
 

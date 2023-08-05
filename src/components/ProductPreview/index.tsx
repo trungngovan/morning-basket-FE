@@ -1,6 +1,6 @@
 import React, { MouseEvent } from 'react'
 import { QuantityInput } from '../QuantityInput'
-import { TitleText } from '../Typography'
+import { RegularText, TitleText } from '../Typography'
 import {
     ProductPreviewFooter,
     AddCartWrapper,
@@ -20,9 +20,10 @@ import { Tags } from '../ProductCard/styles'
 interface ProductPreviewProps {
     product: ProductType
     onClose: () => void
+    onTagClick: (tag: any) => void
 }
 
-export function ProductPreview({ product, onClose }: ProductPreviewProps) {
+export function ProductPreview({ product, onClose, onTagClick }: ProductPreviewProps) {
     const { addProductToCart } = useCart()
     const format = useFormatCurrency()
     const [quantity, setQuantity] = useState<number | string>(1)
@@ -72,12 +73,12 @@ export function ProductPreview({ product, onClose }: ProductPreviewProps) {
 
     return (
         <div
-            className="fixed w-full h-100 inset-0 z-50 overflow-hidden flex justify-center items-center animated fadeIn faster"
+            className="fixed w-full h-full inset-0 z-50 overflow-hidden flex justify-center items-center animated fadeIn faster"
             style={{ background: 'rgba(0, 0, 0, .7)' }}
             onClick={onClose}
         >
             <div
-                className="rounded-[6px_36px_6px_36px] flex flex-col items-center justify-center text-center z-50 w-4/5 h-1/3 md:w-[20rem] 2xl:h-1/3"
+                className="px-2 pb-4 rounded-[6px_36px_6px_36px] flex flex-col items-center justify-center z-50 w-4/5 max-h-[70%] md:max-w-[40%] xl:max-w-[20%] 2xl:max-w-[15%]"
                 style={{
                     background: defaultTheme.colors['base-card'],
                     transform: 'translate(-50 %, -50 %) scale(1)',
@@ -95,18 +96,43 @@ export function ProductPreview({ product, onClose }: ProductPreviewProps) {
                 />
                 <Tags>
                     {product_tags.slice(0, 3).map((tag) => (
-                        <span key={tag}>{tag}</span>
+                        <span
+                            key={tag}
+                            onClick={() => {
+                                onClose()
+                                onTagClick(tag)
+                            }}
+                            className='cursor-pointer'
+                        >
+                            {tag}
+                        </span>
                     ))}
                 </Tags>
-                <div className="flex-1 w-full px-2 flex flex-col items-center justify-start text-center">
-                    <Name onClick={handleNavigate} className="cursor-pointer hover:underline">{product.name}</Name>
-                    <Description>{product.description ? product.description : product.name}</Description>
+                <div className="flex-1 w-full flex flex-col items-center justify-start">
+                    <Name onClick={handleNavigate} className="cursor-pointer text-center hover:underline">{product.name}</Name>
+                    <Description
+                        style={{ scrollbarGutter: 'stable' }}
+                    >
+                        {product.description ? product.description : "(Không có mô tả)"}
+                    </Description>
                 </div>
-                <div className='flex-1 w-full px-2 flex flex-row items-center justify-around'>
-                    <div className='flex items-center gap-[3px]'>
-                        <TitleText size="s" color="text" as="strong">
-                            {format(product.price ? product.price : 50000)}
-                        </TitleText>
+                <div className='flex-1 w-full flex flex-row items-center justify-around'>
+                    <div>
+                        {product.price ?
+                            <p
+                                className='text-xl font-["Baloo_2"] text-bold'
+                                style={{ color: defaultTheme.colors['base-text'] }}
+                            >
+                                {format(product.price)}
+                            </p>
+                            :
+                            <p
+                                className='text-sm font-["Baloo_2"] text-bold'
+                                style={{ color: defaultTheme.colors['base-label'] }}
+                            >
+                                (Giá: liên hệ)
+                            </p>
+                        }
                     </div>
                     <div className='flex items-center gap-[3px] w-[7.5rem]'>
                         <QuantityInput
@@ -129,11 +155,6 @@ export function ProductPreview({ product, onClose }: ProductPreviewProps) {
                         </button>
                     </div>
                 </div>
-                {/* {error && (
-                    <div className="flex-1 text-sm text-red-500 font-medium pt-3">
-                        Số lượng đặt nhiều hơn mức tối đa!
-                    </div>
-                )} */}
             </div>
         </div >
     )

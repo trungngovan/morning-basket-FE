@@ -23,7 +23,7 @@ export function QuantityInput({
             <IconWrapper disabled={quantity <= 1} onClick={onDecrease}>
                 <PiMinus size={14} />
             </IconWrapper>
-            <input type="number" readOnly value={quantity} className='mozilla_input' />
+            <input type="number" readOnly value={quantity} />
             <IconWrapper disabled={quantity >= maxQuantity} onClick={onIncrease}>
                 <PiPlus size={14} />
             </IconWrapper>
