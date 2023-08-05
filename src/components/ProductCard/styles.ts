@@ -5,7 +5,7 @@ export const ProductCardContainer = styled.div`
     width: 100%;
     background: ${({ theme }) => theme.colors['base-card']};
     border-radius: 6px 36px 6px 36px;
-    box-shadow: 0 0 2px #C47F17B3; // brand-yellow-dark, B3 means opacity 70%
+    box-shadow: 0 0 2px #c47f17b3; // brand-yellow-dark, B3 means opacity 70%
     display: flex;
     flex-direction: column;
     align-items: center;

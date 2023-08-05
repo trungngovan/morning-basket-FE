@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { TitleText, RegularText } from '../Typography'
 import { defaultTheme } from '../../styles/themes/default'
-import "../../styles/modal.css"
+import '../../styles/modal.css'
 
 interface Props {
     countdowner: number
@@ -32,10 +32,10 @@ export function RedirectCountdown({ countdowner, onProceed }: Props) {
                     background: defaultTheme.colors['base-card'],
                     transform: 'translate(-50 %, -50 %) scale(1)',
                     transition: 'all 0.1s ease-in -out',
-                    boxShadow: '0 0 8px rgba(241, 233, 201, 0.7)'
+                    boxShadow: '0 0 8px rgba(241, 233, 201, 0.7)',
                 }}
             >
-                < div className="flex flex-col mt-[10%]" >
+                <div className="flex flex-col mt-[10%]">
                     <div className="flex flex-col">
                         <TitleText className="text-center">
                             Bạn sẽ được chuyển hướng trong{' '}
@@ -45,23 +45,31 @@ export function RedirectCountdown({ countdowner, onProceed }: Props) {
                             giây nữa. Hoặc
                         </TitleText>
                     </div>
-                </div >
+                </div>
                 <div className="bottom-0 w-[85%] flex justify-center">
                     <button
                         className="rounded-lg text-center inline-block cursor-pointer font-bold p-2 "
                         style={{
-                            color: onHover ? defaultTheme.colors["brand-yellow-dark"] : defaultTheme.colors["base-card"],
-                            backgroundColor: onHover ? defaultTheme.colors["brand-yellow-light"] : defaultTheme.colors["brand-yellow"],
-                            border: onHover ? "solid 1 px" : undefined
+                            color: onHover
+                                ? defaultTheme.colors['brand-yellow-dark']
+                                : defaultTheme.colors['base-card'],
+                            backgroundColor: onHover
+                                ? defaultTheme.colors['brand-yellow-light']
+                                : defaultTheme.colors['brand-yellow'],
+                            border: onHover ? 'solid 1 px' : undefined,
                         }}
                         onClick={onProceed}
-                        onMouseEnter={() => { setOnHover(true) }}
-                        onMouseLeave={() => { setOnHover(false) }}
+                        onMouseEnter={() => {
+                            setOnHover(true)
+                        }}
+                        onMouseLeave={() => {
+                            setOnHover(false)
+                        }}
                     >
                         Chuyển ngay
                     </button>
                 </div>
-            </div >
-        </div >
+            </div>
+        </div>
     )
 }

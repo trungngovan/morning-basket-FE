@@ -50,6 +50,7 @@ export function ProductCartCard({ product }: ProductCardCardProps) {
                             quantity={product.quantity}
                             onIncrease={handleIncrease}
                             onDecrease={handleDecrease}
+                            maxQuantity={product.quantity}
                         />
                         <RemoveButton onClick={handleRemove}>
                             <PiTrash size={18} />

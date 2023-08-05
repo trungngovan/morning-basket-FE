@@ -25,8 +25,8 @@ const ProductBooking = ({ product }: Props) => {
             1 <= prev + count && prev + count <= product.quantity
                 ? setError(false)
                 : prev + count >= product.quantity
-                ? setError(true)
-                : null
+                    ? setError(true)
+                    : null
             return Math.max(1, prev + count)
         })
     }
@@ -90,6 +90,7 @@ const ProductBooking = ({ product }: Props) => {
                             onIncrease={handleIncrease}
                             onDecrease={handleDecrease}
                             quantity={quantity as number}
+                            maxQuantity={product.quantity}
                         />
                     </div>
                     <div className="text-sm font-medium">

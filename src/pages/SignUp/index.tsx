@@ -257,7 +257,7 @@ export function SignUpPage() {
                                     </div>
                                     {watch('passwordConfirmation') !==
                                         watch('password') &&
-                                    getValues('passwordConfirmation') ? (
+                                        getValues('passwordConfirmation') ? (
                                         <p className="text-sm text-red-500">
                                             Mật khẩu không khớp
                                         </p>
@@ -321,7 +321,7 @@ export function SignUpPage() {
             ) : null}
             {showModal && (
                 <RedirectCountdown
-                    seconds={3}
+                    countdowner={3}
                     onProceed={() => {
                         clearTimeout(timer)
                         handleNavigate(getValues())

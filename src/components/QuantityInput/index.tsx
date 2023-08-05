@@ -1,7 +1,7 @@
 import React from 'react'
 import { IconWrapper, QuantityInputContainer } from './styles'
 import { PiMinus, PiPlus } from 'react-icons/pi'
-import "../../styles/main.css"
+import '../../styles/main.css'
 
 interface QuantityInputProps {
     size?: 'medium' | 'small'
@@ -16,7 +16,7 @@ export function QuantityInput({
     onIncrease,
     onDecrease,
     quantity,
-    maxQuantity
+    maxQuantity,
 }: QuantityInputProps) {
     return (
         <QuantityInputContainer size={size}>
@@ -24,7 +24,10 @@ export function QuantityInput({
                 <PiMinus size={14} />
             </IconWrapper>
             <input type="number" readOnly value={quantity} />
-            <IconWrapper disabled={quantity >= maxQuantity} onClick={onIncrease}>
+            <IconWrapper
+                disabled={quantity >= maxQuantity}
+                onClick={onIncrease}
+            >
                 <PiPlus size={14} />
             </IconWrapper>
         </QuantityInputContainer>

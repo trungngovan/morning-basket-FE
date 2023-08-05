@@ -155,9 +155,7 @@ export function OurProducts() {
                     <ProductCard
                         key={product.id}
                         product={product}
-                        onImageClick={() =>
-                            handleOpenProductPreview(product)
-                        }
+                        onImageClick={() => handleOpenProductPreview(product)}
                         onTagClick={setSelectedTag}
                     />
                 ))}

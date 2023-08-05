@@ -32,7 +32,7 @@ export function SignInPage() {
                 navigate('/completeOrder', { state: { reload: true } })
             }
         } else {
-            console.log("Navigating after signing in")
+            console.log('Navigating after signing in')
             navigate('/', { replace: true, state: { reload: true } })
         }
     }
@@ -220,6 +220,6 @@ export function SignInPage() {
                     handleNavigate()
                 }}
             /> */}
-        </div >
+        </div>
     )
 }

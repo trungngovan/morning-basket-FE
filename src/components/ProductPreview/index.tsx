@@ -13,7 +13,7 @@ import { useState } from 'react'
 import { ProductType } from '../../@types/products'
 import useFormatCurrency from '../../hooks/useFormatCurrency'
 import { defaultTheme } from '../../styles/themes/default'
-import "../../styles/modal.css"
+import '../../styles/modal.css'
 import { useNavigate } from 'react-router-dom'
 import { Tags } from '../ProductCard/styles'
 
@@ -23,13 +23,20 @@ interface ProductPreviewProps {
     onTagClick: (tag: any) => void
 }
 
-export function ProductPreview({ product, onClose, onTagClick }: ProductPreviewProps) {
+export function ProductPreview({
+    product,
+    onClose,
+    onTagClick,
+}: ProductPreviewProps) {
     const { addProductToCart } = useCart()
     const format = useFormatCurrency()
     const [quantity, setQuantity] = useState<number | string>(1)
     const [error, setError] = useState(false)
     const [onHover, setOnHover] = useState(false)
-    const product_tags = product.tags.length > 0 ? product.tags : ["product", "test", "demo", "example", "awesome"]
+    const product_tags =
+        product.tags.length > 0
+            ? product.tags
+            : ['product', 'test', 'demo', 'example', 'awesome']
 
     const navigate = useNavigate()
 
@@ -39,8 +46,8 @@ export function ProductPreview({ product, onClose, onTagClick }: ProductPreviewP
             1 <= prev + count && prev + count <= product.quantity
                 ? setError(false)
                 : prev + count >= product.quantity
-                    ? setError(true)
-                    : null
+                ? setError(true)
+                : null
             return Math.min(product.quantity, prev + count)
         })
     }
@@ -83,7 +90,7 @@ export function ProductPreview({ product, onClose, onTagClick }: ProductPreviewP
                     background: defaultTheme.colors['base-card'],
                     transform: 'translate(-50 %, -50 %) scale(1)',
                     transition: 'all 0.1s ease-in -out',
-                    boxShadow: '0 0 8px rgba(241, 233, 201, 0.7)'
+                    boxShadow: '0 0 8px rgba(241, 233, 201, 0.7)',
                 }}
                 onClick={(e) => {
                     e.stopPropagation()
@@ -102,39 +109,48 @@ export function ProductPreview({ product, onClose, onTagClick }: ProductPreviewP
                                 onClose()
                                 onTagClick(tag)
                             }}
-                            className='cursor-pointer'
+                            className="cursor-pointer"
                         >
                             {tag}
                         </span>
                     ))}
                 </Tags>
                 <div className="flex-1 w-full flex flex-col items-center justify-start">
-                    <Name onClick={handleNavigate} className="cursor-pointer text-center hover:underline">{product.name}</Name>
-                    <Description
-                        style={{ scrollbarGutter: 'stable' }}
+                    <Name
+                        onClick={handleNavigate}
+                        className="cursor-pointer text-center hover:underline"
                     >
-                        {product.description ? product.description : "(Không có mô tả)"}
+                        {product.name}
+                    </Name>
+                    <Description style={{ scrollbarGutter: 'stable' }}>
+                        {product.description
+                            ? product.description
+                            : '(Không có mô tả)'}
                     </Description>
                 </div>
-                <div className='flex-1 w-full flex flex-row items-center justify-around'>
+                <div className="flex-1 w-full flex flex-row items-center justify-around">
                     <div>
-                        {product.price ?
+                        {product.price ? (
                             <p
                                 className='text-xl font-["Baloo_2"] text-bold'
-                                style={{ color: defaultTheme.colors['base-text'] }}
+                                style={{
+                                    color: defaultTheme.colors['base-text'],
+                                }}
                             >
                                 {format(product.price)}
                             </p>
-                            :
+                        ) : (
                             <p
                                 className='text-sm font-["Baloo_2"] text-bold'
-                                style={{ color: defaultTheme.colors['base-label'] }}
+                                style={{
+                                    color: defaultTheme.colors['base-label'],
+                                }}
                             >
                                 (Giá: liên hệ)
                             </p>
-                        }
+                        )}
                     </div>
-                    <div className='flex items-center gap-[3px] w-[7.5rem]'>
+                    <div className="flex items-center gap-[3px] w-[7.5rem]">
                         <QuantityInput
                             onIncrease={handleIncrease}
                             onDecrease={handleDecrease}
@@ -142,20 +158,26 @@ export function ProductPreview({ product, onClose, onTagClick }: ProductPreviewP
                             maxQuantity={product.quantity as number}
                         />
                         <button
-                            className='w-[2.375rem] h-[2.375rem] flex items-center justify-center rounded-md ml-[0.3rem] duration-300'
+                            className="w-[2.375rem] h-[2.375rem] flex items-center justify-center rounded-md ml-[0.3rem] duration-300"
                             style={{
-                                background: onHover ? defaultTheme.colors['brand-purple'] : defaultTheme.colors['brand-purple-dark'],
+                                background: onHover
+                                    ? defaultTheme.colors['brand-purple']
+                                    : defaultTheme.colors['brand-purple-dark'],
                                 color: defaultTheme.colors['base-card'],
                             }}
                             onClick={handleAddToCart}
-                            onMouseEnter={() => { setOnHover(true) }}
-                            onMouseLeave={() => { setOnHover(false) }}
+                            onMouseEnter={() => {
+                                setOnHover(true)
+                            }}
+                            onMouseLeave={() => {
+                                setOnHover(false)
+                            }}
                         >
                             <PiShoppingCartFill size={22} />
                         </button>
                     </div>
                 </div>
             </div>
-        </div >
+        </div>
     )
 }
