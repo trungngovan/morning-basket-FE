@@ -57,7 +57,7 @@ export function SignInPage() {
 
     return (
         <div
-            className="container my-4 py-8 flex min-h-full flex-1 px-4"
+            className="container w-full mx-auto px-4 flex flex-row"
             style={{
                 height: storefrontImgLoaded
                     ? (storefrontImgWidth as number) / 3
