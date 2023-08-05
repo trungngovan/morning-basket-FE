@@ -12,7 +12,7 @@ import { defaultTheme } from '../../styles/themes/default'
 export function Footer() {
     return (
         <footer
-            className="w-full h-fit m-auto flex items-center justify-center absolute bot-0 z-[5]"
+            className="w-full h-fit max-h-[10rem] m-auto flex items-center justify-center absolute bot-0 z-[5]"
             style={{ background: defaultTheme.colors['base-background'] }}
         >
             <div className="container w-full mb-4 px-4 flex flex-col gap-1 items-start justify-between md:flex-row">
