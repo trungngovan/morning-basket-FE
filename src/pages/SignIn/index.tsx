@@ -20,11 +20,7 @@ export function SignInPage() {
     const navigate = useNavigate()
     const { isAuthenticated, signin, signinNotif } = useAuth()
     const [isSubmitting, setIsSubmitting] = useState(false)
-    const [storefrontImgLoaded, setStorefrontImgLoaded] =
-        useState<boolean>(false)
-    const [storefrontImgWidth, setStorefrontImgWidth] = useState<number>()
     const location = useLocation()
-    const [defaultValues, setDefaultValues] = useState<any>()
 
     const handleNavigate = () => {
         if (location.state) {
@@ -32,7 +28,6 @@ export function SignInPage() {
                 navigate('/completeOrder', { state: { reload: true } })
             }
         } else {
-            console.log("Navigating after signing in")
             navigate('/', { replace: true, state: { reload: true } })
         }
     }
@@ -42,9 +37,6 @@ export function SignInPage() {
         if (location.state) {
             if (location.state.hasOwnProperty('reload')) {
                 window.location.reload()
-            }
-            if (location.state.hasOwnProperty('formData')) {
-                setDefaultValues(location.state.formData)
             }
         }
     }, [location])
@@ -57,169 +49,138 @@ export function SignInPage() {
 
     return (
         <div
-            className="container w-full mx-auto px-4 flex flex-row"
-            style={{
-                height: storefrontImgLoaded
-                    ? (storefrontImgWidth as number) / 3
-                    : 'full',
-            }}
+            className="container w-full h-[calc(100vh-15rem)] mx-auto px-4 md:px-16 flex flex-row"
         >
-            <div className="relative hidden w-1 flex-1 lg:block">
+            <div className="flex-1 hidden lg:flex items-center justify-center">
                 <img
-                    className="absolute inset-0 h-full w-full object-cover object-left"
+                    className="m-auto rounded-3xl max-w-[80%] max-h-[80%]"
                     src={storefront}
-                    alt=""
-                    onLoad={(e) => {
-                        setStorefrontImgWidth(e.currentTarget.naturalWidth)
-                        setStorefrontImgLoaded(true)
-                    }}
+                    alt="Morning Basket store at Crescent Mall"
                 />
             </div>
-            {storefrontImgLoaded ? (
-                <div className="flex-1 w-2/5 flex flex-col justify-center px-4 py-12 sm:px-6 lg:flex-none lg:px-16 xl:px-18">
-                    <div className="mx-auto w-full max-w-sm lg:w-64 ">
+            <div
+                className="flex-1 w-2/5 h-full overflow-y-auto flex justify-center"
+                style={{ scrollbarGutter: "stable" }}
+            >
+                <div className="m-auto w-full max-w-sm lg:w-64 flex flex-col justify-center">
+                    <div>
+                        <h2 className="text-2xl font-bold leading-9 tracking-tight text-gray-900">
+                            Đăng nhập vào tài khoản của bạn
+                        </h2>
+                        <p className="mt-2 text-sm leading-6 text-gray-500">
+                            Chưa có tài khoản?{' '}
+                            <Link
+                                to="/signup"
+                                // state={location.state.completingOrder ? { completingOrder: true } : undefined}
+                                className="font-semibold text-indigo-600 hover:text-indigo-500"
+                            >
+                                Đăng ký
+                            </Link>
+                        </p>
+                    </div>
+
+                    <div className="mt-10">
                         <div>
-                            <h2 className="text-2xl font-bold leading-9 tracking-tight text-gray-900">
-                                Đăng nhập vào tài khoản của bạn
-                            </h2>
-                            <p className="mt-2 text-sm leading-6 text-gray-500">
-                                Chưa có tài khoản?{' '}
-                                <Link
-                                    to="/signup"
-                                    // state={location.state.completingOrder ? { completingOrder: true } : undefined}
-                                    className="font-semibold text-indigo-600 hover:text-indigo-500"
-                                >
-                                    Đăng ký
-                                </Link>
-                            </p>
-                        </div>
+                            <form
+                                className="space-y-6"
+                                onSubmit={handleSubmit(handleSignInSubmit)}
+                            >
+                                <div>
+                                    <label
+                                        htmlFor="username"
+                                        className="block text-sm font-medium leading-6 text-gray-900"
+                                    >
+                                        Địa chỉ email hoặc số điện thoại
+                                    </label>
+                                    <div className="mt-2">
+                                        <input
+                                            id="username"
+                                            {...register('username')}
+                                            type="text"
+                                            autoComplete='email'
+                                            required
+                                            // pattern="^([a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3})|(\d{3}-\d{3}-\d{4})$"
+                                            className="block w-full rounded-md border-0 px-3 py-1.5 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-400 sm:text-sm sm:leading-6"
+                                        />
+                                    </div>
+                                </div>
 
-                        <div className="mt-10">
-                            <div>
-                                <form
-                                    className="space-y-6"
-                                    onSubmit={handleSubmit(handleSignInSubmit)}
-                                >
-                                    <div>
+                                <div>
+                                    <label
+                                        htmlFor="password"
+                                        className="block text-sm font-medium leading-6 text-gray-900"
+                                    >
+                                        Mật khẩu
+                                    </label>
+                                    <div className="mt-2">
+                                        <input
+                                            id="password"
+                                            {...register('password')}
+                                            type="password"
+                                            autoComplete='current-password'
+                                            required
+                                            className="block w-full rounded-md border-0 px-3 py-1.5 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-400 sm:text-sm sm:leading-6"
+                                        />
+                                    </div>
+                                </div>
+
+                                <div className="flex items-center justify-between">
+                                    <div className="flex items-center">
+                                        <input
+                                            id="remember-me"
+                                            name="remember-me"
+                                            type="checkbox"
+                                            className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
+                                        />
                                         <label
-                                            htmlFor="username"
-                                            className="block text-sm font-medium leading-6 text-gray-900"
+                                            htmlFor="remember-me"
+                                            className="ml-1 block text-sm leading-6 text-gray-700"
                                         >
-                                            Địa chỉ email hoặc số điện thoại
+                                            Ghi nhớ đăng nhập
                                         </label>
-                                        <div className="mt-2">
-                                            <input
-                                                id="username"
-                                                {...register('username')}
-                                                type="text"
-                                                value={
-                                                    defaultValues
-                                                        ? defaultValues.email
-                                                        : undefined
-                                                }
-                                                autoComplete={
-                                                    defaultValues
-                                                        ? undefined
-                                                        : 'email'
-                                                }
-                                                required
-                                                // pattern="^([a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3})|(\d{3}-\d{3}-\d{4})$"
-                                                className="block w-full rounded-md border-0 px-3 py-1.5 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-400 sm:text-sm sm:leading-6"
-                                            />
-                                        </div>
                                     </div>
 
-                                    <div>
-                                        <label
-                                            htmlFor="password"
-                                            className="block text-sm font-medium leading-6 text-gray-900"
+                                    <div className="text-sm leading-6">
+                                        <Link
+                                            to="/contact"
+                                            state={{
+                                                username: watch('username'),
+                                            }}
+                                            className="font-semibold text-indigo-600 hover:text-indigo-500"
                                         >
-                                            Mật khẩu
-                                        </label>
-                                        <div className="mt-2">
-                                            <input
-                                                id="password"
-                                                {...register('password')}
-                                                type="password"
-                                                value={
-                                                    defaultValues
-                                                        ? defaultValues.password
-                                                        : undefined
-                                                }
-                                                autoComplete={
-                                                    defaultValues
-                                                        ? undefined
-                                                        : 'current-password'
-                                                }
-                                                required
-                                                className="block w-full rounded-md border-0 px-3 py-1.5 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-400 sm:text-sm sm:leading-6"
-                                            />
-                                        </div>
+                                            Quên mật khẩu?
+                                        </Link>
                                     </div>
+                                </div>
 
-                                    <div className="flex items-center justify-between">
-                                        <div className="flex items-center">
-                                            <input
-                                                id="remember-me"
-                                                name="remember-me"
-                                                type="checkbox"
-                                                className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
-                                            />
-                                            <label
-                                                htmlFor="remember-me"
-                                                className="ml-1 block text-sm leading-6 text-gray-700"
-                                            >
-                                                Ghi nhớ đăng nhập
-                                            </label>
-                                        </div>
-
-                                        <div className="text-sm leading-6">
-                                            <Link
-                                                to="/contact"
-                                                state={{
-                                                    username: watch('username'),
-                                                }}
-                                                className="font-semibold text-indigo-600 hover:text-indigo-500"
-                                            >
-                                                Quên mật khẩu?
-                                            </Link>
-                                        </div>
+                                <div className='relative'>
+                                    <button
+                                        type="submit"
+                                        disabled={isSubmitting}
+                                        className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                                    >
+                                        {isSubmitting
+                                            ? 'Đang đăng nhập...'
+                                            : 'Đăng nhập'}
+                                    </button>
+                                    <div className="absolute w-full text-center text-sm text-red-500 mt-2 break-normal">
+                                        {signinNotif}
                                     </div>
-
-                                    <div>
-                                        <button
-                                            type="submit"
-                                            disabled={isSubmitting}
-                                            className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                                        >
-                                            {isSubmitting
-                                                ? 'Đang đăng nhập...'
-                                                : 'Đăng nhập'}
-                                        </button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                        <div className="text-center text-sm truncate text-wrap text-red-500 mt-4 min-h-[4rem]">
-                            {signinNotif}
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
-            ) : null}
+            </div>
             {isAuthenticated && (
                 <RedirectCountdown
-                    countdowner={3}
+                    message={signinNotif}
+                    button_text='Trang chủ'
                     onProceed={() => {
                         handleNavigate()
                     }}
                 />
             )}
-            {/* <RedirectCountdown
-                countdowner={1000}
-                onProceed={() => {
-                    handleNavigate()
-                }}
-            /> */}
         </div >
     )
 }
