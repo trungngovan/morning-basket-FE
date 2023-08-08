@@ -85,7 +85,11 @@ const FAQPage: React.FC = () => {
                             <AnswerDetails>JANG JUNHO (장준호)</AnswerDetails>
                         </AnswerTitle>
                         <br />
-                        <AnswerDetails>Quý khách có thể quét mã QR trong hình đính kèm bằng ứng dụng VietQR hoặc ứng dụng của ngân hàng có hỗ trợ VietQR.</AnswerDetails>
+                        <AnswerDetails>
+                            Quý khách có thể quét mã QR trong hình đính kèm bằng
+                            ứng dụng VietQR hoặc ứng dụng của ngân hàng có hỗ
+                            trợ VietQR.
+                        </AnswerDetails>
                     </div>
                     <div className="flex-1 object-center">
                         <img

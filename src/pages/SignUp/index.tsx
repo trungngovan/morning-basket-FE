@@ -63,9 +63,7 @@ export function SignUpPage() {
     }
 
     return (
-        <div
-            className="container w-full min-h-[calc(100vh-15rem)] m-auto px-4 flex flex-row mb-[max(2rem,0rem)] md:px-16"
-        >
+        <div className="container w-full min-h-[calc(100vh-15rem)] m-auto px-4 flex flex-row mb-[max(2rem,0rem)] md:px-16">
             <div className="flex-1 hidden lg:flex items-center justify-center">
                 <img
                     className="m-auto rounded-3xl max-w-[80%] max-h-[80%]"
@@ -75,7 +73,7 @@ export function SignUpPage() {
             </div>
             <div
                 className="flex-1 w-2/5 overflow-y-hidden flex items-center justify-center hover:overflow-y-auto"
-                style={{ scrollbarGutter: "stable" }}
+                style={{ scrollbarGutter: 'stable' }}
             >
                 <div className="m-auto w-full max-w-sm lg:w-64 flex flex-col justify-center">
                     <div>
@@ -105,7 +103,8 @@ export function SignUpPage() {
                                         htmlFor="name"
                                         className="block text-sm font-medium leading-6 text-gray-900"
                                     >
-                                        Họ và Tên <span className='text-red-500'>*</span>
+                                        Họ và Tên{' '}
+                                        <span className="text-red-500">*</span>
                                     </label>
                                     <div className="mt-1">
                                         <input
@@ -133,7 +132,8 @@ export function SignUpPage() {
                                         htmlFor="phoneNumber"
                                         className="block text-sm font-medium leading-6 text-gray-900"
                                     >
-                                        Số điện thoại <span className='text-red-500'>*</span>
+                                        Số điện thoại{' '}
+                                        <span className="text-red-500">*</span>
                                     </label>
                                     <div className="mt-1">
                                         <input
@@ -161,7 +161,8 @@ export function SignUpPage() {
                                         htmlFor="email"
                                         className="block text-sm font-medium leading-6 text-gray-900"
                                     >
-                                        Địa chỉ email <span className='text-red-500'>*</span>
+                                        Địa chỉ email{' '}
+                                        <span className="text-red-500">*</span>
                                     </label>
                                     <div className="mt-1">
                                         <input
@@ -189,7 +190,8 @@ export function SignUpPage() {
                                         htmlFor="password"
                                         className="block text-sm font-medium leading-6 text-gray-900"
                                     >
-                                        Mật khẩu <span className='text-red-500'>*</span>
+                                        Mật khẩu{' '}
+                                        <span className="text-red-500">*</span>
                                     </label>
                                     <div className="mt-1">
                                         <input
@@ -216,7 +218,8 @@ export function SignUpPage() {
                                         htmlFor="passwordConfirmation"
                                         className="block text-sm font-medium leading-6 text-gray-900"
                                     >
-                                        Nhập lại mật khẩu <span className='text-red-500'>*</span>
+                                        Nhập lại mật khẩu{' '}
+                                        <span className="text-red-500">*</span>
                                     </label>
                                     <div className="mt-1">
                                         <input
@@ -231,8 +234,7 @@ export function SignUpPage() {
                                         {errors ? (
                                             <p className="text-sm text-red-500">
                                                 {
-                                                    errors
-                                                        ?.passwordConfirmation
+                                                    errors?.passwordConfirmation
                                                         ?.message as string
                                                 }
                                             </p>
@@ -241,15 +243,18 @@ export function SignUpPage() {
                                 </div>
                                 {watch('passwordConfirmation') !==
                                     watch('password') &&
-                                    getValues('passwordConfirmation') ? (
+                                getValues('passwordConfirmation') ? (
                                     <p className="text-sm text-red-500">
                                         Mật khẩu không khớp
                                     </p>
                                 ) : null}
-                                <div className='mt-4 relative'>
+                                <div className="mt-4 relative">
                                     <p className="mt-2 text-xs text-gray-500 italic">
-                                        Bằng cách bấm "Đăng ký", bạn đồng ý với {' '}
-                                        <a href='/faq' className="text-indigo-600 hover:text-indigo-500 hover:underline">
+                                        Bằng cách bấm "Đăng ký", bạn đồng ý với{' '}
+                                        <a
+                                            href="/faq"
+                                            className="text-indigo-600 hover:text-indigo-500 hover:underline"
+                                        >
                                             Điều khoản dịch vụ
                                         </a>{' '}
                                         của chúng tôi
@@ -275,7 +280,7 @@ export function SignUpPage() {
             {showModal && (
                 <RedirectCountdown
                     message={signupNotif}
-                    button_text='Đăng nhập'
+                    button_text="Đăng nhập"
                     onProceed={() => {
                         handleNavigate(getValues())
                     }}

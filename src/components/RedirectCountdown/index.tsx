@@ -26,16 +26,16 @@ export function RedirectCountdown({ message, button_text, onProceed }: Props) {
                 }}
             >
                 <div className="mt-[5%] flex flex-col">
-                    <TitleText size='m' className="text-center">
-                        <span className='text-purple-600 '>{message}</span>
+                    <TitleText size="m" className="text-center">
+                        <span className="text-purple-600 ">{message}</span>
                     </TitleText>
                 </div>
                 <div className="bottom-0 w-[85%] flex justify-center items-center flex-col">
                     <TitleText
-                        size='s'
+                        size="s"
                         className="text-center"
                         style={{
-                            color: defaultTheme.colors["brand-yellow-dark"]
+                            color: defaultTheme.colors['brand-yellow-dark'],
                         }}
                     >
                         Đi đến

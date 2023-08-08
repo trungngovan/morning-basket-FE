@@ -48,9 +48,7 @@ export function SignInPage() {
     }
 
     return (
-        <div
-            className="container w-full min-h-[calc(100vh-15rem)] mx-auto px-4 md:px-16 flex flex-row"
-        >
+        <div className="container w-full min-h-[calc(100vh-15rem)] mx-auto px-4 md:px-16 flex flex-row">
             <div className="flex-1 hidden lg:flex items-center justify-center">
                 <img
                     className="m-auto rounded-3xl max-w-[80%] max-h-[80%]"
@@ -60,7 +58,7 @@ export function SignInPage() {
             </div>
             <div
                 className="flex-1 w-2/5 overflow-y-hidden flex justify-center hover:overflow-y-auto"
-                style={{ scrollbarGutter: "stable" }}
+                style={{ scrollbarGutter: 'stable' }}
             >
                 <div className="m-auto my-auto w-full max-w-sm lg:w-64 flex flex-col justify-center">
                     <div>
@@ -97,7 +95,7 @@ export function SignInPage() {
                                             id="username"
                                             {...register('username')}
                                             type="text"
-                                            autoComplete='email'
+                                            autoComplete="email"
                                             required
                                             // pattern="^([a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3})|(\d{3}-\d{3}-\d{4})$"
                                             className="block w-full rounded-md border-0 px-3 py-1.5 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-400 sm:text-sm sm:leading-6"
@@ -117,7 +115,7 @@ export function SignInPage() {
                                             id="password"
                                             {...register('password')}
                                             type="password"
-                                            autoComplete='current-password'
+                                            autoComplete="current-password"
                                             required
                                             className="block w-full rounded-md border-0 px-3 py-1.5 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-400 sm:text-sm sm:leading-6"
                                         />
@@ -153,7 +151,7 @@ export function SignInPage() {
                                     </div>
                                 </div>
 
-                                <div className='mt-4 relative'>
+                                <div className="mt-4 relative">
                                     <button
                                         type="submit"
                                         disabled={isSubmitting}
@@ -175,12 +173,12 @@ export function SignInPage() {
             {isAuthenticated && (
                 <RedirectCountdown
                     message={signinNotif}
-                    button_text='Trang chủ'
+                    button_text="Trang chủ"
                     onProceed={() => {
                         handleNavigate()
                     }}
                 />
             )}
-        </div >
+        </div>
     )
 }
