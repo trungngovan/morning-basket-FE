@@ -13,11 +13,11 @@ export function RedirectCountdown({ message, button_text, onProceed }: Props) {
     const [onHover, setOnHover] = useState(false)
     return (
         <div
-            className="fixed w-full h-100 inset-0 z-50 overflow-hidden flex justify-center items-center animated fadeIn faster"
+            className="fixed w-full h-full inset-0 z-50 overflow-hidden flex justify-center items-center animated fadeIn faster"
             style={{ background: 'rgba(0, 0, 0, .7)' }}
         >
             <div
-                className="px-2 pb-2 rounded-[6px_36px_6px_36px] flex flex-col items-center justify-between gap-2 z-50 w-4/5 max-h-[70%] md:max-w-[40%] xl:max-w-[20%] 2xl:max-w-[15%]"
+                className="p-4 rounded-[6px_36px_6px_36px] flex flex-col items-center justify-between gap-4 z-50 max-h-[70%] w-fit"
                 style={{
                     background: defaultTheme.colors['base-card'],
                     transform: 'translate(-50 %, -50 %) scale(1)',
@@ -26,15 +26,22 @@ export function RedirectCountdown({ message, button_text, onProceed }: Props) {
                 }}
             >
                 <div className="mt-[5%] flex flex-col">
-                    <TitleText size='s' className="text-center">
+                    <TitleText size='m' className="text-center">
                         <span className='text-purple-600 '>{message}</span>
-                        <br />
-                        Bấm nút để đi đến
                     </TitleText>
                 </div>
-                <div className="bottom-0 w-[85%] flex justify-center">
+                <div className="bottom-0 w-[85%] flex justify-center items-center flex-col">
+                    <TitleText
+                        size='s'
+                        className="text-center"
+                        style={{
+                            color: defaultTheme.colors["brand-yellow-dark"]
+                        }}
+                    >
+                        Đi đến
+                    </TitleText>
                     <button
-                        className="rounded-lg text-center text-sm cursor-pointer font-bold p-2"
+                        className="w-fit rounded-lg text-center text-base cursor-pointer font-bold p-2 md:text-lg"
                         style={{
                             color: onHover ? defaultTheme.colors["brand-yellow-dark"] : defaultTheme.colors["base-card"],
                             backgroundColor: onHover ? defaultTheme.colors["brand-yellow-light"] : defaultTheme.colors["brand-yellow"],
