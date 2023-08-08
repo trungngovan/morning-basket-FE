@@ -95,7 +95,7 @@ export function Footer() {
                     >
                         <a
                             href="mailto:hanorder@parkltd.net"
-                            className="hover:underline"
+                            className="break-all hover:underline"
                         >
                             <PiEnvelope className="inline" />{' '}
                             hanorder@parkltd.net
