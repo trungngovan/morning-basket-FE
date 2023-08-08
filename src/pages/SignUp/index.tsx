@@ -64,7 +64,7 @@ export function SignUpPage() {
 
     return (
         <div
-            className="container w-full h-[calc(100vh-15rem)] mx-auto px-4 md:px-16 flex flex-row"
+            className="container w-full min-h-[calc(100vh-15rem)] m-auto px-4 flex flex-row mb-[max(2rem,0rem)] md:px-16"
         >
             <div className="flex-1 hidden lg:flex items-center justify-center">
                 <img
@@ -74,7 +74,7 @@ export function SignUpPage() {
                 />
             </div>
             <div
-                className="flex-1 w-2/5 h-full overflow-y-auto flex justify-center"
+                className="flex-1 w-2/5 overflow-y-hidden flex items-center justify-center hover:overflow-y-auto"
                 style={{ scrollbarGutter: "stable" }}
             >
                 <div className="m-auto w-full max-w-sm lg:w-64 flex flex-col justify-center">
@@ -93,7 +93,7 @@ export function SignUpPage() {
                         </p>
                     </div>
 
-                    <div className="mt-10">
+                    <div className="mt-4">
                         <div>
                             <form
                                 className="space-y-2"
@@ -105,9 +105,9 @@ export function SignUpPage() {
                                         htmlFor="name"
                                         className="block text-sm font-medium leading-6 text-gray-900"
                                     >
-                                        Họ và Tên
+                                        Họ và Tên <span className='text-red-500'>*</span>
                                     </label>
-                                    <div className="mt-2">
+                                    <div className="mt-1">
                                         <input
                                             id="name"
                                             {...register('name')}
@@ -133,9 +133,9 @@ export function SignUpPage() {
                                         htmlFor="phoneNumber"
                                         className="block text-sm font-medium leading-6 text-gray-900"
                                     >
-                                        Số điện thoại
+                                        Số điện thoại <span className='text-red-500'>*</span>
                                     </label>
-                                    <div className="mt-2">
+                                    <div className="mt-1">
                                         <input
                                             id="phoneNumber"
                                             {...register('phoneNumber')}
@@ -161,9 +161,9 @@ export function SignUpPage() {
                                         htmlFor="email"
                                         className="block text-sm font-medium leading-6 text-gray-900"
                                     >
-                                        Địa chỉ email
+                                        Địa chỉ email <span className='text-red-500'>*</span>
                                     </label>
-                                    <div className="mt-2">
+                                    <div className="mt-1">
                                         <input
                                             id="email"
                                             {...register('email')}
@@ -189,9 +189,9 @@ export function SignUpPage() {
                                         htmlFor="password"
                                         className="block text-sm font-medium leading-6 text-gray-900"
                                     >
-                                        Mật khẩu
+                                        Mật khẩu <span className='text-red-500'>*</span>
                                     </label>
-                                    <div className="mt-2">
+                                    <div className="mt-1">
                                         <input
                                             id="password"
                                             {...register('password')}
@@ -216,9 +216,9 @@ export function SignUpPage() {
                                         htmlFor="passwordConfirmation"
                                         className="block text-sm font-medium leading-6 text-gray-900"
                                     >
-                                        Nhập lại mật khẩu
+                                        Nhập lại mật khẩu <span className='text-red-500'>*</span>
                                     </label>
-                                    <div className="mt-2">
+                                    <div className="mt-1">
                                         <input
                                             id="passwordConfirmation"
                                             {...register(
@@ -246,11 +246,18 @@ export function SignUpPage() {
                                         Mật khẩu không khớp
                                     </p>
                                 ) : null}
-                                <div className='relative'>
+                                <div className='mt-4 relative'>
+                                    <p className="mt-2 text-xs text-gray-500 italic">
+                                        Bằng cách bấm "Đăng ký", bạn đồng ý với {' '}
+                                        <a href='/faq' className="text-indigo-600 hover:text-indigo-500 hover:underline">
+                                            Điều khoản dịch vụ
+                                        </a>{' '}
+                                        của chúng tôi
+                                    </p>
                                     <button
                                         type="submit"
                                         disabled={isSubmitting}
-                                        className="mt-8 flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                                        className="mt-1 flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                                     >
                                         {isSubmitting
                                             ? 'Đang đăng ký...'
