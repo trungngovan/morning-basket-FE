@@ -49,7 +49,7 @@ export function SignInPage() {
 
     return (
         <div
-            className="container w-full h-[calc(100vh-15rem)] mx-auto px-4 md:px-16 flex flex-row"
+            className="container w-full min-h-[calc(100vh-15rem)] mx-auto px-4 md:px-16 flex flex-row"
         >
             <div className="flex-1 hidden lg:flex items-center justify-center">
                 <img
@@ -59,10 +59,10 @@ export function SignInPage() {
                 />
             </div>
             <div
-                className="flex-1 w-2/5 h-full overflow-y-auto flex justify-center"
+                className="flex-1 w-2/5 overflow-y-hidden flex justify-center hover:overflow-y-auto"
                 style={{ scrollbarGutter: "stable" }}
             >
-                <div className="m-auto w-full max-w-sm lg:w-64 flex flex-col justify-center">
+                <div className="m-auto my-auto w-full max-w-sm lg:w-64 flex flex-col justify-center">
                     <div>
                         <h2 className="text-2xl font-bold leading-9 tracking-tight text-gray-900">
                             Đăng nhập vào tài khoản của bạn
@@ -92,7 +92,7 @@ export function SignInPage() {
                                     >
                                         Địa chỉ email hoặc số điện thoại
                                     </label>
-                                    <div className="mt-2">
+                                    <div className="mt-1">
                                         <input
                                             id="username"
                                             {...register('username')}
@@ -112,7 +112,7 @@ export function SignInPage() {
                                     >
                                         Mật khẩu
                                     </label>
-                                    <div className="mt-2">
+                                    <div className="mt-1">
                                         <input
                                             id="password"
                                             {...register('password')}
@@ -153,7 +153,7 @@ export function SignInPage() {
                                     </div>
                                 </div>
 
-                                <div className='relative'>
+                                <div className='mt-4 relative'>
                                     <button
                                         type="submit"
                                         disabled={isSubmitting}
