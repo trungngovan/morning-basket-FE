@@ -5,6 +5,7 @@ import { Home } from './pages/Home'
 import AboutUsPage from './pages/AboutUs'
 import ContactPage from './pages/Contact'
 import FAQPage from './pages/FAQ'
+import PrivacyPolicyPage from './pages/PrivacyPolicy'
 import { SignInPage } from './pages/SignIn'
 import { SignUpPage } from './pages/SignUp'
 import { CompleteOrderPage } from './pages/CompleteOrder'
@@ -19,6 +20,7 @@ export function Router() {
                 <Route path="/aboutUs" element={<AboutUsPage />} />
                 <Route path="/contact" element={<ContactPage />} />
                 <Route path="/faq" element={<FAQPage />} />
+                <Route path="/privacyPolicy" element={<PrivacyPolicyPage />} />
                 <Route path="/signin" element={<SignInPage />} />
                 <Route path="/signup" element={<SignUpPage />} />
                 <Route path="/completeOrder" element={<CompleteOrderPage />} />

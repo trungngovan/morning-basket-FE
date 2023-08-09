@@ -47,6 +47,14 @@ export function Footer() {
                             Các câu hỏi thường gặp
                         </a>
                     </p>
+                    <p
+                        className="text-[1rem] mb-1"
+                        style={{ color: defaultTheme.colors['base-text'] }}
+                    >
+                        <a href="/privacyPolicy" className="hover:underline">
+                            Chính sách bảo mật
+                        </a>
+                    </p>
                 </div>
                 <div
                     className="md:max-w-[20%] justify-between"

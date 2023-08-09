@@ -243,7 +243,7 @@ export function SignUpPage() {
                                 </div>
                                 {watch('passwordConfirmation') !==
                                     watch('password') &&
-                                getValues('passwordConfirmation') ? (
+                                    getValues('passwordConfirmation') ? (
                                     <p className="text-sm text-red-500">
                                         Mật khẩu không khớp
                                     </p>
@@ -252,10 +252,10 @@ export function SignUpPage() {
                                     <p className="mt-2 text-xs text-gray-500 italic">
                                         Bằng cách bấm "Đăng ký", bạn đồng ý với{' '}
                                         <a
-                                            href="/faq"
+                                            href="/privacyPolicy"
                                             className="text-indigo-600 hover:text-indigo-500 hover:underline"
                                         >
-                                            Điều khoản dịch vụ
+                                            Chính sách bảo mật
                                         </a>{' '}
                                         của chúng tôi
                                     </p>
