@@ -150,7 +150,7 @@ export function OurProducts() {
                 </div>
             )}
 
-            <div className="w-full gap-x-4 grid grid-cols-2 max-[375px]:grid-cols-1 md:grid-cols-3 lg:grid-cols-5">
+            <div className="w-full gap-x-4 grid grid-cols-2 max-[320px]:grid-cols-1 max-[320px]:px-4 md:grid-cols-3 lg:grid-cols-5">
                 {currentProducts.map((product) => (
                     <ProductCard
                         key={product.id}
