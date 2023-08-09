@@ -9,14 +9,14 @@ const AboutUsPage: React.FC = () => {
                 Bạn đang tìm kiếm món ăn nhẹ ngon, dinh dưỡng và lành mạnh để
                 thưởng thức?
                 <br />
-                Không cần tìm đâu xa! { }
+                Không cần tìm đâu xa! {}
                 <a
                     href="https://morningbasket.vn"
                     className="text-indigo-600 hover:text-indigo-500"
                 >
                     Morning Basket
                 </a>
-                { } sẽ cung cấp cho bạn đầy đủ!
+                {} sẽ cung cấp cho bạn đầy đủ!
             </Paragraph>
             <Paragraph>
                 Morning Basket tự hào giới thiệu đến khách hàng:
