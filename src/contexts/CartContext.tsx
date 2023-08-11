@@ -6,6 +6,7 @@ import { apiPost } from '../apis/api'
 import { AxiosResponse } from 'axios'
 import { rejects } from 'assert'
 import { OrderData } from '../pages/CompleteOrder'
+import { setCookie, getCookie, deleteCookie } from '../utils/cookies'
 
 export interface CartItem extends Product {
     id?: number
@@ -38,7 +39,7 @@ export const CartContext = createContext({} as CartContextType)
 
 export function CartContextProvider({ children }: CartContextProviderProps) {
     const [cartItems, setCartItems] = useState<CartItem[]>(() => {
-        const storedCartItems = localStorage.getItem(PRODUCT_ITEMS_STORAGE_KEY)
+        const storedCartItems = getCookie(PRODUCT_ITEMS_STORAGE_KEY)
 
         if (storedCartItems) {
             return JSON.parse(storedCartItems)
@@ -49,10 +50,9 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
 
     const [orderCompleteInfo, setOrderCompleteInfo] = useState<OrderData>(
         () => {
-            const storedOrderCompleteInfo = localStorage.getItem(
+            const storedOrderCompleteInfo = getCookie(
                 ORDER_COMPLETE_INFO_STORAGE_KEY
             )
-
             if (storedOrderCompleteInfo) {
                 return JSON.parse(storedOrderCompleteInfo)
             }
@@ -123,7 +123,7 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
         return new Promise<any>((resolve, rejects) => {
             setTimeout(async () => {
                 const customerId = JSON.parse(
-                    localStorage.getItem('MorningBasket:customerInfo') as string
+                    getCookie('MorningBasket:customerInfo')
                 ).id
                 const items = cartItems.map((item) => {
                     let retItem = (({ id, name, quantity, price }) => ({
@@ -157,9 +157,7 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
                             if (data.remember) {
                                 setOrderCompleteInfo(data)
                             } else {
-                                localStorage.removeItem(
-                                    ORDER_COMPLETE_INFO_STORAGE_KEY
-                                )
+                                deleteCookie(ORDER_COMPLETE_INFO_STORAGE_KEY)
                             }
                             resolve(response.data.order)
                         }
@@ -172,9 +170,10 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
     }
 
     useEffect(() => {
-        localStorage.setItem(
+        setCookie(
             PRODUCT_ITEMS_STORAGE_KEY,
-            JSON.stringify(cartItems)
+            JSON.stringify(cartItems),
+            24 * 3 // 3 days
         )
     }, [cartItems])
 

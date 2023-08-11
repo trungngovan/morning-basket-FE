@@ -6,6 +6,7 @@ import {
     WardType,
 } from '../@types/provinces'
 import { vnProvincesApiGet } from '../apis/api'
+import { getCookie, setCookie } from '../utils/cookies'
 
 type Props = {
     provinceCode: number
@@ -14,7 +15,7 @@ type Props = {
 
 export const getProvinces = async () => {
     const cachedProvinces = JSON.parse(
-        localStorage.getItem('MorningBasket:provinces') as string
+        getCookie('MorningBasket:provinces')
     )
     if (!cachedProvinces) {
         return new Promise<GetProvincesResponse>((resolve) => {
@@ -25,14 +26,15 @@ export const getProvinces = async () => {
                             const result = response.data.map((a) =>
                                 a.name.startsWith('Tỉnh')
                                     ? {
-                                          ...a,
-                                          name: a.name.replace('Tỉnh ', ''),
-                                      }
+                                        ...a,
+                                        name: a.name.replace('Tỉnh ', ''),
+                                    }
                                     : a
                             )
-                            localStorage.setItem(
+                            setCookie(
                                 'MorningBasket:provinces',
-                                JSON.stringify(result)
+                                JSON.stringify(result),
+                                24 * 3 // 3 days
                             )
                             resolve(result)
                         }
@@ -46,7 +48,7 @@ export const getProvinces = async () => {
 
 export const getDistricts = async ({ provinceCode }: Props) => {
     const cachedProvinces = JSON.parse(
-        localStorage.getItem('MorningBasket:provinces') as string
+        getCookie('MorningBasket:provinces')
     )
     const cachedCurProv = cachedProvinces.find(
         (province: { code: number }) => province.code === provinceCode
@@ -59,7 +61,7 @@ export const getDistricts = async ({ provinceCode }: Props) => {
                 ).then((response) => {
                     if (response) {
                         const result = response.data.districts
-                        localStorage.setItem(
+                        setCookie(
                             'MorningBasket:provinces',
                             JSON.stringify(
                                 cachedProvinces.map(
@@ -73,7 +75,8 @@ export const getDistricts = async ({ provinceCode }: Props) => {
                                         return province
                                     }
                                 )
-                            )
+                            ),
+                            24 * 3 // 3 days
                         )
                         resolve(result)
                     }
@@ -86,7 +89,7 @@ export const getDistricts = async ({ provinceCode }: Props) => {
 
 export const getWards = async ({ provinceCode, districtCode }: Props) => {
     const cachedProvinces = JSON.parse(
-        localStorage.getItem('MorningBasket:provinces') as string
+        getCookie('MorningBasket:provinces')
     )
     const cachedDisttricts = cachedProvinces.find(
         (province: { code: number }) => province.code === provinceCode
@@ -103,7 +106,7 @@ export const getWards = async ({ provinceCode, districtCode }: Props) => {
                 ).then((response) => {
                     if (response) {
                         const result = response.data.wards
-                        localStorage.setItem(
+                        setCookie(
                             'MorningBasket:provinces',
                             JSON.stringify(
                                 cachedProvinces.map(
@@ -131,7 +134,8 @@ export const getWards = async ({ provinceCode, districtCode }: Props) => {
                                         return province
                                     }
                                 )
-                            )
+                            ),
+                            24 * 3 // 3 days
                         )
                         resolve(result)
                     }

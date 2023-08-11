@@ -1,5 +1,6 @@
 import { AxiosResponse } from 'axios'
 import { apiPost } from './api'
+import { getCookie, setCookie } from '../utils/cookies'
 
 interface Props {
     username: string
@@ -7,7 +8,7 @@ interface Props {
 }
 
 export const signIn = async ({ username, password }: Props) => {
-    const authToken = localStorage.getItem('MorningBasket:authToken') as string
+    const authToken = getCookie('MorningBasket:authToken')
     if (!authToken) {
         return new Promise<string>((resolve) => {
             setTimeout(() => {
@@ -16,9 +17,10 @@ export const signIn = async ({ username, password }: Props) => {
                     password: password,
                 }).then((response) => {
                     if (response) {
-                        localStorage.setItem(
+                        setCookie(
                             'MorningBasket:authToken',
-                            response.data.token
+                            response.data.token,
+                            24 * 3 // 3 days
                         )
                         resolve(response.data.token)
                     }

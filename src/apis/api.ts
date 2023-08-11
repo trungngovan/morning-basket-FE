@@ -1,4 +1,5 @@
 import axios, { type AxiosRequestConfig, type AxiosResponse } from 'axios'
+import { getCookie } from '../utils/cookies'
 const BASE_URL = import.meta.env.VITE_BACKEND_URL
 const instance = axios.create({
     withCredentials: true,
@@ -14,7 +15,7 @@ export const apiRequest = async <
 >(
     config: AxiosRequestConfig
 ): Promise<Response | undefined> => {
-    const authToken = localStorage.getItem('MorningBasket:authToken') as string
+    const authToken = getCookie('MorningBasket:authToken')
     return await instance.request({
         ...config,
         headers: {
@@ -35,9 +36,9 @@ export const apiGet = async <Data = unknown, Response = AxiosResponse<Data>>(
 ): Promise<Response | undefined> => {
     const query = params
         ? `?${Object.keys(params)
-              .map((key) => (params[key] ? `${key}=${params[key]}` : ''))
-              .filter(Boolean)
-              .join('&')}`
+            .map((key) => (params[key] ? `${key}=${params[key]}` : ''))
+            .filter(Boolean)
+            .join('&')}`
         : ''
 
     return apiRequest<Data, Response>({
@@ -126,9 +127,9 @@ export const vnProvincesApiGet = async <
 ): Promise<Response | undefined> => {
     const query = params
         ? `?${Object.keys(params)
-              .map((key) => (params[key] ? `${key}=${params[key]}` : ''))
-              .filter(Boolean)
-              .join('&')}`
+            .map((key) => (params[key] ? `${key}=${params[key]}` : ''))
+            .filter(Boolean)
+            .join('&')}`
         : ''
 
     return vnProvincesApiRequest<Data, Response>({

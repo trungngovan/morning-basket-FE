@@ -2,6 +2,7 @@ import React, { ReactNode, createContext, useEffect, useState } from 'react'
 import { apiGet, apiPost } from '../apis/api'
 import { AxiosError, AxiosResponse } from 'axios'
 import { apiMessages } from '../utils/apiMessages'
+import { deleteCookie, getCookie, setCookie } from '../utils/cookies'
 
 interface AuthContextType {
     isAuthenticated: boolean
@@ -29,12 +30,10 @@ export const AuthContext = createContext({} as AuthContextType)
 
 export function AuthContextProvider({ children }: AuthContextProviderProps) {
     const [authToken, setAuthToken] = useState<string | null>(() =>
-        localStorage.getItem(AUTH_TOKEN_STORAGE_KEY)
+        getCookie(AUTH_TOKEN_STORAGE_KEY)
     )
     const [customerInfo, setCustomerInfo] = useState<any>(() => {
-        const storedCustomerInfo = localStorage.getItem(
-            CUSTOMER_INFO_STORAGE_KEY
-        )
+        const storedCustomerInfo = getCookie(CUSTOMER_INFO_STORAGE_KEY)
 
         if (storedCustomerInfo) {
             return JSON.parse(storedCustomerInfo)
@@ -58,9 +57,10 @@ export function AuthContextProvider({ children }: AuthContextProviderProps) {
                     .then(async (response) => {
                         if (response) {
                             const newAuthToken = response.data.token
-                            localStorage.setItem(
+                            setCookie(
                                 AUTH_TOKEN_STORAGE_KEY,
-                                newAuthToken
+                                newAuthToken,
+                                24 * 3 // 3 days
                             )
                             setAuthToken(newAuthToken)
                             await apiGet<unknown, AxiosResponse>(
@@ -70,9 +70,10 @@ export function AuthContextProvider({ children }: AuthContextProviderProps) {
                                     const newCustomerInfo =
                                         response1.data.customer
                                     setCustomerInfo(newCustomerInfo)
-                                    localStorage.setItem(
+                                    setCookie(
                                         CUSTOMER_INFO_STORAGE_KEY,
-                                        JSON.stringify(newCustomerInfo)
+                                        JSON.stringify(newCustomerInfo),
+                                        24 * 3 // 3 days
                                     )
                                 }
                             })
@@ -97,9 +98,9 @@ export function AuthContextProvider({ children }: AuthContextProviderProps) {
     }
 
     const signout = () => {
-        localStorage.removeItem(AUTH_TOKEN_STORAGE_KEY)
-        localStorage.removeItem(CUSTOMER_INFO_STORAGE_KEY)
-        localStorage.removeItem('MorningBasket:orderCompleteInfo')
+        deleteCookie(AUTH_TOKEN_STORAGE_KEY)
+        deleteCookie(CUSTOMER_INFO_STORAGE_KEY)
+        deleteCookie('MorningBasket:orderCompleteInfo')
         setAuthToken(null)
         setIsAuthenticated(false)
     }
@@ -131,11 +132,11 @@ export function AuthContextProvider({ children }: AuthContextProviderProps) {
                         setSignupNotif(
                             customerErrMsg.includes('<DETAIL>')
                                 ? customerErrMsg.replace(
-                                      '<DETAIL>',
-                                      customErrCode.includes('PHONE')
-                                          ? phoneNumber
-                                          : email
-                                  )
+                                    '<DETAIL>',
+                                    customErrCode.includes('PHONE')
+                                        ? phoneNumber
+                                        : email
+                                )
                                 : customerErrMsg
                         )
                         rejects()
@@ -145,9 +146,10 @@ export function AuthContextProvider({ children }: AuthContextProviderProps) {
     }
 
     useEffect(() => {
-        localStorage.setItem(
+        setCookie(
             CUSTOMER_INFO_STORAGE_KEY,
-            JSON.stringify(customerInfo)
+            JSON.stringify(customerInfo),
+            24 * 3 // 3 days
         )
     }, [customerInfo])
 
