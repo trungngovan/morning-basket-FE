@@ -14,9 +14,7 @@ type Props = {
 }
 
 export const getProvinces = async () => {
-    const cachedProvinces = JSON.parse(
-        getCookie('MorningBasket:provinces')
-    )
+    const cachedProvinces = JSON.parse(getCookie('MorningBasket:provinces'))
     if (!cachedProvinces) {
         return new Promise<GetProvincesResponse>((resolve) => {
             setTimeout(() => {
@@ -26,9 +24,9 @@ export const getProvinces = async () => {
                             const result = response.data.map((a) =>
                                 a.name.startsWith('Tỉnh')
                                     ? {
-                                        ...a,
-                                        name: a.name.replace('Tỉnh ', ''),
-                                    }
+                                          ...a,
+                                          name: a.name.replace('Tỉnh ', ''),
+                                      }
                                     : a
                             )
                             setCookie(
@@ -47,9 +45,7 @@ export const getProvinces = async () => {
 }
 
 export const getDistricts = async ({ provinceCode }: Props) => {
-    const cachedProvinces = JSON.parse(
-        getCookie('MorningBasket:provinces')
-    )
+    const cachedProvinces = JSON.parse(getCookie('MorningBasket:provinces'))
     const cachedCurProv = cachedProvinces.find(
         (province: { code: number }) => province.code === provinceCode
     )
@@ -88,9 +84,7 @@ export const getDistricts = async ({ provinceCode }: Props) => {
 }
 
 export const getWards = async ({ provinceCode, districtCode }: Props) => {
-    const cachedProvinces = JSON.parse(
-        getCookie('MorningBasket:provinces')
-    )
+    const cachedProvinces = JSON.parse(getCookie('MorningBasket:provinces'))
     const cachedDisttricts = cachedProvinces.find(
         (province: { code: number }) => province.code === provinceCode
     ).districts
