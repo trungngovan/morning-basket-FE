@@ -23,9 +23,9 @@ export const getProvinces = async () => {
                             const result = response.data.map((a) =>
                                 a.name.startsWith('Tỉnh')
                                     ? {
-                                        ...a,
-                                        name: a.name.replace('Tỉnh ', ''),
-                                    }
+                                          ...a,
+                                          name: a.name.replace('Tỉnh ', ''),
+                                      }
                                     : a
                             )
                             localStorage.setItem(
@@ -43,7 +43,9 @@ export const getProvinces = async () => {
 }
 
 export const getDistricts = async ({ provinceCode }: Props) => {
-    const cachedProvinces = JSON.parse(localStorage.getItem('MorningBasket:provinces') as string)
+    const cachedProvinces = JSON.parse(
+        localStorage.getItem('MorningBasket:provinces') as string
+    )
     const cachedCurProv = cachedProvinces.find(
         (province: { code: number }) => province.code === provinceCode
     )
@@ -81,7 +83,9 @@ export const getDistricts = async ({ provinceCode }: Props) => {
 }
 
 export const getWards = async ({ provinceCode, districtCode }: Props) => {
-    const cachedProvinces = JSON.parse(localStorage.getItem('MorningBasket:provinces') as string)
+    const cachedProvinces = JSON.parse(
+        localStorage.getItem('MorningBasket:provinces') as string
+    )
     const cachedDisttricts = cachedProvinces.find(
         (province: { code: number }) => province.code === provinceCode
     ).districts
