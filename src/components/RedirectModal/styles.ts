@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const RedirectCountdownContainer = styled.div`
+export const RedirectModalContainer = styled.div`
     width: 15vw;
     height: 10vw;
     background: ${({ theme }) => theme.colors['base-input']};
@@ -60,7 +60,7 @@ export const RedirectCountdownContainer = styled.div`
         &:hover {
             color: ${({ theme }) => theme.colors['brand-yellow-dark']};
             background-color: ${({ theme }) =>
-                theme.colors['brand-yellow-light']};
+        theme.colors['brand-yellow-light']};
             border: solid 1px;
         }
     }

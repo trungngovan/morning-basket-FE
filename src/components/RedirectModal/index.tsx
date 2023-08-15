@@ -7,14 +7,16 @@ interface Props {
     message: string
     button_text: string
     onProceed: () => void
+    onClose?: () => void
 }
 
-export function RedirectCountdown({ message, button_text, onProceed }: Props) {
+export function RedirectModal({ message, button_text, onProceed, onClose }: Props) {
     const [onHover, setOnHover] = useState(false)
     return (
         <div
             className="fixed w-full h-full inset-0 z-50 overflow-hidden flex justify-center items-center animated fadeIn faster"
             style={{ background: 'rgba(0, 0, 0, .7)' }}
+            onClick={onClose}
         >
             <div
                 className="p-4 rounded-[6px_36px_6px_36px] flex flex-col items-center justify-between gap-4 z-50 max-h-[70%] w-fit"
@@ -23,6 +25,9 @@ export function RedirectCountdown({ message, button_text, onProceed }: Props) {
                     transform: 'translate(-50 %, -50 %) scale(1)',
                     transition: 'all 0.1s ease-in -out',
                     boxShadow: '0 0 8px rgba(241, 233, 201, 0.7)',
+                }}
+                onClick={(e) => {
+                    e.stopPropagation()
                 }}
             >
                 <div className="mt-[5%] flex flex-col">

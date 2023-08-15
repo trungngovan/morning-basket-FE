@@ -4,7 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useAuth } from '../../hooks/useAuth'
-import { RedirectCountdown } from '../../components/RedirectCountdown'
+import { RedirectModal } from '../../components/RedirectModal'
 import storefront from '../../assets/store-front.jpg'
 
 const signInFormValidationSchema = zod.object({
@@ -171,7 +171,7 @@ export function SignInPage() {
                 </div>
             </div>
             {isAuthenticated && (
-                <RedirectCountdown
+                <RedirectModal
                     message={signinNotif}
                     button_text="Trang chủ"
                     onProceed={() => {
