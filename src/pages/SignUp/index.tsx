@@ -4,7 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../../hooks/useAuth'
-import { RedirectCountdown } from '../../components/RedirectCountdown'
+import { RedirectModal } from '../../components/RedirectModal'
 import storefront from '../../assets/store-front.jpg'
 
 const signUpFormValidationSchema = zod.object({
@@ -12,10 +12,11 @@ const signUpFormValidationSchema = zod.object({
     email: zod
         .string()
         .email("Vui lòng nhập địa chỉ email có dấu '@'")
+        .regex(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/, "Vui lòng nhập địa chỉ email có dạng your_beautiful_name@domain.com")
         .min(1, 'Vui lòng nhập địa chỉ email'),
     phoneNumber: zod
         .string()
-        .regex(new RegExp(/^[0-9]{10}$/), 'Phải bao gồm 10 ký tự là chữ số')
+        .regex(/^(0\d{9})$/, 'Phải bao gồm 10 chữ số và bắt đầu bằng số "0"')
         .min(1, 'Vui lòng nhập số điện thoại'),
     password: zod.string().min(6, 'Vui lòng nhập mật khẩu'),
     passwordConfirmation: zod.string().min(6, 'Vui lòng nhập lại mật khẩu'),
@@ -243,7 +244,7 @@ export function SignUpPage() {
                                 </div>
                                 {watch('passwordConfirmation') !==
                                     watch('password') &&
-                                getValues('passwordConfirmation') ? (
+                                    getValues('passwordConfirmation') ? (
                                     <p className="text-sm text-red-500">
                                         Mật khẩu không khớp
                                     </p>
@@ -278,13 +279,13 @@ export function SignUpPage() {
                 </div>
             </div>
             {showModal && (
-                <RedirectCountdown
+                <RedirectModal
                     message={signupNotif}
                     button_text="Đăng nhập"
                     onProceed={() => {
                         handleNavigate(getValues())
                     }}
-                ></RedirectCountdown>
+                ></RedirectModal>
             )}
         </div>
     )
