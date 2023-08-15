@@ -11,7 +11,7 @@ export const CompleteOrderContainer = styled.form`
     @media (max-width: 1000px) {
         flex-direction: column;
     }
-    padding: 0 2rem;
+    padding: 0 1rem;
 `
 
 export const SectionBaseStyle = styled.div`

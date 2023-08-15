@@ -9,7 +9,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useCart } from '../../hooks/useCart'
 import { useAuth } from '../../hooks/useAuth'
-import { OrderNotSignedIn } from '../../components/OrderNotSignedIn'
+import { RedirectModal } from '../../components/RedirectModal'
 
 enum PaymentMethods {
     credit = 'credit',
@@ -96,10 +96,16 @@ export function CompleteOrderPage() {
                 </CompleteOrderContainer>
             </FormProvider>
             {showModal && (
-                <OrderNotSignedIn
-                    onProceed={handleModalProceed}
-                    onClose={handleModalClose}
-                ></OrderNotSignedIn>
+                <RedirectModal
+                    message="Hãy đăng nhập để đặt hàng"
+                    button_text="Đăng nhập"
+                    onProceed={() => {
+                        handleModalProceed()
+                    }}
+                    onClose={() => {
+                        handleModalClose()
+                    }}
+                />
             )}
         </>
     )

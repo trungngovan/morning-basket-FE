@@ -5,6 +5,7 @@ export const OrderConfirmedContainer = styled.div`
     flex-direction: column;
     gap: 2.5rem;
     margin: 2rem auto;
+    padding: 0 1rem;
 
     h1 {
         color: ${({ theme }) => theme.colors['brand-yellow-dark']};
