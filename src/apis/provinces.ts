@@ -12,8 +12,9 @@ type Props = {
     districtCode?: number
 }
 
+const PROVINCES_STORAGE_KEY = 'MorningBasket:provinces'
 export const getProvinces = async () => {
-    const cachedProvinces = localStorage.getItem('MorningBasket:provinces')
+    const cachedProvinces = localStorage.getItem(PROVINCES_STORAGE_KEY)
     if (!cachedProvinces) {
         return new Promise<GetProvincesResponse>((resolve) => {
             setTimeout(() => {
@@ -23,13 +24,13 @@ export const getProvinces = async () => {
                             const result = response.data.map((a) =>
                                 a.name.startsWith('Tỉnh')
                                     ? {
-                                          ...a,
-                                          name: a.name.replace('Tỉnh ', ''),
-                                      }
+                                        ...a,
+                                        name: a.name.replace('Tỉnh ', ''),
+                                    }
                                     : a
                             )
                             localStorage.setItem(
-                                'MorningBasket:provinces',
+                                PROVINCES_STORAGE_KEY,
                                 JSON.stringify(result)
                             )
                             resolve(result)
@@ -44,7 +45,7 @@ export const getProvinces = async () => {
 
 export const getDistricts = async ({ provinceCode }: Props) => {
     const cachedProvinces = JSON.parse(
-        localStorage.getItem('MorningBasket:provinces') as string
+        localStorage.getItem(PROVINCES_STORAGE_KEY) as string
     )
     const cachedCurProv = cachedProvinces.find(
         (province: { code: number }) => province.code === provinceCode
@@ -58,7 +59,7 @@ export const getDistricts = async ({ provinceCode }: Props) => {
                     if (response) {
                         const result = response.data.districts
                         localStorage.setItem(
-                            'MorningBasket:provinces',
+                            PROVINCES_STORAGE_KEY,
                             JSON.stringify(
                                 cachedProvinces.map(
                                     (province: {
@@ -84,7 +85,7 @@ export const getDistricts = async ({ provinceCode }: Props) => {
 
 export const getWards = async ({ provinceCode, districtCode }: Props) => {
     const cachedProvinces = JSON.parse(
-        localStorage.getItem('MorningBasket:provinces') as string
+        localStorage.getItem(PROVINCES_STORAGE_KEY) as string
     )
     const cachedDisttricts = cachedProvinces.find(
         (province: { code: number }) => province.code === provinceCode
@@ -102,7 +103,7 @@ export const getWards = async ({ provinceCode, districtCode }: Props) => {
                     if (response) {
                         const result = response.data.wards
                         localStorage.setItem(
-                            'MorningBasket:provinces',
+                            PROVINCES_STORAGE_KEY,
                             JSON.stringify(
                                 cachedProvinces.map(
                                     (province: {

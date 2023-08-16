@@ -9,8 +9,7 @@ import { defaultTheme } from '../../styles/themes/default'
 
 export function Header() {
     const { cartQuantity } = useCart()
-    const { customerInfo, isAuthenticated, signout } = useAuth()
-
+    const { customerInfo, signout } = useAuth()
     return (
         <header
             className="w-full h-[5rem] m-auto flex items-center justify-center sticky top-0 left-0 z-[5]"
@@ -21,7 +20,7 @@ export function Header() {
                     <img src={LogoImage} alt="" />
                 </NavLink>
                 <div className="flex flex-col items-end gap-2">
-                    {isAuthenticated && (
+                    {customerInfo && (
                         <p className="text-sm text-gray-500">
                             Xin chào,{' '}
                             <span className="font-bold">
@@ -31,7 +30,7 @@ export function Header() {
                         </p>
                     )}
                     <div className="flex items-center gap-3">
-                        {!isAuthenticated ? (
+                        {!customerInfo ? (
                             <NavLink to="/signin">
                                 <HeaderButton variant="yellow">
                                     Đăng nhập
@@ -41,7 +40,7 @@ export function Header() {
                             <NavLink
                                 to="/"
                                 state={{ reload: true }}
-                                onClick={signout}
+                                onClick={signout} //TODO: cannot call signout endpoint
                             >
                                 <HeaderButton variant="red">
                                     Đăng xuất
@@ -63,6 +62,6 @@ export function Header() {
                     </div>
                 </div>
             </div>
-        </header>
+        </header >
     )
 }

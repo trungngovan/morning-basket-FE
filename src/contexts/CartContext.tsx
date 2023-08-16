@@ -4,9 +4,7 @@ import { Product } from '../components/ProductType'
 import { produce } from 'immer'
 import { apiPost } from '../apis/api'
 import { AxiosResponse } from 'axios'
-import { rejects } from 'assert'
 import { OrderData } from '../pages/CompleteOrder'
-import { setCookie, getCookie, deleteCookie } from '../utils/cookies'
 
 export interface CartItem extends Product {
     id?: number
@@ -32,6 +30,7 @@ interface CartContextProviderProps {
     children: ReactNode
 }
 
+const CUSTOMER_INFO_STORAGE_KEY = 'MorningBasket:customerInfo'
 const PRODUCT_ITEMS_STORAGE_KEY = 'MorningBasket:cartItems'
 const ORDER_COMPLETE_INFO_STORAGE_KEY = 'MorningBasket:orderCompleteInfo'
 
@@ -39,7 +38,7 @@ export const CartContext = createContext({} as CartContextType)
 
 export function CartContextProvider({ children }: CartContextProviderProps) {
     const [cartItems, setCartItems] = useState<CartItem[]>(() => {
-        const storedCartItems = getCookie(PRODUCT_ITEMS_STORAGE_KEY)
+        const storedCartItems = localStorage.getItem(PRODUCT_ITEMS_STORAGE_KEY)
 
         if (storedCartItems) {
             return JSON.parse(storedCartItems)
@@ -50,9 +49,7 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
 
     const [orderCompleteInfo, setOrderCompleteInfo] = useState<OrderData>(
         () => {
-            const storedOrderCompleteInfo = getCookie(
-                ORDER_COMPLETE_INFO_STORAGE_KEY
-            )
+            const storedOrderCompleteInfo = localStorage.getItem(ORDER_COMPLETE_INFO_STORAGE_KEY)
             if (storedOrderCompleteInfo) {
                 return JSON.parse(storedOrderCompleteInfo)
             }
@@ -123,7 +120,7 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
         return new Promise<any>((resolve, rejects) => {
             setTimeout(async () => {
                 const customerId = JSON.parse(
-                    getCookie('MorningBasket:customerInfo')
+                    localStorage.getItem(CUSTOMER_INFO_STORAGE_KEY) as string
                 ).id
                 const items = cartItems.map((item) => {
                     let retItem = (({ id, name, quantity, price }) => ({
@@ -157,7 +154,7 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
                             if (data.remember) {
                                 setOrderCompleteInfo(data)
                             } else {
-                                deleteCookie(ORDER_COMPLETE_INFO_STORAGE_KEY)
+                                localStorage.removeItem(ORDER_COMPLETE_INFO_STORAGE_KEY)
                             }
                             resolve(response.data.order)
                         }
@@ -170,10 +167,9 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
     }
 
     useEffect(() => {
-        setCookie(
+        localStorage.setItem(
             PRODUCT_ITEMS_STORAGE_KEY,
-            JSON.stringify(cartItems),
-            24 * 3 // 3 days
+            JSON.stringify(cartItems)
         )
     }, [cartItems])
 

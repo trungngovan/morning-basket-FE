@@ -49,7 +49,7 @@ export function CompleteOrderPage() {
     const navigate = useNavigate()
     const { sendOrder, cleanCart, orderCompleteInfo } = useCart()
 
-    const { isAuthenticated } = useAuth()
+    const { customerInfo } = useAuth()
     const location = useLocation()
 
     useEffect(() => {
@@ -61,7 +61,7 @@ export function CompleteOrderPage() {
     }, [location])
 
     const handleConfirmOrder = async (data: ConfirmOrderFormData) => {
-        if (isAuthenticated) {
+        if (customerInfo) {
             await sendOrder(data).then(
                 (responseData: any) => {
                     cleanCart()

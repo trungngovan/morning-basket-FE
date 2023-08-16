@@ -2,10 +2,9 @@ import React, { ReactNode, createContext, useEffect, useState } from 'react'
 import { apiGet, apiPost } from '../apis/api'
 import { AxiosError, AxiosResponse } from 'axios'
 import { apiMessages } from '../utils/apiMessages'
-import { deleteCookie, getCookie, setCookie } from '../utils/cookies'
+import { isBlankObject } from '../utils'
 
 interface AuthContextType {
-    isAuthenticated: boolean
     customerInfo: any
     signin: (username: string, password: string) => Promise<boolean>
     signout: () => void
@@ -23,26 +22,16 @@ interface AuthContextProviderProps {
     children: ReactNode
 }
 
-const AUTH_TOKEN_STORAGE_KEY = 'MorningBasket:authToken'
 const CUSTOMER_INFO_STORAGE_KEY = 'MorningBasket:customerInfo'
+const ORDER_COMPLETE_INFO_STORAGE_KEY = 'MorningBasket:orderCompleteInfo'
 
 export const AuthContext = createContext({} as AuthContextType)
 
 export function AuthContextProvider({ children }: AuthContextProviderProps) {
-    const [authToken, setAuthToken] = useState<string | null>(() =>
-        getCookie(AUTH_TOKEN_STORAGE_KEY)
-    )
-    const [customerInfo, setCustomerInfo] = useState<any>(() => {
-        const storedCustomerInfo = getCookie(CUSTOMER_INFO_STORAGE_KEY)
-
-        if (storedCustomerInfo) {
-            return JSON.parse(storedCustomerInfo)
-        }
-
-        return {}
-    })
-    const [isAuthenticated, setIsAuthenticated] = useState<boolean>(() =>
-        authToken ? true : false
+    const [customerInfo, setCustomerInfo] = useState<any>(
+        isBlankObject(JSON.parse(localStorage.getItem(CUSTOMER_INFO_STORAGE_KEY) as string)) ?
+            null :
+            JSON.parse(localStorage.getItem(CUSTOMER_INFO_STORAGE_KEY) as string)
     )
     const [signinNotif, setSigninNotif] = useState<string>('')
     const [signupNotif, setSignupNotif] = useState<string>('')
@@ -56,13 +45,6 @@ export function AuthContextProvider({ children }: AuthContextProviderProps) {
                 })
                     .then(async (response) => {
                         if (response) {
-                            const newAuthToken = response.data.token
-                            setCookie(
-                                AUTH_TOKEN_STORAGE_KEY,
-                                newAuthToken,
-                                24 * 3 // 3 days
-                            )
-                            setAuthToken(newAuthToken)
                             await apiGet<unknown, AxiosResponse>(
                                 `/customers/info`
                             ).then((response1) => {
@@ -70,14 +52,12 @@ export function AuthContextProvider({ children }: AuthContextProviderProps) {
                                     const newCustomerInfo =
                                         response1.data.customer
                                     setCustomerInfo(newCustomerInfo)
-                                    setCookie(
+                                    localStorage.setItem(
                                         CUSTOMER_INFO_STORAGE_KEY,
-                                        JSON.stringify(newCustomerInfo),
-                                        24 * 3 // 3 days
+                                        JSON.stringify(newCustomerInfo)
                                     )
                                 }
                             })
-                            setIsAuthenticated(true)
                             setSigninNotif(apiMessages(response.data.message))
                             resolve(true)
                         }
@@ -97,12 +77,24 @@ export function AuthContextProvider({ children }: AuthContextProviderProps) {
         })
     }
 
-    const signout = () => {
-        deleteCookie(AUTH_TOKEN_STORAGE_KEY)
-        deleteCookie(CUSTOMER_INFO_STORAGE_KEY)
-        deleteCookie('MorningBasket:orderCompleteInfo')
-        setAuthToken(null)
-        setIsAuthenticated(false)
+    const signout = async () => {
+        setTimeout(async () => {
+            await apiGet<unknown, AxiosResponse>(`/customers/signout`)
+                .then((response) => {
+                    if (response) {
+                        console.log(response)
+                        setSigninNotif(apiMessages(response.data.message))
+                    }
+                })
+                .catch((e: AxiosError<{ error: { message: string } }>) => {
+                    console.error(e)
+                    throw e
+                })
+        }, 200)
+
+        localStorage.removeItem(CUSTOMER_INFO_STORAGE_KEY)
+        localStorage.removeItem(ORDER_COMPLETE_INFO_STORAGE_KEY)
+        setCustomerInfo({})
     }
 
     const signup = async (
@@ -132,11 +124,11 @@ export function AuthContextProvider({ children }: AuthContextProviderProps) {
                         setSignupNotif(
                             customerErrMsg.includes('<DETAIL>')
                                 ? customerErrMsg.replace(
-                                      '<DETAIL>',
-                                      customErrCode.includes('PHONE')
-                                          ? phoneNumber
-                                          : email
-                                  )
+                                    '<DETAIL>',
+                                    customErrCode.includes('PHONE')
+                                        ? phoneNumber
+                                        : email
+                                )
                                 : customerErrMsg
                         )
                         rejects()
@@ -146,17 +138,15 @@ export function AuthContextProvider({ children }: AuthContextProviderProps) {
     }
 
     useEffect(() => {
-        setCookie(
+        localStorage.setItem(
             CUSTOMER_INFO_STORAGE_KEY,
-            JSON.stringify(customerInfo),
-            24 * 3 // 3 days
+            JSON.stringify(customerInfo ? customerInfo : {})
         )
     }, [customerInfo])
 
     return (
         <AuthContext.Provider
             value={{
-                isAuthenticated,
                 customerInfo,
                 signin,
                 signout,

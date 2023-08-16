@@ -18,7 +18,7 @@ export function SignInPage() {
         resolver: zodResolver(signInFormValidationSchema),
     })
     const navigate = useNavigate()
-    const { isAuthenticated, signin, signinNotif } = useAuth()
+    const { customerInfo, signin, signinNotif } = useAuth()
     const [isSubmitting, setIsSubmitting] = useState(false)
     const location = useLocation()
 
@@ -170,7 +170,7 @@ export function SignInPage() {
                     </div>
                 </div>
             </div>
-            {isAuthenticated && (
+            {customerInfo && (
                 <RedirectModal
                     message={signinNotif}
                     button_text="Trang chủ"
