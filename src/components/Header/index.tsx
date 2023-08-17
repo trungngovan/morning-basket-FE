@@ -39,8 +39,8 @@ export function Header() {
                         ) : (
                             <NavLink
                                 to="/"
-                                state={{ reload: true }}
-                                onClick={signout} //TODO: cannot call signout endpoint
+                                reloadDocument={true}
+                                onClick={signout}
                             >
                                 <HeaderButton variant="red">
                                     Đăng xuất
