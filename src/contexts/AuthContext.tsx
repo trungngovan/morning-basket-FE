@@ -6,7 +6,7 @@ import { isBlankObject } from '../utils'
 
 interface AuthContextType {
     customerInfo: any
-    signin: (username: string, password: string) => Promise<boolean>
+    signin: (username: string, password: string, remember_me: boolean) => Promise<boolean>
     signout: () => void
     signup: (
         name: string,
@@ -36,12 +36,13 @@ export function AuthContextProvider({ children }: AuthContextProviderProps) {
     const [signinNotif, setSigninNotif] = useState<string>('')
     const [signupNotif, setSignupNotif] = useState<string>('')
 
-    const signin = async (username: string, password: string) => {
+    const signin = async (username: string, password: string, remember_me: boolean) => {
         return new Promise<boolean>((resolve) => {
             setTimeout(async () => {
                 await apiPost<unknown, AxiosResponse>(`/customers/signin`, {
                     username: username,
                     password: password,
+                    remember_me: remember_me
                 })
                     .then(async (response) => {
                         if (response) {
@@ -82,12 +83,10 @@ export function AuthContextProvider({ children }: AuthContextProviderProps) {
             await apiGet<unknown, AxiosResponse>(`/customers/signout`)
                 .then((response) => {
                     if (response) {
-                        console.log(response)
                         setSigninNotif(apiMessages(response.data.message))
                     }
                 })
                 .catch((e: AxiosError<{ error: { message: string } }>) => {
-                    console.error(e)
                     throw e
                 })
         }, 200)

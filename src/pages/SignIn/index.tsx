@@ -10,6 +10,7 @@ import storefront from '../../assets/store-front.jpg'
 const signInFormValidationSchema = zod.object({
     username: zod.string().min(1, 'Vui lòng nhập email hoặc số điện thoại'),
     password: zod.string().min(6, 'Vui lòng nhập mật khẩu'),
+    remember_me: zod.boolean()
 })
 export type SignInData = zod.infer<typeof signInFormValidationSchema>
 type SignInFormData = SignInData
@@ -43,7 +44,7 @@ export function SignInPage() {
 
     const handleSignInSubmit = async (data: SignInFormData) => {
         setIsSubmitting(true)
-        await signin(data.username, data.password)
+        await signin(data.username, data.password, data.remember_me)
         setIsSubmitting(false)
     }
 
@@ -126,7 +127,7 @@ export function SignInPage() {
                                     <div className="flex items-center">
                                         <input
                                             id="remember-me"
-                                            name="remember-me"
+                                            {...register('remember_me')}
                                             type="checkbox"
                                             className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
                                         />
