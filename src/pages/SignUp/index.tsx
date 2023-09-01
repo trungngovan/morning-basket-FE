@@ -12,7 +12,10 @@ const signUpFormValidationSchema = zod.object({
     email: zod
         .string()
         .email("Vui lòng nhập địa chỉ email có dấu '@'")
-        .regex(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/, "Vui lòng nhập địa chỉ email có dạng your_beautiful_name@domain.com")
+        .regex(
+            /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+            'Vui lòng nhập địa chỉ email có dạng your_beautiful_name@domain.com'
+        )
         .min(1, 'Vui lòng nhập địa chỉ email'),
     phoneNumber: zod
         .string()
@@ -244,7 +247,7 @@ export function SignUpPage() {
                                 </div>
                                 {watch('passwordConfirmation') !==
                                     watch('password') &&
-                                    getValues('passwordConfirmation') ? (
+                                getValues('passwordConfirmation') ? (
                                     <p className="text-sm text-red-500">
                                         Mật khẩu không khớp
                                     </p>

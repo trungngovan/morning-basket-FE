@@ -24,9 +24,9 @@ export const getProvinces = async () => {
                             const result = response.data.map((a) =>
                                 a.name.startsWith('Tỉnh')
                                     ? {
-                                        ...a,
-                                        name: a.name.replace('Tỉnh ', ''),
-                                    }
+                                          ...a,
+                                          name: a.name.replace('Tỉnh ', ''),
+                                      }
                                     : a
                             )
                             localStorage.setItem(

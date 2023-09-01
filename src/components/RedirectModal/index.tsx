@@ -10,7 +10,12 @@ interface Props {
     onClose?: () => void
 }
 
-export function RedirectModal({ message, button_text, onProceed, onClose }: Props) {
+export function RedirectModal({
+    message,
+    button_text,
+    onProceed,
+    onClose,
+}: Props) {
     const [onHover, setOnHover] = useState(false)
     return (
         <div

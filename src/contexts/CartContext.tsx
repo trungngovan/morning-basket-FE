@@ -49,7 +49,9 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
 
     const [orderCompleteInfo, setOrderCompleteInfo] = useState<OrderData>(
         () => {
-            const storedOrderCompleteInfo = localStorage.getItem(ORDER_COMPLETE_INFO_STORAGE_KEY)
+            const storedOrderCompleteInfo = localStorage.getItem(
+                ORDER_COMPLETE_INFO_STORAGE_KEY
+            )
             if (storedOrderCompleteInfo) {
                 return JSON.parse(storedOrderCompleteInfo)
             }
@@ -154,7 +156,9 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
                             if (data.remember) {
                                 setOrderCompleteInfo(data)
                             } else {
-                                localStorage.removeItem(ORDER_COMPLETE_INFO_STORAGE_KEY)
+                                localStorage.removeItem(
+                                    ORDER_COMPLETE_INFO_STORAGE_KEY
+                                )
                             }
                             resolve(response.data.order)
                         }

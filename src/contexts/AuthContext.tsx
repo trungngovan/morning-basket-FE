@@ -6,7 +6,11 @@ import { isBlankObject } from '../utils'
 
 interface AuthContextType {
     customerInfo: any
-    signin: (username: string, password: string, remember_me: boolean) => Promise<boolean>
+    signin: (
+        username: string,
+        password: string,
+        remember_me: boolean
+    ) => Promise<boolean>
     signout: () => void
     signup: (
         name: string,
@@ -29,20 +33,30 @@ export const AuthContext = createContext({} as AuthContextType)
 
 export function AuthContextProvider({ children }: AuthContextProviderProps) {
     const [customerInfo, setCustomerInfo] = useState<any>(
-        isBlankObject(JSON.parse(localStorage.getItem(CUSTOMER_INFO_STORAGE_KEY) as string)) ?
-            null :
-            JSON.parse(localStorage.getItem(CUSTOMER_INFO_STORAGE_KEY) as string)
+        isBlankObject(
+            JSON.parse(
+                localStorage.getItem(CUSTOMER_INFO_STORAGE_KEY) as string
+            )
+        )
+            ? null
+            : JSON.parse(
+                  localStorage.getItem(CUSTOMER_INFO_STORAGE_KEY) as string
+              )
     )
     const [signinNotif, setSigninNotif] = useState<string>('')
     const [signupNotif, setSignupNotif] = useState<string>('')
 
-    const signin = async (username: string, password: string, remember_me: boolean) => {
+    const signin = async (
+        username: string,
+        password: string,
+        remember_me: boolean
+    ) => {
         return new Promise<boolean>((resolve) => {
             setTimeout(async () => {
                 await apiPost<unknown, AxiosResponse>(`/customers/signin`, {
                     username: username,
                     password: password,
-                    remember_me: remember_me
+                    remember_me: remember_me,
                 })
                     .then(async (response) => {
                         if (response) {
@@ -123,11 +137,11 @@ export function AuthContextProvider({ children }: AuthContextProviderProps) {
                         setSignupNotif(
                             customerErrMsg.includes('<DETAIL>')
                                 ? customerErrMsg.replace(
-                                    '<DETAIL>',
-                                    customErrCode.includes('PHONE')
-                                        ? phoneNumber
-                                        : email
-                                )
+                                      '<DETAIL>',
+                                      customErrCode.includes('PHONE')
+                                          ? phoneNumber
+                                          : email
+                                  )
                                 : customerErrMsg
                         )
                         rejects()

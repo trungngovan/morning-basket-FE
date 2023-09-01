@@ -45,7 +45,7 @@ export const apiMessages = (code: string) => {
         'CUSTOMER_SIGNIN:EMAIL_NOT_FOUND': 'Không tìm thấy tài khoản: <DETAIL>',
         'CUSTOMER_SIGNIN:PASSWORD_INCORRECT': 'Mật khẩu chưa đúng',
         'CUSTOMER_SIGNIN:PHONE_NOT_FOUND': 'Không tìm thấy tài khoản: <DETAIL>',
-        'CUSTOMER_SIGNOUT:SUCCESS': 'Đăng xuất thành công!'
+        'CUSTOMER_SIGNOUT:SUCCESS': 'Đăng xuất thành công!',
     })
 
     return messages[code]

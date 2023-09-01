@@ -10,7 +10,7 @@ import storefront from '../../assets/store-front.jpg'
 const signInFormValidationSchema = zod.object({
     username: zod.string().min(1, 'Vui lòng nhập email hoặc số điện thoại'),
     password: zod.string().min(6, 'Vui lòng nhập mật khẩu'),
-    remember_me: zod.boolean()
+    remember_me: zod.boolean(),
 })
 export type SignInData = zod.infer<typeof signInFormValidationSchema>
 type SignInFormData = SignInData
