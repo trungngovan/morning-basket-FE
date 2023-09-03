@@ -4,10 +4,9 @@ import { useCart } from '../../../../hooks/useCart'
 import { ProductCartCard } from '../ProductCartCard'
 import { ConfirmationSection } from './ConfirmationSection'
 import { DetailsContainer, SelectedProductsContainer } from './styles'
-import { Button } from '../../../../components/Button'
 
 export function SelectedProducts() {
-    const { cartItems, cartQuantity } = useCart()
+    const { cartItems } = useCart()
 
     return (
         <SelectedProductsContainer>
@@ -21,7 +20,7 @@ export function SelectedProducts() {
                     style={{ scrollbarGutter: 'stable' }}
                 >
                     {cartItems.map((item) => (
-                        <ProductCartCard key={item.id} product={item} />
+                        <ProductCartCard key={item.id} item={item} />
                     ))}
                 </div>
                 <ConfirmationSection />

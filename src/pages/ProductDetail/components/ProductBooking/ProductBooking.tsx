@@ -1,12 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { PiShoppingCartFill } from 'react-icons/pi'
+import { useCart, CartItemType } from '../../../../hooks/useCart'
 import { ProductType } from '../../../../@types/products'
-import Price from './Price'
-import { useState } from 'react'
 import { AddCartWrapper } from './style'
-// import { RegularText, TitleText } from '../../../../components/Typography'
 import { QuantityInput } from '../../../../components/QuantityInput'
-import { useCart } from '../../../../hooks/useCart'
+import Price from './Price'
 
 type Props = {
     product: ProductType | null
@@ -15,18 +13,18 @@ type Props = {
 const ProductBooking = ({ product }: Props) => {
     if (!product) return <></>
     const { addProductToCart } = useCart()
-    const [quantity, setQuantity] = useState<number | string>(1)
+    const [selectedQuantity, setSelectedQuantity] = useState<number | string>(1)
     const [error, setError] = useState(false)
 
     const handleCount = (count: 1 | -1) => {
         // setAmount((prev) => Math.max(0, prev + count))
-        setQuantity((prev) => {
+        setSelectedQuantity((prev) => {
             prev = prev as number
             1 <= prev + count && prev + count <= product.quantity
                 ? setError(false)
                 : prev + count >= product.quantity
-                ? setError(true)
-                : null
+                    ? setError(true)
+                    : null
             return Math.max(1, prev + count)
         })
     }
@@ -42,20 +40,16 @@ const ProductBooking = ({ product }: Props) => {
     }
 
     function handleAddToCart() {
-        const productToAdd = {
+        const itemToAdd = {
             ...product,
-            quantity,
-        } as ProductType
+            selectedQuantity,
+        } as CartItemType
 
-        addProductToCart(productToAdd)
+        addProductToCart(itemToAdd)
 
-        setQuantity(1)
+        setSelectedQuantity(1)
     }
-    // const formattedPrice = !product.price
-    //     ? 0
-    //     : product.price.toLocaleString('pt-BR', {
-    //           minimumFractionDigits: 2,
-    //       })
+
     return (
         <div className="flex flex-col items-stretch justify-center gap-5 mt-5 md:flex-row md:justify-start md:items-start">
             <div className="flex items-start justify-center md:w-1/3 md:h-1/3 md:aspect-square">
@@ -89,7 +83,7 @@ const ProductBooking = ({ product }: Props) => {
                         <QuantityInput
                             onIncrease={handleIncrease}
                             onDecrease={handleDecrease}
-                            quantity={quantity as number}
+                            quantity={selectedQuantity as number}
                             maxQuantity={product.quantity}
                         />
                     </div>

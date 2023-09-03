@@ -8,14 +8,14 @@ import { OrderData } from '../pages/CompleteOrder'
 
 export interface CartItem extends Product {
     id?: number
-    quantity: number
+    selectedQuantity: number
 }
 
 interface CartContextType {
     cartItems: CartItem[]
     cartQuantity: number
     cartItemsTotal: number
-    addProductToCart: (product: CartItem) => void
+    addProductToCart: (item: CartItem) => void
     changeCartItemQuantity: (
         cartItemId: number,
         type: 'increase' | 'decrease'
@@ -62,19 +62,21 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
 
     const cartQuantity = cartItems.length
     const cartItemsTotal = cartItems.reduce((total, cartItem) => {
-        return total + cartItem.price * cartItem.quantity
+        return total + cartItem.price * cartItem.selectedQuantity
     }, 0)
 
-    function addProductToCart(product: CartItem) {
+    function addProductToCart(item: CartItem) {
+        console.log(item)
+
         const productAlreadyExistsInCart = cartItems.findIndex(
-            (cartItem) => cartItem.id === product.id
+            (cartItem) => cartItem.id === item.id
         )
 
         const newCart = produce(cartItems, (draft) => {
             if (productAlreadyExistsInCart < 0) {
-                draft.push(product)
+                draft.push(item)
             } else {
-                draft[productAlreadyExistsInCart].quantity += product.quantity
+                draft[productAlreadyExistsInCart].selectedQuantity += item.selectedQuantity
             }
         })
 
@@ -92,8 +94,8 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
 
             if (productExistsInCart >= 0) {
                 const item = draft[productExistsInCart]
-                item.quantity =
-                    type === 'increase' ? item.quantity + 1 : item.quantity - 1
+                item.selectedQuantity =
+                    type === 'increase' ? item.selectedQuantity + 1 : item.selectedQuantity - 1
             }
         })
 

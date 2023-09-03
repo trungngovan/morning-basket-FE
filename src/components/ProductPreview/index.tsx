@@ -1,38 +1,32 @@
-import React, { MouseEvent } from 'react'
+import { MouseEvent } from 'react'
 import { QuantityInput } from '../QuantityInput'
-import { RegularText, TitleText } from '../Typography'
 import {
-    ProductPreviewFooter,
-    AddCartWrapper,
     Description,
     Name,
 } from './styles'
+import '../../styles/modal.css'
 import { PiShoppingCartFill } from 'react-icons/pi'
-import { useCart } from '../../hooks/useCart'
+import { useCart, CartItemType } from '../../hooks/useCart'
 import { useState } from 'react'
 import { ProductType } from '../../@types/products'
-import useFormatCurrency from '../../hooks/useFormatCurrency'
 import { defaultTheme } from '../../styles/themes/default'
-import '../../styles/modal.css'
 import { useNavigate } from 'react-router-dom'
 import { Tags } from '../ProductCard/styles'
+import useFormatCurrency from '../../hooks/useFormatCurrency'
 
-interface ProductPreviewProps {
+interface Props {
     product: ProductType
     onClose: () => void
     onTagClick: (tag: any) => void
 }
 
-export function ProductPreview({
-    product,
-    onClose,
-    onTagClick,
-}: ProductPreviewProps) {
+export function ProductPreview({ product, onClose, onTagClick }: Props) {
     const { addProductToCart } = useCart()
-    const format = useFormatCurrency()
-    const [quantity, setQuantity] = useState<number | string>(1)
+    const [selectedQuantity, setSelectedQuantity] = useState<number | string>(1)
     const [error, setError] = useState(false)
     const [onHover, setOnHover] = useState(false)
+    const format = useFormatCurrency()
+
     const product_tags =
         product.tags.length > 0
             ? product.tags
@@ -41,13 +35,13 @@ export function ProductPreview({
     const navigate = useNavigate()
 
     const handleCount = (count: 1 | -1) => {
-        setQuantity((prev) => {
+        setSelectedQuantity((prev) => {
             prev = prev as number
             1 <= prev + count && prev + count <= product.quantity
                 ? setError(false)
                 : prev + count >= product.quantity
-                ? setError(true)
-                : null
+                    ? setError(true)
+                    : null
             return Math.min(product.quantity, prev + count)
         })
     }
@@ -61,14 +55,14 @@ export function ProductPreview({
     }
 
     function handleAddToCart() {
-        const productToAdd = {
+        const itemToAdd = {
             ...product,
-            quantity,
-        } as ProductType
+            selectedQuantity,
+        } as CartItemType
 
-        addProductToCart(productToAdd)
+        addProductToCart(itemToAdd)
 
-        setQuantity(1)
+        setSelectedQuantity(1)
     }
 
     const handleNavigate = (
@@ -154,7 +148,7 @@ export function ProductPreview({
                         <QuantityInput
                             onIncrease={handleIncrease}
                             onDecrease={handleDecrease}
-                            quantity={quantity as number}
+                            quantity={selectedQuantity as number}
                             maxQuantity={product.quantity as number}
                         />
                         <button
