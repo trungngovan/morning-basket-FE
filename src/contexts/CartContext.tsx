@@ -127,13 +127,13 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
                     localStorage.getItem(CUSTOMER_INFO_STORAGE_KEY) as string
                 ).id
                 const items = cartItems.map((item) => {
-                    let retItem = (({ id, name, quantity, price }) => ({
+                    let retItem = (({ id, name, selectedQuantity, price }) => ({
                         id,
                         name,
-                        quantity,
+                        selectedQuantity,
                         price,
                     }))(item)
-                    retItem = Object.assign(retItem, { itemId: retItem.id })
+                    retItem = Object.assign(retItem, { productId: retItem.id })
                     retItem.price = retItem.price ? retItem.price : 0
                     delete retItem.id
                     return retItem
