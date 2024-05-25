@@ -1,13 +1,4 @@
 import React from 'react'
-import {
-    FAQContainer,
-    Title,
-    Question,
-    AnswerWrapper,
-    AnswerTitle,
-    AnswerDetails,
-} from './styles'
-import bankqr from '../../assets/bank_qr.jpg'
 
 const PrivacyPolicyPage: React.FC = () => {
     return (
@@ -21,10 +12,10 @@ const PrivacyPolicyPage: React.FC = () => {
                 về việc thu thập, sử dụng và tiết lộ thông tin cá nhân của Bạn
                 khi Bạn sử dụng Trang web{' '}
                 <a
-                    href="https://morningbasket.vn"
+                    href="https://mama-shop-fe.vercel.app/"
                     className="text-indigo-600 hover:underline"
                 >
-                    https://morningbasket.vn
+                    https://mama-shop-fe.vercel.app/
                 </a>
                 , và cho Bạn biết về quyền riêng tư của mình cũng như cách thức
                 pháp luật bảo vệ Bạn.
@@ -61,8 +52,8 @@ const PrivacyPolicyPage: React.FC = () => {
                 </li> */}
                 <li>
                     <strong>Chúng tôi</strong> (và/hoặc &quot;của Chúng
-                    tôi&quot; trong Thỏa thuận này) đề cập đến Morning Basket,
-                    B1F-10, Crescent Mall, Quận 7, Thành phố Hồ Chí Minh.
+                    tôi&quot; trong Thỏa thuận này) đề cập đến Mama Shop, KTX
+                    khu B, ĐHQG HCM, Linh Trung, Thủ Đức, Thành phố Hồ Chí Minh.
                 </li>
                 <li>
                     <strong>Cookies</strong> là các tập tin nhỏ được lưu trữ
@@ -99,15 +90,15 @@ const PrivacyPolicyPage: React.FC = () => {
                     lượt truy cập trang).
                 </li>
                 <li>
-                    <strong>Trang web</strong> đề cập đến Morning Basket, có thể
-                    truy cập tại{' '}
+                    <strong>Trang web</strong> đề cập đến Mama Shop, có thể truy
+                    cập tại{' '}
                     <a
-                        href="https://morningbasket.vn"
-                        rel="external nofollow noopener"
+                        href="https://mama-shop-fe.vercel.app/"
+                        rel="noopener noreferrer external nofollow noopener"
                         target="_blank"
                         className="text-indigo-600 hover:underline"
                     >
-                        https://morningbasket.vn
+                        https://mama-shop-fe.vercel.app/
                     </a>
                 </li>
                 <li>
@@ -543,30 +534,30 @@ const PrivacyPolicyPage: React.FC = () => {
                 <li>
                     Bằng email tại địa chỉ:{' '}
                     <a
-                        href="mailto:hanorder@parkltd.net"
+                        href="mailto:mamashop@gmail.com"
                         className="text-indigo-600 hover:underline"
                     >
-                        hanorder@parkltd.net
+                        mamashop@gmail.com
                     </a>
                 </li>
                 <li>
                     Bằng điện thoại qua số:{' '}
                     <a
-                        href="tel:(+84) 93 864 28 87"
+                        href="tel:(+84) 946 12 9294"
                         className="text-indigo-600 hover:underline"
                     >
-                        (+84) 93 864 28 87
+                        (+84) 946 12 9294
                     </a>
                 </li>
                 <li>
                     Bằng cách gửi biểu mẫu tại trang này:{' '}
                     <a
-                        href="https://morningbasket.vn/contact"
-                        rel="external nofollow noopener"
+                        href="https://mama-shop-fe.vercel.app/contact"
+                        rel="noreferrer external nofollow noopener"
                         target="_blank"
                         className="text-indigo-600 hover:underline"
                     >
-                        https://morningbasket.vn/contact
+                        https://mama-shop-fe.vercel.app/contact
                     </a>
                 </li>
             </ul>

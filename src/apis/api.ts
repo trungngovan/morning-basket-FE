@@ -1,5 +1,6 @@
 import axios, { type AxiosRequestConfig, type AxiosResponse } from 'axios'
 const BASE_URL = import.meta.env.VITE_BACKEND_URL
+console.log(BASE_URL)
 const instance = axios.create({
     withCredentials: true,
     baseURL: BASE_URL,
@@ -31,9 +32,9 @@ export const apiGet = async <Data = unknown, Response = AxiosResponse<Data>>(
 ): Promise<Response | undefined> => {
     const query = params
         ? `?${Object.keys(params)
-              .map((key) => (params[key] ? `${key}=${params[key]}` : ''))
-              .filter(Boolean)
-              .join('&')}`
+            .map((key) => (params[key] ? `${key}=${params[key]}` : ''))
+            .filter(Boolean)
+            .join('&')}`
         : ''
 
     return apiRequest<Data, Response>({
@@ -122,9 +123,9 @@ export const vnProvincesApiGet = async <
 ): Promise<Response | undefined> => {
     const query = params
         ? `?${Object.keys(params)
-              .map((key) => (params[key] ? `${key}=${params[key]}` : ''))
-              .filter(Boolean)
-              .join('&')}`
+            .map((key) => (params[key] ? `${key}=${params[key]}` : ''))
+            .filter(Boolean)
+            .join('&')}`
         : ''
 
     return vnProvincesApiRequest<Data, Response>({

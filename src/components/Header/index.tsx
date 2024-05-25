@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom'
 import { useCart } from '../../hooks/useCart'
 import { HeaderButton } from './styles'
 import { PiShoppingCartFill } from 'react-icons/pi'
-import LogoImage from '../../assets/logo@100-63.png'
+import LogoImage from '../../assets/Logo-clean.png'
 import { useAuth } from '../../hooks/useAuth'
 import { defaultTheme } from '../../styles/themes/default'
 
@@ -15,9 +15,9 @@ export function Header() {
             className="w-full h-[5rem] m-auto flex items-center justify-center sticky top-0 left-0 z-[5]"
             style={{ background: defaultTheme.colors['base-background'] }}
         >
-            <div className="container w-full px-4 flex items-center justify-between">
+            <div className="container w-full px-2 flex items-center justify-between">
                 <NavLink to="/">
-                    <img src={LogoImage} alt="" />
+                    <img src={LogoImage} alt="" width={180} />
                 </NavLink>
                 <div className="flex flex-col items-end gap-2">
                     {customerInfo && (

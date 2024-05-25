@@ -72,23 +72,22 @@ const FAQPage: React.FC = () => {
                 <div className="flex flex-col md:flex-row">
                     <div className="flex-1 m-auto">
                         <AnswerTitle>
-                            Ngân Hàng Shinhan Việt Nam
+                            Ngân Hàng Vietcombank
                             <br />
-                            (Shinhan Bank Vietnam)
+                            (Vietcombank)
                         </AnswerTitle>
                         <AnswerTitle>
                             Số tài khoản:{' '}
-                            <AnswerDetails>700009368988</AnswerDetails>
+                            <AnswerDetails>9946129294</AnswerDetails>
                         </AnswerTitle>
                         <AnswerTitle>
                             Chủ tài khoản:{' '}
-                            <AnswerDetails>JANG JUNHO (장준호)</AnswerDetails>
+                            <AnswerDetails>Ngo Van Trung</AnswerDetails>
                         </AnswerTitle>
                         <br />
                         <AnswerDetails>
                             Quý khách có thể quét mã QR trong hình đính kèm bằng
-                            ứng dụng VietQR hoặc ứng dụng của ngân hàng có hỗ
-                            trợ VietQR.
+                            ứng dụng nga.
                         </AnswerDetails>
                     </div>
                     <div className="flex-1 object-center">
@@ -110,22 +109,23 @@ const FAQPage: React.FC = () => {
                             href="https://goo.gl/maps/jSmEEyKMxsScN51WA"
                             className="hover:underline"
                         >
-                            B1F-10, Crescent Mall, Quận 7, Thành phố Hồ Chí Minh
+                            KTX khu B, ĐHQG HCM, Linh Trung, Thủ Đức, Thành phố
+                            Hồ Chí Minh.
                         </a>
                     </AnswerDetails>
                 </AnswerTitle>
                 <AnswerTitle>
                     Email:{' '}
                     <AnswerDetails>
-                        <a href="mailto: hanorder@parkltd.net">
-                            hanorder@parkltd.net
+                        <a href="mailto: mamashop@gmail.com">
+                            mamashop@gmail.com
                         </a>
                     </AnswerDetails>
                 </AnswerTitle>
                 <AnswerTitle>
                     Số điện thoại:{' '}
                     <AnswerDetails>
-                        <a href="tel: (+84) 93 864 28 87">(+84) 93 864 28 87</a>
+                        <a href="tel: (+84) 946 12 9294">(+84) 946 12 9294</a>
                     </AnswerDetails>
                 </AnswerTitle>
             </AnswerWrapper>

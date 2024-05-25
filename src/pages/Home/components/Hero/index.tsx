@@ -1,12 +1,6 @@
 import React from 'react'
-import {
-    HeroContainer,
-    HeroContent,
-    HeroTitle,
-    BenefitsContainer,
-} from './styles'
-
-import logo from '../../../../assets/logo.png'
+import { HeroTitle } from './styles'
+import home from '../../../../assets/Home.png'
 import { RegularText } from '../../../../components/Typography'
 import { InfoWithIcon } from '../../../../components/InfoWithIcon'
 import {
@@ -38,12 +32,12 @@ export function Hero() {
                             as="h3"
                             className="mb-4"
                         >
-                            Chào mừng đến với{' '}
+                            Chào mừng bạn đến với{' '}
                             <a
-                                href="https://morningbasket.vn"
+                                href="https://mama-shop-fe.vercel.app/"
                                 className="text-indigo-600 hover:text-indigo-500"
                             >
-                                morningbasket.vn
+                                mamashop.vn
                             </a>
                             !
                         </RegularText>
@@ -74,7 +68,7 @@ export function Hero() {
                 </div>
 
                 <div className="flex-1 flex items-center justify-center">
-                    <img src={logo} alt="" className="w-full lg:w-1/2" />
+                    <img src={home} alt="" className="w-full lg:w-96" />
                 </div>
             </div>
         </section>

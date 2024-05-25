@@ -21,7 +21,7 @@ export function Footer() {
                         className="top-0 text-[1.2rem] font-bold"
                         style={{ color: defaultTheme.colors['base-text'] }}
                     >
-                        Morning Basket
+                        Mama Shop
                     </h3>
                     <p
                         className="text-[1rem] mb-1"
@@ -74,8 +74,8 @@ export function Footer() {
                             href="https://goo.gl/maps/jSmEEyKMxsScN51WA"
                             className="hover:underline"
                         >
-                            <PiMapPinLine className="inline" /> B1F-10, Crescent
-                            Mall, Quận 7, Thành phố Hồ Chí Minh
+                            <PiMapPinLine className="inline" /> KTX khu B, ĐHQG
+                            HCM, Linh Trung, Thủ Đức, Thành phố Hồ Chí Minh.
                         </a>
                     </p>
                 </div>
@@ -91,10 +91,10 @@ export function Footer() {
                         style={{ color: defaultTheme.colors['base-text'] }}
                     >
                         <a
-                            href="tel: (+84) 93 864 28 87"
+                            href="tel: (+84) 946 12 9294"
                             className="hover:underline"
                         >
-                            <PiPhone className="inline" /> (+84) 93 864 28 87
+                            <PiPhone className="inline" /> (+84) 946 12 9294
                         </a>
                     </p>
                     <p
@@ -102,11 +102,10 @@ export function Footer() {
                         style={{ color: defaultTheme.colors['base-text'] }}
                     >
                         <a
-                            href="mailto:hanorder@parkltd.net"
+                            href="mailto:mamashop@gmail.com"
                             className="break-all hover:underline"
                         >
-                            <PiEnvelope className="inline" />{' '}
-                            hanorder@parkltd.net
+                            <PiEnvelope className="inline" /> mamashop@gmail.com
                         </a>
                     </p>
                 </div>
@@ -118,10 +117,10 @@ export function Footer() {
                         Theo dõi chúng tôi
                     </h3>
                     <div className="flex flex-row gap-1">
-                        <a href="https://www.instagram.com/morningbasket_official/">
+                        <a href="https://www.instagram.com/nvtrung.dev//">
                             <PiInstagramLogo />
                         </a>
-                        <a href="https://www.facebook.com/morningbasketofficial/">
+                        <a href="https://www.facebook.com/nvtrung.it/">
                             <PiFacebookLogo />
                         </a>
                     </div>
